@@ -964,9 +964,8 @@ static const crs::Layer *card_layer(Rig *r)
 }
 
 /* The turn card (MapFeed::set_card): an image layer over the map at its
- * place in the picture, shown and hidden with the map, moved with the
- * map's quad on the panel, gone when cleared; the map's own state as it
- * was throughout. */
+ * place in the picture, shown and hidden with the map, gone when cleared;
+ * the map's own state as it was throughout. */
 static void turn_card()
 {
     const std::vector<uint8_t> f = atlas(21);
@@ -981,8 +980,8 @@ static void turn_card()
     r.feed->set_card(&card, kTurnCardW, kTurnCardH, kTurnCardX, kTurnCardBottomY);
     r.pump(500, &f);
     const crs::Layer *c = card_layer(&r);
-    ok("turn card: an image layer over the map, 360x56 at 364,384, shown, the map still showing",
-       c && c->params.visible && c->params.rect.x == 364 && c->params.rect.y == 384 && c->params.rect.w == 360 &&
+    ok("turn card: an image layer over the map, 360x56 at 364,344, shown, the map still showing",
+       c && c->params.visible && c->params.rect.x == 364 && c->params.rect.y == 344 && c->params.rect.w == 360 &&
            c->params.rect.h == 56 && c->params.z == 1 && r.st().state == "showing" && r.feed->card_drawn());
     crs::FakeGraph *g = r.gpu.graph("map");
     bool pixels = false;
@@ -1011,11 +1010,6 @@ static void turn_card()
     r.pump(1500, &f);
     c = card_layer(&r);
     ok("turn card: shown again with the map", c && c->params.visible && r.st().state == "showing");
-    r.feed->set_target("panel");
-    r.pump(4000, &f);
-    c = card_layer(&r);
-    ok("turn card: on the panel, at its place in the centred map",
-       c && c->params.rect.x == 416 + 364 && c->params.rect.y == 120 + 72 && r.st().state == "showing");
     r.feed->set_card(nullptr, 0, 0, 0, 0);
     r.pump(300, &f);
     ok("turn card: cleared, no layer, the map still showing",

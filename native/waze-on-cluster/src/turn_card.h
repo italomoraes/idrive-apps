@@ -20,10 +20,11 @@ namespace woc {
 
 const unsigned kTurnCardW = 360, kTurnCardH = 56;
 /* Where the card goes in the 1088x480 map, by its top-left corner: centred
- * on the part the cluster shows in full (x 306-782). Bottom is under the
- * phone's safe area (y 72-378), where the phone draws none of its own UI;
- * top is over the phone's turn card. */
-const int kTurnCardX = 364, kTurnCardBottomY = 384, kTurnCardTopY = 72;
+ * on the part the cluster shows in full (x 306-782). Bottom is below the
+ * phone's position arrow (about y 320 in the safe area, 504x368 at 286,72)
+ * and above where the cluster's frame fades the map out; top is over the
+ * phone's own turn card, at the top of the safe area. */
+const int kTurnCardX = 364, kTurnCardBottomY = 344, kTurnCardTopY = 72;
 
 struct Maneuver {
     enum Kind {
