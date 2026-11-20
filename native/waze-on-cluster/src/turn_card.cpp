@@ -88,7 +88,8 @@ struct Arrow {
     std::vector<Pt> path;
     bool head = true;
     bool ring = false;   /* a roundabout's circle */
-    bool dot = false;    /* the destination */
+    bool dot = false;    /* the destination's, or the plain mark */
+    float dot_y = 16, dot_r = 9;
 };
 
 Arrow arrow_of(Maneuver::Kind k)
@@ -113,6 +114,13 @@ Arrow arrow_of(Maneuver::Kind k)
         a.head = false;
         a.dot = true;
         break;
+    case Maneuver::Other:
+        /* no direction to tell: a dot in the middle, no stroke */
+        a.head = false;
+        a.dot = true;
+        a.dot_y = 24;
+        a.dot_r = 7;
+        break;
     case Maneuver::None: break;
     }
     return a;
@@ -127,18 +135,22 @@ float edge(float d)
 void draw_arrow(Canvas *c, Maneuver::Kind k, int ox, int oy)
 {
     const Arrow a = arrow_of(k);
-    if (a.path.size() < 2)
+    const bool stroke = a.path.size() >= 2;
+    if (!stroke && !a.dot && !a.ring)
         return;
     const float half = 3.0f;
-    const Pt tip = a.path.back(), prev = a.path[a.path.size() - 2];
-    float ux = tip.x - prev.x, uy = tip.y - prev.y;
-    const float ul = std::sqrt(ux * ux + uy * uy);
-    ux /= ul;
-    uy /= ul;
     /* the head: a triangle whose point is 5 px past the path's end */
-    const Pt h0 = {tip.x + ux * 5, tip.y + uy * 5};
-    const Pt h1 = {tip.x - ux * 5 - uy * 9, tip.y - uy * 5 + ux * 9};
-    const Pt h2 = {tip.x - ux * 5 + uy * 9, tip.y - uy * 5 - ux * 9};
+    Pt h0 = {0, 0}, h1 = {0, 0}, h2 = {0, 0};
+    if (stroke && a.head) {
+        const Pt tip = a.path.back(), prev = a.path[a.path.size() - 2];
+        float ux = tip.x - prev.x, uy = tip.y - prev.y;
+        const float ul = std::sqrt(ux * ux + uy * uy);
+        ux /= ul;
+        uy /= ul;
+        h0 = {tip.x + ux * 5, tip.y + uy * 5};
+        h1 = {tip.x - ux * 5 - uy * 9, tip.y - uy * 5 + ux * 9};
+        h2 = {tip.x - ux * 5 + uy * 9, tip.y - uy * 5 - ux * 9};
+    }
     for (int y = 0; y < 48; y++) {
         for (int x = 0; x < 48; x++) {
             const float fx = x + 0.5f, fy = y + 0.5f;
@@ -147,8 +159,8 @@ void draw_arrow(Canvas *c, Maneuver::Kind k, int ox, int oy)
                 const float s = seg_dist(fx, fy, a.path[i].x, a.path[i].y, a.path[i + 1].x, a.path[i + 1].y);
                 d = s < d ? s : d;
             }
-            float cov = edge(half - d);
-            if (a.head) {
+            float cov = stroke ? edge(half - d) : 0;
+            if (stroke && a.head) {
                 /* inside the triangle: the least of the distances to its edges */
                 const Pt t[3] = {h0, h2, h1};
                 float in = 1e9f;
@@ -167,8 +179,8 @@ void draw_arrow(Canvas *c, Maneuver::Kind k, int ox, int oy)
                 cov = rc > cov ? rc : cov;
             }
             if (a.dot) {
-                const float r = std::sqrt((fx - 24) * (fx - 24) + (fy - 16) * (fy - 16));
-                const float rc = edge(9 - r);
+                const float r = std::sqrt((fx - 24) * (fx - 24) + (fy - a.dot_y) * (fy - a.dot_y));
+                const float rc = edge(a.dot_r - r);
                 cov = rc > cov ? rc : cov;
             }
             c->blend(ox + x, oy + y, 255, 255, 255, cov);
@@ -208,7 +220,8 @@ bool maneuver_kind(const std::string &name, Maneuver::Kind *out)
                  {"sharp_right", Maneuver::SharpRight},
                  {"uturn", Maneuver::UTurn},
                  {"roundabout", Maneuver::Roundabout},
-                 {"arrive", Maneuver::Arrive}};
+                 {"arrive", Maneuver::Arrive},
+                 {"other", Maneuver::Other}};
     for (const auto &k : kinds)
         if (name == k.name) {
             *out = k.kind;

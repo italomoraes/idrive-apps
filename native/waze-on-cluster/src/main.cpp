@@ -38,6 +38,7 @@
 #include "control.h"
 #include "opt_in.h"
 #include "guide_setting.h"
+#include "guidance_link.h"
 #include "turn_card_setting.h"
 #include "head_unit.h"
 #include "log.h"
@@ -109,8 +110,8 @@ public:
             log_info("turn card: %s", card_->name());
             feeds_->set_turn_card(card_->mode() != TurnCardSetting::Off, card_->mode() == TurnCardSetting::Top);
         } else if (cmd == "maneuver" && msg.count("kind")) {
-            /* the manoeuvre the turn card shows (kind none: no card): the
-             * app's example, until the car's guidance feeds it */
+            /* a manoeuvre for the turn card, the app's example: shown over
+             * the navigation's until kind none comes (show_maneuver) */
             Maneuver m;
             if (!maneuver_kind(msg.at("kind"), &m.kind)) {
                 log_warn("maneuver: unknown kind %s", msg.at("kind").c_str());
@@ -119,7 +120,8 @@ public:
                     m.distance = msg.at("distance");
                 if (msg.count("road"))
                     m.road = msg.at("road");
-                feeds_->set_maneuver(m);
+                manual_ = m;
+                show_maneuver();
             }
         } else if (cmd == "cluster" && on != msg.end() && (on->second == "0" || on->second == "1")) {
             feeds_->set_cluster(on->second == "1");
@@ -171,6 +173,14 @@ public:
      * CID and the app's page is hidden. */
     void on_owner_gone() override {}
 
+    /* The navigation's next manoeuvre (guidance_link.h); none while it
+     * does not guide. */
+    void set_guided(const Maneuver &m)
+    {
+        guided_ = m;
+        show_maneuver();
+    }
+
     void report(const std::string &status)
     {
         if (control_->owner_fd() < 0)
@@ -186,9 +196,14 @@ public:
     }
 
 private:
+    /* The card shows the app's manoeuvre while it sends one, the
+     * navigation's otherwise. */
+    void show_maneuver() { feeds_->set_maneuver(manual_.kind != Maneuver::None ? manual_ : guided_); }
+
     MapFeeds *feeds_;
     GuideSetting *guide_;
     TurnCardSetting *card_;
+    Maneuver manual_, guided_;
     Control *control_ = nullptr;
     uint64_t log_seq_ = 0;
     std::string last_;
@@ -314,6 +329,17 @@ int serve(Config cfg)
         log_error("%s", err.c_str());
         return 1;
     }
+    /* After the signal mask: vsomeip's threads leave SIGINT and SIGTERM to
+     * sig_fd. */
+    GuidanceLink guidance;
+    bool guided = false;
+    if (cfg.num("guidance") == 1) {
+        guided = guidance.start(&err);
+        if (!guided)
+            log_warn("guidance: %s; the turn card shows the app's example only", err.c_str());
+    } else {
+        log_info("guidance: off; the turn card shows the app's example only");
+    }
 
     std::vector<uint8_t> frame;
     StatusLog status_log;
@@ -329,6 +355,8 @@ int serve(Config cfg)
         std::vector<pollfd> p = {{sig_fd, POLLIN, 0}, {control.listen_fd(), POLLIN, 0}, {control.owner_fd(), POLLIN, 0},
                                  {producer.ready_fd(), POLLIN, 0}};
         feed.poll_fds(&p);   /* one per target's renderer connection */
+        if (guided)
+            p.push_back(pollfd{guidance.fd(), POLLIN, 0});   /* a new manoeuvre */
         /* A decoded frame wakes it (the producer's ready fd), and so does the
          * renderer's socket, and the HUD's next frame when one is due; four
          * times a second otherwise, so the client retries its connection, a
@@ -343,6 +371,9 @@ int serve(Config cfg)
             control.on_owner_readable();
         if (p[1].revents & POLLIN)
             control.on_listen_readable();
+        Maneuver next;
+        if (guided && guidance.take(&next))   /* each pass: it also subscribes once due */
+            server.set_guided(next);
         const int64_t now = now_ms();
         uint64_t id = 0;
         bool same = false;

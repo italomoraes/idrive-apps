@@ -20,11 +20,13 @@ namespace woc {
 
 const unsigned kTurnCardW = 360, kTurnCardH = 56;
 /* Where the card goes in the 1088x480 map, by its top-left corner: centred
- * on the part the cluster shows in full (x 306-782). Bottom is below the
- * phone's position arrow (about y 320 in the safe area, 504x368 at 286,72)
- * and above where the cluster's frame fades the map out; top is over the
- * phone's own turn card, at the top of the safe area. */
-const int kTurnCardX = 364, kTurnCardBottomY = 344, kTurnCardTopY = 72;
+ * on the part the cluster shows in full (x 306-782). Bottom is just below
+ * the phone's position arrow and above where the cluster's frame ends the
+ * map: on photos of a car's cluster (iDrive 7, Google Maps, 2026-11) the
+ * arrow's circle spans about y 314-388 and the map shows down to about
+ * y 450 in the middle (at 344 the card covered the arrow). Top is over the
+ * phone's own turn card, at the top of the safe area (504x368 at 286,72). */
+const int kTurnCardX = 364, kTurnCardBottomY = 392, kTurnCardTopY = 72;
 
 struct Maneuver {
     enum Kind {
@@ -39,6 +41,7 @@ struct Maneuver {
         UTurn,
         Roundabout,
         Arrive,
+        Other,  /* a manoeuvre whose arrow is not known (route_box.h): a plain mark */
     };
     Kind kind = None;
     std::string distance;   /* as shown: "200 m" */
@@ -50,7 +53,7 @@ struct Maneuver {
 
 /* The kind by its name on the control socket ("straight", "slight_left",
  * "left", "sharp_left", "slight_right", "right", "sharp_right", "uturn",
- * "roundabout", "arrive", "none"); false for another name. */
+ * "roundabout", "arrive", "other", "none"); false for another name. */
 bool maneuver_kind(const std::string &name, Maneuver::Kind *out);
 
 /* The card for m as kTurnCardW * kTurnCardH * 4 bytes of RGBA. */

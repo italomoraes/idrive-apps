@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 /* Host test of the turn card (turn_card.h) and its setting
  * (turn_card_setting.h): the kinds by name; the text folded to ASCII and
- * cut; a card with a plate, an arrow and text, and none for no manoeuvre;
+ * cut; a card with a plate, an arrow and text, a plain mark for an arrow
+ * not known, and none for no manoeuvre;
  * a change of the distance alone touching only the text's rows; the
  * setting off by default, the app's choice kept across a restart, other
  * values refused or read as off. */
@@ -45,14 +46,15 @@ int main()
 {
     Maneuver::Kind k = Maneuver::None;
     ok("kinds by name", maneuver_kind("left", &k) && k == Maneuver::Left && maneuver_kind("uturn", &k) &&
-                            k == Maneuver::UTurn && maneuver_kind("none", &k) && k == Maneuver::None);
+                            k == Maneuver::UTurn && maneuver_kind("none", &k) && k == Maneuver::None &&
+                            maneuver_kind("other", &k) && k == Maneuver::Other);
     ok("an unknown kind: refused", !maneuver_kind("sideways", &k) && !maneuver_kind("", &k));
 
-    ok("text: accents folded", card_text("Rua Jo\xC3\xA3o Naves de \xC3\x81vila, S\xC3\xA3o Jos\xC3\xA9 \xC3\xA7", 99) ==
-                                   "Rua Joao Naves de Avila, Sao Jose c");
+    ok("text: accents folded", card_text("Rua Jo\xC3\xA3o das Flores, \xC3\x81rvore, S\xC3\xA3o Jos\xC3\xA9 \xC3\xA7", 99) ==
+                                   "Rua Joao das Flores, Arvore, Sao Jose c");
     ok("text: other characters as ?", card_text("\xE2\x82\xAC 5 \xF0\x9F\x9A\x97", 99) == "? 5 ?");
     ok("text: a sequence cut short as ?", card_text("ab\xC3", 99) == "ab?");
-    ok("text: cut with ...", card_text("Avenida Rondon Pacheco", 10) == "Avenida...");
+    ok("text: cut with ...", card_text("Avenida Longa Ficticia", 10) == "Avenida...");
     ok("text: one that fits is whole", card_text("Av. Brasil", 10) == "Av. Brasil");
 
     std::vector<uint8_t> none, left, right, far;
@@ -65,7 +67,7 @@ int main()
 
     m.kind = Maneuver::Left;
     m.distance = "200 m";
-    m.road = "Av. Segismundo Pereira";
+    m.road = "Av. Exemplo Comprida";
     render_turn_card(m, &left);
     ok("the plate: dark and nearly opaque in the middle, clear at the corners",
        at(left, 200, 30)[3] > 200 && at(left, 200, 30)[0] < 40 && at(left, 0, 0)[3] == 0 &&
@@ -87,6 +89,12 @@ int main()
                 rows = rows && y >= 7 && y < 28 && x >= 62;
             }
     ok("another distance: only the distance's rows change", changed && rows);
+    std::vector<uint8_t> other;
+    m.kind = Maneuver::Other;
+    render_turn_card(m, &other);
+    ok("an arrow not known: a dot in the middle of the square, no stroke",
+       white(other, 22, 20, 38, 36) > 60 && white(other, 6, 42, 54, 52) == 0 && white(other, 6, 4, 54, 14) == 0 &&
+           white(other, 62, 7, 200, 28) > 100);
 
     const std::string path = "/tmp/woc-turn-card-test-" + std::to_string(getpid()) + ".conf";
     unlink(path.c_str());

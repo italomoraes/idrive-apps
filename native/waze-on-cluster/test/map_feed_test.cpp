@@ -980,8 +980,8 @@ static void turn_card()
     r.feed->set_card(&card, kTurnCardW, kTurnCardH, kTurnCardX, kTurnCardBottomY);
     r.pump(500, &f);
     const crs::Layer *c = card_layer(&r);
-    ok("turn card: an image layer over the map, 360x56 at 364,344, shown, the map still showing",
-       c && c->params.visible && c->params.rect.x == 364 && c->params.rect.y == 344 && c->params.rect.w == 360 &&
+    ok("turn card: an image layer over the map, 360x56 at 364,392, shown, the map still showing",
+       c && c->params.visible && c->params.rect.x == 364 && c->params.rect.y == 392 && c->params.rect.w == 360 &&
            c->params.rect.h == 56 && c->params.z == 1 && r.st().state == "showing" && r.feed->card_drawn());
     crs::FakeGraph *g = r.gpu.graph("map");
     bool pixels = false;

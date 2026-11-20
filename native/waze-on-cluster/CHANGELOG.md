@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+The turn card shows the navigation's next manoeuvre while it guides,
+CarPlay's guidance included, instead of only the app's example. Directions
+not recognised yet show a plain mark with the distance and the road. The
+card's lower position now sits below the position arrow instead of over it.
+
 ## 0.10.13
 
 A turn card can show the next manoeuvre over the cluster map, below the

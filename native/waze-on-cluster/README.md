@@ -107,8 +107,17 @@ an image layer over the cluster map (`src/turn_card.h`): below the phone's
 position arrow, at the top over the phone's own card, or none (the
 default). It shows and hides with the map, on the map slot only (not while
 hosted, not on the HUD). The app's **Turn card** sets where, kept in
-`turn_card_state_file`; the control socket's `maneuver` command sets what
-it shows, the app's **Show an example** for now.
+`turn_card_state_file`.
+
+What it shows is the BMW navigation's next manoeuvre as the cluster's route
+box has it, CarPlay's guidance included (`guidance = 1`): the tool reads
+GuidanceEventList (SOME/IP 0xFB1B, event 0x8002) as uid 5000, the way the
+HMI does, and only reads (`src/guidance_link.h`, `src/route_box.h`). The
+route box gives an icon number, not a direction. The numbers whose
+direction a drive has confirmed get their arrow; any other number gets a
+plain mark, with the distance and road still shown, and the log names that
+number once, never the road. While the app sends a manoeuvre (its **Show an
+example**), the card shows the app's until the app sends `none`.
 
 **Where the map shows.** The app's **Show on** sets the cluster, the HUD,
 both or neither (**Off**), at once. On the HUD the frames are scaled on the
