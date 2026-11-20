@@ -40,6 +40,7 @@ void MapFeeds::follow()
         if (cluster_on_) {
             cluster_.reset(new MapFeed(base_));
             cluster_->set_stream(live_, frozen_, picture_);
+            send_card();
             if (hud_ && hud_->latest(&copy_))
                 cluster_->hold(&copy_, id_);
         } else {
@@ -98,6 +99,33 @@ void MapFeeds::set_hud_keep_shown(bool keep)
     base_.hud_keep_shown = keep;
     if (hud_)
         hud_->set_hud_keep_shown(keep);
+}
+
+void MapFeeds::set_turn_card(bool on, bool top)
+{
+    card_on_ = on;
+    card_top_ = top;
+    send_card();
+}
+
+void MapFeeds::set_maneuver(const Maneuver &m)
+{
+    if (m == maneuver_)
+        return;
+    maneuver_ = m;
+    send_card();
+}
+
+void MapFeeds::send_card()
+{
+    if (!cluster_)
+        return;
+    if (!card_on_ || maneuver_.kind == Maneuver::None) {
+        cluster_->set_card(nullptr, 0, 0, 0, 0);
+        return;
+    }
+    render_turn_card(maneuver_, &card_);
+    cluster_->set_card(&card_, kTurnCardW, kTurnCardH, kTurnCardX, card_top_ ? kTurnCardTopY : kTurnCardBottomY);
 }
 
 void MapFeeds::set_guide_hold(bool hold)

@@ -38,6 +38,7 @@
 #include "control.h"
 #include "opt_in.h"
 #include "guide_setting.h"
+#include "turn_card_setting.h"
 #include "head_unit.h"
 #include "log.h"
 #include "block_pack.h"
@@ -67,7 +68,7 @@ namespace {
  * This version does not read it. */
 const char kUnreadLocalConf[] = "/var/opt/waze-on-cluster/waze-on-cluster.local.conf";
 
-std::string status_line(const FeedStatus &s)
+std::string status_line(const FeedStatus &s, const char *turn_card)
 {
     return "{\"ev\":\"status\",\"state\":" + json_escape(s.state) + ",\"target\":" + json_escape(s.target) +
            ",\"page\":" + json_escape(s.page) + ",\"reason\":" + json_escape(s.reason) +
@@ -80,13 +81,14 @@ std::string status_line(const FeedStatus &s)
            ",\"hud_width_pct\":" + std::to_string(s.hud_width_pct) +
            ",\"hud_x\":" + std::to_string(s.hud_offset_x) + ",\"hud_y\":" + std::to_string(s.hud_offset_y) +
            ",\"hud_keep_shown\":" + (s.hud_keep_shown ? "1" : "0") +
+           ",\"turn_card\":" + json_escape(turn_card) +
            /* only while hosted: otherwise the line is as it always was */
            (s.hosted ? ",\"hosted\":1" : "") + "}";
 }
 
 class Server : public Control::Handler {
 public:
-    Server(MapFeeds *feeds, GuideSetting *guide) : feeds_(feeds), guide_(guide) {}
+    Server(MapFeeds *feeds, GuideSetting *guide, TurnCardSetting *card) : feeds_(feeds), guide_(guide), card_(card) {}
     void set_control(Control *c) { control_ = c; }
 
     /* cluster and hud turn the map on each off or on ("on"), hud also sizes
@@ -102,6 +104,23 @@ public:
         if (cmd == "guide" && hide != msg.end() && guide_->set(hide->second)) {
             log_info("guide: BMW's turn box %s while the map shows", guide_->hide() ? "hidden" : "shown");
             feeds_->set_guide_hold(guide_->hide());
+        } else if (cmd == "turn_card" && msg.count("mode") && card_->set(msg.at("mode"))) {
+            /* the turn card over the map off, or where it goes (turn_card_setting.h) */
+            log_info("turn card: %s", card_->name());
+            feeds_->set_turn_card(card_->mode() != TurnCardSetting::Off, card_->mode() == TurnCardSetting::Top);
+        } else if (cmd == "maneuver" && msg.count("kind")) {
+            /* the manoeuvre the turn card shows (kind none: no card): the
+             * app's example, until the car's guidance feeds it */
+            Maneuver m;
+            if (!maneuver_kind(msg.at("kind"), &m.kind)) {
+                log_warn("maneuver: unknown kind %s", msg.at("kind").c_str());
+            } else {
+                if (msg.count("distance"))
+                    m.distance = msg.at("distance");
+                if (msg.count("road"))
+                    m.road = msg.at("road");
+                feeds_->set_maneuver(m);
+            }
         } else if (cmd == "cluster" && on != msg.end() && (on->second == "0" || on->second == "1")) {
             feeds_->set_cluster(on->second == "1");
         } else if (cmd == "hud" && (on != msg.end() || pct != msg.end() || hx != msg.end() || hy != msg.end() ||
@@ -169,6 +188,7 @@ public:
 private:
     MapFeeds *feeds_;
     GuideSetting *guide_;
+    TurnCardSetting *card_;
     Control *control_ = nullptr;
     uint64_t log_seq_ = 0;
     std::string last_;
@@ -284,7 +304,9 @@ int serve(Config cfg)
     std::string err;
     VideoProducer producer(vc);
     MapFeeds feed(fc, cfg.num("cluster") == 1, cfg.num("hud") == 1, (unsigned)cfg.num("hud_fps"));
-    Server server(&feed, &guide);
+    TurnCardSetting card(cfg.str("turn_card"), cfg.str("turn_card_state_file"));
+    feed.set_turn_card(card.mode() != TurnCardSetting::Off, card.mode() == TurnCardSetting::Top);
+    Server server(&feed, &guide, &card);
     Control control(&server);
     server.set_control(&control);
     if (!control.listen(cfg.str("socket_path"), (unsigned)std::strtoul(cfg.str("socket_mode").c_str(), nullptr, 8),
@@ -350,7 +372,7 @@ int serve(Config cfg)
             producer.set_part(feed.part());
         producer.retry_sources(now);
         const FeedStatus fs = feed.status(producer.decode_status(), producer.stream_reason());
-        const std::string status = status_line(fs);
+        const std::string status = status_line(fs, card.name());
         /* The frame rate changes the status every second; the log keeps
          * to its state, reason and target, so the app's last lines are not
          * all status. */
@@ -488,6 +510,8 @@ void define_keys(Config *cfg)
     cfg->define("hosted_vpp_scale", "0");
     cfg->define("always_packed", "0");
     cfg->define("hide_bmw_guidance", "1");
+    cfg->define("turn_card", "off");
+    cfg->define("turn_card_state_file", "/var/opt/waze-on-cluster/state/turn-card.state.conf");
     cfg->define("state_file", "/var/opt/waze-on-cluster/state/waze-on-cluster.state.conf");
     cfg->define("map_state_file", "/var/opt/waze-on-cluster/map.state.conf");
     cfg->define("features_file", "/var/opt/waze-on-cluster/features.conf");
