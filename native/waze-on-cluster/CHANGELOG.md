@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.10.13
+
 A turn card can show the next manoeuvre over the cluster map, below the
 position arrow or at the top; it is off unless turned on in the app.
 

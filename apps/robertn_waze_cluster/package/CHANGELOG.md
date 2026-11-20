@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.13
+
 **Turn card** (Off, Below the arrow or At the top) draws the next manoeuvre
 over the cluster map; **Show an example** shows one for 10 seconds.
 
