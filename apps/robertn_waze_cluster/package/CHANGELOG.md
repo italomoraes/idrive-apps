@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+**Turn card** (Off, Below the arrow or At the top) draws the next manoeuvre
+over the cluster map; **Show an example** shows one for 10 seconds.
+
 ## 0.6.12
 
 The cluster's safe area is back to 504x368 at (286, 72); a smaller area made

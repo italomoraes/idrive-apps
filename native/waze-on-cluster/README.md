@@ -102,6 +102,14 @@ until the phone reconnects.
 the cluster is hidden (cluster-render README, "Guide hold"). The app's
 **Hide BMW's turn box** checkbox turns that off and on at once.
 
+**Turn card.** The next manoeuvre (an arrow, the distance and the road) as
+an image layer over the cluster map (`src/turn_card.h`): below the phone's
+position arrow, at the top over the phone's own card, or none (the
+default). It shows and hides with the map, on the map slot only (not while
+hosted, not on the HUD). The app's **Turn card** sets where, kept in
+`turn_card_state_file`; the control socket's `maneuver` command sets what
+it shows, the app's **Show an example** for now.
+
 **Where the map shows.** The app's **Show on** sets the cluster, the HUD,
 both or neither (**Off**), at once. On the HUD the frames are scaled on the
 head unit to the size shown (**Size**, 30 % to 85 % of the HUD's width, or
