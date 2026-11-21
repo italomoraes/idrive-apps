@@ -10,7 +10,8 @@
  *                  {"cmd":"hud","hud_keep_shown":"0"|"1"}  kept shown over BMW's pop-ups, or not
  *                  {"cmd":"guide","hide":0|1}  BMW's turn box hidden or not (guide_setting.h)
  *                  {"cmd":"turn_card","mode":"off"|"bottom"|"top"}  the turn card over the map (turn_card_setting.h)
- *                  {"cmd":"maneuver","kind":...,"distance":...,"road":...}  what the card shows; kind "none": nothing
+ *                  {"cmd":"maneuver","kind":...,"distance":...,"road":...,"exit":...}  what the card shows
+ *                  (turn_card.h's kinds; "exit": a roundabout's, in degrees); kind "none": nothing
  *   tool -> owner  {"ev":"status",...,"hide_bmw_guidance":0|1,"guide_disabled":0|1,
  *                   "cluster":0|1,"hud":0|1,"hud_state":"off"|"disabled"|"idle"|"starting"|"showing"|...,
  *                   "hud_width_pct":...,"hud_x":...,"hud_y":...,"hud_keep_shown":0|1,

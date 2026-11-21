@@ -3,9 +3,12 @@
 ## Unreleased
 
 The turn card shows the navigation's next manoeuvre while it guides,
-CarPlay's guidance included, instead of only the app's example. Directions
-not recognised yet show a plain mark with the distance and the road. The
-card's lower position now sits below the position arrow instead of over it.
+CarPlay's guidance included, instead of only the app's example: each turn
+with its direction, and the destination with its side. Manoeuvres not
+recognised yet (roundabouts, forks, ferries) show a plain mark with the
+distance and the road. The card's lower position now sits below the
+position arrow instead of over it. Its text is smooth and keeps accents,
+and its arrows are drawn in BMW's style.
 
 ## 0.11.0
 

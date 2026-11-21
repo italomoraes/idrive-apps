@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "route_box.h"
 
-#include <cmath>
 #include <cstring>
 
 namespace woc {
@@ -17,16 +16,6 @@ const uint32_t kMaxString = 2048;
 uint32_t u32_at(const uint8_t *p)
 {
     return (uint32_t)p[0] << 24 | (uint32_t)p[1] << 16 | (uint32_t)p[2] << 8 | (uint32_t)p[3];
-}
-
-double f64_at(const uint8_t *p)
-{
-    uint64_t v = 0;
-    for (int i = 0; i < 8; i++)
-        v = v << 8 | p[i];
-    double d;
-    std::memcpy(&d, &v, sizeof d);
-    return d;
 }
 
 struct Str {
@@ -59,69 +48,102 @@ std::vector<Str> strings(const uint8_t *p, size_t n)
     return out;
 }
 
-bool is_screen(const std::string &s)
+/* At most this many events a screen: a car sends 3. */
+const size_t kMaxEvents = 16;
+
+/* An event's distance, unit, text and direction (route_box.h). */
+void read_event(const uint8_t *d, size_t n, RouteBoxEvent *e)
 {
-    return s.compare(0, 3, "IC.") == 0 || s.compare(0, 4, "CID.") == 0 || s.compare(0, 4, "HUD.") == 0;
+    const std::vector<Str> ss = strings(d, n);
+    if (ss.empty())
+        return;
+    const Str &t = ss.back();
+    e->text = t.text;
+    /* the distance string ends 24 bytes before the text: unit, a f64 and
+     * the text's union header */
+    if (ss.size() >= 2 && t.start >= 24 && ss[ss.size() - 2].end == t.start - 24) {
+        e->distance = ss[ss.size() - 2].text;
+        e->unit = u32_at(d + t.start - 24);
+    }
+    /* 40 bytes on: the direction, after a group that is u32 4, u32 1 at 20 */
+    if (t.end + 44 <= n && u32_at(d + t.end + 20) == 4 && u32_at(d + t.end + 24) == 1)
+        e->direction = u32_at(d + t.end + 40);
 }
 
-/* Between a manoeuvre's distance string and its text: unit u32, weight
- * f64, icon u32, icon2 u32, flag u32. */
-const size_t kFieldsBytes = 24;
+bool blank(const std::string &s)
+{
+    return s.find_first_not_of(' ') == std::string::npos;
+}
 
 }  // namespace
 
-bool parse_route_box(const uint8_t *p, size_t n, const std::string &screen, std::vector<RouteBoxEntry> *out)
+bool parse_route_box(const uint8_t *p, size_t n, const std::string &screen, std::vector<RouteBoxEvent> *out)
 {
     out->clear();
-    const std::vector<Str> ss = strings(p, n);
-    bool named = false, in_screen = false;
-    for (size_t k = 0; k < ss.size(); k++) {
-        const Str &s = ss[k];
-        if (is_screen(s.text)) {
-            in_screen = s.text == screen;
-            named = named || in_screen;
+    if (!p || screen.empty())
+        return false;
+    const size_t len = screen.size() + 4;   /* the name's string: BOM, name, NUL */
+    for (size_t i = 0; n >= 4 + len && i <= n - 4 - len; i++) {
+        if (u32_at(p + i) != len || p[i + 4] != 0xEF || p[i + 5] != 0xBB || p[i + 6] != 0xBF ||
+            p[i + 3 + len] != 0 || std::memcmp(p + i + 7, screen.data(), screen.size()) != 0)
             continue;
+        /* the screen's header: u32, u32, u32, u8, then the events' bytes */
+        const size_t h = i + 4 + len;
+        if (n - h < 17)
+            return true;
+        size_t q = h + 17;
+        const uint32_t bytes = u32_at(p + h + 13);
+        const size_t end = bytes <= n - q ? q + bytes : n;
+        while (end - q >= 8 && out->size() < kMaxEvents) {
+            const uint32_t elen = u32_at(p + q), kind = u32_at(p + q + 4);
+            if (elen > end - q - 8)
+                break;   /* cut short, or not an event */
+            RouteBoxEvent e;
+            e.kind = kind;
+            if (kind != kRouteBoxEmpty)
+                read_event(p + q + 8, elen, &e);
+            out->push_back(e);
+            q += 8 + elen;
         }
-        /* a manoeuvre's text: its distance string ends kFieldsBytes before it */
-        if (!in_screen || s.text.empty() || k == 0 || s.start < kFieldsBytes + 4 ||
-            ss[k - 1].end != s.start - kFieldsBytes || is_screen(ss[k - 1].text))
-            continue;
-        const uint8_t *q = p + s.start;
-        RouteBoxEntry e;
-        e.unit = u32_at(q - 24);
-        e.weight = f64_at(q - 20);
-        e.icon = u32_at(q - 12);
-        e.icon2 = u32_at(q - 8);
-        e.flag = u32_at(q - 4);
-        if (e.unit >= 1000 || e.icon >= 100000 || e.icon2 >= 100000 || e.flag >= 1000 || !std::isfinite(e.weight))
-            continue;
-        e.distance = ss[k - 1].text;
-        e.text = s.text;
-        out->push_back(e);
+        return true;
     }
-    return named;
+    return false;
 }
 
-Maneuver::Kind kind_of_icon(uint32_t icon)
+Maneuver::Kind kind_of_event(uint32_t kind, uint32_t direction)
 {
-    switch (icon) {
-    case 20: return Maneuver::Arrive;
-    case 30: return Maneuver::SharpRight;
-    case 31: return Maneuver::Right;
-    case 42:
-    case 45: return Maneuver::Straight;
-    default: return Maneuver::Other;
+    if (kind == kRouteBoxEmpty)
+        return Maneuver::None;
+    if (kind == kRouteBoxTurn) {
+        switch (direction) {
+        case 1: return Maneuver::Straight;
+        case 2: return Maneuver::Left;
+        case 3: return Maneuver::SlightLeft;
+        case 4: return Maneuver::SharpLeft;
+        case 5: return Maneuver::Right;
+        case 6: return Maneuver::SlightRight;
+        case 7: return Maneuver::SharpRight;
+        case 8: return Maneuver::UTurn;
+        default: return Maneuver::Other;
+        }
     }
+    if (kind == kRouteBoxDestination)
+        return direction == 1 ? Maneuver::ArriveLeft : direction == 3 ? Maneuver::ArriveRight : Maneuver::Arrive;
+    return Maneuver::Other;
 }
 
-bool icon_known(uint32_t icon)
+bool event_known(uint32_t kind, uint32_t direction)
 {
-    return kind_of_icon(icon) != Maneuver::Other;
+    if (kind == kRouteBoxEmpty)
+        return true;
+    if (kind == kRouteBoxDestination)
+        return direction >= 1 && direction <= 3;
+    return kind_of_event(kind, direction) != Maneuver::Other;
 }
 
 std::string route_box_distance(const std::string &distance, uint32_t unit)
 {
-    if (distance.empty())
+    if (blank(distance))
         return std::string();
     return unit == 4 ? distance + " m" : distance;
 }
@@ -131,16 +153,24 @@ bool unit_known(uint32_t unit)
     return unit == 0 || unit == 4;
 }
 
-Maneuver route_box_maneuver(const std::vector<RouteBoxEntry> &entries)
+bool route_box_maneuver(const std::vector<RouteBoxEvent> &events, Maneuver *out)
 {
+    bool any = false;
+    for (const RouteBoxEvent &e : events)
+        any = any || e.kind != kRouteBoxEmpty;
+    if (!any) {
+        *out = Maneuver();
+        return true;
+    }
+    const RouteBoxEvent &e = events.front();
+    if (e.kind == kRouteBoxEmpty)
+        return false;
     Maneuver m;
-    if (entries.empty())
-        return m;
-    const RouteBoxEntry &e = entries.front();
-    m.kind = kind_of_icon(e.icon);
+    m.kind = kind_of_event(e.kind, e.direction);
     m.distance = route_box_distance(e.distance, e.unit);
     m.road = e.text;
-    return m;
+    *out = m;
+    return true;
 }
 
 }  // namespace woc

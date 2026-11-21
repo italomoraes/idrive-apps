@@ -18,8 +18,9 @@
  *
  * vsomeip's thread parses each notification and keeps the manoeuvre; fd()
  * turns readable when it changes, and take() hands it to the main loop. The
- * service gone, the manoeuvre is none. The log names icons and units the
- * card does not know yet (route_box.h), never a road. */
+ * service gone, the manoeuvre is none. The log names event kinds,
+ * directions and units the card does not know yet (route_box.h), never a
+ * road. */
 #ifndef WOC_GUIDANCE_LINK_H
 #define WOC_GUIDANCE_LINK_H
 
@@ -72,8 +73,9 @@ private:
     bool subscribed_ = false;
     Maneuver maneuver_;
     bool changed_ = false;
-    std::set<uint32_t> new_icons_, new_units_;   /* not known, not logged yet */
-    std::set<uint32_t> logged_icons_, logged_units_;
+    /* events (kind << 16 | direction) and units not known, not logged yet */
+    std::set<uint32_t> new_events_, new_units_;
+    std::set<uint32_t> logged_events_, logged_units_;
     uint64_t notifications_ = 0;
     bool first_logged_ = false;
 };

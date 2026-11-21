@@ -127,21 +127,26 @@ void GuidanceLink::on_message(const std::shared_ptr<vsomeip::message> &msg)
     const std::shared_ptr<vsomeip::payload> pl = msg ? msg->get_payload() : nullptr;
     if (!pl)
         return;
-    std::vector<RouteBoxEntry> entries;
-    if (!parse_route_box(pl->get_data(), pl->get_length(), kClusterRouteBox, &entries))
+    std::vector<RouteBoxEvent> events;
+    if (!parse_route_box(pl->get_data(), pl->get_length(), kClusterRouteBox, &events))
         return;   /* about other screens only */
-    const Maneuver m = route_box_maneuver(entries);
+    Maneuver m;
+    const bool whole = route_box_maneuver(events, &m);
     {
         std::lock_guard<std::mutex> lock(mutex_);
         notifications_++;
-        if (!entries.empty()) {
-            const RouteBoxEntry &e = entries.front();
-            if (!icon_known(e.icon) && !logged_icons_.count(e.icon))
-                new_icons_.insert(e.icon);
-            if (!unit_known(e.unit) && !logged_units_.count(e.unit))
+        if (!events.empty()) {
+            const RouteBoxEvent &e = events.front();
+            const uint32_t key = (e.kind & 0xFFFF) << 16 | (e.direction & 0xFFFF);
+            if (!event_known(e.kind, e.direction) && !logged_events_.count(key))
+                new_events_.insert(key);
+            if (e.kind != kRouteBoxEmpty && !unit_known(e.unit) && !logged_units_.count(e.unit))
                 new_units_.insert(e.unit);
         }
-        if (m == maneuver_ && new_icons_.empty() && new_units_.empty() && first_logged_)
+        /* the list mid-rebuild: the card keeps what it shows */
+        if (!whole)
+            m = maneuver_;
+        if (m == maneuver_ && new_events_.empty() && new_units_.empty() && first_logged_)
             return;
         if (m != maneuver_) {
             maneuver_ = m;
@@ -159,7 +164,7 @@ bool GuidanceLink::take(Maneuver *m)
     while (read(wake_[0], buf, sizeof buf) > 0) {
     }
     bool subscribe = false, changed = false, first = false;
-    std::set<uint32_t> icons, units;
+    std::set<uint32_t> events, units;
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (up_ && !subscribed_ &&
@@ -171,9 +176,9 @@ bool GuidanceLink::take(Maneuver *m)
             first_logged_ = true;
             first = true;
         }
-        icons.swap(new_icons_);
+        events.swap(new_events_);
         units.swap(new_units_);
-        logged_icons_.insert(icons.begin(), icons.end());
+        logged_events_.insert(events.begin(), events.end());
         logged_units_.insert(units.begin(), units.end());
         if (changed_) {
             *m = maneuver_;
@@ -191,8 +196,9 @@ bool GuidanceLink::take(Maneuver *m)
     }
     if (first)
         log_info("guidance: the first route box for the cluster came");
-    for (uint32_t i : icons)
-        log_info("guidance: route box icon %u not known yet: a plain mark on the card", (unsigned)i);
+    for (uint32_t k : events)
+        log_info("guidance: route box event kind %u, direction %u, not known yet: a plain mark on the card",
+                 (unsigned)(k >> 16), (unsigned)(k & 0xFFFF));
     for (uint32_t u : units)
         log_info("guidance: route box distance unit %u not known yet: the number alone", (unsigned)u);
     return changed;

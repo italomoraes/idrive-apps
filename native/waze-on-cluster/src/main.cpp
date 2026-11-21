@@ -120,6 +120,8 @@ public:
                     m.distance = msg.at("distance");
                 if (msg.count("road"))
                     m.road = msg.at("road");
+                if (msg.count("exit"))
+                    m.exit_deg = (int)std::strtol(msg.at("exit").c_str(), nullptr, 10) % 360;
                 manual_ = m;
                 show_maneuver();
             }

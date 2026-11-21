@@ -53,7 +53,8 @@ VERSION := $(shell sed -n 's/^ *"version": *"\([^"]*\)".*/\1/p' component.json)
 # The capture, decode and map feed (own files), the kit's atlas, packing and
 # geometry, and the shared renderer's client.
 WOC_SRC = src/main.cpp src/refused.cpp src/video_producer.cpp src/freeze_watch.cpp src/alt_screen.cpp src/map_feed.cpp src/map_feeds.cpp src/atlas_scale.cpp src/control.cpp src/h264_source.cpp \
-          src/guide_setting.cpp src/turn_card.cpp src/turn_card_setting.cpp src/route_box.cpp src/guidance_link.cpp \
+          src/guide_setting.cpp src/turn_card.cpp src/card_font.cpp src/card_font_data.cpp src/turn_card_setting.cpp \
+          src/route_box.cpp src/guidance_link.cpp \
           src/map_state.cpp src/opt_in.cpp \
           src/udp_source.cpp src/avb_source.cpp src/framing_probe.cpp src/rtp_h264.cpp src/sps_info.cpp \
           src/decoder_msdk.cpp src/nal_reader.cpp src/stream_health.cpp $(KIT)/map_geometry.cpp $(KIT)/yuv_atlas.cpp \
@@ -202,7 +203,7 @@ CR_CORE = $(filter-out $(addprefix $(CR)/src/,main.cpp settings.cpp graph_ramses
 # Each of its sources compiles once, with its header dependencies.
 MF       = $(BUILD)/host/map_feed
 MF_FLAGS = $(CXXFLAGS) -Isrc -I$(KIT) -I$(CR)/include -I$(CR) -I$(CR)/src -isystem $(CR)/dcsm/third_party/vsomeip/interface
-MF_SRC   = test/map_feed_test.cpp src/map_feed.cpp src/map_feeds.cpp src/turn_card.cpp src/atlas_scale.cpp src/freeze_watch.cpp $(filter-out $(CR)/client/protocol.cpp,$(CR_CORE)) $(CR_SRC) \
+MF_SRC   = test/map_feed_test.cpp src/map_feed.cpp src/map_feeds.cpp src/turn_card.cpp src/card_font.cpp src/card_font_data.cpp src/atlas_scale.cpp src/freeze_watch.cpp $(filter-out $(CR)/client/protocol.cpp,$(CR_CORE)) $(CR_SRC) \
            $(CR)/src/log.cpp
 
 # objects of sources in this tree under <dir>/, of the shared renderer's under <dir>/cr/
@@ -259,9 +260,16 @@ $(BUILD)/host/guide_setting_test: test/guide_setting_test.cpp src/guide_setting.
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/guide_setting_test.cpp src/guide_setting.cpp $(CR)/src/log.cpp -lpthread
 
-$(BUILD)/host/turn_card_test: test/turn_card_test.cpp src/turn_card.cpp src/turn_card.h src/turn_card_setting.cpp src/turn_card_setting.h $(CR)/src/log.cpp
+CARD_SRC = src/turn_card.cpp src/card_font.cpp src/card_font_data.cpp
+
+$(BUILD)/host/turn_card_test: test/turn_card_test.cpp $(CARD_SRC) src/turn_card.h src/card_font.h src/turn_card_setting.cpp src/turn_card_setting.h $(CR)/src/log.cpp
 	mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/turn_card_test.cpp src/turn_card.cpp src/turn_card_setting.cpp $(CR)/src/log.cpp -lpthread
+	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/turn_card_test.cpp $(CARD_SRC) src/turn_card_setting.cpp $(CR)/src/log.cpp -lpthread
+
+# every kind of card as one picture (PAM) to look at: not a test
+$(BUILD)/host/turn_card_preview: tools/turn_card_preview.cpp $(CARD_SRC) src/turn_card.h src/card_font.h
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -o $@ tools/turn_card_preview.cpp $(CARD_SRC)
 
 $(BUILD)/host/route_box_test: test/route_box_test.cpp src/route_box.cpp src/route_box.h src/turn_card.h
 	mkdir -p $(@D)
