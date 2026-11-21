@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.11.3
+
 The app's example leaves the turn card after 12 seconds, even when the
 app's own end does not come (its page in the background, as with CarPlay
 on the whole screen), so the navigation's manoeuvres show again. A U-turn
