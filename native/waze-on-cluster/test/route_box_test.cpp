@@ -195,17 +195,18 @@ int main()
            route_box_maneuver(e, &m) && m.kind == Maneuver::Left);
     }
     {
-        const Maneuver::Kind want[] = {Maneuver::Straight, Maneuver::Left, Maneuver::SlightLeft, Maneuver::SharpLeft,
-                                       Maneuver::Right, Maneuver::SlightRight, Maneuver::SharpRight, Maneuver::UTurn};
+        const Maneuver::Kind want[] = {Maneuver::Straight,    Maneuver::Left,       Maneuver::SlightLeft,
+                                       Maneuver::SharpLeft,   Maneuver::Right,      Maneuver::SlightRight,
+                                       Maneuver::SharpRight,  Maneuver::UTurn,      Maneuver::UTurn};
         bool all = true;
-        for (uint32_t d = 1; d <= 8; d++) {
+        for (uint32_t d = 1; d <= 9; d++) {
             Payload p;
             p.u32(0).screen(kClusterRouteBox, {turn("100", 4, "Rua Exemplo", d)});
             parse(p, kClusterRouteBox, &e);
             all = all && route_box_maneuver(e, &m) && m.kind == want[d - 1] && event_known(kRouteBoxTurn, d);
         }
-        ok("turn directions 1 to 8: straight, left, slight left, sharp left, right, slight right, sharp right, "
-           "U-turn",
+        ok("turn directions 1 to 9: straight, left, slight left, sharp left, right, slight right, sharp right, "
+           "U-turn, and 9 the U-turn a drive where traffic keeps right had",
            all);
     }
     {
@@ -317,7 +318,8 @@ int main()
            route_box_maneuver(e, &m) && m.kind == Maneuver::Other && m.road == "Esta\xC3\xA7\xC3\xA3o Exemplo" &&
                m.distance == "200 m" && !event_known(3, 0));
         ok("a direction not known yet: the plain mark",
-           kind_of_event(kRouteBoxTurn, 9) == Maneuver::Other && !event_known(kRouteBoxTurn, 0));
+           kind_of_event(kRouteBoxTurn, 10) == Maneuver::Other && !event_known(kRouteBoxTurn, 10) &&
+               !event_known(kRouteBoxTurn, 0));
     }
     {
         Payload p;

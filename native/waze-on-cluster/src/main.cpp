@@ -34,6 +34,7 @@
 #include <vector>
 
 #include "alt_screen.h"
+#include "card_choice.h"
 #include "config.h"
 #include "control.h"
 #include "opt_in.h"
@@ -112,7 +113,8 @@ public:
             feeds_->set_turn_card(card_->mode() != TurnCardSetting::Off, card_->mode() == TurnCardSetting::Top);
         } else if (cmd == "maneuver" && msg.count("kind")) {
             /* a manoeuvre for the turn card, the app's example: shown over
-             * the navigation's until kind none comes (show_maneuver) */
+             * the navigation's until kind none comes, or for
+             * CardChoice::kExampleMs at most (card_choice.h) */
             Maneuver m;
             if (!maneuver_kind(msg.at("kind"), &m.kind)) {
                 log_warn("maneuver: unknown kind %s", msg.at("kind").c_str());
@@ -123,7 +125,7 @@ public:
                     m.road = msg.at("road");
                 if (msg.count("exit"))
                     m.exit_deg = (int)std::strtol(msg.at("exit").c_str(), nullptr, 10) % 360;
-                manual_ = m;
+                choice_.set_example(m, now_ms());
                 show_maneuver();
             }
         } else if (cmd == "cluster" && on != msg.end() && (on->second == "0" || on->second == "1")) {
@@ -180,8 +182,18 @@ public:
      * does not guide. */
     void set_guided(const Maneuver &m)
     {
-        guided_ = m;
+        choice_.set_guided(m);
         show_maneuver();
+    }
+
+    /* Each pass of the main loop: the app's example ends once its time is
+     * up, whether or not the app's own end came. */
+    void tick(int64_t now)
+    {
+        if (choice_.expire(now)) {
+            log_info("turn card: the app's example ends");
+            show_maneuver();
+        }
     }
 
     void report(const std::string &status)
@@ -199,14 +211,14 @@ public:
     }
 
 private:
-    /* The card shows the app's manoeuvre while it sends one, the
-     * navigation's otherwise. */
-    void show_maneuver() { feeds_->set_maneuver(manual_.kind != Maneuver::None ? manual_ : guided_); }
+    /* The card shows the app's example while it lasts, the navigation's
+     * manoeuvre otherwise (card_choice.h). */
+    void show_maneuver() { feeds_->set_maneuver(choice_.shown()); }
 
     MapFeeds *feeds_;
     GuideSetting *guide_;
     TurnCardSetting *card_;
-    Maneuver manual_, guided_;
+    CardChoice choice_;
     Control *control_ = nullptr;
     uint64_t log_seq_ = 0;
     std::string last_;
@@ -378,6 +390,7 @@ int serve(Config cfg)
         if (guided && guidance.take(&next))   /* each pass: it also subscribes once due */
             server.set_guided(next);
         const int64_t now = now_ms();
+        server.tick(now);
         uint64_t id = 0;
         bool same = false;
         OutputPart part;

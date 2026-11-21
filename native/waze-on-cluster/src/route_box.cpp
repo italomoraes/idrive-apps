@@ -156,7 +156,8 @@ Maneuver::Kind kind_of_event(uint32_t kind, uint32_t direction)
         case 5: return Maneuver::Right;
         case 6: return Maneuver::SlightRight;
         case 7: return Maneuver::SharpRight;
-        case 8: return Maneuver::UTurn;
+        case 8:   /* carplay's U-turns, not seen in the route box yet */
+        case 9: return Maneuver::UTurn;   /* a U-turn where traffic keeps right */
         default: return Maneuver::Other;
         }
     }

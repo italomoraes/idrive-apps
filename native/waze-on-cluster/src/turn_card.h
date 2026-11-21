@@ -6,7 +6,9 @@
  *
  * The card is kTurnCardW x kTurnCardH, straight alpha: a dark rounded plate,
  * the arrow in its left square, the distance on the first line and the road
- * on the second. The arrows are drawn as BMW's own are: a heavy white way to
+ * on the second. Below the arrow it is compact, kTurnCardCompactH high: the
+ * arrow smaller and the distance and road side by side on one line. The
+ * arrows are drawn as BMW's own are: a heavy white way to
  * go, the roads not taken grey, a right-hand kind the mirror of its
  * left-hand one. The text is antialiased Roboto (card_font.h), accents and
  * all; a line that does not fit ends in an ellipsis. */
@@ -19,15 +21,18 @@
 
 namespace woc {
 
-const unsigned kTurnCardW = 360, kTurnCardH = 56;
+const unsigned kTurnCardW = 360, kTurnCardH = 56, kTurnCardCompactH = 34;
 /* Where the card goes in the 1088x480 map, by its top-left corner: centred
- * on the part the cluster shows in full (x 306-782). Bottom is just below
- * the phone's position arrow and above where the cluster's frame ends the
- * map: on photos of a car's cluster (iDrive 7, Google Maps, 2026-11) the
- * arrow's circle spans about y 314-388 and the map shows down to about
- * y 450 in the middle (at 344 the card covered the arrow). Top is over the
- * phone's own turn card, at the top of the safe area (504x368 at 286,72). */
-const int kTurnCardX = 364, kTurnCardBottomY = 392, kTurnCardTopY = 72;
+ * on the part the cluster shows in full (x 306-782). On photos of a car's
+ * cluster (iDrive 7, Google Maps over CarPlay, 2026-11-21) the map shows
+ * from its top row down to about y 453 in the middle, the phone's position
+ * arrow's circle spans about y 336-386 and the street name the phone writes
+ * under it about y 389-415. Bottom is the compact card, between that name
+ * and where the cluster's frame ends the map: a two-line card there (at
+ * 392) covered the name, and at 344 the arrow. Top is near the map's top
+ * edge: at the top of the phone's safe area (y 72) some 70 rows of map
+ * showed above the card. */
+const int kTurnCardX = 364, kTurnCardBottomY = 418, kTurnCardTopY = 16;
 
 struct Maneuver {
     enum Kind {
@@ -73,8 +78,9 @@ struct Maneuver {
  * false for another name. */
 bool maneuver_kind(const std::string &name, Maneuver::Kind *out);
 
-/* The card for m as kTurnCardW * kTurnCardH * 4 bytes of RGBA. */
-void render_turn_card(const Maneuver &m, std::vector<uint8_t> *rgba);
+/* The card for m as kTurnCardW * kTurnCardH * 4 bytes of RGBA; compact,
+ * kTurnCardW * kTurnCardCompactH, all on one line. */
+void render_turn_card(const Maneuver &m, std::vector<uint8_t> *rgba, bool compact = false);
 
 }  // namespace woc
 

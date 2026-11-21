@@ -263,7 +263,7 @@ $(BUILD)/host/guide_setting_test: test/guide_setting_test.cpp src/guide_setting.
 
 CARD_SRC = src/turn_card.cpp src/card_font.cpp src/card_font_data.cpp
 
-$(BUILD)/host/turn_card_test: test/turn_card_test.cpp $(CARD_SRC) src/turn_card.h src/card_font.h src/turn_card_setting.cpp src/turn_card_setting.h $(CR)/src/log.cpp
+$(BUILD)/host/turn_card_test: test/turn_card_test.cpp $(CARD_SRC) src/turn_card.h src/card_font.h src/card_choice.h src/turn_card_setting.cpp src/turn_card_setting.h $(CR)/src/log.cpp
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/turn_card_test.cpp $(CARD_SRC) src/turn_card_setting.cpp $(CR)/src/log.cpp -lpthread
 

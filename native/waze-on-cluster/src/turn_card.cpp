@@ -14,11 +14,12 @@ const float kPi = 3.14159265f;
 
 struct Canvas {
     std::vector<uint8_t> *px;
+    unsigned h;   /* rows: kTurnCardH, or kTurnCardCompactH */
 
     /* colour over what is there, at coverage a (0-1). */
     void blend(int x, int y, uint8_t r, uint8_t g, uint8_t b, float a)
     {
-        if (x < 0 || y < 0 || x >= (int)kTurnCardW || y >= (int)kTurnCardH || a <= 0)
+        if (x < 0 || y < 0 || x >= (int)kTurnCardW || y >= (int)h || a <= 0)
             return;
         if (a > 1)
             a = 1;
@@ -249,35 +250,40 @@ float tri_in(float fx, float fy, const Pt t[3])
     return in;
 }
 
-/* the arc's coverage at (fx, fy): the ring's band within from..to, round
- * capped at both ends */
-float arc_cov(float fx, float fy, const Icon::Arc &a)
+/* the arc's signed inside distance at (fx, fy), in the icon's units: the
+ * ring's band within from..to, round capped at both ends */
+float arc_in(float fx, float fy, const Icon::Arc &a)
 {
     const float dx = fx - a.c.x, dy = fy - a.c.y;
     float b = std::atan2(dx, -dy) * 180 / kPi;   /* bearing of the pixel */
     float span = a.to - a.from;
     if (span >= 360)
-        return edge(a.half - std::fabs(std::sqrt(dx * dx + dy * dy) - a.r));
+        return a.half - std::fabs(std::sqrt(dx * dx + dy * dy) - a.r);
     while (b < a.from)
         b += 360;
     while (b >= a.from + 360)
         b -= 360;
     if (b <= a.from + span)
-        return edge(a.half - std::fabs(std::sqrt(dx * dx + dy * dy) - a.r));
+        return a.half - std::fabs(std::sqrt(dx * dx + dy * dy) - a.r);
     const Pt p0 = {a.c.x + bearing(a.from).x * a.r, a.c.y + bearing(a.from).y * a.r};
     const Pt p1 = {a.c.x + bearing(a.to).x * a.r, a.c.y + bearing(a.to).y * a.r};
     const float d0 = dist({fx, fy}, p0), d1 = dist({fx, fy}, p1);
-    return edge(a.half - (d0 < d1 ? d0 : d1));
+    return a.half - (d0 < d1 ? d0 : d1);
 }
 
-void draw_icon(Canvas *c, const Maneuver &m, int ox, int oy)
+/* m's icon, drawn size x size pixels (48: the icon's own units) at ox, oy:
+ * each pixel's centre taken back to the 48x48 drawing, and each edge's
+ * distance to pixels again, so a smaller icon stays as smooth. */
+void draw_icon(Canvas *c, const Maneuver &m, int ox, int oy, int size)
 {
     bool mirror = false;
     const Icon ic = icon_of(m, &mirror);
-    for (int y = 0; y < 48; y++) {
-        for (int x = 0; x < 48; x++) {
+    const float k = size / 48.0f;   /* pixels per unit of the drawing */
+    for (int y = 0; y < size; y++) {
+        for (int x = 0; x < size; x++) {
             /* the pixel's centre, in the right-hand drawing */
-            const float fx = mirror ? 48 - (x + 0.5f) : x + 0.5f, fy = y + 0.5f;
+            const float ux = (x + 0.5f) / k, fy = (y + 0.5f) / k;
+            const float fx = mirror ? 48 - ux : ux;
             float white = 0, grey = 0;
             for (const Icon::Stroke &s : ic.strokes) {
                 float d = 1e9f;
@@ -285,17 +291,17 @@ void draw_icon(Canvas *c, const Maneuver &m, int ox, int oy)
                     const float sd = seg_dist(fx, fy, s.pts[i], s.pts[i + 1]);
                     d = sd < d ? sd : d;
                 }
-                const float cov = edge(s.half - d);
+                const float cov = edge((s.half - d) * k);
                 float &dst = s.grey ? grey : white;
                 dst = cov > dst ? cov : dst;
             }
             for (const Icon::Head &h : ic.heads) {
                 const Pt t[3] = {h.tip, h.a, h.b};
-                const float cov = edge(tri_in(fx, fy, t));
+                const float cov = edge(tri_in(fx, fy, t) * k);
                 white = cov > white ? cov : white;
             }
             for (const Icon::Arc &a : ic.arcs) {
-                const float cov = arc_cov(fx, fy, a);
+                const float cov = edge(arc_in(fx, fy, a) * k);
                 float &dst = a.grey ? grey : white;
                 dst = cov > dst ? cov : dst;
             }
@@ -304,12 +310,12 @@ void draw_icon(Canvas *c, const Maneuver &m, int ox, int oy)
                 in = b.x1 - fx < in ? b.x1 - fx : in;
                 in = fy - b.y0 < in ? fy - b.y0 : in;
                 in = b.y1 - fy < in ? b.y1 - fy : in;
-                const float cov = edge(in);
+                const float cov = edge(in * k);
                 float &dst = b.grey ? grey : white;
                 dst = cov > dst ? cov : dst;
             }
             for (const Icon::Disc &d : ic.discs) {
-                const float cov = edge(d.r - dist({fx, fy}, d.c));
+                const float cov = edge((d.r - dist({fx, fy}, d.c)) * k);
                 white = cov > white ? cov : white;
             }
             /* grey under white: a road not taken shows only where the way
@@ -372,27 +378,41 @@ bool maneuver_kind(const std::string &name, Maneuver::Kind *out)
     return false;
 }
 
-void render_turn_card(const Maneuver &m, std::vector<uint8_t> *rgba)
+void render_turn_card(const Maneuver &m, std::vector<uint8_t> *rgba, bool compact)
 {
-    rgba->assign((size_t)kTurnCardW * kTurnCardH * 4, 0);
+    const unsigned h = compact ? kTurnCardCompactH : kTurnCardH;
+    rgba->assign((size_t)kTurnCardW * h * 4, 0);
     if (m.kind == Maneuver::None)
         return;
-    Canvas c{rgba};
+    Canvas c{rgba, h};
     /* the plate: dark, a little see-through, its corners rounded */
-    const float rad = 12;
-    for (int y = 0; y < (int)kTurnCardH; y++)
+    const float rad = compact ? 10 : 12;
+    for (int y = 0; y < (int)h; y++)
         for (int x = 0; x < (int)kTurnCardW; x++) {
             const float fx = x + 0.5f, fy = y + 0.5f;
             const float cx = fx < rad ? rad : fx > kTurnCardW - rad ? kTurnCardW - rad : fx;
-            const float cy = fy < rad ? rad : fy > kTurnCardH - rad ? kTurnCardH - rad : fy;
+            const float cy = fy < rad ? rad : fy > h - rad ? h - rad : fy;
             const float d = std::sqrt((fx - cx) * (fx - cx) + (fy - cy) * (fy - cy));
             c.blend(x, y, 16, 20, 28, edge(rad - d) * 0.88f);
         }
-    draw_icon(&c, m, 6, 4);
+    const CardFont &df = card_font_distance(), &rf = card_font_road();
+    if (compact) {
+        /* one line: the arrow smaller, then the distance in bold and the
+         * road after it, on one baseline */
+        draw_icon(&c, m, 6, 3, 28);
+        const int tx = 42, base = 25, gap = 10;
+        int dw = 0;
+        const std::vector<CardRun> dist = card_line(df, m.distance, (int)kTurnCardW - tx - 12, &dw);
+        draw_line(&c, df, dist, tx, base, 255, 255, 255);
+        const int rx = dist.empty() ? tx : tx + dw + gap;
+        const std::vector<CardRun> road = card_line(rf, m.road, (int)kTurnCardW - rx - 12, nullptr);
+        draw_line(&c, rf, road, rx, base, 200, 208, 220);
+        return;
+    }
+    draw_icon(&c, m, 6, 4, 48);
     /* the text right of the arrow: the distance in bold on top, the road
      * below; the distance alone in the middle */
     const int tx = 62, room = (int)kTurnCardW - tx - 12;
-    const CardFont &df = card_font_distance(), &rf = card_font_road();
     const std::vector<CardRun> dist = card_line(df, m.distance, room, nullptr);
     const std::vector<CardRun> road = card_line(rf, m.road, room, nullptr);
     if (road.empty()) {

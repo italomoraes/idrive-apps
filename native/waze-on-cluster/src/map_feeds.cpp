@@ -124,8 +124,12 @@ void MapFeeds::send_card()
         cluster_->set_card(nullptr, 0, 0, 0, 0);
         return;
     }
-    render_turn_card(maneuver_, &card_);
-    cluster_->set_card(&card_, kTurnCardW, kTurnCardH, kTurnCardX, card_top_ ? kTurnCardTopY : kTurnCardBottomY);
+    /* below the arrow the compact card, clear of the phone's street name
+     * (turn_card.h) */
+    const bool compact = !card_top_;
+    render_turn_card(maneuver_, &card_, compact);
+    cluster_->set_card(&card_, kTurnCardW, compact ? kTurnCardCompactH : kTurnCardH, kTurnCardX,
+                       card_top_ ? kTurnCardTopY : kTurnCardBottomY);
 }
 
 void MapFeeds::set_guide_hold(bool hold)

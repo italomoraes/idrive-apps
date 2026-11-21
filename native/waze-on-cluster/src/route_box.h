@@ -25,9 +25,9 @@
  *   ...                   (40 bytes, u32 4 and u32 1 at 20)
  *   u32    direction      a turn: 1 straight on, 2 left, 3 slight left,
  *                         4 sharp left, 5 right, 6 slight right, 7 sharp
- *                         right, 8 U-turn; a fork: 1 keep left, 2 keep
- *                         right; the destination: 1 on the left, 2 ahead,
- *                         3 on the right
+ *                         right, 8 and 9 a U-turn; a fork: 1 keep left,
+ *                         2 keep right; the destination: 1 on the left,
+ *                         2 ahead, 3 on the right
  *   u32 4, u32 1, ...
  *
  * A roundabout has, where the direction would be,
@@ -40,7 +40,9 @@
  *   u32 4, u32 1, ...
  *
  * These are BMW's GuidingTypes that carplay converts CarPlay's manoeuvres
- * to (DOCUMENTACAO): its keep left and right a fork's 1 and 2, a
+ * to (DOCUMENTACAO): its U-turns a turn's 8, which a drive where traffic
+ * keeps right had as 9 (Google Maps' "make a U-turn" on the road the turn
+ * before led to; 8 not seen), its keep left and right a fork's 1 and 2, a
  * roundabout's exit CarPlay's angle (360 added to one of 0 or less, 180 for
  * a U-turn round it) and number. Drives had the turns noted on the road,
  * and a fork and roundabouts the kinds 4 and 5 with these fields. This is

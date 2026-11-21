@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 /* Writes every kind of turn card, over a map-coloured ground, as one PAM
- * picture (RGB_ALPHA), to look at the drawing:
+ * picture (RGB_ALPHA), to look at the drawing; "compact" the compact cards
+ * (below the arrow):
  *
- *   make build/host/turn_card_preview && build/host/turn_card_preview > cards.pam
+ *   make build/host/turn_card_preview && build/host/turn_card_preview [compact] > cards.pam
  */
 #include <cstdio>
 #include <string>
@@ -12,8 +13,10 @@
 
 using namespace woc;
 
-int main()
+int main(int argc, char **argv)
 {
+    const bool compact = argc > 1 && std::string(argv[1]) == "compact";
+    const unsigned ch = compact ? kTurnCardCompactH : kTurnCardH;
     struct Case {
         Maneuver::Kind kind;
         int exit;
@@ -46,7 +49,7 @@ int main()
     };
     const int n = sizeof cases / sizeof cases[0], cols = 2, pad = 12;
     const int rows = (n + cols - 1) / cols;
-    const int W = cols * (int)kTurnCardW + (cols + 1) * pad, H = rows * (int)kTurnCardH + (rows + 1) * pad;
+    const int W = cols * (int)kTurnCardW + (cols + 1) * pad, H = rows * (int)ch + (rows + 1) * pad;
     std::vector<uint8_t> img((size_t)W * H * 4);
     for (int i = 0; i < W * H; i++) {
         img[i * 4] = 92, img[i * 4 + 1] = 110, img[i * 4 + 2] = 96, img[i * 4 + 3] = 255;
@@ -58,9 +61,9 @@ int main()
         m.distance = cases[k].dist;
         m.road = cases[k].road;
         std::vector<uint8_t> card;
-        render_turn_card(m, &card);
-        const int ox = pad + (k % cols) * ((int)kTurnCardW + pad), oy = pad + (k / cols) * ((int)kTurnCardH + pad);
-        for (unsigned y = 0; y < kTurnCardH; y++)
+        render_turn_card(m, &card, compact);
+        const int ox = pad + (k % cols) * ((int)kTurnCardW + pad), oy = pad + (k / cols) * ((int)ch + pad);
+        for (unsigned y = 0; y < ch; y++)
             for (unsigned x = 0; x < kTurnCardW; x++) {
                 const uint8_t *s = &card[(y * kTurnCardW + x) * 4];
                 uint8_t *d = &img[((size_t)(oy + y) * W + ox + x) * 4];

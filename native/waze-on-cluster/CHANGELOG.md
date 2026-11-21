@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+The app's example leaves the turn card after 12 seconds, even when the
+app's own end does not come (its page in the background, as with CarPlay
+on the whole screen), so the navigation's manoeuvres show again. A U-turn
+shows as a U-turn instead of a plain mark. The card at the top sits higher,
+near the top of the map, and the one below the arrow is a single line,
+under the street name the phone writes there instead of over it.
+
 ## 0.11.2
 
 0.11.1 did not start: its settings file turns on the navigation's

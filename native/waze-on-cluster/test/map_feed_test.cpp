@@ -980,9 +980,10 @@ static void turn_card()
     r.feed->set_card(&card, kTurnCardW, kTurnCardH, kTurnCardX, kTurnCardBottomY);
     r.pump(500, &f);
     const crs::Layer *c = card_layer(&r);
-    ok("turn card: an image layer over the map, 360x56 at 364,392, shown, the map still showing",
-       c && c->params.visible && c->params.rect.x == 364 && c->params.rect.y == 392 && c->params.rect.w == 360 &&
-           c->params.rect.h == 56 && c->params.z == 1 && r.st().state == "showing" && r.feed->card_drawn());
+    ok("turn card: an image layer over the map, 360x56 where it was put, shown, the map still showing",
+       c && c->params.visible && c->params.rect.x == kTurnCardX && c->params.rect.y == kTurnCardBottomY &&
+           c->params.rect.w == 360 && c->params.rect.h == 56 && c->params.z == 1 && r.st().state == "showing" &&
+           r.feed->card_drawn());
     crs::FakeGraph *g = r.gpu.graph("map");
     bool pixels = false;
     if (g)
@@ -1001,7 +1002,20 @@ static void turn_card()
     r.feed->set_card(&next, kTurnCardW, kTurnCardH, kTurnCardX, kTurnCardTopY);
     r.pump(300, &f);
     c = card_layer(&r);
-    ok("turn card: moved to the top", c && c->params.rect.y == 72 && c->params.visible);
+    ok("turn card: moved to the top", c && c->params.rect.y == kTurnCardTopY && c->params.visible);
+    /* below the arrow the compact one: another shape, a new layer */
+    std::vector<uint8_t> low;
+    render_turn_card(m, &low, true);
+    r.feed->set_card(&low, kTurnCardW, kTurnCardCompactH, kTurnCardX, kTurnCardBottomY);
+    r.pump(300, &f);
+    c = card_layer(&r);
+    ok("turn card: the compact one below the arrow, its own height, shown",
+       c && c->params.rect.y == kTurnCardBottomY && c->params.rect.h == (int)kTurnCardCompactH && c->params.visible);
+    r.feed->set_card(&next, kTurnCardW, kTurnCardH, kTurnCardX, kTurnCardTopY);
+    r.pump(300, &f);
+    c = card_layer(&r);
+    ok("turn card: and back at the top, two lines again",
+       c && c->params.rect.y == kTurnCardTopY && c->params.rect.h == 56 && c->params.visible);
     r.feed->set_stream(true, false, Picture::Blank);
     r.pump(300, &f);
     c = card_layer(&r);

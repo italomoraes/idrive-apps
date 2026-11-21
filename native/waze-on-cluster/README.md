@@ -110,8 +110,9 @@ the cluster is hidden (cluster-render README, "Guide hold"). The app's
 
 **Turn card.** The next manoeuvre (an arrow, the distance and the road) as
 an image layer over the cluster map (`src/turn_card.h`): below the phone's
-position arrow, at the top over the phone's own card, or none (the
-default). It shows and hides with the map, on the map slot only (not while
+position arrow and the street name it writes there, compact (all on one
+line); at the top of the map, on two lines; or none (the default). It
+shows and hides with the map, on the map slot only (not while
 hosted, not on the HUD). The app's **Turn card** sets where, kept in
 `turn_card_state_file`. The arrows follow BMW's own: a heavy white way to
 go, the roads not taken (a fork's other branch, the motorway left, a
@@ -133,7 +134,8 @@ kilometres. A kind not seen on a drive yet (a ferry, a motorway entry) gets
 a plain mark, with the distance and road still shown, and the log names its
 number once, never the road. While the app sends a
 manoeuvre (its **Show an example**), the card shows the app's until the
-app sends `none`.
+app sends `none`, or for 12 s at most (`src/card_choice.h`): the app's own
+end does not come while its page is in the background.
 
 **Where the map shows.** The app's **Show on** sets the cluster, the HUD,
 both or neither (**Off**), at once. On the HUD the frames are scaled on the

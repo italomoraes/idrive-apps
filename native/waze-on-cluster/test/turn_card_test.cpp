@@ -5,7 +5,9 @@
  * too wide cut with an ellipsis; a card with a plate, an arrow and text, a
  * plain mark for an arrow not known, and none for no manoeuvre; mirrored
  * arrows; roads not taken grey; a change of the distance alone touching
- * only the text's rows; the setting off by default, the app's choice kept
+ * only the text's rows; the compact card, all on one line; the app's
+ * example over the navigation's manoeuvre until it ends, on its own once
+ * its time is up (card_choice.h); the setting off by default, the app's choice kept
  * across a restart, other values refused or read as off. */
 #include <unistd.h>
 
@@ -15,6 +17,7 @@
 #include <string>
 #include <vector>
 
+#include "card_choice.h"
 #include "card_font.h"
 #include "turn_card.h"
 #include "turn_card_setting.h"
@@ -53,6 +56,19 @@ static unsigned white(const std::vector<uint8_t> &c, unsigned x0, unsigned y0, u
     for (unsigned y = y0; y < y1; y++)
         for (unsigned x = x0; x < x1; x++)
             n += at(c, x, y)[0] > 240 && at(c, x, y)[3] > 240;
+    return n;
+}
+
+/* the road's light blue-grey text (200,208,220) in a rectangle, its glyphs'
+ * cores: light, bluer than red, not white */
+static unsigned light(const std::vector<uint8_t> &c, unsigned x0, unsigned y0, unsigned x1, unsigned y1)
+{
+    unsigned n = 0;
+    for (unsigned y = y0; y < y1; y++)
+        for (unsigned x = x0; x < x1; x++) {
+            const uint8_t *p = at(c, x, y);
+            n += p[0] > 150 && p[0] <= 240 && p[2] > p[0] && p[3] > 200;
+        }
     return n;
 }
 
@@ -165,6 +181,55 @@ int main()
     render_turn_card(m, &sharp);
     ok("sharp right: up the left, the head down on the right",
        white(sharp, 12, 30, 26, 50) > 40 && white(sharp, 36, 26, 54, 46) > 25);
+
+    /* the compact card below the arrow: one line */
+    m.kind = Maneuver::Left;
+    m.distance = "200 m";
+    m.road = "Rua Exemplo";
+    std::vector<uint8_t> low, low_none;
+    render_turn_card(m, &low, true);
+    ok("compact: kTurnCardW x kTurnCardCompactH", low.size() == (size_t)kTurnCardW * kTurnCardCompactH * 4);
+    ok("compact: the arrow smaller, in its left square",
+       white(low, 6, 3, 34, 31) > 60 && white(low, 0, 0, 6, kTurnCardCompactH) == 0);
+    ok("compact: the distance in bold right of the arrow", white(low, 42, 4, 120, 27) > 60);
+    ok("compact: the road after the distance, on the same line", light(low, 125, 8, 348, 30) > 40);
+    ok("compact: nothing written below the line", white(low, 36, 31, kTurnCardW, kTurnCardCompactH) == 0 &&
+                                                        light(low, 36, 31, kTurnCardW, kTurnCardCompactH) == 0);
+    m.distance.clear();
+    std::vector<uint8_t> low_road;
+    render_turn_card(m, &low_road, true);
+    ok("compact: no distance, the road where the distance would start", light(low_road, 42, 8, 120, 30) > 40);
+    m.kind = Maneuver::None;
+    render_turn_card(m, &low_none, true);
+    bool clear = low_none.size() == (size_t)kTurnCardW * kTurnCardCompactH * 4;
+    for (uint8_t b : low_none)
+        clear = clear && b == 0;
+    ok("compact: no manoeuvre, no card", clear);
+
+    /* the app's example over the navigation's, and its end (card_choice.h) */
+    {
+        CardChoice ch;
+        Maneuver g, ex;
+        g.kind = Maneuver::Right;
+        g.distance = "300 m";
+        ex.kind = Maneuver::Left;
+        ex.distance = "200 m";
+        ch.set_guided(g);
+        ok("choice: the navigation's manoeuvre", ch.shown() == g && !ch.example());
+        ch.set_example(ex, 1000);
+        ok("choice: the app's example over it", ch.shown() == ex && ch.example());
+        ok("choice: the example lasts its time", !ch.expire(1000 + CardChoice::kExampleMs - 1) && ch.shown() == ex);
+        ok("choice: then ends on its own, the app's end or not, and the navigation's shows again",
+           ch.expire(1000 + CardChoice::kExampleMs) && ch.shown() == g && !ch.expire(1000 + CardChoice::kExampleMs + 5000));
+        ch.set_example(ex, 50000);
+        ch.set_example(ex, 55000);
+        ok("choice: another example starts its time again", !ch.expire(50000 + CardChoice::kExampleMs) && ch.example());
+        ch.set_example(Maneuver(), 56000);
+        ok("choice: the app's none ends it at once", !ch.example() && ch.shown() == g && !ch.expire(70000));
+        g.distance = "100 m";
+        ch.set_guided(g);
+        ok("choice: the navigation's next one", ch.shown().distance == "100 m");
+    }
 
     const std::string path = "/tmp/woc-turn-card-test-" + std::to_string(getpid()) + ".conf";
     unlink(path.c_str());
