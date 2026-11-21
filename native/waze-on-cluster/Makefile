@@ -55,7 +55,7 @@ VERSION := $(shell sed -n 's/^ *"version": *"\([^"]*\)".*/\1/p' component.json)
 WOC_SRC = src/main.cpp src/refused.cpp src/video_producer.cpp src/freeze_watch.cpp src/alt_screen.cpp src/map_feed.cpp src/map_feeds.cpp src/atlas_scale.cpp src/control.cpp src/h264_source.cpp \
           src/guide_setting.cpp src/turn_card.cpp src/card_font.cpp src/card_font_data.cpp src/turn_card_setting.cpp \
           src/route_box.cpp src/guidance_link.cpp \
-          src/map_state.cpp src/opt_in.cpp \
+          src/keys.cpp src/map_state.cpp src/opt_in.cpp \
           src/udp_source.cpp src/avb_source.cpp src/framing_probe.cpp src/rtp_h264.cpp src/sps_info.cpp \
           src/decoder_msdk.cpp src/nal_reader.cpp src/stream_health.cpp $(KIT)/map_geometry.cpp $(KIT)/yuv_atlas.cpp \
           $(KIT)/block_pack.cpp
@@ -71,7 +71,7 @@ CPP_TESTS = $(BUILD)/host/nal_reader_test $(BUILD)/host/rtp_h264_test $(BUILD)/h
 		$(BUILD)/host/map_rect_test $(BUILD)/host/guide_setting_test $(BUILD)/host/turn_card_test $(BUILD)/host/route_box_test \
 		$(BUILD)/host/decoder_test \
 		$(BUILD)/host/map_state_test $(BUILD)/host/opt_in_test $(BUILD)/host/atlas_scale_test $(BUILD)/host/sps_info_test \
-		$(BUILD)/host/picture_pace_test
+		$(BUILD)/host/picture_pace_test $(BUILD)/host/keys_test
 # The control socket (accept4) and the producer (pipe2) are Linux's: built and run on Linux only
 # (make test-x86).
 LINUX_TESTS = $(if $(filter Linux,$(shell uname -s)),$(BUILD)/host/refused_test $(BUILD)/host/video_producer_test)
@@ -140,6 +140,7 @@ test-cpp: $(CPP_TESTS)
 	$(BUILD)/host/decoder_test
 	$(BUILD)/host/map_state_test
 	$(BUILD)/host/opt_in_test
+	$(BUILD)/host/keys_test
 	$(BUILD)/host/atlas_scale_test
 	$(BUILD)/host/sps_info_test
 	$(if $(LINUX_TESTS),$(foreach t,$(LINUX_TESTS),$(t) &&) true,@echo 'refused_test, video_producer_test: Linux only (make test-x86)')
@@ -282,6 +283,12 @@ $(BUILD)/host/map_state_test: test/map_state_test.cpp src/map_state.cpp src/map_
 $(BUILD)/host/opt_in_test: test/opt_in_test.cpp src/opt_in.cpp src/opt_in.h $(CR)/src/config.cpp $(CR)/src/log.cpp
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/opt_in_test.cpp src/opt_in.cpp $(CR)/src/config.cpp $(CR)/src/log.cpp -lpthread
+
+# the shipped waze-on-cluster.conf against the keys the program knows; run from
+# this directory (it reads the conf and src/)
+$(BUILD)/host/keys_test: test/keys_test.cpp src/keys.cpp src/keys.h $(CR)/src/config.cpp $(CR)/src/log.cpp
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -I$(CR)/src -o $@ test/keys_test.cpp src/keys.cpp $(CR)/src/config.cpp $(CR)/src/log.cpp -lpthread
 
 # ---- target binary (in Docker) --------------------------------------------
 target:

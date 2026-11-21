@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+0.11.1 did not start: its settings file turns on the navigation's
+manoeuvres with a setting the program did not know, so it stopped at once
+and the Store kept the version before. The program knows the setting now,
+and a test loads the shipped settings the way the program does.
+
 ## 0.11.1
 
 The turn card shows the navigation's next manoeuvre while it guides,
