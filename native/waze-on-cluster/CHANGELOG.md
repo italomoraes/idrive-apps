@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.11.1
+
 The turn card shows the navigation's next manoeuvre while it guides,
 CarPlay's guidance included, instead of only the app's example: each turn
 with its direction, and the destination with its side. Manoeuvres not
