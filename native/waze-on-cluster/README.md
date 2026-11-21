@@ -125,11 +125,13 @@ What it shows is the BMW navigation's next manoeuvre as the cluster's route
 box has it, CarPlay's guidance included (`guidance = 1`): the tool reads
 GuidanceEventList (SOME/IP 0xFB1B, event 0x8002) as uid 5000, the way the
 HMI does, and only reads (`src/guidance_link.h`, `src/route_box.h`). Each
-of its events is a kind (a turn, the destination, an empty slot) and a
-direction: a turn's straight on, left, slight, sharp, right or U-turn, the
-destination's side. A kind not seen on a drive yet (a roundabout, a fork, a
-ferry) gets a plain mark, with the distance and road still shown, and the
-log names its number once, never the road. While the app sends a
+of its events is a kind (a turn, a fork, a roundabout, the destination, an
+empty slot) and a direction: a turn's straight on, left, slight, sharp,
+right or U-turn, a fork's keep left or right, a roundabout's exit (its angle
+and number), the destination's side. Distances come in metres or
+kilometres. A kind not seen on a drive yet (a ferry, a motorway entry) gets
+a plain mark, with the distance and road still shown, and the log names its
+number once, never the road. While the app sends a
 manoeuvre (its **Show an example**), the card shows the app's until the
 app sends `none`.
 

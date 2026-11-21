@@ -51,7 +51,8 @@ std::vector<Str> strings(const uint8_t *p, size_t n)
 /* At most this many events a screen: a car sends 3. */
 const size_t kMaxEvents = 16;
 
-/* An event's distance, unit, text and direction (route_box.h). */
+/* An event's distance, unit, text and direction, and a roundabout's exit
+ * (route_box.h). */
 void read_event(const uint8_t *d, size_t n, RouteBoxEvent *e)
 {
     const std::vector<Str> ss = strings(d, n);
@@ -65,14 +66,46 @@ void read_event(const uint8_t *d, size_t n, RouteBoxEvent *e)
         e->distance = ss[ss.size() - 2].text;
         e->unit = u32_at(d + t.start - 24);
     }
-    /* 40 bytes on: the direction, after a group that is u32 4, u32 1 at 20 */
-    if (t.end + 44 <= n && u32_at(d + t.end + 20) == 4 && u32_at(d + t.end + 24) == 1)
-        e->direction = u32_at(d + t.end + 40);
+    /* 40 bytes on, after a group that is u32 4, u32 1 at 20: the direction;
+     * a roundabout's exit angle and number instead, their u32 and its own
+     * u32 4, u32 1 three bytes later */
+    const uint8_t *g = d + t.end;
+    if (t.end + 44 > n || u32_at(g + 20) != 4 || u32_at(g + 24) != 1)
+        return;
+    if (e->kind != kRouteBoxRoundabout) {
+        e->direction = u32_at(g + 40);
+    } else if (t.end + 55 <= n && u32_at(g + 47) == 4 && u32_at(g + 51) == 1) {
+        e->exit_angle = (uint16_t)(g[40] << 8 | g[41]);
+        e->exit_number = g[42];
+        e->direction = u32_at(g + 43);
+    }
 }
 
 bool blank(const std::string &s)
 {
     return s.find_first_not_of(' ') == std::string::npos;
+}
+
+/* The road as the card shows it: the ends' spaces dropped, and two names the
+ * navigation puts two spaces between ("Cidade A  Cidade B") joined by a
+ * middle dot. */
+std::string road_text(const std::string &t)
+{
+    const size_t a = t.find_first_not_of(' ');
+    if (a == std::string::npos)
+        return std::string();
+    const size_t b = t.find_last_not_of(' ');
+    std::string out;
+    for (size_t i = a; i <= b; i++) {
+        if (t[i] == ' ' && t[i + 1] == ' ') {
+            while (t[i + 1] == ' ')
+                i++;
+            out += " \xC2\xB7 ";
+        } else {
+            out += t[i];
+        }
+    }
+    return out;
 }
 
 }  // namespace
@@ -101,7 +134,7 @@ bool parse_route_box(const uint8_t *p, size_t n, const std::string &screen, std:
             RouteBoxEvent e;
             e.kind = kind;
             if (kind != kRouteBoxEmpty)
-                read_event(p + q + 8, elen, &e);
+                read_event(p + q + 8, elen, &e);   /* by its kind */
             out->push_back(e);
             q += 8 + elen;
         }
@@ -127,6 +160,11 @@ Maneuver::Kind kind_of_event(uint32_t kind, uint32_t direction)
         default: return Maneuver::Other;
         }
     }
+    if (kind == kRouteBoxFork)
+        return direction == 1 ? Maneuver::KeepLeft : direction == 2 ? Maneuver::KeepRight : Maneuver::Other;
+    /* drawn anticlockwise: where traffic keeps right only */
+    if (kind == kRouteBoxRoundabout)
+        return direction == 2 ? Maneuver::Roundabout : Maneuver::Other;
     if (kind == kRouteBoxDestination)
         return direction == 1 ? Maneuver::ArriveLeft : direction == 3 ? Maneuver::ArriveRight : Maneuver::Arrive;
     return Maneuver::Other;
@@ -145,12 +183,12 @@ std::string route_box_distance(const std::string &distance, uint32_t unit)
 {
     if (blank(distance))
         return std::string();
-    return unit == 4 ? distance + " m" : distance;
+    return unit == 4 ? distance + " m" : unit == 1 ? distance + " km" : distance;
 }
 
 bool unit_known(uint32_t unit)
 {
-    return unit == 0 || unit == 4;
+    return unit == 0 || unit == 1 || unit == 4;
 }
 
 bool route_box_maneuver(const std::vector<RouteBoxEvent> &events, Maneuver *out)
@@ -167,8 +205,14 @@ bool route_box_maneuver(const std::vector<RouteBoxEvent> &events, Maneuver *out)
         return false;
     Maneuver m;
     m.kind = kind_of_event(e.kind, e.direction);
+    if (m.kind == Maneuver::Roundabout) {
+        if (e.exit_angle >= 1 && e.exit_angle <= 360)
+            m.exit_deg = e.exit_angle > 180 ? e.exit_angle - 360 : e.exit_angle;
+        else
+            m.kind = Maneuver::Other;
+    }
     m.distance = route_box_distance(e.distance, e.unit);
-    m.road = e.text;
+    m.road = road_text(e.text);
     *out = m;
     return true;
 }

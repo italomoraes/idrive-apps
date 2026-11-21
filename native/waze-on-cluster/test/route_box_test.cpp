@@ -4,8 +4,9 @@
  * in order, empty slots included, and the other screens' left out; a
  * payload without the cluster's screen saying nothing of it, and one with
  * it and empty slots only saying there is no manoeuvre; each turn's
- * direction and the destination's side as the card's arrow, and the plain
- * mark for a kind or direction not known; the distance's text and unit; a
+ * direction, a fork's side, a roundabout's exit and the destination's side
+ * as the card's arrow, and the plain mark for a kind or direction not known;
+ * the distance's text and unit, metres and kilometres; a
  * text's length never taken for its direction (the mistake of the first
  * reading); the list mid-rebuild keeping the card; cut, garbled and
  * implausible input read without a fault and without inventing events. */
@@ -118,6 +119,24 @@ Payload turn(const std::string &distance, uint32_t unit, const std::string &text
     return event(kRouteBoxTurn, d);
 }
 
+Payload fork(const std::string &distance, uint32_t unit, const std::string &text, uint32_t direction,
+             uint32_t lead = 2)
+{
+    Payload d = head(distance, unit, text, lead);
+    d.u32(direction).u32(4).u32(1).zeros(8);
+    return event(kRouteBoxFork, d);
+}
+
+/* where a turn's direction is: the exit's angle (u16) and number (u8), then
+ * a u32 (2) and its own 4, 1 */
+Payload roundabout(const std::string &distance, uint32_t unit, const std::string &text, uint16_t angle,
+                   uint8_t exit, uint32_t side = 2, uint32_t lead = 2)
+{
+    Payload d = head(distance, unit, text, lead);
+    d.u8((uint8_t)(angle >> 8)).u8((uint8_t)angle).u8(exit).u32(side).u32(4).u32(1).zeros(4);
+    return event(kRouteBoxRoundabout, d);
+}
+
 Payload destination(const std::string &distance, uint32_t unit, const std::string &text, uint32_t side,
                     uint32_t lead = 2)
 {
@@ -149,6 +168,8 @@ int main()
 
     ok("an empty slot is the 37 bytes a car sends, a turn's head its 60 after the text",
        empty_slot().b.size() == 8 + 37 && turn("0", 4, "R. Exemplo", 7).b.size() == 8 + 144);
+    ok("and as a car sends them, a fork 60 after the text, a roundabout 59",
+       fork("0", 4, "R. Exemplo", 2).b.size() == 8 + 144 && roundabout("0", 4, "R. Exemplo", 270, 3).b.size() == 8 + 143);
     {
         Payload p;
         p.u32(0).screen(kClusterRouteBox, {turn("300", 4, "Rua Exemplo", 5), turn(" ", 0, "Rua Seguinte", 2, 1),
@@ -208,10 +229,92 @@ int main()
     }
     {
         Payload p;
-        p.u32(0).screen(kClusterRouteBox, {event(3, head("200", 4, "Rotat\xC3\xB3ria Exemplo", 2))});
+        p.u32(0).screen(kClusterRouteBox, {fork("1,5", 1, "em dire\xC3\xA7\xC3\xA3o a Cidade Exemplo", 2), empty_slot()});
+        parse(p, kClusterRouteBox, &e);
+        ok("a fork's 2: keep right, its kilometres",
+           route_box_maneuver(e, &m) && m.kind == Maneuver::KeepRight && m.distance == "1,5 km" &&
+               m.road == "em dire\xC3\xA7\xC3\xA3o a Cidade Exemplo");
+        Payload two;
+        two.u32(0).screen(kClusterRouteBox, {fork("1,5", 1, "em dire\xC3\xA7\xC3\xA3o a Cidade A  Cidade B", 2)});
+        parse(two, kClusterRouteBox, &e);
+        ok("two names two spaces apart: joined by a middle dot on the card, the event's text as sent",
+           route_box_maneuver(e, &m) && m.road == "em dire\xC3\xA7\xC3\xA3o a Cidade A \xC2\xB7 Cidade B" &&
+               e[0].text == "em dire\xC3\xA7\xC3\xA3o a Cidade A  Cidade B");
+        const struct { const char *sent, *shown; } roads[] = {
+            {"  Rua Exemplo ", "Rua Exemplo"}, {"A   B", "A \xC2\xB7 B"}, {"Ponte  Av. Exemplo  Centro", "Ponte \xC2\xB7 Av. Exemplo \xC2\xB7 Centro"},
+            {"   ", ""}, {"Rua de Uma Palavra So", "Rua de Uma Palavra So"}};
+        bool all = true;
+        for (const auto &r : roads) {
+            Payload q;
+            q.u32(0).screen(kClusterRouteBox, {turn("100", 4, r.sent, 5)});
+            parse(q, kClusterRouteBox, &e);
+            all = all && route_box_maneuver(e, &m) && m.road == r.shown;
+        }
+        ok("the road's ends' spaces dropped, a run of spaces one dot, single spaces kept", all);
+        ok("a fork's 1 keep left, 1 and 2 known, others the plain mark",
+           kind_of_event(kRouteBoxFork, 1) == Maneuver::KeepLeft && event_known(kRouteBoxFork, 1) &&
+               event_known(kRouteBoxFork, 2) && kind_of_event(kRouteBoxFork, 3) == Maneuver::Other &&
+               !event_known(kRouteBoxFork, 3));
+    }
+    {
+        Payload p;
+        p.u32(0).screen(kClusterRouteBox, {roundabout("200", 4, "Rua Exemplo", 270, 3), turn(" ", 0, "Rua Seguinte", 5, 1)});
+        parse(p, kClusterRouteBox, &e);
+        ok("a roundabout: its exit's angle and number, the u32 after them, not taken for a direction",
+           e.size() == 2 && e[0].exit_angle == 270 && e[0].exit_number == 3 && e[0].direction == 2 &&
+               e[1].direction == 5 && e[1].text == "Rua Seguinte");
+        ok("by the third exit at 270: the ring, its exit to the left (-90), the road and distance",
+           route_box_maneuver(e, &m) && m.kind == Maneuver::Roundabout && m.exit_deg == -90 && m.road == "Rua Exemplo" &&
+               m.distance == "200 m" && event_known(kRouteBoxRoundabout, 2));
+        const struct { uint16_t angle; uint8_t exit; int deg; } exits[] = {{360, 2, 0}, {90, 1, 90}, {180, 0, 180},
+                                                                           {225, 4, -135}, {1, 1, 1}};
+        bool all = true;
+        for (const auto &x : exits) {
+            Payload q;
+            q.u32(0).screen(kClusterRouteBox, {roundabout("50", 4, "Rua Exemplo", x.angle, x.exit)});
+            parse(q, kClusterRouteBox, &e);
+            all = all && route_box_maneuver(e, &m) && m.kind == Maneuver::Roundabout && m.exit_deg == x.deg;
+        }
+        ok("its exits: 360 straight on (0), 90 right, 180 a U-turn round it, 225 back left (-135), 1", all);
+    }
+    {
+        Payload p;
+        p.u32(0).screen(kClusterRouteBox, {roundabout("50", 4, "Rua Exemplo", 270, 3, 1)});
+        parse(p, kClusterRouteBox, &e);
+        ok("a roundabout not as where traffic keeps right: the plain mark, not known",
+           route_box_maneuver(e, &m) && m.kind == Maneuver::Other && !event_known(kRouteBoxRoundabout, 1));
+        Payload z;
+        z.u32(0).screen(kClusterRouteBox, {roundabout("50", 4, "Rua Exemplo", 0, 1)});
+        parse(z, kClusterRouteBox, &e);
+        ok("a roundabout with no angle (0): the plain mark", route_box_maneuver(e, &m) && m.kind == Maneuver::Other);
+        Payload big;
+        big.u32(0).screen(kClusterRouteBox, {roundabout("50", 4, "Rua Exemplo", 400, 1)});
+        parse(big, kClusterRouteBox, &e);
+        ok("an angle past 360: the plain mark", route_box_maneuver(e, &m) && m.kind == Maneuver::Other);
+        /* its own 4, 1 missing: the angle not trusted */
+        Payload d = head("50", 4, "Rua Exemplo", 2);
+        d.u8(0x01).u8(0x0E).u8(3).u32(2).u32(9).u32(9).zeros(4);
+        Payload q;
+        q.u32(0).screen(kClusterRouteBox, {event(kRouteBoxRoundabout, d)});
+        parse(q, kClusterRouteBox, &e);
+        ok("a roundabout without its marks after the exit: no angle, the plain mark",
+           e.size() == 1 && e[0].exit_angle == 0 && e[0].direction == 0 && route_box_maneuver(e, &m) &&
+               m.kind == Maneuver::Other);
+        Payload whole;
+        whole.u32(0).screen(kClusterRouteBox, {roundabout("200", 4, "Rua Exemplo", 360, 2), fork(" ", 0, "Rua Seguinte", 1, 1)});
+        bool fine = true;
+        for (size_t n = 0; n <= whole.b.size(); n++) {
+            parse_route_box(whole.b.data(), n, kClusterRouteBox, &e);
+            fine = fine && e.size() <= 2 && (e.empty() || e[0].exit_angle == 0 || e[0].exit_angle == 360);
+        }
+        ok("a roundabout and a fork: every length read without a fault", fine);
+    }
+    {
+        Payload p;
+        p.u32(0).screen(kClusterRouteBox, {event(3, head("200", 4, "Esta\xC3\xA7\xC3\xA3o Exemplo", 2))});
         parse(p, kClusterRouteBox, &e);
         ok("a kind not known yet: the plain mark, its text as sent, accents and all",
-           route_box_maneuver(e, &m) && m.kind == Maneuver::Other && m.road == "Rotat\xC3\xB3ria Exemplo" &&
+           route_box_maneuver(e, &m) && m.kind == Maneuver::Other && m.road == "Esta\xC3\xA7\xC3\xA3o Exemplo" &&
                m.distance == "200 m" && !event_known(3, 0));
         ok("a direction not known yet: the plain mark",
            kind_of_event(kRouteBoxTurn, 9) == Maneuver::Other && !event_known(kRouteBoxTurn, 0));
@@ -288,10 +391,11 @@ int main()
         ok("nothing at all: nothing", !parse_route_box(nullptr, 0, kClusterRouteBox, &e) && e.empty());
     }
 
-    ok("distance: metres for unit 4, none when blank",
-       route_box_distance("300", 4) == "300 m" && route_box_distance(" ", 0).empty() &&
-           route_box_distance("", 4).empty() && route_box_distance("1,2", 7) == "1,2");
-    ok("units 0 and 4 known, 7 not", unit_known(0) && unit_known(4) && !unit_known(7));
+    ok("distance: metres for unit 4, kilometres for 1, none when blank",
+       route_box_distance("300", 4) == "300 m" && route_box_distance("1,5", 1) == "1,5 km" &&
+           route_box_distance(" ", 0).empty() && route_box_distance("", 4).empty() &&
+           route_box_distance("1,2", 7) == "1,2");
+    ok("units 0, 1 and 4 known, 7 not", unit_known(0) && unit_known(1) && unit_known(4) && !unit_known(7));
     ok("an empty slot: no arrow, known", kind_of_event(kRouteBoxEmpty, 0) == Maneuver::None &&
                                              event_known(kRouteBoxEmpty, 0));
 
