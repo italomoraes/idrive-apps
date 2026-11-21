@@ -161,6 +161,12 @@ int main()
                err.empty());
     }
     ok("off with 0: no hold", load({"guide_hold=0"}, &t, &err) && t.size() == 1 && err.empty());
+    ok("off: the map not asked for again after a cover", load({"guide_hold=0"}, &t, &err) && !t[0].refresh_after_hold);
+    ok("on: the map the hold follows asked for again after its cover (slots.h), the hold not",
+       load({"guide_hold=1", "guide_slots=auto"}, &t, &err) && t.size() == 2 && t[0].name == "map" &&
+           t[0].refresh_after_hold && !t[1].refresh_after_hold);
+    ok("a refused hold: the map left as it was",
+       !load({"guide_hold=1", "guide_slots=0x105, auto"}, &t, &err) && t.size() == 1 && !t[0].refresh_after_hold);
 
     ok("on: a hold of 0x105 following the map, never drawn",
        load({"guide_hold=1"}, &t, &err) && t.size() == 2 && t[1].name == "guide_0x105" && t[1].slot == 0x105 &&
