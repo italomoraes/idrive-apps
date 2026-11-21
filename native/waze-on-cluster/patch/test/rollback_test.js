@@ -91,8 +91,11 @@ if (!list.length) process.exit(1);
 
 var dir = fs.mkdtempSync(path.join(os.tmpdir(), 'woc-rollback-'));
 process.on('exit', function () { try { cp.execFileSync('rm', ['-rf', dir]); } catch (e) {} });
+/* Releases from 0.11.0 on patch in memory, as this version does: none of
+ * the groups above describes them, so their tags (present once 0.11.0 was
+ * released) are left out rather than tested as H. */
 var RELEASES = list.map(function (t) { return t.slice('waze-on-cluster@'.length); }).filter(function (v) { return /^\d+\.\d+\.\d+$/.test(v); })
-    .sort(cmp).filter(function (v) { return BIN || group(v) !== 'A'; });
+    .sort(cmp).filter(function (v) { return BIN || group(v) !== 'A'; }).filter(function (v) { return cmp(v, '0.11.0') < 0; });
 RELEASES.forEach(function (v) {
     var d = path.join(dir, 'rel', v);
     fs.mkdirSync(d, { recursive: true });
