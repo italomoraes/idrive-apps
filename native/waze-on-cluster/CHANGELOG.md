@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.11.2
+
 0.11.1 did not start: its settings file turns on the navigation's
 manoeuvres with a setting the program did not know, so it stopped at once
 and the Store kept the version before. The program knows the setting now,
