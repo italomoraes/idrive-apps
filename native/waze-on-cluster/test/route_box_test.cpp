@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 
+#include "guided_card.h"
 #include "route_box.h"
 
 using namespace woc;
@@ -391,6 +392,49 @@ int main()
         }
         ok("noise: nothing", !parse_route_box(noise.data(), noise.size(), kClusterRouteBox, &e) && e.empty());
         ok("nothing at all: nothing", !parse_route_box(nullptr, 0, kClusterRouteBox, &e) && e.empty());
+    }
+
+    /* the card while the navigation guides (guided_card.h) */
+    {
+        Maneuver out, right;
+        out.kind = Maneuver::Straight;   /* the way out: no distance */
+        out.road = "em dire\xC3\xA7\xC3\xA3o a Rua Exemplo";
+        right.kind = Maneuver::Right;
+        right.distance = "20 m";
+        right.road = "Rua Seguinte";
+        GuidedCard g;
+        g.set_box(out, 1000);
+        g.set_box(Maneuver(), 1022);
+        ok("guiding not known: an empty box is no card at once, as before", g.shown(1022).kind == Maneuver::None);
+        GuidedCard c;
+        c.set_guiding(true);
+        c.set_box(out, 1000);
+        ok("guiding: the box's manoeuvre", c.shown(1000) == out);
+        c.set_box(Maneuver(), 1022);
+        ok("the box empty after the way out (no distance): held while guiding, 47 s on too",
+           c.shown(1022) == out && c.shown(1022 + 47000) == out);
+        c.set_box(right, 48000);
+        ok("the first turn once the box has it", c.shown(48000) == right);
+        c.set_box(Maneuver(), 50000);
+        ok("one with a distance, the box empty while guiding: held a moment (a recalculation)",
+           c.shown(50000 + GuidedCard::kGraceMs - 1) == right);
+        ok("then gone (passed)", c.shown(50000 + GuidedCard::kGraceMs).kind == Maneuver::None);
+        c.set_box(right, 51000);
+        ok("a box again within the moment: no gap", c.shown(51000) == right);
+        c.set_box(out, 60000);
+        c.set_box(Maneuver(), 60010);
+        c.set_guiding(false);
+        ok("guiding off (arrived, cancelled): no card at once", c.shown(60010).kind == Maneuver::None);
+        c.set_guiding(true);
+        ok("on again for another route, the box still empty: nothing from before",
+           c.shown(70000).kind == Maneuver::None);
+        GuidedCard d;
+        d.set_box(out, 1000);
+        d.set_guiding(true);
+        d.set_box(Maneuver(), 1022);
+        ok("guiding on a few ms after the box's first: the way out held", d.shown(5000) == out);
+        d.forget_guiding();
+        ok("the Guidance service gone: not known again, an empty box no card", d.shown(5000).kind == Maneuver::None);
     }
 
     ok("distance: metres for unit 4, kilometres for 1, none when blank",

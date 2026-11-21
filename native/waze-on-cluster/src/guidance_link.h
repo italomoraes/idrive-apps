@@ -16,11 +16,19 @@
  * kSettleMs: a request that comes before the provider's registration, and
  * names a type, can stand in the routing manager's table in its place.
  *
- * vsomeip's thread parses each notification and keeps the manoeuvre; fd()
- * turns readable when it changes, and take() hands it to the main loop. The
- * service gone, the manoeuvre is none. The log names event kinds,
- * directions and units the card does not know yet (route_box.h), never a
- * road. */
+ * It also reads whether the navigation guides: Guidance 0xFB1A major 7,
+ * event 0x8015 in eventgroup 0x0015 (a u32, 1 on, 0 off), which uid 5000's
+ * policy allows too, subscribed the same way. With it the card holds its
+ * manoeuvre through the box's empty spells while the navigation guides
+ * (guided_card.h).
+ *
+ * vsomeip's thread parses each notification and keeps the box's manoeuvre
+ * and the guiding; fd() turns readable when one comes, and take() hands the
+ * card's manoeuvre to the main loop, each pass, as the hold's time runs out
+ * too. The route box's service gone, the box is empty; the Guidance
+ * service's, the guiding is not known. The log names event kinds,
+ * directions and units the card does not know yet (route_box.h) and the
+ * guiding's changes, never a road. */
 #ifndef WOC_GUIDANCE_LINK_H
 #define WOC_GUIDANCE_LINK_H
 
@@ -33,6 +41,7 @@
 #include <string>
 #include <thread>
 
+#include "guided_card.h"
 #include "turn_card.h"
 
 namespace vsomeip_v3 { class application; class message; }
@@ -51,28 +60,33 @@ public:
     bool start(std::string *err);
     void stop();
 
-    /* Readable when the manoeuvre changed, or a subscription may be due;
+    /* Readable when a notification came, or a subscription may be due;
      * -1 before start. */
     int fd() const { return wake_[0]; }
-    /* On the main loop: subscribes once due; true and the manoeuvre when it
-     * changed since the last call. */
+    /* On the main loop, each pass: subscribes once due; true and the card's
+     * manoeuvre when it changed since the last call. */
     bool take(Maneuver *m);
 
 private:
     void wake();
     void on_availability(bool up);
+    void on_guide_availability(bool up);
     void on_message(const std::shared_ptr<vsomeip_v3::message> &msg);
+    void on_guiding(const std::shared_ptr<vsomeip_v3::message> &msg);
 
     int wake_[2] = {-1, -1};
     std::shared_ptr<vsomeip_v3::application> app_;
     std::thread thread_;
 
     std::mutex mutex_;   /* what follows: written by vsomeip's thread */
-    bool up_ = false;
+    bool up_ = false;    /* the route box's service */
     std::chrono::steady_clock::time_point up_since_;
     bool subscribed_ = false;
-    Maneuver maneuver_;
-    bool changed_ = false;
+    bool guide_up_ = false;   /* the Guidance service */
+    std::chrono::steady_clock::time_point guide_up_since_;
+    bool guide_subscribed_ = false;
+    GuidedCard card_;
+    Maneuver published_;   /* the card's manoeuvre take() last handed over */
     /* events (kind << 16 | direction) and units not known, not logged yet */
     std::set<uint32_t> new_events_, new_units_;
     std::set<uint32_t> logged_events_, logged_units_;

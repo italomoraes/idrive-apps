@@ -20,7 +20,17 @@ const vsomeip::instance_t kInstance = 0x0080;
 const vsomeip::major_version_t kMajor = 5;
 const vsomeip::event_t kEvent = 0x8002;        /* the route box of each screen */
 const vsomeip::eventgroup_t kGroup = 0x0002;
+const vsomeip::service_t kGuidance = 0xFB1A;   /* Guidance */
+const vsomeip::major_version_t kGuidanceMajor = 7;
+const vsomeip::event_t kGuiding = 0x8015;      /* guiding: u32, 1 on, 0 off */
+const vsomeip::eventgroup_t kGuidingGroup = 0x0015;
 const char kAppName[] = "woc-guidance";
+
+int64_t steady_ms()
+{
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch())
+        .count();
+}
 
 }  // namespace
 
@@ -75,7 +85,24 @@ bool GuidanceLink::start(std::string *err)
                 log_warn("guidance: the route box's subscription refused (%u)", (unsigned)code);
         },
         true);
+    app_->register_availability_handler(
+        kGuidance, kInstance, [this](vsomeip::service_t, vsomeip::instance_t, bool up) { on_guide_availability(up); },
+        vsomeip::ANY_MAJOR, vsomeip::ANY_MINOR);
+    app_->register_message_handler(kGuidance, kInstance, kGuiding,
+                                   [this](const std::shared_ptr<vsomeip::message> &m) { on_guiding(m); });
+    app_->register_subscription_status_handler(
+        kGuidance, kInstance, kGuidingGroup, kGuiding,
+        [](const vsomeip::service_t, const vsomeip::instance_t, const vsomeip::eventgroup_t, const vsomeip::event_t,
+           const uint16_t code) {
+            if (code == 0)
+                log_info("guidance: whether the navigation guides, subscribed");
+            else
+                log_warn("guidance: the guiding's subscription refused (%u): an empty box is no card at once",
+                         (unsigned)code);
+        },
+        true);
     app_->request_service(kService, kInstance, kMajor, vsomeip::ANY_MINOR);
+    app_->request_service(kGuidance, kInstance, kGuidanceMajor, vsomeip::ANY_MINOR);
     std::shared_ptr<vsomeip::application> app = app_;
     thread_ = std::thread([app] { app->start(); });
     log_info("guidance: vsomeip application %s, waiting for the navigation's route box (0x%04x.0x%04x)", kAppName,
@@ -87,16 +114,22 @@ void GuidanceLink::stop()
 {
     if (!app_)
         return;
-    bool subscribed;
+    bool subscribed, guide_subscribed;
     {
         std::lock_guard<std::mutex> lock(mutex_);
         subscribed = subscribed_;
+        guide_subscribed = guide_subscribed_;
     }
     if (subscribed) {
         app_->unsubscribe(kService, kInstance, kGroup);
         app_->release_event(kService, kInstance, kEvent);
     }
+    if (guide_subscribed) {
+        app_->unsubscribe(kGuidance, kInstance, kGuidingGroup);
+        app_->release_event(kGuidance, kInstance, kGuiding);
+    }
     app_->release_service(kService, kInstance);
+    app_->release_service(kGuidance, kInstance);
     app_->clear_all_handler();
     app_->stop();
     if (thread_.joinable())
@@ -113,12 +146,44 @@ void GuidanceLink::on_availability(bool up)
         up_ = up;
         if (up)
             up_since_ = std::chrono::steady_clock::now();
-        if (!up && maneuver_.kind != Maneuver::None) {
-            maneuver_ = Maneuver();
-            changed_ = true;
-        }
+        else
+            card_.set_box(Maneuver(), steady_ms());   /* no box: nothing to hold either */
     }
     log_info("guidance: the navigation's route box %s", up ? "offered" : "gone");
+    wake();
+}
+
+void GuidanceLink::on_guide_availability(bool up)
+{
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (up == guide_up_)
+            return;
+        guide_up_ = up;
+        if (up)
+            guide_up_since_ = std::chrono::steady_clock::now();
+        else
+            card_.forget_guiding();
+    }
+    log_info("guidance: the navigation's Guidance service %s", up ? "offered" : "gone");
+    wake();
+}
+
+void GuidanceLink::on_guiding(const std::shared_ptr<vsomeip::message> &msg)
+{
+    const std::shared_ptr<vsomeip::payload> pl = msg ? msg->get_payload() : nullptr;
+    if (!pl || pl->get_length() < 4)
+        return;
+    const vsomeip::byte_t *d = pl->get_data();
+    const bool on = ((uint32_t)d[0] << 24 | (uint32_t)d[1] << 16 | (uint32_t)d[2] << 8 | (uint32_t)d[3]) != 0;
+    bool changed;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        changed = card_.guiding() != (on ? 1 : 0);
+        card_.set_guiding(on);
+    }
+    if (changed)
+        log_info("guidance: the navigation %s", on ? "guides" : "does not guide");
     wake();
 }
 
@@ -143,15 +208,9 @@ void GuidanceLink::on_message(const std::shared_ptr<vsomeip::message> &msg)
             if (e.kind != kRouteBoxEmpty && !unit_known(e.unit) && !logged_units_.count(e.unit))
                 new_units_.insert(e.unit);
         }
-        /* the list mid-rebuild: the card keeps what it shows */
-        if (!whole)
-            m = maneuver_;
-        if (m == maneuver_ && new_events_.empty() && new_units_.empty() && first_logged_)
-            return;
-        if (m != maneuver_) {
-            maneuver_ = m;
-            changed_ = true;
-        }
+        /* the list mid-rebuild: the box keeps what it had */
+        if (whole)
+            card_.set_box(m, steady_ms());
     }
     wake();
 }
@@ -163,14 +222,18 @@ bool GuidanceLink::take(Maneuver *m)
     char buf[64];
     while (read(wake_[0], buf, sizeof buf) > 0) {
     }
-    bool subscribe = false, changed = false, first = false;
+    bool subscribe = false, guide_subscribe = false, changed = false, first = false;
     std::set<uint32_t> events, units;
     {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (up_ && !subscribed_ &&
-            std::chrono::steady_clock::now() - up_since_ >= std::chrono::milliseconds(kSettleMs)) {
+        const auto now = std::chrono::steady_clock::now();
+        if (up_ && !subscribed_ && now - up_since_ >= std::chrono::milliseconds(kSettleMs)) {
             subscribed_ = true;
             subscribe = true;
+        }
+        if (guide_up_ && !guide_subscribed_ && now - guide_up_since_ >= std::chrono::milliseconds(kSettleMs)) {
+            guide_subscribed_ = true;
+            guide_subscribe = true;
         }
         if (notifications_ && !first_logged_) {
             first_logged_ = true;
@@ -180,9 +243,11 @@ bool GuidanceLink::take(Maneuver *m)
         units.swap(new_units_);
         logged_events_.insert(events.begin(), events.end());
         logged_units_.insert(units.begin(), units.end());
-        if (changed_) {
-            *m = maneuver_;
-            changed_ = false;
+        /* each pass, as a hold's time runs out too (guided_card.h) */
+        const Maneuver shown = card_.shown(steady_ms());
+        if (shown != published_) {
+            published_ = shown;
+            *m = shown;
             changed = true;
         }
     }
@@ -192,6 +257,13 @@ bool GuidanceLink::take(Maneuver *m)
                             vsomeip::event_type_e::ET_UNKNOWN, vsomeip::reliability_type_e::RT_UNKNOWN);
         app_->subscribe(kService, kInstance, kGroup, kMajor);
         log_info("guidance: asking for the route box, its service offered %lld s ago",
+                 (long long)(kSettleMs / 1000));
+    }
+    if (guide_subscribe) {
+        app_->request_event(kGuidance, kInstance, kGuiding, std::set<vsomeip::eventgroup_t>{kGuidingGroup},
+                            vsomeip::event_type_e::ET_UNKNOWN, vsomeip::reliability_type_e::RT_UNKNOWN);
+        app_->subscribe(kGuidance, kInstance, kGuidingGroup, kGuidanceMajor);
+        log_info("guidance: asking whether the navigation guides, its Guidance service offered %lld s ago",
                  (long long)(kSettleMs / 1000));
     }
     if (first)

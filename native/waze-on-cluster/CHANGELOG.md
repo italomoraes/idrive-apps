@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+While the navigation guides, the turn card keeps a route's first
+instruction ("towards …") until the first turn comes, as CarPlay does,
+where the navigation's own box shows nothing until that turn is near, and
+it no longer blinks off when the navigation recalculates. The card goes
+when the navigation stops guiding.
+
 ## 0.11.3
 
 The app's example leaves the turn card after 12 seconds, even when the

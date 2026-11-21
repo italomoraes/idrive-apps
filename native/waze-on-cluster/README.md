@@ -132,7 +132,11 @@ right or U-turn, a fork's keep left or right, a roundabout's exit (its angle
 and number), the destination's side. Distances come in metres or
 kilometres. A kind not seen on a drive yet (a ferry, a motorway entry) gets
 a plain mark, with the distance and road still shown, and the log names its
-number once, never the road. While the app sends a
+number once, never the road. The box empties now and then while the
+navigation guides (a route's start, a recalculation); the tool also reads
+whether it guides (Guidance 0xFB1A, event 0x8015), and while it does the
+card keeps an instruction with no distance (the way out) through those
+spells and one with a distance for 2.5 s (`src/guided_card.h`). While the app sends a
 manoeuvre (its **Show an example**), the card shows the app's until the
 app sends `none`, or for 12 s at most (`src/card_choice.h`): the app's own
 end does not come while its page is in the background.

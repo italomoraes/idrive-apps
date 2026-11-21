@@ -272,7 +272,7 @@ $(BUILD)/host/turn_card_preview: tools/turn_card_preview.cpp $(CARD_SRC) src/tur
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -Isrc -o $@ tools/turn_card_preview.cpp $(CARD_SRC)
 
-$(BUILD)/host/route_box_test: test/route_box_test.cpp src/route_box.cpp src/route_box.h src/turn_card.h
+$(BUILD)/host/route_box_test: test/route_box_test.cpp src/route_box.cpp src/route_box.h src/guided_card.h src/turn_card.h
 	mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -Isrc -o $@ test/route_box_test.cpp src/route_box.cpp
 
