@@ -3,7 +3,32 @@
 ## Unreleased
 
 This fork's turn card (0.10.13 and 0.11.1 to 0.11.4) together with
-0.12.0 to 0.14.5. Nothing else changes.
+0.12.0 to 0.14.9.
+
+The tests run at once: `make test` takes about a minute and a half instead
+of about 18, with the same checks. Nothing changes on the car.
+
+## 0.14.9
+
+Building from source retries a failed package download and shows its
+error.
+
+## 0.14.8
+
+The tests remove their temporary files and stop the processes they start
+however a run ends, also when it fails or is interrupted.
+
+## 0.14.7
+
+CarPlay's cluster map works on cars where removing or updating
+another CarPlay safe-area tool left `Changed by another tool`; restart the
+head unit after updating.
+
+## 0.14.6
+
+Uses about 10 MB less of the head unit's memory: the diagnostic DLT
+capture now runs inside the patch service instead of a service of its own.
+Boot recovery and the journal keeper stay separate.
 
 ## 0.14.5
 
