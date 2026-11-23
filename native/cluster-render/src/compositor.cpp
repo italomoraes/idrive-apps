@@ -326,6 +326,10 @@ uint32_t Compositor::add_effect(uint64_t owner, int target, const LayerParams &l
         *err = "unknown target";
         return 0;
     }
+    if (vs.size() > kMaxShader || fs.size() > kMaxShader) {
+        *err = "a shader is at most " + std::to_string(kMaxShader) + " bytes";
+        return 0;
+    }
     const int fx = gpu_->effect(vs.empty() ? kQuadVertexShader : vs.c_str(), fs.c_str(), err);
     if (!fx)
         return 0;
@@ -376,6 +380,10 @@ bool Compositor::add_part(uint64_t owner, uint32_t layer, uint32_t part, const s
         *err = "part " + std::to_string(part) + " exists";
         return false;
     }
+    if (vs.size() > kMaxShader || fs.size() > kMaxShader) {
+        *err = "a shader is at most " + std::to_string(kMaxShader) + " bytes";
+        return false;
+    }
     const int fx = gpu_->effect(vs.c_str(), fs.c_str(), err);
     if (!fx)
         return false;
@@ -424,7 +432,7 @@ uint32_t Compositor::add_asset(uint64_t owner, int target, const AssetParams &ap
         *err = "unknown target";
         return 0;
     }
-    if (const char *e = Asset::size_error(ap.format, ap.w, ap.h)) {
+    if (const char *e = Asset::size_error(ap)) {
         *err = e;
         return 0;
     }
@@ -596,6 +604,11 @@ void Compositor::set_layers(uint32_t id, const SceneLayers &l)
     host_serial_++;
 }
 
+static bool inside(const Rect &r, const TargetSpec &t)
+{
+    return r.w && r.h && r.x >= 0 && r.y >= 0 && (uint64_t)r.x + r.w <= t.width && (uint64_t)r.y + r.h <= t.height;
+}
+
 bool Compositor::host(uint64_t owner, uint32_t id, int hosted, const Host &h, std::string *err)
 {
     auto it = scenes_.find(id);
@@ -624,9 +637,6 @@ bool Compositor::host(uint64_t owner, uint32_t id, int hosted, const Host &h, st
     for (const auto &kv : scenes_)
         if (kv.first != id && kv.second.error.empty() && kv.second.hosts.count(hosted))
             return refuse("target " + specs[hosted].name + " is hosted by another scene");
-    auto inside = [](const Rect &r, const TargetSpec &t) {
-        return r.w && r.h && r.x >= 0 && r.y >= 0 && (uint64_t)r.x + r.w <= t.width && (uint64_t)r.y + r.h <= t.height;
-    };
     if (!inside(h.rect, specs[s.target]))
         return refuse("x, y, w, h must lie inside " + specs[s.target].name);
     if (!inside(h.src, specs[hosted]))
@@ -643,15 +653,264 @@ void Compositor::unhost(uint64_t owner, uint32_t id, int hosted)
         host_serial_++;
 }
 
+bool Compositor::host_layers(uint64_t owner, int into, int hosted, const Host &h, std::string *err)
+{
+    const std::vector<TargetSpec> &specs = slots_->targets();
+    /* A refusal ends owner's host of the target, whatever its into: the
+     * clients forget it too (PROTOCOL.md "Hosting from layers"). */
+    auto refuse = [&](const std::string &why) {
+        *err = why;
+        unhost_layers(owner, hosted);
+        return false;
+    };
+    if (hosted == into)
+        return refuse("a host shows other targets, not its own");
+    if (!inside(h.rect, specs[into]))
+        return refuse("x, y, w, h must lie inside " + specs[into].name);
+    if (!inside(h.src, specs[hosted]))
+        return refuse("src_x, src_y, src_w, src_h must lie inside " + specs[hosted].name);
+    /* smaller, the producer draws nothing: the picture would be nowhere */
+    if (h.rect.w < kHostMinW || h.rect.h < kHostMinH || h.src.w < kHostMinW || h.src.h < kHostMinH)
+        return refuse("a host from layers is at least " + std::to_string(kHostMinW) + "x" + std::to_string(kHostMinH) +
+                      " (w, h and src_w, src_h)");
+    /* Sent again (also into another target): the same host; the next
+     * arrange() decides on it. */
+    LayerHost &l = layer_hosts_[std::make_pair(hosted, owner)];
+    if (!l.seq)
+        l.seq = ++layer_host_seq_;
+    l.owner = owner;
+    l.into = into;
+    l.host = h;
+    host_serial_++;
+    return true;
+}
+
+void Compositor::unhost_layers(uint64_t owner, int hosted)
+{
+    if (layer_hosts_.erase(std::make_pair(hosted, owner)))
+        host_serial_++;
+}
+
+bool Compositor::drawable(uint32_t id, const SceneEntry &s) const
+{
+    const Target &t = targets_[s.target];
+    return s.error.empty() && t.file && t.graph && t.file_of == id && t.file_serial == s.serial;
+}
+
+static bool overlaps(const Rect &a, const Rect &b)
+{
+    return (int64_t)a.x < (int64_t)b.x + b.w && (int64_t)b.x < (int64_t)a.x + a.w && (int64_t)a.y < (int64_t)b.y + b.h &&
+           (int64_t)b.y < (int64_t)a.y + a.h;
+}
+
+/* Something of l can be seen: a video or image not at opacity 0 (an effect
+ * or mesh draws what its shader does: taken as seen). */
+static bool seen(const Layer &l)
+{
+    const std::string kind = l.kind();
+    return (kind != "video" && kind != "image") || l.params.opacity > 0;
+}
+
+static bool listed(const std::vector<uint32_t> &v, uint32_t id)
+{
+    return std::find(v.begin(), v.end(), id) != v.end();
+}
+
+bool Compositor::seen_over(const Arrangement &a, size_t p, const Rect &r) const
+{
+    const Layer &l = *layers_.at(a.order[p]).layer;
+    return listed(a.drawn, a.order[p]) && seen(l) && overlaps(l.params.rect, r);
+}
+
+void Compositor::host_eligibility(LayerHost &lh) const
+{
+    const std::string &into = slots_->targets()[lh.into].name;
+    const Target &t = targets_[lh.into];
+    const TargetState st = slots_->status(lh.into).state;
+    lh.eligible = lh.over = false;
+    lh.wait.clear();
+    if (!lh.host.shown) {
+        lh.wait = "it shows the target nowhere (shown 0)";
+        return;
+    }
+    if (layers_wait(lh.into)) {
+        lh.wait = into + "'s layers wait for a scene file there";
+        return;
+    }
+    if (!t.graph || !(st == TargetState::Shown || st == TargetState::Lingering || slots_->kept(lh.into))) {
+        lh.wait = into + " is not on screen (" + target_state_name(st) + ")";
+        return;
+    }
+    /* The client's layers drawn and seen over the rect, from its topmost
+     * exclusive layer up (nothing of it below that is drawn once it is):
+     * the lowest is the anchor, the topmost decides who wins. */
+    const Arrangement &a = t.arr;
+    size_t from = 0;
+    for (size_t p = 0; p < a.order.size(); p++) {
+        const Entry &e = layers_.at(a.order[p]);
+        if (e.owner == lh.owner && e.layer->params.exclusive &&
+            (listed(a.drawn, a.order[p]) || listed(a.suspended, a.order[p])))
+            from = p;
+    }
+    for (size_t p = from; p < a.order.size(); p++) {
+        const Entry &e = layers_.at(a.order[p]);
+        if (e.owner != lh.owner || !seen_over(a, p, lh.host.rect))
+            continue;
+        if (!lh.eligible) {
+            lh.eligible = true;
+            lh.anchor = a.order[p];
+            lh.over = e.layer->params.exclusive;
+        }
+        lh.top_pos = p;
+    }
+    if (!lh.eligible)
+        lh.wait = "no layer of the client is drawn over its rect on " + into;
+}
+
+std::map<int, const Compositor::LayerHost *> Compositor::host_winners(const std::vector<bool> &by_scene) const
+{
+    /* On one into, the host whose client draws highest over its rect. Of
+     * several intos, the one holding the target (held_into_: the last live
+     * host's, also after it ended) keeps it while it has an eligible host;
+     * else the one whose host was sent first (sent again after unhost, a
+     * host is sent later). */
+    std::map<std::pair<int, int>, const LayerHost *> best;   /* by (target, into) */
+    for (const auto &kv : layer_hosts_) {
+        const LayerHost &lh = kv.second;
+        if (!lh.eligible || by_scene[kv.first.first])
+            continue;
+        const LayerHost *&b = best[std::make_pair(kv.first.first, lh.into)];
+        if (!b || lh.top_pos > b->top_pos)
+            b = &lh;
+    }
+    std::map<int, const LayerHost *> win;
+    for (const auto &kv : best) {
+        const int target = kv.first.first;
+        auto h = held_into_.find(target);
+        auto keep = h == held_into_.end() ? best.end() : best.find(std::make_pair(target, h->second));
+        if (keep != best.end()) {
+            win[target] = keep->second;
+            continue;
+        }
+        const LayerHost *&w = win[target];
+        if (!w || kv.second->seq < w->seq)
+            w = kv.second;
+    }
+    return win;
+}
+
+void Compositor::host_decided(int target, LayerHost &lh, const LayerHost *winner, bool by_scene)
+{
+    const std::string &name = slots_->targets()[target].name;
+    const bool live = winner == &lh;
+    uint64_t by = 0;
+    std::string why = lh.wait;
+    if (lh.eligible && by_scene) {
+        why = "target " + name + " is hosted by a scene";
+    } else if (lh.eligible && !live) {
+        by = winner->owner;
+        why = winner->into == lh.into ? "target " + name + " is hosted by another client's layers, drawn higher over it"
+                                      : "target " + name + " is hosted by another client's layers on " +
+                                            slots_->targets()[winner->into].name + ", there first";
+    }
+    if (live != lh.live || why != lh.why || by != lh.by) {
+        host_serial_++;
+        log_info("compositor: host of %s from client %llu's layers on %s: %s", name.c_str(),
+                 (unsigned long long)lh.owner, slots_->targets()[lh.into].name.c_str(), live ? "live" : why.c_str());
+    }
+    lh.live = live;
+    lh.why = why;
+    lh.by = by;
+}
+
+void Compositor::host_restack(int target, const LayerHost &lh)
+{
+    std::vector<StackItem> &items = items_[lh.into];
+    /* as made by now: an earlier restack into the same target moved layers */
+    const Arrangement &a = targets_[lh.into].arr;
+    size_t at = std::find(a.order.begin(), a.order.end(), lh.anchor) - a.order.begin();
+    if (at == a.order.size())
+        return;
+    /* By the anchor, but never under a layer the hosts it won over drew
+     * over the rect (seen, over their own rect too): no competing host's
+     * layers hide the picture. Any other client keeps its place. */
+    bool over = lh.over;
+    for (const auto &kv : layer_hosts_) {
+        const LayerHost &o = kv.second;
+        if (kv.first.first != target || o.owner == lh.owner || o.into != lh.into || !o.eligible)
+            continue;
+        for (size_t p = at + 1; p < a.order.size(); p++) {
+            const Entry &e = layers_.at(a.order[p]);
+            if (e.owner == o.owner && seen_over(a, p, o.host.rect) && seen_over(a, p, lh.host.rect)) {
+                at = p;
+                over = true;
+            }
+        }
+    }
+    auto anchor = std::find_if(items.begin(), items.end(), [&](const StackItem &it) { return it.id == a.order[at]; });
+    if (anchor == items.end())
+        return;
+    const StackItem key = *anchor;
+    bool moved = false;
+    for (StackItem &it : items) {
+        const Entry &e = layers_.at(it.id);
+        if (e.owner == lh.owner || std::strcmp(e.layer->kind(), "video") ||
+            e.layer->params.hosted != slots_->targets()[target].name)
+            continue;
+        it.klass = key.klass;
+        it.z = key.z;
+        it.seq = key.seq;
+        it.under = over ? -1 : 1;
+        moved = true;
+    }
+    if (moved)
+        targets_[lh.into].arr = crs::arrange(items);
+}
+
+void Compositor::arrange_layer_hosts()
+{
+    const std::vector<TargetSpec> &specs = slots_->targets();
+    /* A target a scene hosts (the clients are told so): the scene's. */
+    std::vector<bool> by_scene(specs.size(), false);
+    for (const auto &kv : scenes_)
+        if (drawable(kv.first, kv.second))
+            for (const auto &h : kv.second.hosts)
+                by_scene[h.first] = true;
+    for (auto &kv : layer_hosts_)
+        host_eligibility(kv.second);
+    const std::map<int, const LayerHost *> win = host_winners(by_scene);
+    /* The into that holds each target: the live host's, kept when that host
+     * ends, until no host on it is eligible. */
+    held_into_.clear();
+    for (const auto &kv : win)
+        held_into_[kv.first] = kv.second->into;
+    for (auto &kv : layer_hosts_) {
+        auto w = win.find(kv.first.first);
+        host_decided(kv.first.first, kv.second, w == win.end() ? nullptr : w->second, by_scene[kv.first.first]);
+    }
+    for (const auto &kv : win)
+        host_restack(kv.first, *kv.second);
+}
+
+const Compositor::LayerHost *Compositor::layer_host_of(int ti, const Entry &e) const
+{
+    if (std::strcmp(e.layer->kind(), "video") || e.layer->params.hosted.empty())
+        return nullptr;
+    const int hosted = slots_->index(e.layer->params.hosted);
+    for (const auto &kv : layer_hosts_) {
+        const LayerHost &lh = kv.second;
+        if (kv.first.first == hosted && lh.live && lh.into == ti && lh.owner != e.owner)
+            return &lh;
+    }
+    return nullptr;
+}
+
 std::vector<Compositor::Hosted> Compositor::hosts() const
 {
     std::vector<Hosted> out;
     for (const auto &kv : scenes_) {
         const SceneEntry &s = kv.second;
-        const Target &t = targets_[s.target];
-        /* Its layers drawable: its file published with the layers' graph. */
-        if (s.hosts.empty() || !s.error.empty() || !t.file || !t.graph || t.file_of != kv.first ||
-            t.file_serial != s.serial)
+        if (s.hosts.empty() || !drawable(kv.first, s))
             continue;
         for (const auto &h : s.hosts) {
             Hosted x;
@@ -660,6 +919,15 @@ std::vector<Compositor::Hosted> Compositor::hosts() const
             x.host = h.second;
             out.push_back(x);
         }
+    }
+    for (const auto &kv : layer_hosts_) {
+        if (!kv.second.live)
+            continue;
+        Hosted x;
+        x.target = kv.first.first;
+        x.into = kv.second.into;
+        x.host = kv.second.host;
+        out.push_back(x);
     }
     return out;
 }
@@ -816,6 +1084,14 @@ void Compositor::remove_owner(uint64_t owner)
         it = scenes_.erase(it);
         host_serial_++;
     }
+    for (auto it = layer_hosts_.begin(); it != layer_hosts_.end();) {
+        if (it->second.owner != owner) {
+            ++it;
+            continue;
+        }
+        it = layer_hosts_.erase(it);
+        host_serial_++;
+    }
 }
 
 void Compositor::arrange(int64_t now_ms)
@@ -826,9 +1102,11 @@ void Compositor::arrange(int64_t now_ms)
             reconcile();
             break;
         }
+    items_.resize(targets_.size());
     for (size_t ti = 0; ti < targets_.size(); ti++) {
         Target &t = targets_[ti];
-        std::vector<StackItem> items;
+        std::vector<StackItem> &items = items_[ti];
+        items.clear();
         for (const auto &kv : layers_) {
             const Entry &e = kv.second;
             const Layer &l = *e.layer;
@@ -843,6 +1121,7 @@ void Compositor::arrange(int64_t now_ms)
             it.ready = l.ready(now_ms) && assets_have(e);
             it.exclusive = l.params.exclusive;
             it.prewarm = l.params.prewarm;
+            it.preload = l.params.preload;
             it.contend = l.params.contend;
             it.guide_hold = l.params.guide_hold;
             it.yield = l.params.yield;
@@ -850,6 +1129,13 @@ void Compositor::arrange(int64_t now_ms)
             items.push_back(it);
         }
         t.arr = crs::arrange(items);
+    }
+    if (!layer_hosts_.empty())
+        arrange_layer_hosts();
+    else
+        held_into_.clear();
+    for (size_t ti = 0; ti < targets_.size(); ti++) {
+        Target &t = targets_[ti];
         if (const uint32_t sc = content((int)ti)) {
             /* The target's scene is the content's file: it wants the
              * target, and every layer waits (state()) unless they are
@@ -860,7 +1146,7 @@ void Compositor::arrange(int64_t now_ms)
             t.arr.contend = t.arr.contend || scenes_[sc].contend;
         }
         fade((int)ti, t, now_ms);
-        slots_->want((int)ti, t.arr.wanted, t.arr.contend, t.arr.guide_hold, t.arr.yield);
+        slots_->want((int)ti, t.arr.wanted, t.arr.contend, t.arr.guide_hold, t.arr.yield, t.arr.preload);
         if (!t.graph)
             continue;
         const bool cv = t.composite && t.composite->attached();
@@ -914,12 +1200,72 @@ void Compositor::arrange(int64_t now_ms)
         if (t.composite && t.composite->arranged())
             t.dirty = true;
     }
+    cap_videos(now_ms);
+}
+
+uint32_t Compositor::fps_cap(uint64_t owner, const FpsRequest **by) const
+{
+    const FpsRequest *low = nullptr;
+    for (const FpsRequest &r : fps_requests_)
+        if (r.owner != owner && (!low || r.fps < low->fps))
+            low = &r;
+    if (by)
+        *by = low;
+    return low ? low->fps : 0;
+}
+
+void Compositor::cap_videos(int64_t now_ms)
+{
+    fps_requests_.clear();
+    for (const auto &kv : layers_) {
+        const Layer &l = *kv.second.layer;
+        if (!l.params.others_fps)
+            continue;
+        std::string reason;
+        if (state(kv.first, &reason) == LayerState::Shown)
+            fps_requests_.push_back(FpsRequest{kv.second.owner, kv.first,
+                                               l.params.others_fps < kOthersFpsFloor ? kOthersFpsFloor
+                                                                                     : l.params.others_fps});
+    }
+    if (fps_requests_.empty() && !capped_)
+        return;
+    /* the last tick of a hold puts every clock back */
+    capped_ = !fps_requests_.empty();
+    for (size_t ti = 0; ti < targets_.size(); ti++) {
+        /* a composite: the highest cap of its sources' clients, none when
+         * one of them is not held */
+        uint32_t composite_cap = 0;
+        bool sources = false, unheld = false;
+        for (auto &kv : layers_) {
+            Entry &e = kv.second;
+            if (e.layer->target() != (int)ti || std::strcmp(e.layer->kind(), "video"))
+                continue;
+            const uint32_t cap = fps_cap(e.owner);
+            /* a composite's source too, so it draws itself at its client's
+             * rate when the composite goes */
+            static_cast<VideoLayer *>(e.layer.get())->cap_fps(cap, now_ms);
+            if (e.composited) {
+                sources = true;
+                unheld = unheld || !cap;
+                composite_cap = std::max(composite_cap, cap);
+            }
+        }
+        if (targets_[ti].composite)
+            targets_[ti].composite->cap_fps(sources && !unheld ? composite_cap : 0, now_ms);
+    }
 }
 
 VideoEdge Compositor::edge_for(int ti, const Entry &e) const
 {
     const Rect &r = e.layer->params.rect;
     const int64_t x0 = r.x, y0 = r.y, x1 = x0 + r.w, y1 = y0 + r.h, th = slots_->targets()[ti].height;
+    /* held within the target, a fade at most half the video's height */
+    auto clamped = [&](VideoEdge v) {
+        v.top = (uint32_t)std::min<int64_t>(v.top, y0);
+        v.bottom = (uint32_t)std::min<int64_t>(v.bottom, std::max<int64_t>(0, th - y1));
+        v.fade = std::min(v.fade, r.h / 2);
+        return v;
+    };
     for (const auto &kv : scenes_) {
         const SceneEntry &s = kv.second;
         if (s.target != ti || s.owner == e.owner || !s.error.empty())
@@ -929,14 +1275,11 @@ VideoEdge Compositor::edge_for(int ti, const Entry &e) const
             if (!h.shown || !h.edge.on() || x0 < h.rect.x || y0 < h.rect.y || x1 > (int64_t)h.rect.x + h.rect.w ||
                 y1 > (int64_t)h.rect.y + h.rect.h)
                 continue;
-            VideoEdge v = h.edge;
-            v.top = (uint32_t)std::min<int64_t>(v.top, y0);
-            v.bottom = (uint32_t)std::min<int64_t>(v.bottom, std::max<int64_t>(0, th - y1));
-            v.fade = std::min(v.fade, r.h / 2);
-            return v;
+            return clamped(h.edge);
         }
     }
-    return VideoEdge();
+    const LayerHost *lh = layer_hosts_.empty() ? nullptr : layer_host_of(ti, e);
+    return lh && lh->host.edge.on() ? clamped(lh->host.edge) : VideoEdge();
 }
 
 void Compositor::fade(int ti, Target &t, int64_t now_ms)
@@ -1017,11 +1360,12 @@ void Compositor::render(int64_t now_ms)
     bool sharing = false;
     for (const auto &kv : layers_) {
         const int ti = kv.second.layer->target();
-        sharing = sharing || (slots_->targets()[ti].share && slots_->requested(ti));
+        sharing = sharing || (slots_->targets()[ti].share && (slots_->requested(ti) || slots_->loaded(ti)));
     }
     pacer_.set_share(sharing ? kSharePct : 0);
     /* Released, or kept through a lock: nothing of a target is asked for,
-     * and a kept scene keeps its last flush. Parked or being mapped again
+     * and a kept scene keeps its last flush. Loaded (preload): its scene is
+     * fetched, not mapped, and stages as a shown one's. Parked or being mapped again
      * after a lock: nothing of it is on screen, and the link carries the
      * HMI's content too. It stages again once shown. Each target staging is told what covers its videos; one
      * with held tiles to uncover, or an alert waiting for its first write,
@@ -1100,6 +1444,7 @@ void Compositor::render_target(int ti, Target &t, int64_t now_ms)
      * target: only its whole rewrite stages, and nothing flushes until
      * that goes, so the cluster keeps showing the last frame. */
     const bool hold = holds(t);
+    t.held_back = false;
     std::vector<Layer *> staged;
     std::vector<Asset *> staged_assets;
     bool wrote = false, failed = false;
@@ -1143,7 +1488,9 @@ void Compositor::render_target(int ti, Target &t, int64_t now_ms)
         }
         if (hold && !l->holds_flush() && !l->uncovering())
             continue;
+        const uint64_t holds = l->write_stats().holds;
         const Stage s = l->stage(now_ms);
+        t.held_back = t.held_back || l->write_stats().holds != holds;
         if (l == t.composite.get() && t.composite->placed_now())
             t.dirty = true;   /* quads moved over a canvas the display holds */
         if (s == Stage::Idle)
@@ -1727,11 +2074,11 @@ int64_t Compositor::wake_in_ms(int64_t now_ms) const
             best = w;
     };
     for (const auto &kv : layers_)
-        if (slots_->requested(kv.second.layer->target()))
+        if (slots_->requested(kv.second.layer->target()) || slots_->loaded(kv.second.layer->target()))
             at(kv.second.layer->wake_in_ms(now_ms));
     for (size_t ti = 0; ti < targets_.size(); ti++) {
         const Target &t = targets_[ti];
-        if (t.composite && slots_->requested((int)ti))
+        if (t.composite && (slots_->requested((int)ti) || slots_->loaded((int)ti)))
             at(t.composite->wake_in_ms(now_ms));
         if (t.remake_ms >= 0)
             at(std::max<int64_t>(1, t.remake_ms - now_ms));

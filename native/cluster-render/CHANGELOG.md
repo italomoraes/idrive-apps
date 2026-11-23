@@ -1,0 +1,43 @@
+# Changelog
+
+## Unreleased
+
+When a route starts, the cluster no longer stays black where the map
+should be: the map is asked for again 1.5 seconds after the guide hold's
+cover is shown over the navigation's turn box, at most once every 30
+seconds.
+
+## 0.8.2
+
+An app that draws the cluster with layers only, such as a cluster theme,
+can show another app's picture (Waze's map) inside it with no scene file:
+`host` with `into`. The picture is drawn under the app's layers, and goes
+back to its own place when the app hides its layers, ends the host
+(`unhost`) or exits, or the panel is taken. Of several such apps the one
+drawn highest over the picture wins, and an app showing a scene file that
+hosts the picture wins over them; the `hosting` event tells each app why it
+waits.
+
+## 0.8.1
+
+Effect layers and mesh parts choose how they blend (presets such as
+`premultiplied`, `max` and `subtract`, or their own factors and
+operations) and which colour channels they write, and a part its depth
+test. Assets can be sampled with mipmaps (the service makes the levels of
+`rgba8` and `r8` assets; a compressed one brings its own), mirrored, with
+each axis wrapped its own way and anisotropically. A shader is at most
+64 KB.
+
+## 0.8.0
+
+A layer can ask for upload bandwidth while it is shown (`others_fps`): the
+other apps' videos are then written at most that many times a second, 15
+at the least, until the layer is hidden or goes or its app exits. The apps
+held are told (`fps_cap`).
+
+## 0.7.0
+
+A layer can ask for its target's scene to stay loaded on the cluster while
+nothing shows it, so the target appears without loading again when a layer
+wants it (`preload`).
+

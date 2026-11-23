@@ -2,10 +2,21 @@
 
 ## Unreleased
 
-## 0.6.13
-
 **Turn card** (Off, Below the arrow or At the top) draws the next manoeuvre
 over the cluster map; **Show an example** shows one for 10 seconds.
+This fork's 0.6.13 together with 0.6.13 and 0.6.14. Requires the next
+waze-on-cluster.
+
+## 0.6.14
+
+A Patch or Remove patch that fails shows the reason.
+
+## 0.6.13
+
+`Untested version` is gone from CarPlay's and Android Auto's Status: Maps
+on cluster patches every software version of the car it can check, and
+removes the patch by itself if the head unit then fails to start. Requires
+the next waze-on-cluster.
 
 ## 0.6.12
 
