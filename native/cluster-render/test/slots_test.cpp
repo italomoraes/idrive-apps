@@ -242,12 +242,15 @@ struct Rig {
     FakeScenes scenes;
     SlotManager m{&port, &scenes};
     int64_t now = 100000;
-    Rig()
+    /* refresh: the map asked for again after a hold's cover, as load_holds
+     * sets it for the map a guide hold follows */
+    explicit Rig(bool refresh = false)
     {
         TargetSpec map;
         map.name = "map"; map.slot = kMapSlot; map.scene_id = kMapScene; map.width = 1088; map.height = 480;
         map.linger_ms = 2000;
         map.take_over_stock = true;
+        map.refresh_after_hold = refresh;
         TargetSpec panel;
         panel.name = "panel"; panel.slot = kPanelSlot; panel.scene_id = kPanelScene; panel.width = 1920;
         panel.height = 720; panel.linger_ms = 3000;
@@ -1755,7 +1758,7 @@ static const uint64_t kBox = 0x01000310, kBoxAlt = 0x01000315, kBelt = 0x0100031
  * its slot from the slot table instead (guide_slots = auto). */
 struct GuideRig : Rig {
     static const int kGuide = 3;
-    explicit GuideRig(bool from_table = false)
+    explicit GuideRig(bool from_table = false, bool refresh = false) : Rig(refresh)
     {
         TargetSpec g;
         g.name = "guide"; g.slot = from_table ? 0 : kGuideSlot; g.scene_id = kGuideScene; g.width = g.height = 16;
@@ -4075,6 +4078,70 @@ static void boot_hold()
     ok("no slot table: asked for at 1 s", calls_are("publish map; request map"));
 }
 
+/* The map a guide hold follows (refresh_after_hold, as load_holds sets it):
+ * out of its slot and back in 1.5 s after the hold's cover is shown over
+ * the box, at once, once per 30 s (slots.h, "Asked for again after a hold's
+ * cover"); without the flag, never. */
+static void hold_cover_asks_the_map_again()
+{
+    for (const bool refresh : {true, false}) {
+        GuideRig r(false, refresh);
+        logged();
+        r.show_map();
+        r.pass();
+        /* a route starts: the box shown, the hold asked for, parked behind
+         * it, the box taken over, the hold shown */
+        r.rows(kGuideSlot, 2, {{kBox, 1}, {kBoxAlt, 3}});
+        r.pass();
+        r.rows(kGuideSlot, 2, {{kBox, 1}, {kBoxAlt, 3}, {kGuideScene, 3}});
+        r.m.on_parked(kGuideScene, r.now);
+        r.pass();
+        r.rows(kGuideSlot, 2, {{kGuideScene, 1}, {kBox, 3}, {kBoxAlt, 3}});
+        r.m.on_shown(kGuideScene, r.now);
+        joined();
+        logged();
+        r.pass(1400);
+        if (!refresh) {
+            r.pass(60000);
+            ok("without refresh_after_hold: the map never asked for again", joined().find("map") == std::string::npos &&
+                                                                                r.state(0) == TargetState::Shown);
+            continue;
+        }
+        ok("the hold's cover shown: the map left as it is for 1.4 s", joined().empty() && r.state(0) == TargetState::Shown);
+        r.pass(200);
+        const std::string out = joined();
+        ok("1.5 s after: the map out of its slot and asked for again at once",
+           out.find("release map") != std::string::npos &&
+               out.find("request map") != std::string::npos && out.find("release map") < out.find("request map"));
+        ok("logged with the scene and the slot's rows",
+           logged().find("target map: out of slot 0x100 and back in, 1500 ms after a hold's cover was shown") !=
+               std::string::npos);
+        r.rows(kMapSlot, 2, {{kMapScene, 1}});
+        r.m.on_shown(kMapScene, r.now);
+        ok("the map shown again", r.state(0) == TargetState::Shown);
+        /* the hold, which follows the map, comes back over the box */
+        r.pass(500);
+        r.rows(kGuideSlot, 2, {{kGuideScene, 1}, {kBox, 3}, {kBoxAlt, 3}});
+        r.m.on_shown(kGuideScene, r.now);
+        joined();
+        r.pass(5000);
+        ok("the cover shown again within 30 s: the map not asked for again", joined().find("map") == std::string::npos &&
+                                                                               r.state(0) == TargetState::Shown);
+        /* the next route, a minute on: the box gone and back, the hold
+         * shown over it again */
+        r.pass(60000);
+        r.rows(kGuideSlot, 2, {{kGuideScene, 3}, {kBox, 1}, {kBoxAlt, 3}});
+        r.m.on_parked(kGuideScene, r.now);
+        r.pass(2000);
+        r.rows(kGuideSlot, 2, {{kGuideScene, 1}, {kBox, 3}, {kBoxAlt, 3}});
+        r.m.on_shown(kGuideScene, r.now);
+        joined();
+        r.pass(1600);
+        ok("the next route's cover, 30 s or more on: the map asked for again once more",
+           joined().find("release map") != std::string::npos);
+    }
+}
+
 /* Preload: rigs whose port can keep a fetch unmapped. The panel (1) has
  * the HUD's (2) scene id in this rig. */
 struct PreloadRig : Rig {
@@ -4562,6 +4629,7 @@ int main()
     rendering();
     quiet_console();
     guide_follows_the_map();
+    hold_cover_asks_the_map_again();
     table_in_status();
     guide_queue_order();
     guide_never_verified_out();

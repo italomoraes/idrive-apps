@@ -119,6 +119,10 @@ bool load_holds(const HoldSettings &cfg, const std::vector<uint64_t> &allowed, s
     }
     if (holds.empty())
         return refuse(warn, "guide_hold: guide_slots names no slot");
+    /* the map they follow is asked for again after a hold's cover (slots.h) */
+    for (TargetSpec &o : *targets)
+        if (o.name == "map")
+            o.refresh_after_hold = true;
     targets->insert(targets->end(), holds.begin(), holds.end());
     return true;
 }

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+When a route starts, the cluster no longer stays black where the map
+should be: the map is asked for again 1.5 seconds after the guide hold's
+cover is shown over the navigation's turn box, at most once every 30
+seconds.
+
 ## 0.8.7
 
 On iDrive 7, a cluster app's finished animations no longer stay in memory
