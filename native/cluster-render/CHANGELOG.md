@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.8.8
+
 This fork's 0.8.4 together with 0.8.5 to 0.8.7.
 
 ## 0.8.7
