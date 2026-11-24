@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.14.14
+
 A change of the app's Turn card reconnects CarPlay at once where the tool
 may restart it, as CarPlay's Patch button does, so the phone's own turn
 card follows it straight away; elsewhere it still follows at CarPlay's next
