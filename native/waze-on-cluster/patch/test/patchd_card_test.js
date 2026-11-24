@@ -4,15 +4,16 @@
  * synthetic carplay (synthetic_carplay.js): with the card off, the plan's
  * ShowUI URL asks for the arrival-time card, as before; patchd's
  * {"cmd":"turn-card"} plans it again with the map alone while the card
- * shows (bottom or top) and with the arrival-time card once it is off,
- * never restarting carplay, also where patchd may restart it: the patch
- * stays patched and proven, nothing waits, the next start is armed with the
- * new plan, and carplay runs the plan as it started until then. A change
- * the plan already has plans nothing; a patch that is off is left alone,
- * and the Patch button, the install hook and boot recovery plan the URL
- * the card asks for. Runs the real patchd.js and carplay_patch.js with the
- * fakes patchd_patch_test.js uses (systemctl, mount, recmgr list and
- * /proc: carplay_proc.js).
+ * shows (bottom or top) and with the arrival-time card once it is off, and
+ * stays proven. Where patchd may restart carplay it does (SIGKILL, start),
+ * and carplay then runs the new plan; where it may not, carplay is left
+ * running the plan as it started, which counts as patched with nothing
+ * pending, and its next start is armed with the new one. A change the plan
+ * already has plans nothing; a patch that is off is left alone; the install
+ * hook plans the URL the card asks for and never restarts carplay; the
+ * Patch button and boot recovery plan that URL too. Runs the real patchd.js
+ * and carplay_patch.js with the fakes patchd_patch_test.js uses
+ * (systemctl, mount, recmgr list and /proc: carplay_proc.js).
  *
  *   node patchd_card_test.js
  */
@@ -134,6 +135,7 @@ function memAgainst(text) {
         { env: Object.assign({}, process.env, ENV), encoding: 'utf8' });
     return r.stdout;
 }
+function diedWithin(c) { return Promise.race([c.died, sleep(5000).then(function () { return 'still running'; })]); }
 function setCard(mode) {
     if (mode === null) { try { fs.unlinkSync(CARD); } catch (e) {} return; }
     fs.writeFileSync(CARD, 'turn_card = ' + mode + '\n');
@@ -214,11 +216,11 @@ async function main() {
     r = await status();
     ok('card off: carplay runs the plan, patched, mapurl eta', r.state === 'patched' && r.mapurl === 'eta' && !r.pending && !r.carplay, JSON.stringify(r));
 
-    /* The card on, with patchd allowed to restart carplay: planned again
-     * with the map alone, carplay neither restarted nor killed, nothing
-     * pending, still patched and proven; carplay runs the plan it started
-     * with until its next start, which is armed with the new one. */
-    setRecmgr(['HBAdasMgu', 'carplay']);
+    /* The card on where patchd may not restart carplay (not in recmgr's
+     * restart list): planned again with the map alone, carplay neither
+     * restarted nor killed, nothing pending, still patched and proven;
+     * carplay runs the plan it started with until its next start, which is
+     * armed with the new one. */
     changes();
     var etaPlan = planText();
     r = await card('bottom');
@@ -226,7 +228,7 @@ async function main() {
     ok('card bottom: the plan asks for the map alone (--showui map)', !!rc && rc.args.indexOf('--showui') >= 0 && rc.args[rc.args.indexOf('--showui') + 1] === 'map' &&
         planForm(planText()) === 'map' && cpp.onlyShowUiDiffers(etaPlan, planText()), JSON.stringify(rc && rc.args));
     ok('card bottom: the patch stays proven, enabled', rc.enabled === true && rc.proven === true && rc.trial === false, JSON.stringify(rc));
-    ok('card bottom: carplay neither started, stopped nor killed; nothing pending', changes().length === 0 && !fs.existsSync(PENDING) &&
+    ok('card bottom, no restart allowed: carplay neither started, stopped nor killed; nothing pending', changes().length === 0 && !fs.existsSync(PENDING) &&
         await Promise.race([dummy.died, sleep(300).then(function () { return 'alive'; })]) === 'alive');
     ok('card bottom: status patched, mapurl map-only, nothing waits', r.state === 'patched' && r.mapurl === 'map-only' && !r.pending && !r.carplay && !r.reason,
         JSON.stringify(r));
@@ -245,18 +247,27 @@ async function main() {
     ok('next start: carplay runs the map alone, patched', r.state === 'patched' && r.mapurl === 'map-only' && !r.pending &&
         memAgainst(planText()) === 'patched', JSON.stringify(r));
 
-    /* Off again: the arrival-time card, the arguments without --showui. */
-    var mapPlan = planText();
+    /* Off again where patchd may restart carplay: planned with the
+     * arrival-time card, carplay restarted (SIGKILL, start) and running
+     * it, still proven, nothing pending. */
+    setRecmgr(['HBAdasMgu', 'carplay']);
+    dummy = dummyCarplay();
+    setUnit(dummy.pid);
+    nextStart();
+    changes();
     r = await card('off');
     rc = record();
+    var restarted = changes();
     ok('card off again: the plan is the arrival-time card\'s again, no --showui, proven', rc.args.indexOf('--showui') < 0 && planText() === etaPlan &&
         rc.proven === true && rc.trial === false, JSON.stringify(rc));
-    ok('card off again: patched, mapurl eta, carplay untouched and running the map alone until its next start', r.state === 'patched' && r.mapurl === 'eta' &&
-        !r.pending && changes().length === 0 && memAgainst(mapPlan) === 'patched', JSON.stringify(r));
+    ok('card off again, restart allowed: carplay killed and started, running the new plan', await diedWithin(dummy) === 'SIGKILL' &&
+        restarted.some(function (l) { return /^start carplay\.service/.test(l); }) && memAgainst(planText()) === 'patched', JSON.stringify(restarted));
+    ok('card off again: patched, mapurl eta, nothing pending', r.state === 'patched' && r.mapurl === 'eta' && !r.pending && !fs.existsSync(PENDING),
+        JSON.stringify(r));
 
     /* Another value, or no file: off. */
     r = await card('left');
-    ok('card "left": counts as off, nothing planned', planText() === etaPlan && r.mapurl === 'eta', JSON.stringify(r));
+    ok('card "left": counts as off, nothing planned or restarted', planText() === etaPlan && r.mapurl === 'eta' && changes().length === 0, JSON.stringify(r));
 
     /* The install hook plans the user's arguments with the card's URL. */
     setCard('bottom');
@@ -264,7 +275,7 @@ async function main() {
     rc = record();
     ok('install with the card on: planned with the map alone, the user\'s arguments kept, carplay untouched', h.status === 0 &&
         rc.args.slice(0, 2).join(' ') === '--panel high' && rc.args.indexOf('--unproven') >= 0 && rc.args.slice(-2).join(' ') === '--showui map' &&
-        planForm(planText()) === 'map' && changes().length === 0, h.stdout + h.stderr + JSON.stringify(rc && rc.args));
+        planForm(planText()) === 'map' && changes().length === 0 && memAgainst(etaPlan) === 'patched', h.stdout + h.stderr + JSON.stringify(rc && rc.args));
 
     /* Remove patch: a card change leaves the patch off; the Patch button
      * then plans the card's URL. */

@@ -482,9 +482,11 @@ patchd plans it while the render's saved choice (`turn_card_state_file`) is
 `bottom` or `top`: at the Patch button, an install, boot recovery's plan,
 and when the app says the card changed (`{"cmd":"turn-card"}`), where an
 enabled patch whose URL is not the one the card asks for is planned again.
-That never restarts carplay, also where patchd may: carplay asks the phone
-for the new URL from its next start and runs the patch as it started until
-then, which patchd's status counts as patched, with nothing pending. A patch
+Where patchd may restart carplay ("Activation") it does, as CarPlay's Patch
+button and Android Auto's turn card choice do, so the phone gets the new URL
+at once. Elsewhere, and at an install, carplay asks the phone for the new
+URL from its next start and runs the patch as it started until then, which
+patchd's status counts as patched, with nothing pending. A patch
 planned again for the other URL keeps its proven state, since only the URL
 the phone is asked for differs. `status` shows the form as `showui:
 PATCHED, MAP ONLY (…)`, `verify` as `ShowUI URL map only`, and patchd
