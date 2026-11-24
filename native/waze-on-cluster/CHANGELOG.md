@@ -4,6 +4,11 @@
 
 This fork's 0.14.10 together with 0.14.11 and 0.14.12.
 
+While the turn card shows, CarPlay's patch asks the phone for the map
+alone, so Apple Maps does not draw its own turn card, nor its arrival-time
+card, below ours. A change of the app's Turn card takes effect at CarPlay's
+next start; nothing restarts for it.
+
 ## 0.14.12
 
 The tests build with the cluster renderer's iDrive 7 log-level handling

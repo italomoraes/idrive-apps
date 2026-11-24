@@ -305,6 +305,8 @@ class WazeClusterControl extends EventEmitter {
         this._forget();
         this.captureState = { state: 'unavailable' };
         this.renderStatus = null;   /* the render tool's last status while connected */
+        this._turnCardAsked = null;  /* the turn card asked of the render, until its status shows it */
+        this._turnCardSync = false;  /* patchd still to be told of a turn card change */
 
         this.render = new LineSocket({
             path: o.renderPath || RENDER_PATH,
@@ -323,12 +325,13 @@ class WazeClusterControl extends EventEmitter {
         const reset = () => {
             this.renderStatus = null;
             this._askedShownOn = null;
+            this._turnCardAsked = null;
             this._clearAskedHud();
             this.emit('change');
         };
         this.render.on('connect', reset);
         this.render.on('close', reset);
-        this.patch.on('connect', () => { this._forget(); this.emit('change'); });
+        this.patch.on('connect', () => { this._forget(); this._syncTurnCard(); this.emit('change'); });
         this.patch.on('close', () => { this._forget(); this._restartRequested = false; this.emit('change'); });
     }
 
@@ -732,7 +735,18 @@ class WazeClusterControl extends EventEmitter {
     nextTurnCard() {
         if (this.canSetTurnCard()) {
             const next = TURN_CARD_MODES[(TURN_CARD_MODES.indexOf(this.turnCard()) + 1) % TURN_CARD_MODES.length];
+            this._turnCardAsked = next;
             this.render.send({ cmd: 'turn_card', mode: next });
+        }
+    }
+
+    /* CarPlay's patch follows the turn card: patchd plans its ShowUI URL
+     * from the choice the render saved, so it is told once the render shows
+     * the new one, or once it is connected again. */
+    _syncTurnCard() {
+        if (this._turnCardSync && this.patch.connected()) {
+            this._turnCardSync = false;
+            this.patch.send({ cmd: 'turn-card' });
         }
     }
 
@@ -1104,6 +1118,11 @@ class WazeClusterControl extends EventEmitter {
             }
             if (this._askedPos && msg.hud_x === this._askedPos[0] && msg.hud_y === this._askedPos[1]) {
                 this._askedPos = null;
+            }
+            if (this._turnCardAsked && msg.turn_card === this._turnCardAsked) {
+                this._turnCardAsked = null;
+                this._turnCardSync = true;
+                this._syncTurnCard();
             }
             this.emit('change');
         }

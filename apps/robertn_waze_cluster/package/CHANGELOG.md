@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-Requires the next waze-on-cluster.
+While **Turn card** is on, the iPhone draws no turn card of its own on the
+cluster map, from the next head-unit start. Requires the next
+waze-on-cluster.
 
 ## 0.6.16
 
