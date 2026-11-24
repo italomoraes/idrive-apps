@@ -3,9 +3,10 @@
  * shipped waze-on-cluster.conf with only the defined keys (no extra_keys),
  * and every key the program reads by name defined. A key the conf sets but
  * the program does not define stops it before its first log line, so the
- * service restarts until the Store puts the version before back (0.11.1,
- * guidance); a key read but not defined is always empty. Run from the
- * tool's directory: it reads waze-on-cluster.conf and src/. */
+ * service restarts until the Store puts the version before back (as an
+ * early build of the turn card did, with its guidance key); a key read but
+ * not defined is always empty. Run from the tool's directory: it reads
+ * waze-on-cluster.conf and src/. */
 #include <dirent.h>
 
 #include <cstdio>

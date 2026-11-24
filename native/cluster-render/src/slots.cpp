@@ -1016,14 +1016,6 @@ void SlotManager::on_shown(uint64_t scene_id, int64_t now_ms)
     t.removed_ms = -1;
     t.no_fetch = t.stuck = 0;
     verify(i, now_ms);
-    /* A hold's cover shown over the stock HMI's box: the targets that take
-     * over from the stock HMI and are shown are asked for again a moment
-     * later (slots.h, "Asked for again after a hold's cover"). */
-    if (!specs_[i].follows.empty() && now_ms - refreshed_ms_ >= kRefreshGapMs)
-        for (size_t k = 0; k < specs_.size(); k++)
-            if (specs_[k].refresh_after_hold && specs_[k].name == specs_[i].follows &&
-                t_[k].status.state == TargetState::Shown && t_[k].refresh_ms < 0)
-                t_[k].refresh_ms = now_ms + kRefreshAfterHoldMs;
 }
 
 void SlotManager::on_fetched(uint64_t scene_id, int64_t now_ms)
@@ -1165,23 +1157,6 @@ void SlotManager::not_mapped(int i, int64_t now_ms)
         return;
     }
     settle_loss(i, h, false, "accepted, not mapped", now_ms, now_ms);
-}
-
-void SlotManager::refresh(int i, int64_t now_ms)
-{
-    Target &t = t_[i];
-    const TargetSpec &spec = specs_[i];
-    log_info("target %s: out of slot 0x%llx and back in, %lld ms after a hold's cover was shown: at a route's start "
-             "the display can leave scene 0x%llx unseen while the slot table reports it shown; %s",
-             spec.name.c_str(), (unsigned long long)spec.slot, (long long)kRefreshAfterHoldMs,
-             (unsigned long long)spec.scene_id, rows_text(spec.slot).c_str());
-    refreshed_ms_ = now_ms;
-    take_down(i, now_ms);
-    /* as at any release (release()): its take-overs start over */
-    t.takeovers = 0;
-    t.takeover_ms = t.takeover_sent_ms + kTakeOverMs[0];
-    /* asked for again at once, as at a first recovery (verify) */
-    set(i, TargetState::Waiting, Holder::None, "asked for again after a hold's cover", now_ms, now_ms);
 }
 
 void SlotManager::on_refused(uint64_t scene_id, Refusal r, const std::string &why, int64_t now_ms)
@@ -1656,15 +1631,6 @@ void SlotManager::tick(int64_t now_ms)
             continue;
         }
 
-        /* Asked for again after a hold's cover, if still shown and wanted. */
-        if (t.refresh_ms >= 0 && now_ms >= t.refresh_ms) {
-            t.refresh_ms = -1;
-            if (s == TargetState::Shown && t.wanted && !t.kept) {
-                refresh(i, now_ms);
-                continue;
-            }
-        }
-
         /* Kept through a lock: mapped again once the slot is back, released
          * when nothing wants it or after kKeepMs. */
         if (t.kept) {
@@ -1898,13 +1864,22 @@ int64_t SlotManager::wake_in_ms(int64_t now_ms) const
         }
         if (t.unmapped_ms >= 0)
             at(t.unmapped_ms + kNotMappedMs);
-        if (t.refresh_ms >= 0)
-            at(t.refresh_ms);
         auto r = released_.find(specs_[i].scene_id);
         if ((t.wanted || loads((int)i)) && r != released_.end() && !settled((int)i, now_ms))
             at(r->second + kConfirmMs);
     }
     return best;
+}
+
+bool SlotManager::at_rest() const
+{
+    for (size_t i = 0; i < specs_.size(); i++) {
+        const Target &t = t_[i];
+        if (t.status.state != TargetState::Idle || t.wanted || loads((int)i) || t.requested || t.loaded || t.kept ||
+            t.remap || t.unmapped_ms >= 0 || t.verdict)
+            return false;
+    }
+    return true;
 }
 
 void SlotManager::verify(int i, int64_t now_ms)

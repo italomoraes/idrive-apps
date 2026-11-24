@@ -42,17 +42,6 @@
  *   when the HMI's map is not mapped again first, a race lost about 30% of
  *   the time (VERIFIED on the car); the HMI maps its content again, parked
  *   behind ours, so it comes back when ours goes.
- * - Asked for again after a hold's cover: when a hold is shown over the
- *   stock HMI's box (on_shown), every other target that takes over from the
- *   stock HMI and is shown goes out of its slot and back in
- *   kRefreshAfterHoldMs later, at once, as at a first recovery (verify), at
- *   most once per kRefreshGapMs. When route guidance starts the KOMBI shows
- *   its turn box, the hold covers it, and the map can stay unseen, its row
- *   reporting it shown, until it is asked for again (seen on the car, 20
- *   and 21/11/2026: at each route's start with the map black, the hold
- *   shown 1-2 s after the route began; the map came back each time a
- *   release happened 1.5 s after the cover, and stayed when the route was
- *   already on at the start). A blink of about 0.4 s at each route's start.
  * - Accepted, not mapped: a target whose map the display accepted
  *   (Port::accepted_ms) and that has no map status kNotMappedMs after that,
  *   or a parked, shown or lingering target whose own row the slot table
@@ -193,6 +182,10 @@
  *   DLT daemon turns RAMSES's console off and on while the service runs
  *   (ramses_console.h): a subscription made while it is off is never read,
  *   and such a showing is not verified (Unobservable) rather than released.
+ *   On iDrive 7 the service keeps the console at INFO whatever DLT's level
+ *   (ramses_dlt.h), so a renderer that stops drawing a shown target (seen at
+ *   route starts, the map's renderer unsubscribing while the slot table
+ *   reports it shown) is caught there.
  * - Holds: a target that follows another (TargetSpec::follows) keeps its
  *   slot from the stock HMI while that target is shown and one of its
  *   take_over_contents is mapped in the slot (follow(), which keeps a
@@ -304,10 +297,6 @@ struct TargetSpec {
     /* A hold (SlotManager::follow): the name of the target it follows. Its
      * scene is never drawn and takes no client's layers. */
     std::string follows;
-    /* Asked for again a moment after a hold following it is shown over the
-     * stock HMI's box (SlotManager, "Asked for again after a hold's
-     * cover"): the map a guide hold follows (load_holds). */
-    bool refresh_after_hold = false;
     /* A hold's: the only contents its take-overs unmap. Any other content
      * shown in its slot makes it yield; parked, it is left alone. */
     std::vector<uint64_t> take_over_contents;
@@ -477,10 +466,6 @@ public:
      * first gap is then the least to the next. */
     static const int64_t kTakeOverMs[6];
     static const int64_t kTakeOverSettleMs = 10000;
-    /* Asked for again after a hold's cover (above): how long after, and
-     * the least time between two. */
-    static const int64_t kRefreshAfterHoldMs = 1500;
-    static const int64_t kRefreshGapMs = 30000;
     /* A report of a disabled slot holds its targets' requests this long at
      * most, in case the display never reports the slot again. */
     static const int64_t kLockTrustMs = 30000;
@@ -610,6 +595,10 @@ public:
     std::string renderer_text(int64_t now_ms) const;
     /* Milliseconds until the next timer of any target; -1: none. */
     int64_t wake_in_ms(int64_t now_ms) const;
+    /* Every target idle with nothing of it wanted, loaded, kept or waiting
+     * on the display: what changes that comes from a client or the
+     * display, and no timer of the slot manager is running. */
+    bool at_rest() const;
 
     /* Who has content in slot: us only when the target requested with that
      * scene id is the slot's (0x01000400 is the HUD's and, in 0x203, the
@@ -702,8 +691,6 @@ private:
         std::vector<int64_t> losses;
         bool given_up = false;
         bool lost_parked = false;       /* a hold: parked again, counted as a loss, since last shown */
-        /* Asked for again then, after a hold's cover (above); -1: not due. */
-        int64_t refresh_ms = -1;
         /* A hold: the box counts as mapped in its slot (follow()), and the
          * last pass that saw it mapped (-1: none). */
         bool boxed = false;
@@ -840,9 +827,6 @@ private:
     void take_over(int i, int64_t now_ms);
     /* Accepted, not mapped for kNotMappedMs: released and asked for again. */
     void not_mapped(int i, int64_t now_ms);
-    /* Asked for again after a hold's cover (above): out of its slot and back
-     * in, at once. */
-    void refresh(int i, int64_t now_ms);
     void settle_loss(int i, Holder h, bool removal, const std::string &reason, int64_t now_ms, int64_t lost_ms);
     bool yields(int i, int64_t now_ms);
     int by_scene(uint64_t scene_id) const;
@@ -899,7 +883,6 @@ private:
      * passed. */
     bool boot_hold_ = false;
     int64_t reconnect_ms_ = kNoMapping;   /* the last on_renderer_stuck */
-    int64_t refreshed_ms_ = -1000000;     /* the last refresh() */
     int64_t slot_poll_ms_ = 0;
     std::map<uint64_t, int64_t> released_;   /* scene id -> its release not yet followed by a request */
     std::map<uint64_t, Subscribers> subs_;   /* by published scene id */

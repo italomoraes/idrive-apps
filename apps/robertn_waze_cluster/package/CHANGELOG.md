@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+Requires the next waze-on-cluster.
+
 ## 0.6.16
 
 This fork's 0.6.15 together with 0.6.15.

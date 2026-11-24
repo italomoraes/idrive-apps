@@ -40,7 +40,7 @@
  *   u32 4, u32 1, ...
  *
  * These are BMW's GuidingTypes that carplay converts CarPlay's manoeuvres
- * to (DOCUMENTACAO): its U-turns a turn's 8, which a drive where traffic
+ * to: its U-turns a turn's 8, which a drive where traffic
  * keeps right had as 9 (Google Maps' "make a U-turn" on the road the turn
  * before led to; 8 not seen), its keep left and right a fork's 1 and 2, a
  * roundabout's exit CarPlay's angle (360 added to one of 0 or less, 180 for

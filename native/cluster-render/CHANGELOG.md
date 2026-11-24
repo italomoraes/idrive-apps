@@ -2,9 +2,49 @@
 
 ## Unreleased
 
+## 0.8.11
+
+Text layers: an app sends a font once (an `r8` atlas and its glyph table)
+and then only its strings; the service lays each line out (advances,
+kerning, alignment, UTF-8) and draws each glyph as two triangles, so a
+line holds up to 256 glyphs (64 by default) instead of 14, a change sends
+the string alone, and a frame samples the atlas once for each pixel a
+glyph covers. Fonts may be distance fields, sharp at any size. The text
+helpers of both clients use them; the hello's `text` 1 says the service
+takes them.
+
+## 0.8.10
+
+A scene file's layers can have a band of their own above the file: the
+`scene` field `over_order` draws the `overlay` and `alert` layers in passes
+from that render order up, while `ambient` and `content` layers stay at
+`layers_order`. A file can then draw its own artwork between hosted content
+and an overlay. Without the field nothing changes; the hello's `over_order` 1
+says the service takes it.
+
+## 0.8.9
+
+On iDrive 7, the service keeps seeing which of its scenes the cluster draws
+while the car's DLT logging is off, so a map the cluster stops drawing at a
+route's start is asked for again within about 2 seconds instead of staying
+black.
+
+A scene file's own animations can be played: the edit line `--play NAME`
+starts the animation sequence `NAME` the file was saved with and `--skip
+NAME` shows its end at once. In an animation system without a clock of its
+own, the service sets its time once a tick, so the play never depends on the
+display's clock. These lines are applied once and never kept; the hello's
+`scene_anim` 1 says the display can play them.
+
 ## 0.8.8
 
-This fork's 0.8.4 together with 0.8.5 to 0.8.7.
+A video layer's frames go to the service through memory both share instead
+of through its socket, which takes less CPU for each frame. Clients and
+services without it keep sending and taking whole frames on the socket.
+
+With nothing shown, requested or due, the service wakes less often, and on
+iDrive 8 it dispatches the cluster's events less often while it offers
+nothing. The status file is written only when its text changes.
 
 ## 0.8.7
 
@@ -60,11 +100,6 @@ which could go on for minutes after a head-unit restart with a cluster theme
 installed. The service no longer takes the map down as not drawn while the
 car's logging has RAMSES's messages turned off, since it cannot see then
 whether the cluster draws it.
-
-When a route starts, the cluster no longer stays black where the map
-should be: the map is asked for again 1.5 seconds after the guide hold's
-cover is shown over the navigation's turn box, at most once every 30
-seconds.
 
 The C++ client library sends every repeated map frame to a service without
 repeats, also one that comes while the frame before is still being sent;
