@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Wo unsere Karte mit dem nächsten Abbiegen über der Karte erscheint. Die Liste zeigt jede Wahl.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Keine Karte von uns über der Karte: die eigene Karte der App erscheint, falls sie eine hat, wie bei Apple Maps.",
     "Our card with the next turn shows below the map's arrow.": "Unsere Karte mit dem nächsten Abbiegen erscheint unter dem Pfeil der Karte.",
-    "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte."
+    "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte.",
+    "Position": "Position"
   }
 }

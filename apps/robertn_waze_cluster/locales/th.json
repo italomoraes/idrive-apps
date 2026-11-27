@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "ตำแหน่งการ์ดเลี้ยวถัดไปของเราบนแผนที่ เปิดรายการเพื่อดูแต่ละตัวเลือก",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "ไม่มีการ์ดของเราบนแผนที่: การ์ดของแอปจะแสดงแทน หากมี เช่นใน Apple Maps",
     "Our card with the next turn shows below the map's arrow.": "การ์ดเลี้ยวถัดไปของเราแสดงใต้ลูกศรของแผนที่",
-    "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่"
+    "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่",
+    "Position": "ตำแหน่ง"
   }
 }

@@ -92,6 +92,7 @@ const TURN_CARD_NAME = 'wocTurnCard';
 const TURN_CARD_SHOW_NAME = 'wocTurnCardShow';
 const HEAD_GENERAL_NAME = 'wocHeadGeneral';
 const HEAD_HUD_NAME = 'wocHeadHud';
+const HEAD_TURN_CARD_NAME = 'wocHeadTurnCard';
 const HUD_NAME = 'wocHud';
 const HUD_KEEP_NAME = 'wocHudKeep';
 const SHOW_ON_NAME = 'wocShowOn';
@@ -226,7 +227,7 @@ class WazeClusterApp extends OnlineApp {
         }
         const names = [STATUS_NAME, MAP_NAME, RESTART_STATUS_NAME, ENABLE_NAME, DISABLE_NAME, WIFI_NAME, WIFI_HINT_NAME, AA_STATUS_NAME,
             AA_ENABLE_NAME, AA_DISABLE_NAME, AA_ZOOM_NAME, AA_ZOOM_OUT_NAME, AA_ZOOM_IN_NAME, AA_CARD_NAME, RESTART_NAME, GUIDE_NAME, TURN_CARD_NAME, TURN_CARD_SHOW_NAME,
-            HEAD_GENERAL_NAME, HEAD_HUD_NAME, SHOW_ON_NAME, PROFILE_NAME, HUD_NAME, HUD_KEEP_NAME, HUD_SIZE_NAME, HUD_POS_NAME,
+            HEAD_GENERAL_NAME, HEAD_HUD_NAME, HEAD_TURN_CARD_NAME, SHOW_ON_NAME, PROFILE_NAME, HUD_NAME, HUD_KEEP_NAME, HUD_SIZE_NAME, HUD_POS_NAME,
             PREVIEW_NAME]
             .concat(Object.values(HUD_MOVE_NAMES), [HUD_CENTRE_NAME, CAPTURE_NAME, CAPTURE_STATUS,
                 LOGS_NAME, LOGS_SAVE, LOGS_STATUS, LOGS_QR, LOGS_URL], LOGS_ROW_NAMES);
@@ -675,7 +676,7 @@ class WazeClusterApp extends OnlineApp {
         const c = this._control;
         [[ENABLE_NAME, t('Patch')], [DISABLE_NAME, t('Remove patch')], [AA_ENABLE_NAME, t('Patch')], [AA_DISABLE_NAME, t('Remove patch')],
             [AA_ZOOM_OUT_NAME, t('Zoom out')], [AA_ZOOM_IN_NAME, t('Zoom in')], [HEAD_GENERAL_NAME, t('General')], [LOGS_NAME, t('Logs')],
-            [HEAD_HUD_NAME, t('Head-up display')],
+            [HEAD_HUD_NAME, t('Head-up display')], [HEAD_TURN_CARD_NAME, t('Turn card')],
             [HUD_MOVE_NAMES.left, t('Move left')], [HUD_MOVE_NAMES.right, t('Move right')], [HUD_MOVE_NAMES.up, t('Move up')],
             [HUD_MOVE_NAMES.down, t('Move down')], [HUD_CENTRE_NAME, t('Centre')],
             [RESTART_NAME, t('Restart head unit')]].forEach(([name, text]) => this._write(name, text));
@@ -723,7 +724,7 @@ class WazeClusterApp extends OnlineApp {
         this._write(GUIDE_NAME, t("Hide BMW's turn box"));
         this._setSelected(GUIDE_NAME, !!hide && !unavailable);
         const card = TURN_CARD_MODES.indexOf(c.turnCard());
-        this._writeCell(TURN_CARD_NAME, 'HeaderText', t('Turn card'), 'Text');
+        this._writeCell(TURN_CARD_NAME, 'HeaderText', t('Position'), 'Text');
         [t('Off'), t('Below the arrow'), t('At the top')].forEach((text, row) => {
             const shown = row === 0 && card < 0 ? '\u2014' : text;
             this._writeCell(TURN_CARD_NAME, 'ItemText', shown, 'Text', row);

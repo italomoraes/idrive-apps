@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Unde apare pe hartă cardul nostru cu virajul următor. Deschideți lista pentru fiecare opțiune.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Fără cardul nostru pe hartă: apare cardul aplicației, dacă are unul, ca la Apple Maps.",
     "Our card with the next turn shows below the map's arrow.": "Cardul nostru cu virajul următor apare sub săgeata hărții.",
-    "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții."
+    "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții.",
+    "Position": "Poziție"
   }
 }

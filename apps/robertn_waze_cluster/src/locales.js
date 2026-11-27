@@ -130,7 +130,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "مكان ظهور بطاقتنا للانعطاف التالي فوق الخريطة. افتح القائمة لترى كل خيار.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "لا بطاقة منا فوق الخريطة: تظهر بطاقة التطبيق نفسه، إن وُجدت، كما في خرائط Apple.",
    "Our card with the next turn shows below the map's arrow.": "تظهر بطاقتنا للانعطاف التالي أسفل سهم الخريطة.",
-   "Our card with the next turn shows at the top of the map.": "تظهر بطاقتنا للانعطاف التالي أعلى الخريطة."
+   "Our card with the next turn shows at the top of the map.": "تظهر بطاقتنا للانعطاف التالي أعلى الخريطة.",
+   "Position": "الموضع"
   }
  },
  {
@@ -262,7 +263,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde se na mapě zobrazuje naše karta s dalším odbočením. Otevřete seznam a uvidíte volby.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez naší karty na mapě: zobrazí se karta samotné aplikace, pokud ji má, jako u Map Apple.",
    "Our card with the next turn shows below the map's arrow.": "Naše karta s dalším odbočením se zobrazí pod šipkou mapy.",
-   "Our card with the next turn shows at the top of the map.": "Naše karta s dalším odbočením se zobrazí nahoře na mapě."
+   "Our card with the next turn shows at the top of the map.": "Naše karta s dalším odbočením se zobrazí nahoře na mapě.",
+   "Position": "Poloha"
   }
  },
  {
@@ -394,7 +396,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vores kort med næste sving vises over kortet. Åbn listen for at se hvert valg.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Intet kort fra os over kortet: appens eget kort vises, hvis den har et, som i Apple Kort.",
    "Our card with the next turn shows below the map's arrow.": "Vores kort med næste sving vises under kortets pil.",
-   "Our card with the next turn shows at the top of the map.": "Vores kort med næste sving vises øverst på kortet."
+   "Our card with the next turn shows at the top of the map.": "Vores kort med næste sving vises øverst på kortet.",
+   "Position": "Placering"
   }
  },
  {
@@ -526,7 +529,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Wo unsere Karte mit dem nächsten Abbiegen über der Karte erscheint. Die Liste zeigt jede Wahl.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Keine Karte von uns über der Karte: die eigene Karte der App erscheint, falls sie eine hat, wie bei Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Unsere Karte mit dem nächsten Abbiegen erscheint unter dem Pfeil der Karte.",
-   "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte."
+   "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte.",
+   "Position": "Position"
   }
  },
  {
@@ -658,7 +662,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Πού εμφανίζεται στον χάρτη η κάρτα μας με την επόμενη στροφή. Ανοίξτε τη λίστα για τις επιλογές.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Χωρίς δική μας κάρτα στον χάρτη: εμφανίζεται η κάρτα της εφαρμογής, αν έχει, όπως στους Χάρτες Apple.",
    "Our card with the next turn shows below the map's arrow.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται κάτω από το βέλος του χάρτη.",
-   "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη."
+   "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη.",
+   "Position": "Θέση"
   }
  },
  {
@@ -790,7 +795,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de la propia app, si tiene una, como la de Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
-   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
+   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa.",
+   "Position": "Posición"
   }
  },
  {
@@ -922,7 +928,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de la propia app, si tiene una, como la de Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
-   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
+   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa.",
+   "Position": "Posición"
   }
  },
  {
@@ -1054,7 +1061,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Missä korttimme seuraavasta käännöksestä näkyy kartan päällä. Avaa luettelo nähdäksesi valinnat.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Ei korttiamme kartan päällä: sovelluksen oma kortti näkyy, jos sillä on sellainen, kuten Apple Kartoilla.",
    "Our card with the next turn shows below the map's arrow.": "Korttimme seuraavasta käännöksestä näkyy kartan nuolen alla.",
-   "Our card with the next turn shows at the top of the map.": "Korttimme seuraavasta käännöksestä näkyy kartan yläreunassa."
+   "Our card with the next turn shows at the top of the map.": "Korttimme seuraavasta käännöksestä näkyy kartan yläreunassa.",
+   "Position": "Sijainti"
   }
  },
  {
@@ -1186,7 +1194,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Pas de carte à nous sur la carte : celle de l'app s'affiche, si elle en a une, comme celle d'Apple Plans.",
    "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
-   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
+   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte.",
+   "Position": "Position"
   }
  },
  {
@@ -1318,7 +1327,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Pas de carte à nous sur la carte : celle de l'app s'affiche, si elle en a une, comme celle d'Apple Plans.",
    "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
-   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
+   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte.",
+   "Position": "Position"
   }
  },
  {
@@ -1450,7 +1460,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "היכן מוצג על המפה הכרטיס שלנו עם הפנייה הבאה. פתחו את הרשימה לכל אפשרות.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "בלי כרטיס שלנו על המפה: מוצג הכרטיס של האפליקציה עצמה, אם יש לה, כמו ב-Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "הכרטיס שלנו עם הפנייה הבאה מוצג מתחת לחץ של המפה.",
-   "Our card with the next turn shows at the top of the map.": "הכרטיס שלנו עם הפנייה הבאה מוצג בראש המפה."
+   "Our card with the next turn shows at the top of the map.": "הכרטיס שלנו עם הפנייה הבאה מוצג בראש המפה.",
+   "Position": "מיקום"
   }
  },
  {
@@ -1582,7 +1593,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hol jelenik meg a térképen a következő kanyar kártyánk. Nyissa meg a listát a lehetőségekért.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Nincs kártyánk a térképen: az alkalmazás saját kártyája látszik, ha van neki, mint az Apple Térképnél.",
    "Our card with the next turn shows below the map's arrow.": "A következő kanyar kártyánk a térkép nyila alatt jelenik meg.",
-   "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg."
+   "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg.",
+   "Position": "Pozíció"
   }
  },
  {
@@ -1714,7 +1726,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Tempat kartu kami dengan belokan berikutnya tampil di atas peta. Buka daftar untuk tiap pilihan.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Tanpa kartu kami di peta: kartu milik aplikasi yang tampil, jika ada, seperti di Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Kartu kami dengan belokan berikutnya tampil di bawah panah peta.",
-   "Our card with the next turn shows at the top of the map.": "Kartu kami dengan belokan berikutnya tampil di bagian atas peta."
+   "Our card with the next turn shows at the top of the map.": "Kartu kami dengan belokan berikutnya tampil di bagian atas peta.",
+   "Position": "Posisi"
   }
  },
  {
@@ -1846,7 +1859,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dove appare sulla mappa la nostra scheda con la prossima svolta. Apri l'elenco per vedere ogni scelta.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Nessuna nostra scheda sulla mappa: appare quella dell'app, se ne ha una, come in Apple Mappe.",
    "Our card with the next turn shows below the map's arrow.": "La nostra scheda con la prossima svolta appare sotto la freccia della mappa.",
-   "Our card with the next turn shows at the top of the map.": "La nostra scheda con la prossima svolta appare in cima alla mappa."
+   "Our card with the next turn shows at the top of the map.": "La nostra scheda con la prossima svolta appare in cima alla mappa.",
+   "Position": "Posizione"
   }
  },
  {
@@ -1978,7 +1992,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "次の進路を示す当アプリのカードを地図上のどこに出すか。リストを開くと各選択肢が見られます。",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "当アプリのカードは出しません。ナビアプリに独自のカードがあればそれが出ます（Appleマップなど）。",
    "Our card with the next turn shows below the map's arrow.": "次の進路のカードを地図の矢印の下に出します。",
-   "Our card with the next turn shows at the top of the map.": "次の進路のカードを地図の上部に出します。"
+   "Our card with the next turn shows at the top of the map.": "次の進路のカードを地図の上部に出します。",
+   "Position": "位置"
   }
  },
  {
@@ -2110,7 +2125,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "다음 회전을 알리는 저희 카드가 지도 위 어디에 표시되는지입니다. 목록을 열어 각 선택을 보세요.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "지도 위에 저희 카드가 없습니다. 앱 자체 카드가 있으면 그것이 표시됩니다(Apple 지도처럼).",
    "Our card with the next turn shows below the map's arrow.": "다음 회전 카드가 지도 화살표 아래에 표시됩니다.",
-   "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다."
+   "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다.",
+   "Position": "위치"
   }
  },
  {
@@ -2242,7 +2258,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vårt kort med neste sving vises over kartet. Åpne listen for å se hvert valg.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Ikke noe kort fra oss over kartet: appens eget kort vises, hvis den har et, som i Apple Kart.",
    "Our card with the next turn shows below the map's arrow.": "Vårt kort med neste sving vises under kartets pil.",
-   "Our card with the next turn shows at the top of the map.": "Vårt kort med neste sving vises øverst på kartet."
+   "Our card with the next turn shows at the top of the map.": "Vårt kort med neste sving vises øverst på kartet.",
+   "Position": "Plassering"
   }
  },
  {
@@ -2376,7 +2393,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Waar onze kaart met de volgende afslag over de kaart verschijnt. Open de lijst voor elke keuze.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Geen kaart van ons over de kaart: de eigen kaart van de app verschijnt, als die er een heeft, zoals bij Apple Kaarten.",
    "Our card with the next turn shows below the map's arrow.": "Onze kaart met de volgende afslag verschijnt onder de pijl van de kaart.",
-   "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart."
+   "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart.",
+   "Position": "Positie"
   }
  },
  {
@@ -2508,7 +2526,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Gdzie nasza karta z następnym manewrem pokazuje się na mapie. Otwórz listę, by zobaczyć wybory.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez naszej karty na mapie: pokazuje się karta samej aplikacji, jeśli ją ma, jak w Mapach Apple.",
    "Our card with the next turn shows below the map's arrow.": "Nasza karta z następnym manewrem pokazuje się pod strzałką mapy.",
-   "Our card with the next turn shows at the top of the map.": "Nasza karta z następnym manewrem pokazuje się na górze mapy."
+   "Our card with the next turn shows at the top of the map.": "Nasza karta z następnym manewrem pokazuje się na górze mapy.",
+   "Position": "Pozycja"
   }
  },
  {
@@ -2640,7 +2659,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso card com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sem o nosso card sobre o mapa: aparece o card do próprio app, se ele tiver um, como o do Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "O nosso card com a próxima manobra aparece abaixo da seta do mapa.",
-   "Our card with the next turn shows at the top of the map.": "O nosso card com a próxima manobra aparece no topo do mapa."
+   "Our card with the next turn shows at the top of the map.": "O nosso card com a próxima manobra aparece no topo do mapa.",
+   "Position": "Posição"
   }
  },
  {
@@ -2772,7 +2792,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso cartão com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sem o nosso cartão sobre o mapa: aparece o cartão da própria app, se tiver um, como o do Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "O nosso cartão com a próxima manobra aparece abaixo da seta do mapa.",
-   "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa."
+   "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa.",
+   "Position": "Posição"
   }
  },
  {
@@ -2904,7 +2925,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Unde apare pe hartă cardul nostru cu virajul următor. Deschideți lista pentru fiecare opțiune.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Fără cardul nostru pe hartă: apare cardul aplicației, dacă are unul, ca la Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Cardul nostru cu virajul următor apare sub săgeata hărții.",
-   "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții."
+   "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții.",
+   "Position": "Poziție"
   }
  },
  {
@@ -3036,7 +3058,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Где на карте видна наша карточка следующего манёвра. Откройте список, чтобы увидеть варианты.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашей карточки на карте: видна карточка самого приложения, если она есть, как у Apple Карт.",
    "Our card with the next turn shows below the map's arrow.": "Наша карточка следующего манёвра видна под стрелкой карты.",
-   "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты."
+   "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты.",
+   "Position": "Положение"
   }
  },
  {
@@ -3168,7 +3191,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde sa na mape zobrazuje naša karta s ďalším odbočením. Otvorte zoznam a uvidíte voľby.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez našej karty na mape: zobrazí sa karta samotnej aplikácie, ak ju má, ako pri Mapách Apple.",
    "Our card with the next turn shows below the map's arrow.": "Naša karta s ďalším odbočením sa zobrazí pod šípkou mapy.",
-   "Our card with the next turn shows at the top of the map.": "Naša karta s ďalším odbočením sa zobrazí hore na mape."
+   "Our card with the next turn shows at the top of the map.": "Naša karta s ďalším odbočením sa zobrazí hore na mape.",
+   "Position": "Poloha"
   }
  },
  {
@@ -3300,7 +3324,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kje se na zemljevidu prikaže naša kartica z naslednjim zavojem. Odprite seznam za izbire.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Brez naše kartice na zemljevidu: prikaže se kartica aplikacije, če jo ima, kot pri Apple Zemljevidih.",
    "Our card with the next turn shows below the map's arrow.": "Naša kartica z naslednjim zavojem se prikaže pod puščico zemljevida.",
-   "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida."
+   "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida.",
+   "Position": "Položaj"
   }
  },
  {
@@ -3432,7 +3457,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Var vårt kort med nästa sväng visas över kartan. Öppna listan för att se varje val.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Inget kort från oss över kartan: appens eget kort visas, om den har ett, som i Apple Kartor.",
    "Our card with the next turn shows below the map's arrow.": "Vårt kort med nästa sväng visas under kartans pil.",
-   "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan."
+   "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan.",
+   "Position": "Position"
   }
  },
  {
@@ -3564,7 +3590,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "ตำแหน่งการ์ดเลี้ยวถัดไปของเราบนแผนที่ เปิดรายการเพื่อดูแต่ละตัวเลือก",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "ไม่มีการ์ดของเราบนแผนที่: การ์ดของแอปจะแสดงแทน หากมี เช่นใน Apple Maps",
    "Our card with the next turn shows below the map's arrow.": "การ์ดเลี้ยวถัดไปของเราแสดงใต้ลูกศรของแผนที่",
-   "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่"
+   "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่",
+   "Position": "ตำแหน่ง"
   }
  },
  {
@@ -3696,7 +3723,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Bir sonraki dönüşü gösteren kartımızın haritada göründüğü yer. Seçenekler için listeyi açın.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Haritada kartımız yok: uygulamanın kendi kartı, varsa, görünür; Apple Haritalar'daki gibi.",
    "Our card with the next turn shows below the map's arrow.": "Bir sonraki dönüşü gösteren kartımız haritanın okunun altında görünür.",
-   "Our card with the next turn shows at the top of the map.": "Bir sonraki dönüşü gösteren kartımız haritanın üstünde görünür."
+   "Our card with the next turn shows at the top of the map.": "Bir sonraki dönüşü gösteren kartımız haritanın üstünde görünür.",
+   "Position": "Konum"
   }
  },
  {
@@ -3828,7 +3856,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Де на карті видно нашу картку наступного маневру. Відкрийте список, щоб побачити варіанти.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашої картки на карті: видно картку самого застосунку, якщо вона є, як у Apple Карт.",
    "Our card with the next turn shows below the map's arrow.": "Наша картка наступного маневру видна під стрілкою карти.",
-   "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти."
+   "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти.",
+   "Position": "Положення"
   }
  },
  {
@@ -3960,7 +3989,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Nơi thẻ rẽ tiếp theo của chúng tôi hiện trên bản đồ. Mở danh sách để xem từng lựa chọn.",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Không có thẻ của chúng tôi trên bản đồ: thẻ của chính ứng dụng sẽ hiện, nếu có, như Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Thẻ rẽ tiếp theo của chúng tôi hiện dưới mũi tên của bản đồ.",
-   "Our card with the next turn shows at the top of the map.": "Thẻ rẽ tiếp theo của chúng tôi hiện ở trên cùng bản đồ."
+   "Our card with the next turn shows at the top of the map.": "Thẻ rẽ tiếp theo của chúng tôi hiện ở trên cùng bản đồ.",
+   "Position": "Vị trí"
   }
  },
  {
@@ -4094,7 +4124,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "我们显示下一个转向的卡片在地图上的位置。打开列表查看每个选项。",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地图上不显示我们的卡片：如导航应用有自己的卡片，则显示它，例如 Apple 地图。",
    "Our card with the next turn shows below the map's arrow.": "我们的下一个转向卡片显示在地图箭头下方。",
-   "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。"
+   "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。",
+   "Position": "位置"
   }
  },
  {
@@ -4228,7 +4259,8 @@ module.exports = [
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "我們顯示下一個轉彎的卡片在地圖上的位置。開啟清單查看每個選項。",
    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地圖上不顯示我們的卡片：如導航 App 有自己的卡片，則顯示它，例如 Apple 地圖。",
    "Our card with the next turn shows below the map's arrow.": "我們的下一個轉彎卡片顯示在地圖箭頭下方。",
-   "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。"
+   "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。",
+   "Position": "位置"
   }
  }
 ];

@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Где на карте видна наша карточка следующего манёвра. Откройте список, чтобы увидеть варианты.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашей карточки на карте: видна карточка самого приложения, если она есть, как у Apple Карт.",
     "Our card with the next turn shows below the map's arrow.": "Наша карточка следующего манёвра видна под стрелкой карты.",
-    "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты."
+    "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты.",
+    "Position": "Положение"
   }
 }

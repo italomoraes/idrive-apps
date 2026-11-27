@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kje se na zemljevidu prikaže naša kartica z naslednjim zavojem. Odprite seznam za izbire.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Brez naše kartice na zemljevidu: prikaže se kartica aplikacije, če jo ima, kot pri Apple Zemljevidih.",
     "Our card with the next turn shows below the map's arrow.": "Naša kartica z naslednjim zavojem se prikaže pod puščico zemljevida.",
-    "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida."
+    "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida.",
+    "Position": "Položaj"
   }
 }

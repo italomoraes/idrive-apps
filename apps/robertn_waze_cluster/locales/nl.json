@@ -128,6 +128,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Waar onze kaart met de volgende afslag over de kaart verschijnt. Open de lijst voor elke keuze.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Geen kaart van ons over de kaart: de eigen kaart van de app verschijnt, als die er een heeft, zoals bij Apple Kaarten.",
     "Our card with the next turn shows below the map's arrow.": "Onze kaart met de volgende afslag verschijnt onder de pijl van de kaart.",
-    "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart."
+    "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart.",
+    "Position": "Positie"
   }
 }

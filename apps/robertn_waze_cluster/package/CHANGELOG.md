@@ -5,8 +5,9 @@
 A row's name too long for the list takes a second line instead of being
 cut off, a line sets each section apart, and the HUD's section is called
 Head-up display. The Logs page is laid out like the main page, the QR code
-of the download address on its right. Turn card is a list like Show on,
-each of its choices with its own picture and explanation.
+of the download address on its right. The turn card has its own section,
+its Position a list like Show on, each choice with its own picture and
+explanation.
 
 ## 0.6.18
 

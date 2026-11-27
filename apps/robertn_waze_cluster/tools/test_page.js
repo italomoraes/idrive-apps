@@ -8,7 +8,7 @@
  *
  *   node tools/build.js && node tools/test_page.js
  *
- * Covers: the main page's four sections in order (General, HUD, CarPlay,
+ * Covers: the main page's five sections in order (General, Turn card, HUD, CarPlay,
  * Android Auto), each under an unfocusable header row, the same in
  * application.xml; no log rows on it; its labels; every row stays on the
  * page through every state (CarPlay showing and waiting, patched and not,
@@ -299,26 +299,27 @@ async function main() {
         .map(([id]) => [id, components[id].type, components[id].name, shipped(components[id])]);
     assert.deepStrictEqual(main.map(([id, type, name, text]) => (type === 'title' ? name : `${name} ${text}`)), [
         'wocTitle',
-        'wocHeadGeneral General', 'wocShowOn Show on: Cluster', 'wocProfile Own settings for this driver', 'wocMap Cluster map: Off', "wocGuide Hide BMW's turn box", 'wocTurnCard Turn card: \u2014', 'wocTurnCardShow Show an example', 'wocLogs Logs',
+        'wocHeadGeneral General', 'wocShowOn Show on: Cluster', 'wocProfile Own settings for this driver', 'wocMap Cluster map: Off', "wocGuide Hide BMW's turn box", 'wocLogs Logs',
+        'wocSepTurnCard ', 'wocHeadTurnCard Turn card', 'wocTurnCard Position: \u2014', 'wocTurnCardShow Show an example',
         'wocSepHud ', 'wocHeadHud Head-up display', 'wocHud HUD map: \u2014', "wocHudKeep Keep HUD map over BMW's pop-ups", 'wocHudSize Size: \u2014', 'wocHudPos Position: \u2014', 'wocHudLeft Move left',
         'wocHudRight Move right', 'wocHudUp Move up', 'wocHudDown Move down', 'wocHudCentre Centre',
         'wocSepCarPlay ', 'wocHeadCarPlay CarPlay', 'wocStatus Status: Connecting…', 'wocEnable Patch', 'wocDisable Remove patch', 'wocWifi ', 'wocWifiHint ',
         'wocSepAa ', 'wocHeadAa Android Auto', 'wocAaStatus Status: Connecting…', 'wocAaEnable Patch', 'wocAaDisable Remove patch',
         'wocAaZoom Zoom: —', 'wocAaZoomOut Zoom out', 'wocAaZoomIn Zoom in', "wocAaCard Hide phone's turn card",
         'wocRestart Restart head unit', 'wocRestartStatus '],
-        'the main page: four sections, in order');
+        'the main page: five sections, in order');
     assert.deepStrictEqual(xmlIds('1').map(([id, type]) => `${id} ${type}`).sort(),
         Object.entries(components).map(([id, d]) => `${id} ${d.type}`).sort(), 'application.xml and uiDescription agree on the main page');
     const widgets = {};
     xmlIds('1').forEach(([id, , widget]) => { widgets[components[id].name] = widget; });
-    assert.deepStrictEqual(['wocHeadGeneral', 'wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => widgets[n]), Array(4).fill('LT_Label_Header_1Row'),
+    assert.deepStrictEqual(['wocHeadGeneral', 'wocHeadTurnCard', 'wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => widgets[n]), Array(5).fill('LT_Label_Header_1Row'),
         'the section headers are header rows');
     /* application.xml's property 3: 0 a row the controller passes over, 3 one it stops on */
     const focus = Object.fromEntries([...XML.split('<container id="2"')[0]
         .matchAll(/<component id="(\d+)"[^>]*>\s*<property id="2" value="\d"\/>\s*<property id="3" value="(\d)"\/>/g)]
         .map((m) => [components[m[1]].name, m[2]]));
-    assert.deepStrictEqual(['wocHeadGeneral', 'wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => [focus[n], components[Object.keys(components)
-        .find((id) => components[id].name === n)].properties.Focusable.value]), Array(4).fill(['0', 0]), 'the section headers take no focus');
+    assert.deepStrictEqual(['wocHeadGeneral', 'wocHeadTurnCard', 'wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => [focus[n], components[Object.keys(components)
+        .find((id) => components[id].name === n)].properties.Focusable.value]), Array(5).fill(['0', 0]), 'the section headers take no focus');
     assert.strictEqual(main.find(([, , name]) => focus[name] === '3')[2], 'wocShowOn', 'the first row the controller stops on: Show on');
     assert(!main.some(([, , name]) => /^wocRow|^wocSetup|^wocCapture/.test(name)), 'no log rows, setup line or capture on the main page');
     assert.deepStrictEqual(['wocAaCard', 'wocGuide', 'wocProfile', 'wocHudKeep'].map((n) => widgets[n]), Array(4).fill('LT_CheckBox_2Row_1TextDyn'),
@@ -354,8 +355,8 @@ async function main() {
         'every row ships shown but CarPlay Wi-Fi, its line and the restart\'s two');
     /* a row's name wraps to a second line in the narrow list rather than being cut off */
     assert(Object.values(widgets).every((w) => !/_1Row$/.test(w) || w === 'LT_Label_Header_1Row'), 'every row but the headers takes two lines when it needs them');
-    assert.deepStrictEqual(['wocSepHud', 'wocSepCarPlay', 'wocSepAa'].map((n) => main.findIndex(([, , name]) => name === n) + 1),
-        ['wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => main.findIndex(([, , name]) => name === n)),
+    assert.deepStrictEqual(['wocSepTurnCard', 'wocSepHud', 'wocSepCarPlay', 'wocSepAa'].map((n) => main.findIndex(([, , name]) => name === n) + 1),
+        ['wocHeadTurnCard', 'wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => main.findIndex(([, , name]) => name === n)),
         'a separator before each section header but General');
     assert(/<component id="34" type="button" widget="LT_Button_2Row_1TextDyn">\s*<property id="2" value="0"\/>/.test(XML), 'application.xml: the restart, hidden');
     ['29', '30'].forEach((id) => assert(new RegExp(`<component id="${id}" type="label" widget="LT_Label_2Row_1TextDyn">\\s*<property id="2" value="0"\\/>\\s*` +
@@ -457,20 +458,20 @@ async function main() {
             /* the turn card: a value list of Off, Below the arrow and At the top, each choice
              * through the render; the example only while it is on */
             const card = byName.wocTurnCard, show = byName.wocTurnCardShow;
-            await until('the turn card off, its example greyed', () => card.shown() === 'Turn card: Off' && card.enabled === true && show.enabled === false);
+            await until('the turn card off, its example greyed', () => card.shown() === 'Position: Off' && card.enabled === true && show.enabled === false);
             assert.deepStrictEqual([0, 1, 2].map((r) => card.cells[`${r}:ItemSelectionText`]), ['Off', 'Below the arrow', 'At the top'],
                 'each choice shows under the list\'s name, closed');
             card.pick(1);
-            await until('below the arrow', () => render.turnCard === 'bottom' && card.shown() === 'Turn card: Below the arrow' && show.enabled === true);
+            await until('below the arrow', () => render.turnCard === 'bottom' && card.shown() === 'Position: Below the arrow' && show.enabled === true);
             show.press();
             await until('the example sent', () => (render.maneuvers || []).length === 1);
             assert.deepStrictEqual(render.maneuvers[0], { cmd: 'maneuver', kind: 'left', distance: '200 m', road: 'Example street' }, 'the example manoeuvre');
             await sleep(450);   /* past the press debounce */
             card.pick(2);
-            await until('at the top', () => render.turnCard === 'top' && card.shown() === 'Turn card: At the top');
+            await until('at the top', () => render.turnCard === 'top' && card.shown() === 'Position: At the top');
             await sleep(450);
             card.pick(0);
-            await until('off again', () => render.turnCard === 'off' && card.shown() === 'Turn card: Off' && show.enabled === false);
+            await until('off again', () => render.turnCard === 'off' && card.shown() === 'Position: Off' && show.enabled === false);
             render.received = render.received.filter((m) => m.cmd !== 'turn_card' && m.cmd !== 'maneuver');
             console.log('ok   the turn card: a list of Off, Below the arrow and At the top, each pick as the render says; Show an example sends one, greyed while off');
         }

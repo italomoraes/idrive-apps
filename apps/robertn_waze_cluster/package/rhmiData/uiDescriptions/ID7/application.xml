@@ -34,15 +34,22 @@
                 <property id="2" value="1"/>
                 <property id="3" value="3"/>
             </component>
+            <component id="39" type="button" widget="LT_Button_2Row_1TextDyn">
+                <property id="2" value="1"/>
+                <property id="3" value="3"/>
+            </component>
+            <component id="98" type="separator">
+                <property id="2" value="1"/>
+            </component>
+            <component id="99" type="label" widget="LT_Label_Header_1Row">
+                <property id="2" value="1"/>
+                <property id="3" value="0"/>
+            </component>
             <component id="40" type="valueList" widget="LT_ValueList_Regular">
                 <property id="2" value="1"/>
                 <property id="3" value="3"/>
             </component>
             <component id="41" type="button" widget="LT_Button_2Row_1TextDyn">
-                <property id="2" value="1"/>
-                <property id="3" value="3"/>
-            </component>
-            <component id="39" type="button" widget="LT_Button_2Row_1TextDyn">
                 <property id="2" value="1"/>
                 <property id="3" value="3"/>
             </component>

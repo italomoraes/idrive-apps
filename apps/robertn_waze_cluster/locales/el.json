@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Πού εμφανίζεται στον χάρτη η κάρτα μας με την επόμενη στροφή. Ανοίξτε τη λίστα για τις επιλογές.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Χωρίς δική μας κάρτα στον χάρτη: εμφανίζεται η κάρτα της εφαρμογής, αν έχει, όπως στους Χάρτες Apple.",
     "Our card with the next turn shows below the map's arrow.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται κάτω από το βέλος του χάρτη.",
-    "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη."
+    "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη.",
+    "Position": "Θέση"
   }
 }

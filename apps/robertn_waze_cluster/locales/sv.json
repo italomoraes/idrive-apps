@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Var vårt kort med nästa sväng visas över kartan. Öppna listan för att se varje val.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Inget kort från oss över kartan: appens eget kort visas, om den har ett, som i Apple Kartor.",
     "Our card with the next turn shows below the map's arrow.": "Vårt kort med nästa sväng visas under kartans pil.",
-    "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan."
+    "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan.",
+    "Position": "Position"
   }
 }

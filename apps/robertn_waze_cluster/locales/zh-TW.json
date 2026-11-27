@@ -128,6 +128,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "我們顯示下一個轉彎的卡片在地圖上的位置。開啟清單查看每個選項。",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地圖上不顯示我們的卡片：如導航 App 有自己的卡片，則顯示它，例如 Apple 地圖。",
     "Our card with the next turn shows below the map's arrow.": "我們的下一個轉彎卡片顯示在地圖箭頭下方。",
-    "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。"
+    "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。",
+    "Position": "位置"
   }
 }

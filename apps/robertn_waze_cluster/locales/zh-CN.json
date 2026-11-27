@@ -128,6 +128,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "我们显示下一个转向的卡片在地图上的位置。打开列表查看每个选项。",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地图上不显示我们的卡片：如导航应用有自己的卡片，则显示它，例如 Apple 地图。",
     "Our card with the next turn shows below the map's arrow.": "我们的下一个转向卡片显示在地图箭头下方。",
-    "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。"
+    "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。",
+    "Position": "位置"
   }
 }

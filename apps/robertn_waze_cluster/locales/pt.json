@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso cartão com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sem o nosso cartão sobre o mapa: aparece o cartão da própria app, se tiver um, como o do Apple Maps.",
     "Our card with the next turn shows below the map's arrow.": "O nosso cartão com a próxima manobra aparece abaixo da seta do mapa.",
-    "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa."
+    "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa.",
+    "Position": "Posição"
   }
 }

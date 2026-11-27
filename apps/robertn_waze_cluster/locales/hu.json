@@ -126,6 +126,7 @@
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hol jelenik meg a térképen a következő kanyar kártyánk. Nyissa meg a listát a lehetőségekért.",
     "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Nincs kártyánk a térképen: az alkalmazás saját kártyája látszik, ha van neki, mint az Apple Térképnél.",
     "Our card with the next turn shows below the map's arrow.": "A következő kanyar kártyánk a térkép nyila alatt jelenik meg.",
-    "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg."
+    "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg.",
+    "Position": "Pozíció"
   }
 }
