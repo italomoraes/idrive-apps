@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+The page looks like the car's own settings pages: a narrow list with, on
+its right, a picture and a few lines saying what the row the controller
+stops on does. Show on opens its choices in place, each with its own
+explanation, and shows the one in use under its name.
+
 ## 0.6.18
 
 The Status rows say Not supported only where the patch cannot be applied,

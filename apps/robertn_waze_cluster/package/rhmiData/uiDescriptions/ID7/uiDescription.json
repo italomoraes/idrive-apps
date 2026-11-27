@@ -4,6 +4,12 @@
     "1": {
       "type": "state",
       "name": "ST_OnlineApps_WazeCluster",
+      "properties": {
+        "Preview": {
+          "value": 94,
+          "type": "UInt"
+        }
+      },
       "components": {
         "10": {
           "type": "title",
@@ -22,6 +28,10 @@
               }
             }
           ]
+        },
+        "94": {
+          "type": "preview",
+          "name": "wocPreview"
         },
         "92": {
           "type": "label",
@@ -46,7 +56,7 @@
           ]
         },
         "62": {
-          "type": "dropDownMenu",
+          "type": "valueList",
           "name": "wocShowOn",
           "properties": {
             "Visible": {
@@ -73,10 +83,18 @@
               "ItemText": {
                 "value": "Cluster",
                 "type": "Text"
+              },
+              "ItemSelectionText": {
+                "value": "Cluster",
+                "type": "Text"
               }
             },
             {
               "ItemText": {
+                "value": "HUD (experimental)",
+                "type": "Text"
+              },
+              "ItemSelectionText": {
                 "value": "HUD (experimental)",
                 "type": "Text"
               }
@@ -85,10 +103,18 @@
               "ItemText": {
                 "value": "Cluster and HUD (experimental)",
                 "type": "Text"
+              },
+              "ItemSelectionText": {
+                "value": "Cluster and HUD (experimental)",
+                "type": "Text"
               }
             },
             {
               "ItemText": {
+                "value": "Off",
+                "type": "Text"
+              },
+              "ItemSelectionText": {
                 "value": "Off",
                 "type": "Text"
               }

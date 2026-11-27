@@ -104,6 +104,25 @@
     "Audio may cut out. On your iPhone, turn Wi-Fi off and on.": "音频可能中断。请在 iPhone 上关闭再打开无线局域网。",
     "Own settings for this driver": "此驾驶员的专属设置",
     "Driver profile can't be read": "无法读取驾驶员档案",
-    "Keep HUD map over BMW's pop-ups": "HUD 地图保持在 BMW 弹窗之上"
+    "Keep HUD map over BMW's pop-ups": "HUD 地图保持在 BMW 弹窗之上",
+    "Where the phone's map shows. Open the list to see what each choice does.": "手机地图的显示位置。打开列表可查看每个选项的作用。",
+    "Ticked, this driver profile keeps its own Show on, HUD size and HUD position.": "勾选后，此驾驶员配置文件保留自己的显示位置、HUD 大小和 HUD 位置。",
+    "Ticked, BMW's turn-by-turn box on the cluster is hidden while the map shows.": "勾选后，显示地图时隐藏仪表盘上的 BMW 转向提示。",
+    "Opens the Logs page: save the logs to report a problem, and download them on your phone.": "打开日志页面：保存日志以报告问题，并下载到手机。",
+    "Ticked, the map stays on the HUD while BMW's media and list pop-ups show.": "勾选后，BMW 的媒体和列表弹窗出现时地图仍留在 HUD 上。",
+    "How wide the map is on the HUD.": "地图在 HUD 上的宽度。",
+    "Moves the map on the HUD, a step at a time.": "逐步移动 HUD 上的地图。",
+    "Puts the map back in the middle of the HUD.": "将地图放回 HUD 中央。",
+    "Turns the map on for CarPlay. Only needed when its Status isn't Patched.": "为 CarPlay 开启地图。仅当状态不是已应用补丁时需要。",
+    "Turns the map off for CarPlay. It stays off, also after updates, until you press Patch.": "为 CarPlay 关闭地图。即使更新后也保持关闭，直到你按下应用补丁。",
+    "Turns the map on for Android Auto. Only needed when its Status isn't Patched.": "为 Android Auto 开启地图。仅当状态不是已应用补丁时需要。",
+    "Turns the map off for Android Auto. It stays off, also after updates, until you press Patch.": "为 Android Auto 关闭地图。即使更新后也保持关闭，直到你按下应用补丁。",
+    "Zoom out shows more of the map, Zoom in bigger text. Applied at the next restart.": "缩小显示更多地图，放大显示更大文字。下次重启后生效。",
+    "Ticked, Google Maps' own turn card at the top of the map is hidden.": "勾选后，隐藏地图顶部 Google 地图自带的转向卡片。",
+    "Restarts the head unit, to apply the changes that wait for it.": "重启主机，以应用等待中的更改。",
+    "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "手机导航时，地图显示在仪表盘上，取代 BMW 的地图。",
+    "The map shows on the head-up display. Still experimental.": "地图显示在抬头显示器上。仍为实验功能。",
+    "The map shows on both: the instrument cluster and the head-up display.": "地图同时显示在仪表盘和抬头显示器上。",
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地图都不显示：仪表盘和 HUD 显示 BMW 自己的内容。"
   }
 }
