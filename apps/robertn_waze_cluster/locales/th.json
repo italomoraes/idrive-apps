@@ -119,7 +119,7 @@
     "The map shows on both: the instrument cluster and the head-up display.": "แผนที่แสดงทั้งสองที่: หน้าปัดและจอ HUD",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "แผนที่ไม่แสดงที่ใด: หน้าปัดและ HUD แสดงเนื้อหาของ BMW",
     "Shows the turn card for a few seconds, where it is set to show.": "แสดงการ์ดเลี้ยวสองสามวินาที ในตำแหน่งที่ตั้งไว้",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "หากถูกขอให้เก็บข้อมูล: เริ่มเก็บ เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "หากต้องการตรวจสอบปัญหา: เริ่มเก็บข้อมูล เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "บันทึกล็อกของแผนที่และข้อความล่าสุดของชุดควบคุมหลักเป็นไฟล์ เพื่อแนบในการรายงานปัญหา",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก",
     "Turn card": "การ์ดเลี้ยว",

@@ -119,7 +119,7 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Mapa se zobrazí na obou: štítu přístrojů i průhledovém displeji.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa se nezobrazí nikde: štít a HUD ukazují obsah BMW.",
     "Shows the turn card for a few seconds, where it is set to show.": "Na několik sekund ukáže kartu odbočení tam, kde je nastavena.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pokud vás požádají o záznam: spusťte ho, znovu připojte telefon, počkejte na problém a stiskněte Uložit protokoly.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Chcete-li problém prozkoumat: spusťte záznam, znovu připojte telefon, počkejte na problém a stiskněte Uložit protokoly.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží protokoly mapy a nedávné zprávy hlavní jednotky do souboru, který přiložíte k hlášení problému.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem připojeným k hotspotu Wi-Fi auta naskenujte kód nebo otevřete adresu a stáhněte protokoly.",
     "Turn card": "Karta odbočení",

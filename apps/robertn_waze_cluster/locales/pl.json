@@ -119,7 +119,7 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Mapa pokazuje się na obu: zegarach i wyświetlaczu przeziernym.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa nie pokazuje się nigdzie: zegary i HUD pokazują treści BMW.",
     "Shows the turn card for a few seconds, where it is set to show.": "Pokazuje kartę manewru przez kilka sekund, tam gdzie jest ustawiona.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jeśli poproszą o rejestrację: rozpocznij ją, połącz ponownie telefon, poczekaj na problem i naciśnij Zapisz logi.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Aby zbadać problem: rozpocznij rejestrację, połącz ponownie telefon, poczekaj na problem i zapisz logi.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Zapisuje logi mapy i ostatnie komunikaty jednostki głównej w pliku do dołączenia do zgłoszenia.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem w hotspocie Wi-Fi auta zeskanuj kod lub otwórz adres, by pobrać zapisane logi.",
     "Turn card": "Karta manewru",

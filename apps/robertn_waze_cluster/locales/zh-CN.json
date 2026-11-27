@@ -121,7 +121,7 @@
     "The map shows on both: the instrument cluster and the head-up display.": "地图同时显示在仪表盘和抬头显示器上。",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "地图都不显示：仪表盘和 HUD 显示 BMW 自己的内容。",
     "Shows the turn card for a few seconds, where it is set to show.": "在设定的位置显示转向卡片几秒钟。",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需采集：开始后重新连接手机，等问题出现，再按保存日志。",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "排查问题时：开始采集后重新连接手机，等问题出现，再按保存日志。",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "将地图日志和主机的最近消息保存为文件，以附在问题报告中。",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。",
     "Turn card": "转向卡片",

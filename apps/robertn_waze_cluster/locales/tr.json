@@ -119,7 +119,7 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Harita ikisinde de görünür: göstergede ve head-up ekranda.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harita hiçbirinde görünmez: gösterge ve HUD, BMW'nin kendi içeriğini gösterir.",
     "Shows the turn card for a few seconds, where it is set to show.": "Dönüş kartını birkaç saniye, ayarlandığı yerde gösterir.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Sizden kayıt istenirse: başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Bir sorunu incelemek için: kaydı başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Haritanın günlüklerini ve ana ünitenin son iletilerini bir sorun bildirimine eklemek için dosyaya kaydeder.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin.",
     "Turn card": "Dönüş kartı",
