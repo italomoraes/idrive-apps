@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+The Logs page's capture row explains the capture as a way to look into a
+problem.
+
 ## 0.6.19
 
 A row's name too long for the list takes a second line instead of being
