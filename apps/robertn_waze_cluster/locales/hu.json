@@ -76,7 +76,7 @@
     "Cluster": "Műszerfal",
     "HUD (experimental)": "HUD (kísérleti)",
     "Cluster and HUD (experimental)": "Műszerfal és HUD (kísérleti)",
-    "HUD": "HUD",
+    "Head-up display": "Szélvédőkijelző",
     "HUD map: {0}": "Térkép a HUD-on: {0}",
     "Showing": "Megjelenítve",
     "Disabled after errors": "Hibák miatt letiltva",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "A térkép mindkettőn megjelenik: a műszerfalon és a szélvédőkijelzőn.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "A térkép sehol sem jelenik meg: a műszerfal és a HUD a BMW saját tartalmát mutatja.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hol jelenik meg a kanyarodási kártya a térképen: ki, a nyíl alatt vagy felül. Minden nyomás vált.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Néhány másodpercre megmutatja a kanyarodási kártyát a beállított helyen."
+    "Shows the turn card for a few seconds, where it is set to show.": "Néhány másodpercre megmutatja a kanyarodási kártyát a beállított helyen.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ha rögzítést kérnek: indítsa el, csatlakoztassa újra a telefont, várja meg a hibát, majd Naplók mentése.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Fájlba menti a térkép naplóit és a fejegység legutóbbi üzeneteit, hogy hibabejelentéshez csatolja.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért."
   }
 }

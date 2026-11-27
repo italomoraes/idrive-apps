@@ -11,7 +11,8 @@
  * Illustration cells when a row takes the focus.
  *
  * Show on is a value list: each of its choices has its own preview while
- * the list is open, and its name has one while it is closed.
+ * the list is open, and its name has one while it is closed. The Logs page
+ * has its own preview, the same way, its picture the QR code.
  *
  * The pictures are package/previews/<image>.png, 957 × 639 (the preview's
  * size in the HMI's 1920 × 720 units; smaller displays scale the whole page
@@ -46,6 +47,18 @@ const ROWS = {
     wocRestart: { image: 'restart', text: () => t('Restarts the head unit, to apply the changes that wait for it.') }
 };
 
+/* The Logs page's rows. Their picture, 'qr', is the QR code of the address
+ * the saved logs download from, drawn on the same background (src/qr.js),
+ * or the logs picture while there is no address. */
+const LOGS_ROWS = {
+    wocCapture: { image: 'qr', text: () => t('If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.') },
+    wocLogsSave: { image: 'qr', text: () => t('Saves the map\'s logs and the head unit\'s recent messages in a file, to attach to a problem report.') }
+};
+[1, 2, 3, 4, 5].forEach((i) => {
+    LOGS_ROWS[`wocLogsRow${i}`] = { image: 'qr',
+        text: () => t('With a phone on the car\'s Wi-Fi hotspot, scan the code or open the address to download the saved logs.') };
+});
+
 /* Show on's choices, in the list's order (SHOWN_ON of waze_cluster_control.js). */
 const SHOW_ON_CHOICES = [
     { image: 'cluster', text: () => t('The map shows on the instrument cluster, in place of BMW\'s, while the phone navigates.') },
@@ -59,13 +72,13 @@ const SHOW_ON_CHOICES = [
  * for a row without one. */
 function preview(name, row) {
     const choice = name === 'wocShowOn' && Number.isInteger(row) && row >= 0 ? SHOW_ON_CHOICES[row] : null;
-    const entry = choice || ROWS[name];
+    const entry = choice || ROWS[name] || LOGS_ROWS[name];
     return entry ? { image: entry.image, text: entry.text() } : null;
 }
 
 /* Every picture the previews use, for the app to register at start. */
 function images() {
-    return [...new Set(Object.values(ROWS).concat(SHOW_ON_CHOICES).map((e) => e.image))].sort();
+    return [...new Set(Object.values(ROWS).concat(SHOW_ON_CHOICES).map((e) => e.image).concat('logs'))].sort();
 }
 
-module.exports = { ROWS, SHOW_ON_CHOICES, preview, images };
+module.exports = { ROWS, LOGS_ROWS, SHOW_ON_CHOICES, preview, images };

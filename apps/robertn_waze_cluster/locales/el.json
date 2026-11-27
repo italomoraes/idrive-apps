@@ -76,7 +76,7 @@
     "Cluster": "Όργανα",
     "HUD (experimental)": "HUD (πειραματικό)",
     "Cluster and HUD (experimental)": "Όργανα και HUD (πειραματικό)",
-    "HUD": "HUD",
+    "Head-up display": "Προβολή head-up",
     "HUD map: {0}": "Χάρτης στο HUD: {0}",
     "Showing": "Εμφανίζεται",
     "Disabled after errors": "Απενεργοποιήθηκε μετά από σφάλματα",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Ο χάρτης εμφανίζεται και στα δύο: στα όργανα και στην προβολή head-up.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Ο χάρτης δεν εμφανίζεται πουθενά: όργανα και HUD δείχνουν το περιεχόμενο της BMW.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Πού εμφανίζεται η κάρτα στροφής στον χάρτη: ανενεργή, κάτω από το βέλος ή στο πάνω μέρος. Κάθε πάτημα την αλλάζει.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Δείχνει την κάρτα στροφής για λίγα δευτερόλεπτα, εκεί που έχει ρυθμιστεί."
+    "Shows the turn card for a few seconds, where it is set to show.": "Δείχνει την κάρτα στροφής για λίγα δευτερόλεπτα, εκεί που έχει ρυθμιστεί.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Αν σας ζητηθεί καταγραφή: ξεκινήστε την, συνδέστε ξανά το τηλέφωνο, περιμένετε το πρόβλημα και πατήστε Αποθήκευση αρχείων.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Αποθηκεύει τα αρχεία του χάρτη και τα πρόσφατα μηνύματα της κεντρικής μονάδας σε ένα αρχείο για αναφορά.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Με τηλέφωνο στο σημείο πρόσβασης Wi-Fi του αυτοκινήτου, σαρώστε τον κωδικό ή ανοίξτε τη διεύθυνση."
   }
 }

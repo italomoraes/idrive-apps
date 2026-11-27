@@ -76,7 +76,7 @@
     "Cluster": "Quadrante",
     "HUD (experimental)": "HUD (experimental)",
     "Cluster and HUD (experimental)": "Quadrante e HUD (experimental)",
-    "HUD": "HUD",
+    "Head-up display": "Head-Up Display",
     "HUD map: {0}": "Mapa no HUD: {0}",
     "Showing": "A mostrar",
     "Disabled after errors": "Desativado após erros",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no quadrante e no head-up display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o quadrante e o HUD mostram o conteúdo da própria BMW.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Onde o cartão de manobra aparece sobre o mapa: desligado, abaixo da seta ou no topo. Cada toque muda.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Mostra o cartão de manobra durante alguns segundos, onde está definido para aparecer."
+    "Shows the turn card for a few seconds, where it is set to show.": "Mostra o cartão de manobra durante alguns segundos, onde está definido para aparecer.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se lhe pedirem uma captura: inicie-a, volte a ligar o telemóvel, espere pelo problema e prima Guardar registos.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda os registos do mapa e as mensagens recentes da unidade principal num ficheiro, para anexar a um relato.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um telemóvel no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para transferir os registos."
   }
 }

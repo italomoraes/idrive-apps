@@ -76,7 +76,7 @@
     "Cluster": "メーター",
     "HUD (experimental)": "HUD（試験的）",
     "Cluster and HUD (experimental)": "メーターとHUD（試験的）",
-    "HUD": "HUD",
+    "Head-up display": "ヘッドアップディスプレイ",
     "HUD map: {0}": "HUDの地図：{0}",
     "Showing": "表示中",
     "Disabled after errors": "エラーのため無効",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "メーターとヘッドアップディスプレイの両方に地図を表示します。",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "どちらにも地図を表示しません。メーターとHUDはBMWの表示になります。",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "地図上の案内カードの位置：オフ、矢印の下、上部。押すたびに切り替わります。",
-    "Shows the turn card for a few seconds, where it is set to show.": "案内カードを設定した位置に数秒間表示します。"
+    "Shows the turn card for a few seconds, where it is set to show.": "案内カードを設定した位置に数秒間表示します。",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "キャプチャを頼まれたら、開始してスマートフォンを再接続し、問題を待ってからログを保存を押します。",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "地図のログとヘッドユニットの最近のメッセージを、問題報告に添付するファイルに保存します。",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。"
   }
 }

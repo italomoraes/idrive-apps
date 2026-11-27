@@ -76,7 +76,7 @@
     "Cluster": "Combiné",
     "HUD (experimental)": "HUD (expérimental)",
     "Cluster and HUD (experimental)": "Combiné et HUD (expérimental)",
-    "HUD": "HUD",
+    "Head-up display": "Affichage tête haute",
     "HUD map: {0}": "Carte sur le HUD : {0}",
     "Showing": "Affichée",
     "Disabled after errors": "Désactivée après des erreurs",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Où la carte de manœuvre s'affiche sur la carte : désactivée, sous la flèche ou en haut. Chaque appui la change.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Affiche la carte de manœuvre quelques secondes, là où elle est réglée."
+    "Shows the turn card for a few seconds, where it is set to show.": "Affiche la carte de manœuvre quelques secondes, là où elle est réglée.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger."
   }
 }

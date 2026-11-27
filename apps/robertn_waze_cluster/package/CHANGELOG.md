@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+A row's name too long for the list takes a second line instead of being
+cut off, a line sets each section apart, and the HUD's section is called
+Head-up display. The Logs page is laid out like the main page, the QR code
+of the download address on its right.
+
 ## 0.6.18
 
 The page looks like the car's own settings pages: a narrow list with, on

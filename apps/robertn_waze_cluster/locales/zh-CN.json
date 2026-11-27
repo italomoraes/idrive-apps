@@ -78,7 +78,7 @@
     "Cluster": "仪表盘",
     "HUD (experimental)": "HUD（实验性）",
     "Cluster and HUD (experimental)": "仪表盘和 HUD（实验性）",
-    "HUD": "HUD",
+    "Head-up display": "抬头显示器",
     "HUD map: {0}": "HUD 地图：{0}",
     "Showing": "正在显示",
     "Disabled after errors": "因错误已停用",
@@ -122,6 +122,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "地图同时显示在仪表盘和抬头显示器上。",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "地图都不显示：仪表盘和 HUD 显示 BMW 自己的内容。",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "转向卡片在地图上的位置：关闭、箭头下方或顶部。每按一次切换。",
-    "Shows the turn card for a few seconds, where it is set to show.": "在设定的位置显示转向卡片几秒钟。"
+    "Shows the turn card for a few seconds, where it is set to show.": "在设定的位置显示转向卡片几秒钟。",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需采集：开始后重新连接手机，等问题出现，再按保存日志。",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "将地图日志和主机的最近消息保存为文件，以附在问题报告中。",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。"
   }
 }

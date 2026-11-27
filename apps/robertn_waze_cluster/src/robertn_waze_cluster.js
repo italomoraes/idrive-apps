@@ -33,12 +33,13 @@
  * render puts the map on the cluster whenever the phone streams it, with no
  * button.
  *
- * The Logs page (logs_control.js): Start capture and the Capture row, Save
- * logs and the Saved logs row, the QR code of the address a phone on the
- * car's hotspot downloads the saved archives from, that address, and the
- * archives. The app holds the logs socket while the page is visible; the QR
- * code is a PNG in QR_DIR (RAM), replaced when the address changes.
- *
+ * The Logs page (logs_control.js), a narrow list as the main page: Start
+ * capture and the Capture row, Save logs and the Saved logs row, the address
+ * a phone on the car's hotspot downloads the saved archives from, and the
+ * archives; on its right, the preview says what the row in focus does, its
+ * picture the address's QR code on the pages' background (src/qr.js), a PNG
+ * in QR_DIR (RAM) replaced when the address changes. The app holds the logs
+ * socket while the page is visible. *
  * CarPlay's Patch button is enabled for an unpatched or unknown state and Remove
  * patch for a patch, both only with no change pending (waze_cluster_control.js
  * canEnable/canDisable); capture is enabled while the patch daemon is
@@ -64,7 +65,7 @@ const someipBuilders = require('oap-sdk/src/someip/someipBuilders');
 const i18n = require('./i18n.js');
 const { WazeClusterControl, ZOOM_STEP, SHOWN_ON } = require('./waze_cluster_control.js');
 const { LogsControl, ROWS: LOGS_ROWS } = require('./logs_control.js');
-const { qrPng } = require('./qr.js');
+const { qrPreviewPng } = require('./qr.js');
 const { ProfileSync, sessionReader } = require('./profile_sync.js');
 const previews = require('./previews.js');
 
@@ -150,6 +151,8 @@ class WazeClusterApp extends OnlineApp {
         this._qr = { url: undefined, file: null, chain: Promise.resolve() };
         /* the preview: the pictures' files once registered, the row it shows */
         this._preview = { files: null, name: 'wocShowOn', row: null, shown: null };
+        /* the Logs page's preview: the row it shows */
+        this._logsPreview = { name: 'wocCapture', shown: null };
         this._nameById = {};
         this._sawForeground = false;
         this._shutdownPromise = null;
@@ -327,6 +330,7 @@ class WazeClusterApp extends OnlineApp {
             this._qr.url = undefined;
             this._preview.files = null;
             this._preview.shown = null;
+            this._logsPreview.shown = null;
             this._render();
             this._renderLogs();
             this._setupPreviews();
@@ -367,6 +371,7 @@ class WazeClusterApp extends OnlineApp {
         }).then(() => {
             this._preview.files = files;
             this._showPreview();
+            this._showLogsPreview();
         }).catch((err) => logger.warn(`previews failed: ${err && err.message}`));
     }
 
@@ -384,11 +389,39 @@ class WazeClusterApp extends OnlineApp {
         } else if (!isTrue(params[0])) {
             return;
         }
-        if (previews.preview(name, row)) {
+        if (previews.LOGS_ROWS[name]) {
+            this._logsPreview.name = name;
+            this._showLogsPreview();
+        } else if (previews.preview(name, row)) {
             this._preview.name = name;
             this._preview.row = row;
             this._showPreview();
         }
+    }
+
+    /* The Logs page's preview: the row in focus's text, and the QR code of
+     * the address on the pages' background (src/qr.js), or the logs picture
+     * while there is no address. */
+    _showLogsPreview() {
+        const p = previews.preview(this._logsPreview.name, null);
+        const files = this._preview.files;
+        const picture = this._qr.url && this._qr.file ? this._qr.file : files && files.logs;
+        if (!p || !picture || this._shutdownPromise) {
+            return Promise.resolve();
+        }
+        const key = `${picture}\n${p.text}`;
+        if (this._logsPreview.shown === key) {
+            return Promise.resolve();
+        }
+        this._logsPreview.shown = key;
+        const comp = this._components[LOGS_QR];
+        return Promise.all([comp.setValue(0, 'Description', p.text, 'Text'),
+            comp.setValue(0, 'Illustration', picture, 'ResourceId')])
+            .then(() => this.rhmiApplication.flush())
+            .catch((err) => {
+                this._logsPreview.shown = null;
+                logger.warn(`Logs preview failed: ${err && err.message}`);
+            });
     }
 
     /* Writes the preview of the row in focus, in the display language, unless
@@ -437,6 +470,8 @@ class WazeClusterApp extends OnlineApp {
             this._render();
             this._renderLogs();
             this._showPreview();
+            this._logsPreview.shown = null;
+            this._showLogsPreview();
         }
     }
 
@@ -634,7 +669,7 @@ class WazeClusterApp extends OnlineApp {
         const c = this._control;
         [[ENABLE_NAME, t('Patch')], [DISABLE_NAME, t('Remove patch')], [AA_ENABLE_NAME, t('Patch')], [AA_DISABLE_NAME, t('Remove patch')],
             [AA_ZOOM_OUT_NAME, t('Zoom out')], [AA_ZOOM_IN_NAME, t('Zoom in')], [HEAD_GENERAL_NAME, t('General')], [LOGS_NAME, t('Logs')],
-            [HEAD_HUD_NAME, t('HUD')],
+            [HEAD_HUD_NAME, t('Head-up display')],
             [HUD_MOVE_NAMES.left, t('Move left')], [HUD_MOVE_NAMES.right, t('Move right')], [HUD_MOVE_NAMES.up, t('Move up')],
             [HUD_MOVE_NAMES.down, t('Move down')], [HUD_CENTRE_NAME, t('Centre')],
             [RESTART_NAME, t('Restart head unit')]].forEach(([name, text]) => this._write(name, text));
@@ -715,7 +750,8 @@ class WazeClusterApp extends OnlineApp {
         this._showQr(this._logs.url());
     }
 
-    /* Writes url's QR code (none: a blank square) as a new file and shows it,
+    /* Writes url's QR code (none: a blank card) as a new file, shows it as the
+     * Logs page's preview picture,
      * then removes the one it replaced. */
     _showQr(url) {
         const rhmi = this.rhmiApplication;
@@ -734,15 +770,17 @@ class WazeClusterApp extends OnlineApp {
             }
             fs.chmodSync(QR_DIR, 0o755);
             const file = path.join(QR_DIR, `qr_${Date.now()}.png`);
-            fs.writeFileSync(file, qrPng(url).png);
+            fs.writeFileSync(file, qrPreviewPng(url).png);
             fs.chmodSync(file, 0o644);
             const bundle = rhmi.getResourceBundle();
             const old = this._qr.file;
             return Promise.resolve(bundle.createResourceHandles([file]))
-                .then(() => this._components[LOGS_QR].setValue(0, 'Graphic', file, 'ResourceId'))
-                .then(() => rhmi.flush())
                 .then(() => {
                     this._qr.file = file;
+                    this._logsPreview.shown = null;
+                    return this._showLogsPreview();
+                })
+                .then(() => {
                     return old ? this._retireQr(bundle, old) : undefined;
                 });
         }).catch((err) => {

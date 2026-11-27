@@ -76,7 +76,7 @@
     "Cluster": "Prístrojovka",
     "HUD (experimental)": "HUD (experimentálne)",
     "Cluster and HUD (experimental)": "Prístrojovka a HUD (experimentálne)",
-    "HUD": "HUD",
+    "Head-up display": "Priehľadový displej",
     "HUD map: {0}": "Mapa na HUD: {0}",
     "Showing": "Zobrazuje sa",
     "Disabled after errors": "Vypnuté po chybách",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Mapa sa zobrazí na oboch: prístrojovke aj priehľadovom displeji.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa sa nezobrazí nikde: prístrojovka a HUD ukazujú obsah BMW.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kde sa karta odbočenia zobrazuje na mape: vyp., pod šípkou alebo hore. Každé stlačenie prepne.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Na niekoľko sekúnd ukáže kartu odbočenia tam, kde je nastavená."
+    "Shows the turn card for a few seconds, where it is set to show.": "Na niekoľko sekúnd ukáže kartu odbočenia tam, kde je nastavená.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ak vás požiadajú o záznam: spustite ho, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží záznamy mapy a nedávne správy hlavnej jednotky do súboru, ktorý priložíte k hláseniu problému.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy."
   }
 }

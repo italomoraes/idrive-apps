@@ -66,11 +66,20 @@ func pointer(_ x0: CGFloat, _ y0: CGFloat, _ x1: CGFloat, _ y1: CGFloat) -> CGPa
 func cluster(_ c: CGContext, _ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, map: Bool) {
     stroke(c, map ? red : white, 8, rounded(x, y, w, h, h * 0.21))
     let r = h * 0.2
+    /* two alike gauges, open at the bottom (one open and one closed reads as a wink) */
     let dials = CGMutablePath()
-    dials.addArc(center: CGPoint(x: x + w * 0.17, y: y + h / 2), radius: r, startAngle: .pi * 1.2, endAngle: -.pi * 0.2, clockwise: true)
-    dials.move(to: CGPoint(x: x + w * 0.83 + r, y: y + h / 2))
-    dials.addArc(center: CGPoint(x: x + w * 0.83, y: y + h / 2), radius: r, startAngle: 0, endAngle: .pi * 2, clockwise: false)
+    for cx in [x + w * 0.17, x + w * 0.83] {
+        dials.move(to: CGPoint(x: cx + r * cos(-.pi * 0.25), y: y + h / 2 + r * sin(-.pi * 0.25)))
+        dials.addArc(center: CGPoint(x: cx, y: y + h / 2), radius: r, startAngle: -.pi * 0.25, endAngle: .pi * 1.25, clockwise: false)
+    }
     stroke(c, white, 5, dials)
+    /* a needle in each, as a speedometer and a rev counter */
+    let needles = CGMutablePath()
+    for (cx, a) in [(x + w * 0.17, CGFloat.pi * 0.7), (x + w * 0.83, CGFloat.pi * 0.35)] {
+        needles.move(to: CGPoint(x: cx, y: y + h / 2))
+        needles.addLine(to: CGPoint(x: cx + r * 0.8 * cos(a), y: y + h / 2 + r * 0.8 * sin(a)))
+    }
+    stroke(c, red, 4, needles)
     if map { stroke(c, red, 7, arrow(x + w / 2, y + h * 0.21, w * 0.15, h * 0.57)) }
 }
 func windscreen(_ c: CGContext, _ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, map: Bool) {

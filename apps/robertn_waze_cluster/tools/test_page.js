@@ -293,17 +293,17 @@ async function main() {
         .matchAll(/<component id="(\d+)" type="(\w+)"(?: widget="(\w+)")?/g)].map((m) => [m[1], m[2], m[3]]);
     /* application.xml orders the rows; uiDescription holds them by id */
     const shipped = (d) => (d.type === 'valueList' ? `${d.cells.HeaderText.value}: ${d.rows[d.cells.SelectedItem.value].ItemText.value}`
-        : d.type === 'slider' ? d.rows[0].TextDescription.value : d.rows[0].Text.value);
+        : d.type === 'slider' ? d.rows[0].TextDescription.value : d.type === 'separator' ? '' : d.rows[0].Text.value);
     /* the list's rows; the preview, on its right, is no row */
     const main = xmlIds('1').filter(([id]) => components[id].type !== 'preview')
         .map(([id]) => [id, components[id].type, components[id].name, shipped(components[id])]);
     assert.deepStrictEqual(main.map(([id, type, name, text]) => (type === 'title' ? name : `${name} ${text}`)), [
         'wocTitle',
         'wocHeadGeneral General', 'wocShowOn Show on: Cluster', 'wocProfile Own settings for this driver', 'wocMap Cluster map: Off', "wocGuide Hide BMW's turn box", 'wocTurnCard Turn card: \u2014', 'wocTurnCardShow Show an example', 'wocLogs Logs',
-        'wocHeadHud HUD', 'wocHud HUD map: \u2014', "wocHudKeep Keep HUD map over BMW's pop-ups", 'wocHudSize Size: \u2014', 'wocHudPos Position: \u2014', 'wocHudLeft Move left',
+        'wocSepHud ', 'wocHeadHud Head-up display', 'wocHud HUD map: \u2014', "wocHudKeep Keep HUD map over BMW's pop-ups", 'wocHudSize Size: \u2014', 'wocHudPos Position: \u2014', 'wocHudLeft Move left',
         'wocHudRight Move right', 'wocHudUp Move up', 'wocHudDown Move down', 'wocHudCentre Centre',
-        'wocHeadCarPlay CarPlay', 'wocStatus Status: Connecting…', 'wocEnable Patch', 'wocDisable Remove patch', 'wocWifi ', 'wocWifiHint ',
-        'wocHeadAa Android Auto', 'wocAaStatus Status: Connecting…', 'wocAaEnable Patch', 'wocAaDisable Remove patch',
+        'wocSepCarPlay ', 'wocHeadCarPlay CarPlay', 'wocStatus Status: Connecting…', 'wocEnable Patch', 'wocDisable Remove patch', 'wocWifi ', 'wocWifiHint ',
+        'wocSepAa ', 'wocHeadAa Android Auto', 'wocAaStatus Status: Connecting…', 'wocAaEnable Patch', 'wocAaDisable Remove patch',
         'wocAaZoom Zoom: —', 'wocAaZoomOut Zoom out', 'wocAaZoomIn Zoom in', "wocAaCard Hide phone's turn card",
         'wocRestart Restart head unit', 'wocRestartStatus '],
         'the main page: four sections, in order');
@@ -321,7 +321,7 @@ async function main() {
         .find((id) => components[id].name === n)].properties.Focusable.value]), Array(4).fill(['0', 0]), 'the section headers take no focus');
     assert.strictEqual(main.find(([, , name]) => focus[name] === '3')[2], 'wocShowOn', 'the first row the controller stops on: Show on');
     assert(!main.some(([, , name]) => /^wocRow|^wocSetup|^wocCapture/.test(name)), 'no log rows, setup line or capture on the main page');
-    assert.deepStrictEqual(['wocAaCard', 'wocGuide', 'wocProfile', 'wocHudKeep'].map((n) => widgets[n]), Array(4).fill('LT_CheckBox_1Row'),
+    assert.deepStrictEqual(['wocAaCard', 'wocGuide', 'wocProfile', 'wocHudKeep'].map((n) => widgets[n]), Array(4).fill('LT_CheckBox_2Row_1TextDyn'),
         'the on/off settings are checkboxes');
     assert.deepStrictEqual([widgets.wocShowOn, widgets.wocHudSize], ['LT_ValueList_Regular', 'LT_Slider_LeftJustified_Fill_Steps'],
         'where the map shows: a value list of four, opening in place; the HUD\'s size: a slider');
@@ -350,22 +350,30 @@ async function main() {
     const hidden = Object.values(components).filter((d) => d.type !== 'preview' && d.properties.Visible.value !== 1).map((d) => d.name);
     assert.deepStrictEqual(hidden, ['wocWifi', 'wocWifiHint', 'wocRestart', 'wocRestartStatus'],
         'every row ships shown but CarPlay Wi-Fi, its line and the restart\'s two');
-    assert(/<component id="34" type="button" widget="LT_Button_1Row">\s*<property id="2" value="0"\/>/.test(XML), 'application.xml: the restart, hidden');
-    ['29', '30'].forEach((id) => assert(new RegExp(`<component id="${id}" type="label" widget="LT_Label_1Row">\\s*<property id="2" value="0"\\/>\\s*` +
+    /* a row's name wraps to a second line in the narrow list rather than being cut off */
+    assert(Object.values(widgets).every((w) => !/_1Row$/.test(w) || w === 'LT_Label_Header_1Row'), 'every row but the headers takes two lines when it needs them');
+    assert.deepStrictEqual(['wocSepHud', 'wocSepCarPlay', 'wocSepAa'].map((n) => main.findIndex(([, , name]) => name === n) + 1),
+        ['wocHeadHud', 'wocHeadCarPlay', 'wocHeadAa'].map((n) => main.findIndex(([, , name]) => name === n)),
+        'a separator before each section header but General');
+    assert(/<component id="34" type="button" widget="LT_Button_2Row_1TextDyn">\s*<property id="2" value="0"\/>/.test(XML), 'application.xml: the restart, hidden');
+    ['29', '30'].forEach((id) => assert(new RegExp(`<component id="${id}" type="label" widget="LT_Label_2Row_1TextDyn">\\s*<property id="2" value="0"\\/>\\s*` +
         '<property id="3" value="0"\\/>').test(XML), `application.xml: ${components[id].name}, hidden and unfocusable`));
     console.log('ok   the main page: General, HUD, CarPlay and Android Auto under unfocusable header rows, Show on the first stop; no log rows; ' +
         'CarPlay Wi-Fi and its line CarPlay\'s last, the restart\'s rows the page\'s last, all four hidden');
     const logsPage = UI.containers['2'];
     assert.strictEqual(logsPage.name, 'ST_OnlineApps_WazeClusterLogs');
     assert.deepStrictEqual(logsPage.properties.ParentState, { value: 1, type: 'UInt' }, 'the Logs page is a child of the main page');
-    assert(/<container id="2" type="state" widget="LT_State_Wide">\s*<property id="9" value="1"\/>/.test(XML));
+    assert(/<container id="2" type="state" widget="LT_State_Regular_ContentHidden">\s*<property id="9" value="1"\/>\s*<property id="4" value="83"\/>/.test(XML),
+        'the Logs page: the narrow list, its preview component 83');
+    assert.deepStrictEqual(logsPage.properties.Preview, { value: 83, type: 'UInt' });
     assert.deepStrictEqual(xmlIds('2').map(([id, type]) => `${id} ${type}`).sort(),
         Object.entries(logsPage.components).map(([id, d]) => `${id} ${d.type}`).sort(), 'application.xml and uiDescription agree on the Logs page');
-    assert.deepStrictEqual(xmlIds('2').map(([id]) => logsPage.components[id].name), ['wocLogsTitle', 'wocCapture', 'wocCaptureStatus',
-        'wocLogsSave', 'wocLogsStatus', 'wocLogsQr', 'wocLogsUrl', 'wocLogsRow1', 'wocLogsRow2', 'wocLogsRow3', 'wocLogsRow4', 'wocLogsRow5']);
-    assert(/<component id="83" type="label" widget="LT_Label_1Graphic_Scalable">/.test(XML), 'the QR code is a graphic');
+    assert.deepStrictEqual(xmlIds('2').map(([id]) => logsPage.components[id].name), ['wocLogsTitle', 'wocLogsQr', 'wocCapture', 'wocCaptureStatus',
+        'wocLogsSave', 'wocLogsStatus', 'wocLogsUrl', 'wocLogsRow1', 'wocLogsRow2', 'wocLogsRow3', 'wocLogsRow4', 'wocLogsRow5']);
+    assert(/<layoutGroup id="\d+" name="ContentPreview">\s*<component id="83" type="preview" widget="LT_PreviewTable_1Graphic_1TextBottom"\/>/.test(XML),
+        'the QR code: the Logs page\'s preview picture');
     assert.strictEqual(APP_JSON.application.entryPoints.length, 1);
-    assert.deepStrictEqual(xmlIds('2').slice(1).map(([id]) => logsPage.components[id].rows[0].Text && logsPage.components[id].rows[0].Text.value)
+    assert.deepStrictEqual(xmlIds('2').slice(2).map(([id]) => logsPage.components[id].rows[0].Text && logsPage.components[id].rows[0].Text.value)
         .slice(0, 4), ['Start capture', 'Capture: Unavailable', 'Save logs', 'Saved logs: Connecting…']);
     console.log('ok   the Logs page: Start capture and its row, Save logs and its row, QR code, address, five archives; a child of the main page');
 
@@ -786,11 +794,17 @@ async function main() {
         assert.strictEqual(patch._clients.size, 1, 'and its sockets open');
         await until('logs state shown', () => byName.wocLogsStatus.text === 'Saved logs: None' &&
             byName.wocLogsUrl.text === `Address: ${lserver.url}` && byName.wocLogsSave.enabled === true);
-        const qr1 = byName.wocLogsQr.text;
+        const logsPicture = () => byName.wocLogsQr.cells['0:Illustration'];
+        const qr1 = logsPicture();
         assert(qr1 && rhmi.handles.has(qr1), 'the QR code shown through a resource handle');
         assert.deepStrictEqual(fs.readFileSync(qr1).slice(0, 8), Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
         assert.strictEqual(fs.statSync(qr1).mode & 0o777, 0o644, 'the HMI reads it');
-        console.log('ok   Logs opens the Logs page; the app stays shown; the page shows the address and its QR code');
+        const logsText = (name) => require('../src/previews.js').preview(name, null).text;
+        await until('the first row\'s preview', () => byName.wocLogsQr.cells['0:Description'] === logsText('wocCapture'));
+        rhmi.emit('userEvent', { eventType: 'FOCUS', sourceId: byName.wocLogsSave.id, parameterMap: { 0: true } });
+        await until('Save logs\' preview', () => byName.wocLogsQr.cells['0:Description'] === logsText('wocLogsSave') && logsPicture() === qr1);
+        console.log('ok   Logs opens the Logs page; the app stays shown; the page shows the address, and its QR code as the preview\'s picture ' +
+            'under the row in focus\'s text');
 
         byName.wocLogsSave.emit('action');
         ['wocCaptureStatus', 'wocLogsStatus', 'wocLogsUrl'].forEach((n) => assert(/^[A-Z][a-z ]+: [A-Z0-9h]/.test(byName[n].text), byName[n].text));
@@ -802,14 +816,13 @@ async function main() {
 
         lserver.url = 'http://172.16.222.97:8475/fedcba9876543210fedcba9876543210/';
         lserver.announce();
-        await until('a new QR code', () => byName.wocLogsUrl.text === `Address: ${lserver.url}` && byName.wocLogsQr.text !== qr1);
+        await until('a new QR code', () => byName.wocLogsUrl.text === `Address: ${lserver.url}` && logsPicture() !== qr1);
         await until('the old one gone', () => !fs.existsSync(qr1) && !rhmi.handles.has(qr1));
         lserver.url = null;
         lserver.announce();
         await until('no address', () => byName.wocLogsUrl.text === 'Address: Wi-Fi hotspot off');
-        const blank = byName.wocLogsQr.text;
-        await until('blank code', () => rhmi.handles.has(blank) && fs.existsSync(blank));
-        console.log('ok   a new address gets a new QR code, the old one removed; no address: a blank one');
+        await until('the logs picture', () => path.basename(logsPicture() || '') === 'logs.png' && rhmi.handles.has(logsPicture()));
+        console.log('ok   a new address gets a new QR code, the old one removed; no address: the logs picture');
 
         /* an overlay takes the screen (ROOT_APP gone) and gives it back; the
          * Logs page says nothing of its own */

@@ -76,7 +76,7 @@
     "Cluster": "Приборы",
     "HUD (experimental)": "HUD (экспериментально)",
     "Cluster and HUD (experimental)": "Приборы и HUD (экспериментально)",
-    "HUD": "HUD",
+    "Head-up display": "Проекционный дисплей",
     "HUD map: {0}": "Карта на HUD: {0}",
     "Showing": "Показывается",
     "Disabled after errors": "Отключена после ошибок",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "Карта показывается на обоих: на приборах и на проекционном дисплее.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта нигде не показывается: приборы и HUD показывают содержимое BMW.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Где карточка манёвра видна на карте: выкл., под стрелкой или вверху. Каждое нажатие меняет.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Показывает карточку манёвра на несколько секунд там, где она настроена."
+    "Shows the turn card for a few seconds, where it is set to show.": "Показывает карточку манёвра на несколько секунд там, где она настроена.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Если просят запись: начните, переподключите телефон, дождитесь проблемы и сохраните журналы.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Сохраняет журналы карты и недавние сообщения головного устройства в файл для отчёта о проблеме.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "С телефона в точке доступа машины отсканируйте код или откройте адрес и скачайте журналы."
   }
 }

@@ -76,7 +76,7 @@
     "Cluster": "หน้าปัด",
     "HUD (experimental)": "HUD (ทดลอง)",
     "Cluster and HUD (experimental)": "หน้าปัดและ HUD (ทดลอง)",
-    "HUD": "HUD",
+    "Head-up display": "จอแสดงผล HUD",
     "HUD map: {0}": "แผนที่บน HUD: {0}",
     "Showing": "กำลังแสดง",
     "Disabled after errors": "ปิดใช้งานเนื่องจากข้อผิดพลาด",
@@ -120,6 +120,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "แผนที่แสดงทั้งสองที่: หน้าปัดและจอ HUD",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "แผนที่ไม่แสดงที่ใด: หน้าปัดและ HUD แสดงเนื้อหาของ BMW",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "ตำแหน่งที่การ์ดเลี้ยวแสดงบนแผนที่: ปิด ใต้ลูกศร หรือด้านบน กดแต่ละครั้งจะเปลี่ยน",
-    "Shows the turn card for a few seconds, where it is set to show.": "แสดงการ์ดเลี้ยวสองสามวินาที ในตำแหน่งที่ตั้งไว้"
+    "Shows the turn card for a few seconds, where it is set to show.": "แสดงการ์ดเลี้ยวสองสามวินาที ในตำแหน่งที่ตั้งไว้",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "หากถูกขอให้เก็บข้อมูล: เริ่มเก็บ เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "บันทึกล็อกของแผนที่และข้อความล่าสุดของชุดควบคุมหลักเป็นไฟล์ เพื่อแนบในการรายงานปัญหา",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก"
   }
 }

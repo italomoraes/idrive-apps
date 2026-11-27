@@ -78,7 +78,7 @@
     "Cluster": "Paneel",
     "HUD (experimental)": "HUD (experimenteel)",
     "Cluster and HUD (experimental)": "Paneel en HUD (experimenteel)",
-    "HUD": "HUD",
+    "Head-up display": "Head-up display",
     "HUD map: {0}": "Kaart in HUD: {0}",
     "Showing": "Wordt getoond",
     "Disabled after errors": "Uitgeschakeld na fouten",
@@ -122,6 +122,9 @@
     "The map shows on both: the instrument cluster and the head-up display.": "De kaart verschijnt op beide: het instrumentenpaneel en het head-up display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "De kaart verschijnt nergens: paneel en HUD tonen BMW's eigen inhoud.",
     "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Waar de afslagkaart over de kaart verschijnt: uit, onder de pijl of bovenaan. Elke druk wisselt.",
-    "Shows the turn card for a few seconds, where it is set to show.": "Toont de afslagkaart een paar seconden, waar die is ingesteld."
+    "Shows the turn card for a few seconds, where it is set to show.": "Toont de afslagkaart een paar seconden, waar die is ingesteld.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Als om een opname wordt gevraagd: start die, verbind de telefoon opnieuw, wacht op het probleem en kies Logs opslaan.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Slaat de logs van de kaart en de recente meldingen van de head unit op in een bestand voor een probleemmelding.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs."
   }
 }
