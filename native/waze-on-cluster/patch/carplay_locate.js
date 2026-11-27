@@ -1069,6 +1069,9 @@ module.exports = {
     locate: locate, buildId: elfBuildId, SINK_STOCK: SINK_STOCK, MAP_URL: MAP_URL, MAP_URL_FORMS: FORMS, SHOWUI_URL: SHOWUI_URL, ALT_URL: ALT_URL,
     SHOWUI_MAP_URL: SHOWUI_MAP_URL, SHOWUI_FORMS: { eta: SHOWUI_FORM.toString('hex'), map: SHOWUI_MAP_FORM.toString('hex') },
     stockOriginal: stockOriginal, partsDiffering: partsDiffering,
+    /* both patchers' words for a file another build than its backup by its
+     * build-id: a car software update replaced it */
+    BUILD_ID_DIFFERS: 'its build-id differs',
     /* the ELF reading aapd_locate.js shares */
     elf: { parseElf: parseElf, Image: Image, noteBuildId: buildId, scan: scan, namedString: namedString, leaRefs: leaRefs,
            funcOfString: funcOfString, relocated: relocated, hex32: hex32, version: version,

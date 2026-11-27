@@ -286,7 +286,7 @@ async function main() {
     var h = cp.spawnSync(process.execPath, [PATCHD, 'activate'], { env: Object.assign({}, process.env, ENV), encoding: 'utf8', timeout: 60000 });
     rc = record();
     ok('install with the card on: planned with the map alone, the user\'s arguments kept, carplay untouched', h.status === 0 &&
-        rc.args.slice(0, 2).join(' ') === '--panel high' && rc.args.indexOf('--unproven') >= 0 && rc.args.slice(-2).join(' ') === '--showui map' &&
+        rc.args.slice(0, 2).join(' ') === '--panel high' && rc.args.indexOf('--coding') >= 0 && rc.args.slice(-2).join(' ') === '--showui map' &&
         planForm(planText()) === 'map' && changes().length === 0 && memAgainst(etaPlan) === 'patched', h.stdout + h.stderr + JSON.stringify(rc && rc.args));
 
     /* Remove patch: a card change leaves the patch off; the Patch button

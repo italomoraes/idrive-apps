@@ -169,21 +169,82 @@ function density(text) { return JSON.parse(text).SCREENS.KOMBI_DISPLAY.CODEC_DEF
 (function patcherTests() {
     var t = unit();
     var s = status(t);
-    ok('status: the pristine build, coding 7, nothing to restore, planable, nothing foreign, no list of builds named', /known:\s+yes, pristine build 2dfb9881/.test(s) && !/^proven:/m.test(s) && /coding:\s+KI_KOMBI_VARIANT 7/.test(s) &&
-        /restorable:\s+no/.test(s) && /geometry:\s+ORIGINAL/.test(s) && /^confpath:\s+ORIGINAL$/m.test(s) && /^planable:\s+yes$/m.test(s) && /^foreign:\s+no$/m.test(s), s);
+    ok('status: the pristine build, coding 7, nothing to restore, nothing foreign, no list of builds named', /known:\s+yes, pristine build 2dfb9881/.test(s) && !/^proven:/m.test(s) && /coding:\s+KI_KOMBI_VARIANT 7/.test(s) &&
+        /restorable:\s+no/.test(s) && /geometry:\s+ORIGINAL/.test(s) && !/^confpath:/m.test(s) && !/^planable:/m.test(s) && /^foreign:\s+no$/m.test(s), s);
 
-    [[coding(9), 'KI_KOMBI_VARIANT 9 is not the supported'], [coding(2), 'KI_KOMBI_VARIANT 2 is not the supported'], [coding(7, 0x0b), 'coding not valid'],
-     [Buffer.alloc(16), 'is 16 bytes']].forEach(function (c) {
+    /* KI_KOMBI_VARIANT 7 is planned, and a coding that cannot be read as
+     * 7 (its record says so); 0 (no cluster display) and every other
+     * cluster are refused, as a refusal of the car. */
+    [[coding(7, 0x0b), 'unreadable'], [Buffer.alloc(16), 'unreadable'], [null, 'unreadable']].forEach(function (c) {
         var u = unit();
-        fs.writeFileSync(u.coding, c[0]);
-        var r = plan(u);
-        ok('coding: the plan refused (' + c[1] + '), nothing written', r.code === 1 && r.out.indexOf(c[1]) >= 0 && untouched(u) && !fs.existsSync(r.plan) && !fs.existsSync(r.copy), r.out);
+        if (c[0]) fs.writeFileSync(u.coding, c[0]); else fs.unlinkSync(u.coding);
+        var r = plan(u), what = c[0] ? 'KI_KOMBI_VARIANT ' + ((c[0][0x2c + 0x75a] & 0x7e) >> 1) + ' (unreadable)' : 'no coding';
+        ok('coding ' + what + ': planned as 7, the summary says the coding could not be read', r.code === 0 && r.sum.coding === c[1] && r.sum.variant === null &&
+            untouched(u), r.out);
     });
-    var nc = unit();
-    fs.unlinkSync(nc.coding);
-    var r = plan(nc);
-    ok('coding: an unreadable coding fails the plan, not a refusal of the file (a later try may read it)', r.code === 1 && /^error: refusing: the cluster coding cannot be read/m.test(r.out) &&
-        !require('../inmem.js').refusal(/^error: (.*)$/m.exec(r.out)[1]) && untouched(nc), r.out);
+    var r = plan(unit());
+    ok('coding 7: planned, the summary names it', r.code === 0 && r.sum.coding === 'ok' && r.sum.variant === 7, r.out);
+    [[0, 'not supported on this car (KI_KOMBI_VARIANT 0: no cluster display is coded)'], [9, 'built in on this cluster (KI_KOMBI_VARIANT 9: CarPlay and Android Auto stream the cluster map themselves)'],
+     [10, 'built in on this cluster (KI_KOMBI_VARIANT 10: CarPlay and Android Auto stream the cluster map themselves)'], [4, 'not supported on this cluster (KI_KOMBI_VARIANT 4; the map is made for KI_KOMBI_VARIANT 7)'],
+     [12, 'not supported on this cluster (KI_KOMBI_VARIANT 12; the map is made for KI_KOMBI_VARIANT 7)'], [63, 'not supported on this cluster (KI_KOMBI_VARIANT 63; the map is made for KI_KOMBI_VARIANT 7)']].forEach(function (c) {
+        var u = unit();
+        fs.writeFileSync(u.coding, coding(c[0]));
+        r = plan(u);
+        var words = (/^error: (.*)$/m.exec(r.out) || [])[1] || '';
+        ok('coding ' + c[0] + ': the plan refused, a refusal of the car in the words patchd reports, nothing written', r.code === 1 && words === 'refusing: ' + c[1] &&
+            require('../inmem.js').refusal(words) && require('../inmem.js').refusalConflict(words) === c[1] && untouched(u) && !fs.existsSync(r.plan), r.out);
+    });
+
+    /* A build without the ready start's site (here its call after the
+     * ready flag subscribes rbx, not its own `this`): planned with the
+     * other edits at patch revision 2, its record one releases before
+     * this one do not read; the overlay reads them patched and the ready
+     * start not applied. */
+    var LOCATOR = require('../aapd_locate.js'), nr = unit(), nrb = Buffer.from(SRC);
+    ok('no ready start: the call after the ready flag moves its own this to rdi', nrb.toString('hex', LOC.readystart.offset - 8, LOC.readystart.offset - 5) === '4889ef');
+    nrb[LOC.readystart.offset - 6] = 0xdf;
+    fs.writeFileSync(nr.bin, nrb);
+    var nl = LOCATOR.locate(nrb).readystart;
+    ok('no ready start: the locator does not find the site', !nl.ok, JSON.stringify(nl));
+    var nrs = status(nr);
+    ok('no ready start: status names why, the build known', /^readystart:\s+UNKNOWN \(/m.test(nrs) && /^known:\s+yes/m.test(nrs), nrs);
+    r = plan(nr);
+    ok('no ready start: planned without it, the other edits all there, revision 2, record 3', r.code === 0 && r.sum && JSON.stringify(r.sum.edits) === JSON.stringify(['gate', 'selfstart-call', 'selfstart-guard', 'screen']) &&
+        r.sum.rev === 2 && r.sum.record === 3 && sha(nr.bin) === sha(nrb), r.out);
+    var nro = patcher(nr, ['overlay', '--plan', r.plan, '--conf-copy', r.copy]).out;
+    ok('no ready start: the overlay reads the plan patched, the ready start not applied', /^readystart:\s+NOT APPLIED \(/m.test(nro) && /^gate:\s+PATCHED$/m.test(nro) &&
+        /^redirect:\s+REDIRECTED \(\/etc\/aapd\.conf -> /m.test(nro) && /^overlay:\s+ok$/m.test(nro), nro);
+    r = plan(unit());
+    ok('a build with the ready start: revision 3, record 3', r.code === 0 && r.sum.rev === 3 && r.sum.record === 3, r.out);
+    /* A dynamic relocation over the ready start: the first .rela entry's
+     * offset moved there. */
+    function relocOverReady(b) {
+        var shoff = b.readUInt32LE(0x28), n = b.readUInt16LE(0x3c), at = LOC.readystart.offset;
+        var loads = [];
+        for (var i = 0; i < b.readUInt16LE(0x38); i++) {
+            var o = b.readUInt32LE(0x20) + i * 56;
+            if (b.readUInt32LE(o) === 1) loads.push({ off: b.readUInt32LE(o + 8), va: b.readUInt32LE(o + 16), size: b.readUInt32LE(o + 32) });
+        }
+        var l = loads.filter(function (x) { return at >= x.off && at < x.off + x.size; })[0];
+        for (var j = 0; j < n; j++) {
+            var sh = shoff + j * 64;
+            if (b.readUInt32LE(sh + 4) === 4) { b.writeUInt32LE(l.va + at - l.off + 4, b.readUInt32LE(sh + 24)); return; }
+        }
+        throw new Error('no .rela section');
+    }
+    /* Its end in a form the ready start does not know (a newer gcc's `sub`
+     * stack check, another `jne` distance, another tool's bytes) or under a
+     * relocation: the plan writes nothing there, so it is planned without
+     * it, the end as it is. */
+    [['a sub stack check', 7, 0x2b], ['another jne distance', 15, 0x09], ['other bytes', 0, null], ['a relocation over it', 0, relocOverReady]].forEach(function (m) {
+        var u = unit(), b = Buffer.from(SRC);
+        if (typeof m[2] === 'function') m[2](b);
+        else b[LOC.readystart.offset + m[1]] = m[2] === null ? b[LOC.readystart.offset + m[1]] ^ 0xff : m[2];
+        fs.writeFileSync(u.bin, b);
+        var x = plan(u), text = x.code === 0 ? fs.readFileSync(x.plan, 'utf8') : '';
+        ok('the ready start with ' + m[0] + ': planned without it at revision 2, nothing written there', x.code === 0 && x.sum.rev === 2 &&
+            !/\nedit readystart /.test(text) && /\nedit selfstart-guard /.test(text) && sha(u.bin) === sha(b), x.out);
+    });
 
     /* A site the locator does not find (aapd_locate_test.js perturbs each):
      * refused with the reason, nothing written. */
@@ -194,13 +255,17 @@ function density(text) { return JSON.parse(text).SCREENS.KOMBI_DISPLAY.CODEC_DEF
     ok('a site not found: the plan refused with the reason, nothing written', r.code === 1 && /refusing: gate: variant check not found/.test(r.out) &&
         sha(nf.bin) === sha(nb) && !fs.existsSync(r.plan), r.out);
     ok('a site not found: status says which', /known:\s+NO — gate: variant check not found/.test(status(nf)) && /gate:\s+UNKNOWN/.test(status(nf)), status(nf));
-    var ncp = unit(), ncb = Buffer.from(SRC);
-    ncb.write('/etc/aapd.cfg', LOC.confpath.offset, 'latin1');
-    fs.writeFileSync(ncp.bin, ncb);
-    r = plan(ncp, ['--unproven']);
-    s = status(ncp);
-    ok('the config path not found: the plan refused, status not planable, the four edits still known', r.code === 1 && /refusing: config path: the path string not found/.test(r.out) &&
-        /^planable:\s+no \(config path/m.test(s) && /^confpath:\s+UNKNOWN/m.test(s) && !/known:\s+NO/.test(s), r.out + s);
+    /* aapd's config path string is no site: a build without it, or with it
+     * twice, is planned all the same, the reads redirected. */
+    var CONF_AT = SRC.indexOf(Buffer.from('\0/etc/aapd.conf\0', 'latin1')) + 1;
+    [['without it', function (b) { b.write('/etc/aapd.cfg', CONF_AT, 'latin1'); return b; }],
+     ['with it twice', function (b) { return Buffer.concat([b, Buffer.from('\0/etc/aapd.conf\0', 'latin1')]); }]].forEach(function (m) {
+        var u = unit(m[1](Buffer.from(SRC)));
+        r = plan(u, ['--unproven']);
+        s = status(u);
+        ok('the config path string ' + m[0] + ': planned with the redirect, the build known', CONF_AT > 0 && r.code === 0 && /^known:\s+yes/m.test(s) &&
+            /\nredirect \/etc\/aapd\.conf \/run\/aapd\.conf\n/.test(fs.readFileSync(r.plan, 'utf8')), r.out + s);
+    });
     /* aapd 22.39.3's build-id with other bytes away from the sites: the
      * locator's checks decide; probe names the part that differs */
     [['bytes appended', Buffer.concat([SRC, Buffer.alloc(16)]), /^differs:\s+the bytes no segment loads$/m],
@@ -238,28 +303,29 @@ function density(text) { return JSON.parse(text).SCREENS.KOMBI_DISPLAY.CODEC_DEF
     ok('dpi: a density off the steps is refused', plan(unit(), ['--dpi', '155']).code === 1);
     ok('card: a turn-card setting other than shown or hidden is refused', plan(unit(), ['--card', 'off']).code === 1);
 
-    /* The plan: the six sites, stock to patched, and the copy of aapd.conf
-     * at 180 dpi with the card shown; neither file written. */
+    /* The plan: the five sites, stock to patched, the redirect of
+     * /etc/aapd.conf to the copy, and the copy at 180 dpi with the card
+     * shown; neither file written. */
     var st0 = fs.statSync(t.bin), cst0 = fs.statSync(t.conf);
     var p = plan(t);
     var lines = fs.readFileSync(p.plan, 'utf8');
-    var want = ['wocplan 1', 'build-id 2dfb9881706bff435b05f621486e8eb8b6c55984'].concat(['gate', 'call', 'guard', 'screen', 'confpath', 'readystart'].map(function (e, i) {
-        return ['edit', ['gate', 'selfstart-call', 'selfstart-guard', 'screen', 'confpath', 'readystart'][i], LOC[e].offset.toString(16), LOC[e].stock, LOC[e].patched].join(' ');
-    }), ['end 6']).join('\n') + '\n';
-    ok('plan: the six sites of the proven build at their addresses, stock to patched', p.code === 0 && lines === want, lines);
+    var want = ['wocplan 1', 'build-id 2dfb9881706bff435b05f621486e8eb8b6c55984'].concat(['gate', 'call', 'guard', 'screen', 'readystart'].map(function (e, i) {
+        return ['edit', ['gate', 'selfstart-call', 'selfstart-guard', 'screen', 'readystart'][i], LOC[e].offset.toString(16), LOC[e].stock, LOC[e].patched].join(' ');
+    }), ['redirect /etc/aapd.conf /run/aapd.conf', 'end 5']).join('\n') + '\n';
+    ok('plan: the five sites of the proven build at their addresses, stock to patched, and the redirect', p.code === 0 && lines === want, lines);
     ok('plan: onAlternateVideoReady ends with a tail jump to requestStream', /\nedit readystart 1d3bbf 488b44240864483304252800000075074883c4185b5dc3 4889ef4883c4185b5de9630300000f1f80000000006690\n/.test(lines));
-    ok('plan: the config path made /run/aapd.conf', /\nedit confpath 5008ec 2f6574632f616170642e636f6e6600 2f72756e2f616170642e636f6e6600\n/.test(lines));
+    ok('plan: no edit of the config path; its reads redirected to /run/aapd.conf', !/\nedit confpath /.test(lines) && /\nredirect \/etc\/aapd\.conf \/run\/aapd\.conf\n/.test(lines));
     ok('plan: aapd and aapd.conf not written, not even their times', sha(t.bin) === sha(SRC) && sha(t.conf) === sha(SRCCONF) &&
         fs.statSync(t.bin).mtime.getTime() === st0.mtime.getTime() && fs.statSync(t.conf).mtime.getTime() === cst0.mtime.getTime() && !fs.existsSync(t.bin + '.woc-orig'));
     ok('plan: its summary names the build, the edits, the geometry, the revision and the SHA-256 of the plan, the copy and aapd.conf', !!p.sum && !('provenBuild' in p.sum) &&
         p.sum.build === '2dfb9881706bff435b05f621486e8eb8b6c55984' && p.sum.version === 'aapd 22.39.3' && p.sum.coding === 'ok' &&
-        p.sum.edits.join() === 'gate,selfstart-call,selfstart-guard,screen,confpath,readystart' && p.sum.writes.dpi === 180 && p.sum.writes.card === 'shown' &&
+        p.sum.edits.join() === 'gate,selfstart-call,selfstart-guard,screen,readystart' && p.sum.writes.dpi === 180 && p.sum.writes.card === 'shown' &&
         p.sum.writes.crop === '1280x720:0,0,1280,564' && p.sum.rev === ap.PATCH_REV && p.sum.planSha256 === sha(p.plan) && p.sum.copies.conf === sha(p.copy) &&
         p.sum.inputs.conf === sha(SRCCONF), JSON.stringify(p.sum));
     var laid = require('../carplay_patch.js').overlay(SRC, lines), rest = laid.buf ? Buffer.from(laid.buf) : null;
-    if (rest) ['confpath', 'readystart'].forEach(function (k) { SRC.copy(rest, LOC[k].offset, LOC[k].offset, LOC[k].offset + LOC[k].len); });
-    ok('plan: laid over aapd, the four edits an earlier release wrote, the config path and the ready start, nothing else', !laid.err && onlyEdits(SRC, rest) &&
-        laid.buf.toString('latin1', LOC.confpath.offset, LOC.confpath.offset + 15) === '/run/aapd.conf\0' &&
+    if (rest) SRC.copy(rest, LOC.readystart.offset, LOC.readystart.offset, LOC.readystart.offset + LOC.readystart.len);
+    ok('plan: laid over aapd, the four edits an earlier release wrote and the ready start, nothing else; the redirect', !laid.err && onlyEdits(SRC, rest) &&
+        JSON.stringify(laid.redirects) === JSON.stringify([['/etc/aapd.conf', '/run/aapd.conf']]) &&
         laid.buf.toString('hex', LOC.readystart.offset, LOC.readystart.offset + 23) === LOC.readystart.patched, laid.err);
     var k = JSON.parse(fs.readFileSync(p.copy, 'utf8')).SCREENS.KOMBI_DISPLAY, c = k.CODEC_DEFINITION.HIGH_1080P, sa = k.DIMENSIONS['12.3'];
     var g = conf.GEOMETRY.shown;
@@ -267,8 +333,8 @@ function density(text) { return JSON.parse(text).SCREENS.KOMBI_DISPLAY.CODEC_DEF
         c.REPORTED_SCREEN_DENSITY === 180 && c.WIDTH_TARGET_VIEWPORT === g.ui.w && c.HEIGHT_TARGET_VIEWPORT === g.ui.h && sa.SA_WIDTHPIXELS === g.safe.w &&
         sa.SA_OFFSET_TOPPIXELS === g.safe.y && JSON.stringify(k.CODEC_DEFINITION.MID_1080P) === JSON.stringify(JSON.parse(SRCCONF).SCREENS.KOMBI_DISPLAY.CODEC_DEFINITION.MID_1080P));
     var o = patcher(t, ['overlay', '--plan', p.plan, '--conf-copy', p.copy]).out;
-    ok('overlay: every site patched, the copy\'s geometry, ok', ['gate', 'selfstart-call', 'selfstart-guard', 'screen', 'confpath', 'readystart'].every(function (e) {
-        return new RegExp('^' + e + ':\\s+PATCHED$', 'm').test(o); }) && /^geometry:\s+PATCHED \(180 dpi, card shown, crop 1280x720:0,0,1280,564\)$/m.test(o) && /^overlay:\s+ok$/m.test(o), o);
+    ok('overlay: every site patched, aapd.conf redirected, the copy\'s geometry, ok', ['gate', 'selfstart-call', 'selfstart-guard', 'screen', 'readystart'].every(function (e) {
+        return new RegExp('^' + e + ':\\s+PATCHED$', 'm').test(o); }) && /^redirect:\s+REDIRECTED \(\/etc\/aapd\.conf -> \/run\/aapd\.conf\)$/m.test(o) && /^geometry:\s+PATCHED \(180 dpi, card shown, crop 1280x720:0,0,1280,564\)$/m.test(o) && /^overlay:\s+ok$/m.test(o), o);
     s = status(t);
     ok('status after a plan: the files as they ship', /^gate:\s+ORIGINAL$/m.test(s) && /^geometry:\s+ORIGINAL$/m.test(s) && /restorable:\s+no/.test(s), s);
     o = patcher(t, ['overlay', '--plan', p.plan, '--conf-copy', t.conf]).out;
@@ -407,7 +473,7 @@ function density(text) { return JSON.parse(text).SCREENS.KOMBI_DISPLAY.CODEC_DEF
     }
     r = throwing(['status']);
     ok('a throwing locator: status prints every line, restorable, the backup named', r.code === 0 &&
-        ['target', 'size', 'sha256', 'build-id', 'version', 'conf', 'coding', 'restorable', 'undo', 'known', 'gate', 'selfstart-call', 'selfstart-guard', 'screen', 'confpath', 'readystart', 'geometry', 'foreign', 'planable', 'backup']
+        ['target', 'size', 'sha256', 'build-id', 'version', 'conf', 'coding', 'restorable', 'replaced', 'undo', 'known', 'gate', 'selfstart-call', 'selfstart-guard', 'screen', 'readystart', 'geometry', 'foreign', 'backup']
             .every(function (k2) { return new RegExp('^' + k2 + ':', 'm').test(r.out); }) &&
         /^restorable:\s+yes$/m.test(r.out) && /^known:\s+NO — locator failed: boom$/m.test(r.out) && /^gate:\s+UNKNOWN \(locator failed: boom\)$/m.test(r.out) &&
         r.out.split('\n').some(function (l) { return /^backup:/.test(l) && l.indexOf(th.bin + '.woc-orig') > 0; }), r.out);
@@ -693,11 +759,13 @@ function nextStart(t, pid) {
         noAaInmem(fo) && !marker(fo, 'aa-pending'), r.out);
 
     /* Not supported, not patchable, absent: CarPlay is patched in memory as
-     * ever, except on a car not coded 7, where CarPlay's patch is left too,
-     * with the same conflict. */
-    [['coding 9', function (u) { fs.writeFileSync(u.coding, coding(9)); }, /not supported on this car \(KI_KOMBI_VARIANT 9\)/],
+     * ever, except on a coding the patch is not made for, where CarPlay's
+     * patch is left too, with the same conflict. */
+    [['coding 0', function (u) { fs.writeFileSync(u.coding, coding(0)); }, /not supported on this car \(KI_KOMBI_VARIANT 0: no cluster display is coded\)/],
+     ['coding 9', function (u) { fs.writeFileSync(u.coding, coding(9)); }, /built in on this cluster \(KI_KOMBI_VARIANT 9: CarPlay and Android Auto stream the cluster map themselves\)/],
+     ['coding 10', function (u) { fs.writeFileSync(u.coding, coding(10)); }, /built in on this cluster \(KI_KOMBI_VARIANT 10: CarPlay and Android Auto stream the cluster map themselves\)/],
+     ['coding 4', function (u) { fs.writeFileSync(u.coding, coding(4)); }, /not supported on this cluster \(KI_KOMBI_VARIANT 4; the map is made for KI_KOMBI_VARIANT 7\)/],
      ['an aapd the locator refuses', function (u) { var b = Buffer.from(SRC); b[LOC.gate.offset + 6] = 3; fs.writeFileSync(u.bin, b); }, /not patchable: gate: variant check not found/],
-     ['an aapd without the config path', function (u) { var b = Buffer.from(SRC); b.write('/etc/aapd.cfg', LOC.confpath.offset, 'latin1'); fs.writeFileSync(u.bin, b); }, /not patchable: config path/],
      ['an aapd.conf without the 12.3" codec', function (u) { fs.writeFileSync(u.conf, SRCCONF.toString('utf8').replace(/"HIGH_1080P"\s*\]/, '"NONE"]')); }, /aapd\.conf not usable: no number/],
      /* another build has the real reason of its own */
      ['another aapd build and an aapd.conf without the 12.3" codec', function (u) {
@@ -712,7 +780,7 @@ function nextStart(t, pid) {
         var x = hook(u, 'activate');
         ok('activate with ' + c[0] + ': Android Auto left as it is, nothing armed, exit 0', x.code === 0 && c[2].test(JSON.stringify(x.result.aa)) &&
             (before === null || sha(u.bin) === before) && sha(u.conf) === confBefore && !marker(u, 'aa-pending') && noAaInmem(u), x.out);
-        if (HAVE_CP && c[0] === 'coding 9') ok('activate with ' + c[0] + ': CarPlay left as it is, the same conflict', x.result.conflict === 'not supported on this car (KI_KOMBI_VARIANT 9)' &&
+        if (HAVE_CP && /^coding /.test(c[0])) ok('activate with ' + c[0] + ': CarPlay left as it is, the same conflict', c[2].test(x.result.conflict) &&
             sha(u.carplay) === sha(CARPLAY) && !marker(u, 'activation-pending'), JSON.stringify(x.result));
         else if (HAVE_CP) ok('activate with ' + c[0] + ': CarPlay patched as ever, in memory', /map patch armed in memory/.test(x.result.status) && sha(u.carplay) === sha(CARPLAY), JSON.stringify(x.result));
     });
@@ -805,6 +873,66 @@ function nextStart(t, pid) {
     r = hook(fw2, 'deactivate');
     ok('deactivate with only another aapd build beside our backups: exit 0, left as it is', r.code === 0 && sha(fw2.bin) === sha(newer) &&
         /another build than our backup/.test(JSON.stringify(r.result.aa)), r.out);
+
+    /* A car software update put another aapd build in place (its build-id
+     * differs) beside an earlier release's backups: no conflict; the
+     * install drops the backups of the build no longer there, puts our
+     * aapd.conf back, leaves the new aapd as it is and plans it; a removal
+     * over it drops them too. */
+    var bid = require('../carplay_locate.js').buildId(SRC), bat = SRC.indexOf(Buffer.from(bid, 'hex')), upd = Buffer.from(SRC);
+    upd[bat + 19] ^= 0xff;
+    var fw3 = patchdUnit();
+    patcher(fw3, ['apply', '--yes']);
+    fs.writeFileSync(fw3.bin, upd);
+    r = hook(fw3, 'activate');
+    ok('activate over an aapd a car software update replaced: no conflict, the backups dropped, aapd left as it is, aapd.conf as it ships, planned in memory', r.code === 0 &&
+        !(r.result.aa && r.result.aa.conflict) && /Android Auto patch armed in memory/.test(r.result.aa && r.result.aa.status) && sha(fw3.bin) === sha(upd) &&
+        sha(fw3.conf) === sha(SRCCONF) && !fs.existsSync(fw3.bin + '.woc-orig') && !fs.existsSync(fw3.conf + '.woc-orig') && aaRecord(fw3).enabled === true, r.out);
+    var fw4 = patchdUnit();
+    patcher(fw4, ['apply', '--yes']);
+    fs.writeFileSync(fw4.bin, upd);
+    r = hook(fw4, 'deactivate');
+    ok('deactivate over an aapd a car software update replaced: exit 0, aapd left as it is, the backups dropped, aapd.conf as it ships', r.code === 0 && sha(fw4.bin) === sha(upd) &&
+        sha(fw4.conf) === sha(SRCCONF) && !fs.existsSync(fw4.bin + '.woc-orig') && !fs.existsSync(fw4.conf + '.woc-orig'), r.out);
+
+    /* The same with aapd.conf another build than its backup too: a
+     * conflict, nothing dropped or planned. */
+    var fw5 = patchdUnit();
+    patcher(fw5, ['apply', '--yes']);
+    fs.writeFileSync(fw5.bin, upd);
+    fs.writeFileSync(fw5.conf, SRCCONF.toString('utf8') + '\n ');
+    var c5 = sha(fw5.conf);
+    r = hook(fw5, 'activate');
+    ok('activate over a replaced aapd and an aapd.conf changed beside our backups: a conflict, nothing dropped, planned or written', r.code === 0 &&
+        /another build than our backup|aapd\.conf/.test(JSON.stringify(r.result.aa)) && sha(fw5.bin) === sha(upd) && sha(fw5.conf) === c5 &&
+        fs.existsSync(fw5.bin + '.woc-orig') && noAaInmem(fw5), r.out);
+
+    /* A plan without the ready start that boot recovery turned off after a
+     * crash stays off at the next install: its revision, 2, is the one this
+     * version plans for that build. */
+    var nrr = patchdUnit(), nrbin = Buffer.from(SRC);
+    nrbin[LOC.readystart.offset - 6] = 0xdf;
+    fs.writeFileSync(nrr.bin, nrbin);
+    r = hook(nrr, 'activate');
+    var nrec = aaRecord(nrr);
+    ok('activate over a build without the ready start: planned, record v 3 at revision 2', r.code === 0 && !!nrec && nrec.v === 3 && nrec.rev === 2 && nrec.enabled === true, r.out);
+    fs.writeFileSync(path.join(nrr.d, 'var', 'inmem-aapd.json'), JSON.stringify(Object.assign(nrec, { enabled: false, by: 'recovery', fails: 1, why: 'crash' })) + '\n');
+    r = hook(nrr, 'activate');
+    ok('its plan boot recovery turned off after a crash stays off at the next install', r.code === 0 && aaRecord(nrr).enabled === false &&
+        /boot recovery removed the patch after the patched aapd crashed/.test(r.result.aa && r.result.aa.status), r.out);
+
+    /* A 0.13.x plan (record v 1 at revision 2, no ready start) boot recovery
+     * turned off: this version's revision 3 is newer, so the install plans
+     * it again, on trial. */
+    var old13 = patchdUnit();
+    r = hook(old13, 'activate');
+    var orec = aaRecord(old13);
+    fs.writeFileSync(path.join(old13.d, 'var', 'inmem-aapd.json'), JSON.stringify(Object.assign(orec, { v: 1, rev: 2, enabled: false, by: 'recovery', fails: 1, why: 'crash', proven: true, trial: false,
+        edits: orec.edits.filter(function (e) { return e !== 'readystart'; }) })) + '\n');
+    r = hook(old13, 'activate');
+    var o13 = aaRecord(old13);
+    ok('a 0.13.x plan boot recovery turned off: the install plans it again at revision 3, on trial', r.code === 0 && o13.enabled === true && o13.rev === 3 && o13.trial === true &&
+        /Android Auto patch armed in memory/.test(r.result.aa && r.result.aa.status), r.out);
 
     /* A removal passes only when nothing of Android Auto's is left to undo:
      * aapd restored but aapd.conf not is refused. */

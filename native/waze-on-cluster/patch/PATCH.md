@@ -36,7 +36,7 @@ On a refused head unit:
   included); `revert` works.
 - patchd reports the conflict `not supported on this car (head unit:
   ...)` for CarPlay and Android Auto, which the app shows as `Status: Not
-  supported on this car`; it refuses an apply with the reason. The install
+  supported on this head unit`; it refuses an apply with the reason. The install
   hook writes nothing and leaves no pending marker; the removal reverts.
 - With a backup of ours, the boot steps restore a restorable patch before
   carplay or aapd starts, whatever the crash count ("Boot recovery").
@@ -92,19 +92,36 @@ image, or bytes another tool left in a geometry immediate the classifier
 reads as stock).
 
 **The cluster coding.** The patch is made for cars coded
-`KI_KOMBI_VARIANT` 7, the value Edit 1 remaps. `carplay_patch.js` reads the
-coding as the Android Auto patcher does (`aapd_patch.js` `readCoding`,
-"Builds and the coding" below) and `status` prints it (`coding:
-KI_KOMBI_VARIANT n`, or `unreadable (...)`). On another value, or a coding
-it cannot read, the plan needs `--unproven`, whatever the build. `patchd` reports the conflict `not supported on
-this car (KI_KOMBI_VARIANT n)` or `cluster coding unreadable`, the words
-Android Auto's patch uses, so an install leaves carplay as it is, and the
-app shows `Status: Not supported on this car` or `Status: Unavailable`
-while it is not patched. CarPlay's Patch button still applies it
-(`--unproven`, which lets the plan past the coding check). Its record
-calls that patch unproven on another value, never on trial, and on trial
-while the coding cannot be read, since that car may be coded 7 ("Boot
-recovery").
+`KI_KOMBI_VARIANT` 7 (`high_4_1`), the value Edit 1 remaps and the cluster
+whose map slot, safe area and crop this tool's geometry was measured on
+("The coding gate stays at 7" below). `carplay_patch.js` reads the coding as the
+Android Auto patcher does (`aapd_patch.js` `readCoding`, "Builds and the
+coding" below) and `status` prints it (`coding: KI_KOMBI_VARIANT n`, or
+`unreadable (...)`). The plan refuses every other value, whatever the
+flags: 9 and 10 (`ic_box_high`, `ic_box_mid`), whose clusters CarPlay and
+Android Auto stream the map to themselves, as `built in on this cluster
+(KI_KOMBI_VARIANT n: CarPlay and Android Auto stream the cluster map
+themselves)`; 0 as `not supported on this car (KI_KOMBI_VARIANT 0: no
+cluster display is coded)`; any other as `not supported on this cluster
+(KI_KOMBI_VARIANT n; the map is made for KI_KOMBI_VARIANT 7)`. `patchd`
+reports the same conflict for both patches, an install and the Patch
+buttons plan nothing, an install puts an earlier patch of ours back as
+it ships (on 9 and 10 the cluster's own map then takes over), and the app
+shows `Status: Built in`, `Status: Not supported — no cluster display` or
+`Status: Not supported — this cluster` with no Patch button. A coding
+that cannot be read is planned as 7, on trial ("Boot recovery").
+`--unproven`, which earlier releases' records pass, is accepted and
+changes nothing.
+
+**The coding a plan is for.** A plan's record keeps the coding it was
+made for (`coding`: the value, or `unreadable`; a record without one, an
+earlier release's, counts as 7). When the coding reads otherwise (a plan
+made while it could not be read, a car recoded since), that plan cannot
+work: the boot step, before the service starts, and the watcher, once the
+coding reads, turn its record into a plan still to make and plan it again
+with every check a plan has (`recovery.js` `codingMoved`), and an install
+drops it. Meanwhile `patchd` reports the coding's conflict, also while the
+running service still holds the patch.
 
 **At CarPlay start**, with or without a phone, `ApplicationPrivate::start()`
 builds the CarPlay info: it converts the variant (Edit 1), constructs
@@ -695,7 +712,9 @@ shows.
 | the pristine build (any build whose sites are found and verify), no backup of ours | plans the patch in memory and arms carplay's next start (pending), on trial until it ran healthy on this car ("Boot recovery") | nothing |
 | a patch of ours (an earlier release's), with our verified backup or, without one, on a build `SHIPPED` knows | puts the file back as it ships, drops our backup, then plans and arms as above; nothing pending where the running carplay holds the plan's bytes | puts the file back, drops our backup |
 | a patch of ours plus another tool's change elsewhere (`foreign: yes`) | nothing: a conflict, the file and its backup left as they are, nothing armed | puts our edits back, keeps theirs, drops our backup |
-| a car not coded `KI_KOMBI_VARIANT` 7, or whose coding cannot be read | puts a patch of ours back as it ships; plans nothing: a conflict (`not supported on this car (KI_KOMBI_VARIANT n)`, `cluster coding unreadable`). CarPlay's Patch button's patch (its record: patched, neither proven nor on trial) is put back and planned in memory as that button plans it (`--unproven`) | as on any car |
+| a car coded otherwise than `KI_KOMBI_VARIANT` 7 (a coding that cannot be read is planned as 7) | puts a patch of ours back as it ships and drops an enabled plan in memory; plans nothing: a conflict (`built in on this cluster (KI_KOMBI_VARIANT 9 or 10: …)`, `not supported on this car (KI_KOMBI_VARIANT 0: no cluster display is coded)`, `not supported on this cluster (KI_KOMBI_VARIANT n; …)`) | as on any car |
+| another build by its build-id beside our backup (a car software update replaced carplay after an earlier release patched it) | drops the backup of the build no longer there, leaves carplay as it is, then plans and arms as for the pristine build | drops our backup |
+| another build beside our backup that its build-id does not tell (the same build-id, another size, or no build-id) | nothing: a conflict (`carplay is another build than our backup`) | nothing |
 | the original with our backup (CarPlay's Remove patch button was used, or boot recovery removed the patch), or a patch in memory turned off (Remove patch: whatever carplay is, a firmware update's included; boot recovery: the carplay it turned off, another one is planned again on trial) | nothing: the map stays off; the first install on HIGH F applies it again ("Supported head units"), except where boot recovery removed the patch | drops our backup |
 | a build with an edit site not found or not recognised | nothing: a conflict | with our verified backup of the same build differing from it (`restorable`), writes the backup whole (pending) and drops it; else nothing |
 | another build with one of our edits and no backup of ours to trust | nothing: a conflict | nothing: the removal is refused (exit 1) |
@@ -734,7 +753,7 @@ arming and boot recovery ("Android Auto in memory" below).
 
 **The plan.** `carplay_patch.js plan` reads carplay on disk, which must be
 the pristine build, runs every check an apply's first edit runs (the head
-unit, the coding unless `--unproven`, the locator) and builds
+unit, the coding, the locator) and builds
 the edited image as `apply` does. For each edit region that differs it
 writes one line: the region's virtual address, the bytes the build ships
 there and the bytes to write. It then lays the plan over the file again
@@ -756,7 +775,19 @@ plan's SHA-256 and carplay's inode, size and modification time. The record
 describes carplay only while all of them match: a firmware update that
 replaces carplay, or any other write of the file, leaves nothing armed.
 
-**The library.** `libwocpatch.so` (C, libc only, exports nothing) runs as
+**A car software update.** Nothing plans the patch for a carplay or aapd a
+car software update put in place: the service runs as it ships until the
+next install of this tool, which plans it as any other build (on trial),
+or its Patch button. A record of a plan still to make (`needsPlan`) keeps
+the GNU build-id of the file it was for (`build`); the boot step and the
+watcher plan it again only for that build, and drop the record over
+another one or one that names none (an earlier release's). A patch turned off with Remove patch stays off across the
+update, until the Patch button; one boot recovery turned off stays off
+for the file it turned off, and the next install plans another build
+again, on trial.
+
+**The library.** `libwocpatch.so` (C, libc and libdl only, exporting only
+the open functions its redirects take, below) runs as
 a constructor of a preloaded library, after the libraries' own
 constructors and before carplay's: its static initialisers (Edit 5's site
 is one) and `main` have not run. It reads the plan and applies every edit
@@ -786,6 +817,21 @@ put the stock bytes back. A region inside `PT_GNU_RELRO` refuses the plan. A pla
 be read or parsed is reported on stderr only. The result goes to `/run/woc-preload/carplay.result`
 (`{pid, applied, edits, why}`, a file the boot step made for carplay's user;
 the library never creates one) and to the journal.
+
+**Redirects.** A plan may also hold `redirect <from> <to>` lines (absolute
+paths, up to four): once every edit is applied, and only then, each open of
+`from` for reading, by that exact path, opens `to` while `to` exists (one
+access check per such open; without `to` the open goes through as it is). The library exports
+`open`, `open64`, `openat`, `openat64`, their `_FORTIFY_SOURCE` forms
+(`__open_2` …), `fopen`, `fopen64`, `freopen` and `freopen64` for that;
+each hands every call to the C library's own (`dlsym(RTLD_NEXT)`, looked up
+as the library starts; one the C library lacks ends the process), the path
+replaced only for a read of a redirected file in a process the plan was
+applied to. A write, any other path, a process the plan names no build of
+and one where the plan was not applied go through unchanged. Android
+Auto's plan redirects `/etc/aapd.conf` ("Android Auto in memory"); carplay's
+has none. A library of an earlier release refuses a plan with a redirect
+whole (a kind of line it does not know), so the program runs as it ships.
 
 **Arming.** The tool's drop-in for `carplay.service` has
 `EnvironmentFile=-/run/woc-preload/carplay.env`. Without that file carplay
@@ -872,8 +918,12 @@ threshold put our backup back. An enabled plan takes the original back by
 its SHA-256 and is armed for that start; without one, the patch is planned
 there and then. A plan still to
 make (one that failed, a put-back cut short) is made at the boot step too,
-before carplay starts, so that start applies it; the watcher tries again
-at its own start when the boot step did not get to it. Only the boot step
+before carplay starts, so that start applies it, once the cluster coding
+reads (up to 5 s); the watcher tries again at its own start when the boot
+step did not get to it, waiting up to 120 s for the coding and then
+planning whatever it reads. The watcher follows each service from its own
+start; only a service whose plan it still has to make waits for that
+plan. Only the boot step
 puts a file patch back: at an install the deploy tool starts the watcher
 before `activate`, which moves such a patch into memory itself.
 
@@ -892,7 +942,8 @@ read.
 aapd's patch is planned and armed as carplay's (`inmem.js` target
 `aapd`, `aapd_patch.js plan` and `overlay`), and `/usr/bin/aapd` and
 `/etc/aapd.conf` stay as they ship. Its plan holds the four edits of
-"Android Auto: the edits", the config path and the ready start:
+"Android Auto: the edits", the ready start, and the redirect of aapd's
+configuration file:
 
 ```
 wocplan 1
@@ -901,30 +952,22 @@ edit gate 998bd 83bb1c02000001 83bb1c02000002
 edit selfstart-call 1d43eb e800f8ffff e840fbffff
 edit selfstart-guard 1d3f53 837b3802740a837b44020f848d000000 807b4100740a837b38020f858d000000
 edit screen 15b440 660fefc0ebe1662e0f1f840000000000 83f802740b660fefc0ebdc0f1f440000
-edit confpath 5008ec 2f6574632f616170642e636f6e6600 2f72756e2f616170642e636f6e6600
 edit readystart 1d3bbf 488b44240864483304252800000075074883c4185b5dc3 4889ef4883c4185b5de9630300000f1f80000000006690
-end 6
+redirect /etc/aapd.conf /run/aapd.conf
+end 5
 ```
 
 **aapd.conf in memory too.** aapd reads its cluster geometry from
-`/etc/aapd.conf`, which earlier releases edited in place. Its path is one
-string in aapd's read-only data, `/etc/aapd.conf` at `0x5008ec`, which 32
-static initialisers copy into `std::string`s before `main` (each with the
-string's address, by `strlen`). The plan rewrites those 15 bytes to
-`/run/aapd.conf`, the same length, and boot recovery writes there, for a
-start it arms, a copy of aapd.conf with the geometry (`aapd_conf.js`
-applied to `/etc/aapd.conf` as it is): every path aapd opens its
-configuration by is the copy, and no file of `/` is written. The library
-runs before those initialisers, so no copy of the stock path is made
-first. The locator takes the string only when rewriting it changes those
-paths and nothing else (`aapd_locate.js` `conf-*` checks): the whole
-string once, NUL before and after; no 8 of its bytes anywhere else (a copy
-built from immediates or a literal pool would keep the stock path); loaded
-with a rip-relative `lea`; no rip-relative `lea`, `mov` or SSE load,
-absolute pointer or relocation addend into its middle (another string
-merged into its tail); in a `PT_LOAD` without write permission, outside
-`PT_GNU_RELRO`; and no dynamic relocation over it. `/etc/aapd.conf` itself is
-read by aapd alone on the unit.
+`/etc/aapd.conf`, which earlier releases edited in place. Boot recovery
+writes, for a start it arms, a copy of aapd.conf with the geometry to
+`/run/aapd.conf` (`aapd_conf.js` applied to `/etc/aapd.conf` as it is), and
+the library opens that copy for each of aapd's reads of `/etc/aapd.conf`
+("Redirects" above; aapd reads it with `std::ifstream`, which opens it with
+`fopen`). No site in aapd is needed for it, so whatever a build does with
+the path string (32 static initialisers copy it into `std::string`s in
+22.39.3; 23.16.5 holds `/etc/aapd_bmw_m.conf` beside it) does not matter,
+and no file of `/` is written. Only reads are redirected; aapd writes
+neither file.
 
 The plan's record also names its inputs and copies: `/etc/aapd.conf`'s
 inode, size, modification time and SHA-256 (a firmware update that
@@ -961,8 +1004,8 @@ a crash of an armed start turns the patch off at once, `by: "recovery"`,
 `why: "crash"`, and the watcher starts aapd again, stock). A patch of ours
 found in aapd or aapd.conf at its boot step is put back before aapd starts
 and planned there and then. A plan still to make is made at the boot step
-(`waze-on-cluster-aa-boot.service`, after `codingshm.service`) and by the
-watcher.
+(`waze-on-cluster-aa-boot.service`, after `codingshm.service`) once the
+cluster coding reads, and otherwise by the watcher.
 
 ## Reversibility
 
@@ -986,7 +1029,9 @@ elsewhere stays, and confirms every edit reads original. Otherwise, over
 the backup's build, it writes the whole backup: that undoes a patch any
 version of this tool wrote, also one whose sites the locator now refuses.
 Over another build (a firmware update) it refuses; `revert --force` writes
-the whole backup there too. A backup without a record (an older release's)
+the whole backup there too, and `revert --drop-backup` over a build whose
+build-id differs from the backup's drops the backup and leaves carplay as
+it is. A backup without a record (an older release's)
 is written whole only when the locator reads it as the pristine build or it
 has the target's size, `--force` or not.
 
@@ -1000,7 +1045,8 @@ build still needs a verified backup, and so does carplay 21.27.4: its list
 lacks the variant slot and three of the geometry immediates.
 
 `status` prints `restorable: yes` when the revert would change the target,
-else `no` with why. Every write is an atomic rename, with the original's
+else `no` with why, and `replaced: yes` when the target is another build
+than the backup by its build-id (a car software update). Every write is an atomic rename, with the original's
 mode and owner (file_mode.js); a pristine original that carplay.service's
 user cannot run gets only those from `revert`, or from an `apply` that
 changes nothing. After each write to the target the patcher records it in
@@ -1066,6 +1112,17 @@ log texts, the initial URL of a cluster display that CarPlay, with Edit 1
 reverted, does not offer the phone, and the ShowUI URL of the cluster
 stream that display would carry.
 
+On those paths a release from 0.13.0 on reads the CarPlay patch in memory
+this version left. A plan made for `KI_KOMBI_VARIANT` 7 is the plan they
+make. CarPlay's plan made while the coding could not be read is one
+releases before 0.14.19 would not make: its record is `v: 2`, which their
+`readRecord` does not read. Android Auto's plan redirects aapd.conf, which
+only this version's library applies: its record is `v: 3`, which no earlier
+release reads. A release that reads no record finds no patch to arm, the
+service runs as it ships, its status reads it not patched, and its
+`activate` plans its own patch over the same record and plan files
+(`rollback_test.js`).
+
 **Android Auto.** Every release from 0.8.0 to 0.12.1 writes its Android
 Auto patch to aapd and aapd.conf, with backups; 0.8.0–0.10.10 the
 self-start guard this version reads as outdated, 0.10.11–0.12.1 this
@@ -1085,30 +1142,38 @@ this version reads theirs (parts 1 and 2).
 The same pipeline shows Android Auto's cluster view: Google Maps renders it
 for the display aapd declares to the phone as Android Auto's cluster display,
 and aapd sends it to the same AVB stream 15. `aapd_patch.js` plans four
-edits to aapd and its config path, and the geometry of a copy of
-`/etc/aapd.conf` (`aapd_conf.js`), applied in aapd's memory ("Android Auto in
-memory"); `patchd` runs it for the app and the install hooks. Releases up to
+edits to aapd and its ready start, and the geometry of a copy of
+`/etc/aapd.conf` (`aapd_conf.js`) that aapd reads in its place, applied in
+aapd's memory ("Android Auto in memory"); `patchd` runs it for the app and
+the install hooks. Releases up to
 0.12.1 wrote the same edits to `/usr/bin/aapd` and `/etc/aapd.conf`; this
 version puts such a patch back ("Backups and undo").
 
 ### Builds and the coding
 
-`aapd_locate.js` finds the six edit sites in each build by its code, as
+`aapd_locate.js` finds the five edit sites in each build by its code, as
 each edit's "Found by" below says, in their stock or patched form, with
 `carplay_locate.js`'s ELF reading: function bounds from the `.eh_frame_hdr`
 search table, functions by the name strings their logging prologues load
 (each string once, loaded by one function only, within 0x80 bytes of its
-start), a site a dynamic relocation covers refused. A build where a site is
+start), a site a dynamic relocation covers not taken. A build where a site is
 not found, is found more than once or fails a check is refused with the
 reason; `patchd` reports it as `not patchable: <reason>` (`Status: Not
-supported on this car` in the app's Android Auto section). A build whose
-config path is not found ("Android Auto in memory") is not patchable either. Each check has a
+supported — this Android Auto version` in the app; the locator's own words
+go to patchd's log and `aapd-probe.txt`). A build whose ready start is not
+found or does not verify is planned without it ("readystart" below): the
+plan writes nothing there. Each check has a
 name in `aapd_locate.js` (`CHECKS`), and `aapd_locate_test.js` shows for
-each one a changed build that it alone refuses. The checks tie the sites to
-each other, not to a build: the gate's kept result must be the flag that
-turns the cluster display code on, the self-start's fields must be those
-the session start and end set, and its opening test must read the object
-its function was called with. No list of builds decides it: a build of
+each one a changed build whose outcome it alone decides. Every check
+protects a site the plan writes: that the bytes there are the instruction
+the edit replaces, and that the edited code is safe. The gate's kept result
+must be the flag that turns the cluster display code on; the self-start's
+guard must read the ready flag the phone's display setup sets and the
+session end clears (`ready-flag`, `ready-subscribe`, `end-resets`,
+`guard-ready`), since a request before that setup, or after the session
+ended, makes aapd abort; its fields must be those the session start and
+end set, and its opening test must read the object its function was
+called with. No list of builds decides it: a build of
 another version patches when its code has the same shape. `plan`
 locates its own edited image again, and writes no plan unless every site
 reads patched at the same offsets and the plan laid over the file gives
@@ -1119,7 +1184,8 @@ record; Save logs includes it (`aapd-probe.txt`).
 
 **Any build is planned** whose sites are all found and pass every check,
 and counts as pristine when all its sites read stock: no list of builds
-decides whether it is patched. An install arms it as any other, on trial
+decides whether it is patched. The one site a build may lack is the ready
+start's ("readystart" below). An install arms it as any other, on trial
 until it ran healthy on this car ("Boot recovery"). `SHIPPED` in
 `aapd_patch.js` keeps the shipped SHA-256 and bytes of aapd 22.39.3, the
 build earlier releases patched in the file, for the same uses as
@@ -1127,8 +1193,22 @@ CarPlay's, each needing the whole file to be the shipped one; the
 locator's checks decide whether a file is pristine. `probe`
 prints `differs:` as CarPlay's does. `--unproven`, which earlier
 releases' Patch button passed, changes nothing. `status` prints the
-build-id, the version its debug source paths name, `planable:` and
-`foreign:` (our edits beside another change in either file).
+build-id, the version its debug source paths name, `known:` (every
+edit's site found, or the first reason one is not) and `foreign:` (our
+edits beside another change in either file).
+
+What a build must have for the map, and what it may lack:
+
+| Part | Without it | A build without it |
+|---|---|---|
+| gate | aapd builds no cluster display for a car coded 7 | refused |
+| screen | aapd skips aapd.conf and sends an 800x480 stream of another shape | refused |
+| selfstart call and guard | the stream never starts (the car never asks for it); the call without the guard lets a request reach `SetVideoFocus` before the phone's display is set up, and aapd aborts | refused |
+| readystart | the map waits for a navigation status after a reconnect | planned without it (revision 2), as is one that does not verify; `onAlternateVideoReady()` itself must be there, since the guard's ready flag is the one it sets |
+| aapd.conf | — | needs no site: the plan redirects its reads |
+
+An edit's site found but changed (by another tool) is refused like one not
+found; a ready start in any form it does not know is left out of the plan.
 
 | | |
 |---|---|
@@ -1148,14 +1228,17 @@ helper is found there.
 aapd maps the raw `KI_KOMBI_VARIANT` through
 `codingToInternal(const CodingKOMBI_HUD::eKI_KOMBI_VARIANT&, KombiVariant&)`
 (`0x4f8840`): 9 → 0, 10 → 1, 1–8 and 11 → 2, 0 → 3. The gate edit admits
-class 2 whole, so `apply` refuses unless the raw value is 7, the coding the
+class 2 whole, so the plan refuses unless the raw value is 7, the coding the
 patch is made for. It reads it as aapd and carplay do: `CodingKOMBI_HUD`
 is `CodingBase(0x75a, 150)` of the coding image (`0x4f9e5b`; carplay
 `0x23ad70`) and the variant `getBits(0, 0x7e, 1)` of it (`0x4f9c88`), so
 byte `0x2c + 0x75a` of `/dev/shm/rawcodingdata` (4144 bytes, header flags
 at `0x28` reading `0x09`, valid coding), bits 1–6. A coding that cannot be
-read refuses too. `patchd` reports another value as `not supported on this
-car (KI_KOMBI_VARIANT n)`.
+read is planned as 7, on trial. `patchd` reports 9 and 10 as `built in on
+this cluster (…)`, 0 as `not supported on this car (KI_KOMBI_VARIANT 0: no
+cluster display is coded)` and any other value as `not supported on this
+cluster (KI_KOMBI_VARIANT n; the map is made for KI_KOMBI_VARIANT 7)`, as
+CarPlay's ("The cluster coding").
 
 ### The edits
 
@@ -1167,7 +1250,6 @@ In aapd 22.39.3:
 | selfstart call | `0x1d43eb` | `e800f8ffff` (`call setNaviStreamStatus`) | `e840fbffff` (`call requestStream`) |
 | selfstart guard | `0x1d3f53` | `837b3802 740a 837b4402 0f848d000000` (`cmp dword [rbx+0x38],2 ; je L1 ; cmp dword [rbx+0x44],2 ; je 0x1d3ff0`) | `807b4100 740a 837b3802 0f858d000000` (`cmp byte [rbx+0x41],0 ; je L1 ; cmp dword [rbx+0x38],2 ; jne 0x1d3ff0`) |
 | screen | `0x15b440` | `660fefc0 ebe1 662e0f1f840000000000` | `83f802 740b 660fefc0 ebdc 0f1f440000` |
-| confpath (in memory only) | `0x5008ec` | `/etc/aapd.conf\0` | `/run/aapd.conf\0` |
 | readystart (in memory only) | `0x1d3bbf` | `488b442408 644833042528000000 7507 4883c418 5b 5d c3` (`mov rax,[rsp+8] ; xor rax,fs:[0x28] ; jne Lfail ; add rsp,0x18 ; pop rbx ; pop rbp ; ret`) | `4889ef 4883c418 5b 5d e963030000 0f1f8000000000 6690` (`mov rdi,rbp ; add rsp,0x18 ; pop rbx ; pop rbp ; jmp requestStream ; nop ; nop`) |
 
 - **gate.** `Application::secondVideoEnabled()` returns `featureFlag &&
@@ -1205,9 +1287,13 @@ In aapd 22.39.3:
   in its top 800x300. The fall-through's 16 bytes (10 of them padding)
   become `cmp eax,2 ; je <the 12.3 load> ; pxor xmm0,xmm0 ; jmp <return>`:
   class 2 reads 12.3, every other class as before.
-- **confpath.** The path aapd reads aapd.conf by, pointed at the copy with
-  the geometry ("Android Auto in memory"). Releases up to 0.12.1 edited
-  `/etc/aapd.conf` itself instead and had no such edit.
+- **aapd.conf.** No edit: the plan redirects aapd's reads of
+  `/etc/aapd.conf` to the copy with the geometry ("Android Auto in
+  memory"). Releases up to 0.12.1 edited `/etc/aapd.conf` itself; 0.13.0 to
+  0.14.19 rewrote the path string in aapd's memory (an edit named
+  `confpath`), which needed that string once and alone in the build.
+  `overlay` reads such a plan's `confpath` as aapd reading the copy
+  (`redirect: PATCHED (confpath)`).
 - **readystart.** The selfstart edits start the stream on a navigation
   status that arrives while the cluster display is ready. On a later
   session in the same aapd run, the status the phone sends as it connects
@@ -1227,7 +1313,16 @@ In aapd 22.39.3:
   are the function's end after the `subscribeEvents()` call; its
   stack-protector check goes, to make room for the jump. `onEndSession()`
   still clears the ready flag and the stream status, so each session starts
-  its stream again.
+  its stream again. A build whose `onAlternateVideoReady()` lacks the site
+  (its frame, its one call after the ready flag or that call's own `this`
+  differ) is planned without it: the plan names no
+  `readystart` and its record keeps `rev: 2` (`PATCH_REV`, the patch
+  without it); the overlay reads it `NOT APPLIED (<reason>)`.
+  A ready start whose end is neither form (a newer compiler's `sub`
+  stack check, another `jne` distance, another tool's bytes), with a
+  branch into it, or under a dynamic relocation is left out the same way.
+  On such a build the map does not come back after the phone reconnects
+  until a navigation status starts the stream (a route).
 
 **Found by.**
 
@@ -1250,8 +1345,7 @@ In aapd 22.39.3:
   `test al,al ; je +10 ; cmp dword [reg+field],1|2 ; setbe al` and keeps
   its result as a byte of its object. No other code compares the field with
   1 or 2.
-- *selfstart*: `requestStream()`, which `onStreamCommandChanged()` calls,
-  copies `rdi` (its `this`) into the register its opening test reads and
+- *selfstart*: `requestStream()` copies `rdi` (its `this`) into the register its opening test reads and
   opens with `cmp [this+A],2 ; je +10 ; cmp [this+B],2 ; je Ldo`, or the
   patched `cmp byte [this+F],0 ; je +10 ; cmp [this+A],2 ; jne Ldo`, or
   the outdated `... ; jmp Ldo ; nop`; before `Ldo` it logs `Ignoring
@@ -1261,11 +1355,9 @@ In aapd 22.39.3:
   `subscribeEvents()`; `onEndSession()` sets `F` to 0, `A` to 0 and `B`
   to 2; the patched test must read that `F`, and in the patched form `B` is
   the field set to 1 after the call that `onEndSession()` sets to 2.
-  `setNaviStreamStatus` copies its argument's value (`[rsi+X]`) into `A`;
-  where the build has its name string, it is the function loading it.
+  `setNaviStreamStatus` copies its argument's value (`[rsi+X]`) into `A`.
   The gate's kept result (a byte of the Application) is tested by
-  `initAlternateDisplays()`, which builds the cluster display, and before
-  every branch into `onNewNavigationStatus()` (within 0x40 bytes of it).
+  `initAlternateDisplays()`, which builds the cluster display.
   `onNewNavigationStatus()` calls `setNaviStreamStatus` (stock) or
   `requestStream` (patched) exactly once: that call. On every path to it,
   `rsi` holds `rsp+B`, its value followed through the function by
@@ -1285,10 +1377,11 @@ In aapd 22.39.3:
   the UNAVAILABLE (0) status at `[rsp+B+X]` right before that tail,
   falling into it, and the
   AVAILABLE (1) status in the same slot by the one store that jumps to the
-  tail; STREAMING in `requestStream()` is stored the same way. The three
-  functions lie within 64 KiB of each other. 22.39.3 has no
-  `setNaviStreamStatus` name string (23.16.5 has); there the STREAMING,
-  argument and field checks identify it.
+  tail; STREAMING in `requestStream()` is stored the same way.
+  `setNaviStreamStatus` is the one function within 64 KiB of
+  `onNewNavigationStatus()` that `requestStream()` calls after the request;
+  the STREAMING, argument and field checks identify it (22.39.3 has no
+  name string for it).
 
 *readystart*: in `onAlternateVideoReady()` (by its name string), opening
 `push rbp ; mov rbp,rdi ; push rbx` and `sub rsp,0x18` (the frame its end
@@ -1302,10 +1395,15 @@ checks).
 **The coding gate stays at 7.** The gate edit admits KombiVariant class 2
 whole (raw 1–8 and 11), and the screen edit gives class 2 the 12.3"
 geometry this tool's 1088x480 map slot is cut from; the slot, the safe area
-and the crop were measured on a variant-7 cluster only. Classes 0 and 1
-(raw 9, 10) already have aapd's own cluster display, which the self-start
-and geometry edits would change. So `apply` refuses every raw value but 7,
-on every build.
+and the crop were measured on a `KI_KOMBI_VARIANT` 7 (`high_4_1`) cluster
+only. Raw 9 and 10 (`ic_box_high`, `ic_box_mid`) are other cluster
+hardware, which takes aapd's and carplay's own cluster stream at its own
+geometry (carplay: IC_HIGH 1920x900, IC_MID 1920x720), and nothing places
+this tool's map slot there: aapd and carplay show the map on those
+clusters as they ship. The other values name other clusters again. So the
+plan refuses every raw value but 7, on every build: 9 and 10 as built in,
+0 as no cluster display, the rest as not supported on this cluster; a
+coding that cannot be read is planned as 7.
 
 ### The geometry
 
@@ -1388,8 +1486,12 @@ another tool changed, is left as it is and reads nothing to undo. Another
 build still needs a verified backup.
 `revert` exits non-zero unless each file ends at its original, with no
 backup of ours, or another build than its backup; `--drop-backup` drops the
-backups of those files only. `status` prints `restorable: yes` when the
-revert would change either file, or only its mode, and `undo:` with each
+backups of those files only, the backup of an aapd whose build-id differs
+from its backup's (a car software update) included. `status` prints
+`restorable: yes` when the revert would change either file, or only its
+mode, `replaced: yes` when aapd is another build than its backup by its
+build-id and aapd.conf's backup, if any, is trusted and of its own build,
+and `undo:` with each
 file's state (`original`, `none`, `other`, `restorable` or `untrusted`).
 Each file is written with its original's mode and owner (above); a file
 that is exactly its original but lacks the access aapd.service's user needs
@@ -1428,9 +1530,10 @@ reported in the hook's result (`"aa": {"status", "conflict"}`) and nothing
 is armed. A patch Remove patch turned off stays off for any aapd and
 aapd.conf, a firmware update's included, until the Patch button. A patch
 boot recovery turned off stays off, in memory or (an earlier release's) in
-the files, unless this version's `PATCH_REV` is newer than the turned-off
-one or a firmware update replaced aapd or aapd.conf (planned again, on
-trial); what a restore cut short left of it in the files is put back. When CarPlay's step fails, Android Auto's does not run.
+the files, unless `PATCH_REV` (2 for this version's own plan of a build
+without the ready start's site, which stays off) is newer than the
+turned-off one or a firmware update replaced aapd or aapd.conf
+(planned again, on trial); what a restore cut short left of it in the files is put back. When CarPlay's step fails, Android Auto's does not run.
 `deactivate` turns the patch in memory off (record, plan and copy deleted)
 and puts back an earlier release's patch left in the files.
 
@@ -1445,7 +1548,8 @@ ours: its state is read whole first, and after its step `deactivate` reads
 the status again: no record of the patch in memory may be left, and each of aapd
 and aapd.conf must be at its original, have no backup of ours, or be
 another build than our backup (a firmware update; left as it is, like
-carplay's), and no edit of ours may read in either; carplay's status
+carplay's, and our backup dropped when the build-id tells it), and no edit
+of ours may read in either; carplay's status
 likewise. Either status counts only when read whole: the patcher's last
 line, `end: complete`, and exit code 0. Otherwise (a state unreadable or
 cut short, no time left for its step, a file still restorable or with a
@@ -1536,7 +1640,8 @@ and a failing patch is not tried again:
 - **The patch stays off** while its record names the restore (the plan's
   record `by: "recovery"`, or an earlier release's patch record): an
   install leaves it off, unless its patch revision (`aapd_patch.js`
-  `PATCH_REV`, kept in the record as `rev`, 1 when there is none) is
+  `PATCH_REV`, kept in the record as `rev`, 1 when there is none; 2 for
+  this version's own plan of a build without the ready start's site) is
   newer than the removed patch's, or the plan's record no longer describes
   aapd and aapd.conf (a firmware update replaced one); Android Auto's Patch button applies it
   again. `patchd` reports the restore as `recovered` with
@@ -1699,8 +1804,7 @@ Then, by the binary about to start:
 
 The threshold is 1 failed start for a patch the record does not call
 proven (`proven: false`: a patch on trial, which every build is until it
-ran healthy on this car, or a car not coded `KI_KOMBI_VARIANT` 7, which
-CarPlay's Patch button patches with `--unproven`) and 2 for a proven one or a
+ran healthy on this car) and 2 for a proven one or a
 binary of the backup's build the record does not describe (`unknown`, an
 older release's patch). Only a healthy start
 clears the counter: a proven patch is restored after two failed starts, or
@@ -1732,8 +1836,8 @@ untouched; with the lock held or a remount failing it tries again a
 minute later, and a stop waits for the write. When `/` stays read-write
 after the write, the log says the patch is recorded proven and `/` stays
 read-write until the next start; nothing is tried again. From then on the
-patch is restored after two failed starts. A patch CarPlay's Patch button
-applies while the coding cannot be read is on trial too.
+patch is restored after two failed starts. A plan made while the coding
+cannot be read is on trial too.
 
 A patch of ours that no record describes (`unknown`: the record is missing
 or another write changed the file) counts as proven at the boot step. The
@@ -1742,13 +1846,7 @@ in "Install-time activation" says; one it plans is on trial, since nothing shows
 after that install it is turned off after one failed start, then the
 watcher records it proven.
 
-On a car coded otherwise than 7, an install does not touch a patch of
-ours, with one exception. When an earlier release's install wrote the
-patch and recorded it proven, and the patch has not started yet (its apply
-is pending, or CarPlay runs the file the patch replaced), the install puts
-that record on trial. carplay's bytes are not touched. A patch that has
-started keeps its record, and so does a pending one on a car coded 7. A
-record write that fails leaves the record as it was. A record saying `proven: true` without
+A record saying `proven: true` without
 `trial` keeps it across later applies, as does the record of a patch
 written before trials existed (0.9.4 and earlier), which only proven
 builds got: a car running such a patch is restored at the threshold it
@@ -1827,7 +1925,7 @@ to), `patchd` reports `recovered` with the count, and the app's Status row
 reads `Removed — head unit kept restarting`; the Patch button applies the
 patch again. A restore on a head unit that refuses our parts is recorded
 `by: "refused"`, not as `recovered`, and the app says `Not supported on
-this car` there.
+this head unit` there.
 
 **The watcher** (`recovery.js`, `waze-on-cluster-recovery.service`, after
 the boot step) follows CarPlay by run (systemd's `InvocationID`). While a
