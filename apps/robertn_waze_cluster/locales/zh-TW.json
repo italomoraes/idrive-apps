@@ -124,7 +124,7 @@
     "The map shows on the head-up display. Still experimental.": "地圖顯示在抬頭顯示器上。仍為實驗功能。",
     "The map shows on both: the instrument cluster and the head-up display.": "地圖同時顯示在儀表板和抬頭顯示器上。",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需擷取：開始後重新連接手機，等問題出現，再按儲存記錄檔。",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "排查問題時：開始擷取後重新連接手機，等問題出現，再按儲存記錄檔。",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "將地圖記錄檔和主機的最近訊息儲存為檔案，以附在問題回報中。",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。"
   }

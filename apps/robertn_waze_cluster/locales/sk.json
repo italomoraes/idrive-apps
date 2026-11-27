@@ -122,7 +122,7 @@
     "The map shows on the head-up display. Still experimental.": "Mapa sa zobrazí na priehľadovom displeji. Zatiaľ experimentálne.",
     "The map shows on both: the instrument cluster and the head-up display.": "Mapa sa zobrazí na oboch: prístrojovke aj priehľadovom displeji.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa sa nezobrazí nikde: prístrojovka a HUD ukazujú obsah BMW.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ak vás požiadajú o záznam: spustite ho, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Ak chcete problém preskúmať: spustite záznam, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží záznamy mapy a nedávne správy hlavnej jednotky do súboru, ktorý priložíte k hláseniu problému.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy."
   }

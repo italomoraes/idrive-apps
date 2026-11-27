@@ -126,7 +126,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "تظهر الخريطة على شاشة العرض الأمامية. ما زالت تجريبية.",
    "The map shows on both: the instrument cluster and the head-up display.": "تظهر الخريطة على الاثنين: لوحة العدادات وشاشة العرض الأمامية.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "لا تظهر الخريطة في أي منهما: لوحة العدادات وHUD تعرضان محتوى BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "إذا طُلب منك التقاط: ابدأه، وأعد توصيل الهاتف، وانتظر المشكلة، ثم اضغط حفظ السجلات.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "لتحليل مشكلة: ابدأ الالتقاط، وأعد توصيل الهاتف، وانتظر المشكلة، ثم اضغط حفظ السجلات.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "يحفظ سجلات الخريطة والرسائل الأخيرة للوحدة الرئيسية في ملف لإرفاقه بتقرير المشكلة.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات."
   }
@@ -256,7 +256,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa se zobrazí na průhledovém displeji. Zatím experimentální.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa se zobrazí na obou: štítu přístrojů i průhledovém displeji.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa se nezobrazí nikde: štít a HUD ukazují obsah BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pokud vás požádají o záznam: spusťte ho, znovu připojte telefon, počkejte na problém a stiskněte Uložit protokoly.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Chcete-li problém prozkoumat: spusťte záznam, znovu připojte telefon, počkejte na problém a stiskněte Uložit protokoly.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží protokoly mapy a nedávné zprávy hlavní jednotky do souboru, který přiložíte k hlášení problému.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem připojeným k hotspotu Wi-Fi auta naskenujte kód nebo otevřete adresu a stáhněte protokoly."
   }
@@ -386,7 +386,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kortet vises på head-up-displayet. Stadig eksperimentelt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kortet vises begge steder: i instrumentpanelet og på head-up-displayet.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kortet vises ingen steder: instrumentpanel og HUD viser BMW's eget indhold.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du bliver bedt om en optagelse: start den, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Vil du undersøge et problem: start optagelsen, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Gemmer kortets logfiler og hovedenhedens seneste meddelelser i en fil, du kan vedhæfte en fejlrapport.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne."
   }
@@ -516,7 +516,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Die Karte erscheint im Head-up-Display. Noch experimentell.",
    "The map shows on both: the instrument cluster and the head-up display.": "Die Karte erscheint in beiden: im Kombi und im Head-up-Display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Die Karte erscheint in keinem: Kombi und HUD zeigen BMWs eigene Inhalte.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Für eine erbetene Aufzeichnung: starten, Telefon neu verbinden, Problem abwarten, Protokolle speichern.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Zur Fehlersuche: Aufzeichnung starten, Telefon neu verbinden, Problem abwarten, Protokolle speichern.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Speichert die Protokolle der Karte und die letzten Meldungen der Head Unit in einer Datei für einen Fehlerbericht.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden."
   }
@@ -646,7 +646,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Ο χάρτης εμφανίζεται στην προβολή head-up. Ακόμα πειραματικό.",
    "The map shows on both: the instrument cluster and the head-up display.": "Ο χάρτης εμφανίζεται και στα δύο: στα όργανα και στην προβολή head-up.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Ο χάρτης δεν εμφανίζεται πουθενά: όργανα και HUD δείχνουν το περιεχόμενο της BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Αν σας ζητηθεί καταγραφή: ξεκινήστε την, συνδέστε ξανά το τηλέφωνο, περιμένετε το πρόβλημα και πατήστε Αποθήκευση αρχείων.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Για διερεύνηση: ξεκινήστε την καταγραφή, επανασυνδέστε το τηλέφωνο, περιμένετε το πρόβλημα, πατήστε Αποθήκευση αρχείων.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Αποθηκεύει τα αρχεία του χάρτη και τα πρόσφατα μηνύματα της κεντρικής μονάδας σε ένα αρχείο για αναφορά.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Με τηλέφωνο στο σημείο πρόσβασης Wi-Fi του αυτοκινήτου, σαρώστε τον κωδικό ή ανοίξτε τη διεύθυνση."
   }
@@ -776,7 +776,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "El mapa se muestra en el head-up display. Aún es experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "El mapa se muestra en ambos: el tablero de instrumentos y el head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "El mapa no se muestra en ninguno: el tablero y el HUD muestran el contenido propio de BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Si te piden una captura: iníciala, vuelve a conectar el teléfono, espera el problema y toca Guardar registros.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Para investigar: inicia la captura, reconecta el teléfono, espera el problema y toca Guardar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda los registros del mapa y de la unidad principal en un archivo para adjuntar a un reporte.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el hotspot Wi-Fi del auto, escanea el código o abre la dirección para descargar los registros."
   }
@@ -906,7 +906,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "El mapa se muestra en el head-up display. Aún es experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "El mapa se muestra en ambos: el cuadro de instrumentos y el head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "El mapa no se muestra en ninguno: el cuadro y el HUD muestran el contenido propio de BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Si te piden una captura: iníciala, vuelve a conectar el teléfono, espera el problema y pulsa Guardar registros.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Para investigar: inicia la captura, reconecta el teléfono, espera el problema y pulsa Guardar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda los registros del mapa y de la unidad principal en un archivo para adjuntar a un informe.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el punto de acceso Wi-Fi del coche, escanea el código o abre la dirección para descargar los registros."
   }
@@ -1036,7 +1036,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartta näkyy tuulilasinäytössä. Yhä kokeellinen.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartta näkyy molemmissa: mittaristossa ja tuulilasinäytössä.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartta ei näy kummassakaan: mittaristo ja HUD näyttävät BMW:n omaa sisältöä.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jos sinulta pyydetään kaappausta: aloita se, yhdistä puhelin uudelleen, odota ongelmaa ja paina Tallenna lokit.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Ongelman tutkimiseksi: aloita kaappaus, yhdistä puhelin uudelleen, odota ongelmaa ja paina Tallenna lokit.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Tallentaa kartan lokit ja pääyksikön viimeisimmät viestit tiedostoon, jonka voi liittää ongelmailmoitukseen.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Kun puhelin on auton Wi-Fi-yhteyspisteessä, skannaa koodi tai avaa osoite ladataksesi lokit."
   }
@@ -1166,7 +1166,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La carte s'affiche sur l'affichage tête haute. Encore expérimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Pour examiner un problème : démarrez la capture, reconnectez le téléphone, attendez le problème, puis enregistrez.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger."
   }
@@ -1296,7 +1296,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La carte s'affiche sur l'affichage tête haute. Encore expérimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Pour examiner un problème : démarrez la capture, reconnectez le téléphone, attendez le problème, puis enregistrez.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, scannez le code ou ouvrez l'adresse pour les télécharger."
   }
@@ -1426,7 +1426,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "המפה מוצגת בתצוגה העילית. עדיין ניסיוני.",
    "The map shows on both: the instrument cluster and the head-up display.": "המפה מוצגת בשניהם: בלוח המחוונים ובתצוגה העילית.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "המפה לא מוצגת באף אחד: לוח המחוונים וה-HUD מציגים את התוכן של BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "אם ביקשו מכם הקלטה: התחילו אותה, חברו מחדש את הטלפון, חכו לבעיה ולחצו שמירת יומנים.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "כדי לחקור בעיה: התחילו הקלטה, חברו מחדש את הטלפון, חכו לבעיה ולחצו שמירת יומנים.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "שומר את יומני המפה ואת ההודעות האחרונות של היחידה הראשית בקובץ לצירוף לדיווח על בעיה.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים."
   }
@@ -1556,7 +1556,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "A térkép a szélvédőkijelzőn jelenik meg. Még kísérleti.",
    "The map shows on both: the instrument cluster and the head-up display.": "A térkép mindkettőn megjelenik: a műszerfalon és a szélvédőkijelzőn.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "A térkép sehol sem jelenik meg: a műszerfal és a HUD a BMW saját tartalmát mutatja.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ha rögzítést kérnek: indítsa el, csatlakoztassa újra a telefont, várja meg a hibát, majd Naplók mentése.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Hiba kivizsgálásához: indítsa a rögzítést, csatlakoztassa újra a telefont, várja meg a hibát, majd Naplók mentése.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Fájlba menti a térkép naplóit és a fejegység legutóbbi üzeneteit, hogy hibabejelentéshez csatolja.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért."
   }
@@ -1686,7 +1686,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Peta tampil di head-up display. Masih eksperimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "Peta tampil di keduanya: panel instrumen dan head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Peta tidak tampil di mana pun: panel dan HUD menampilkan konten BMW sendiri.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jika diminta rekaman: mulai, sambungkan ulang ponsel, tunggu masalahnya, lalu tekan Simpan log.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Untuk menyelidiki: mulai perekaman, sambungkan ulang ponsel, tunggu masalahnya, lalu tekan Simpan log.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Menyimpan log peta dan pesan terbaru head unit ke dalam file untuk dilampirkan pada laporan masalah.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log."
   }
@@ -1816,7 +1816,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La mappa appare sull'head-up display. Ancora sperimentale.",
    "The map shows on both: the instrument cluster and the head-up display.": "La mappa appare su entrambi: il quadro strumenti e l'head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La mappa non appare da nessuna parte: il quadro e l'HUD mostrano i contenuti BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se ti chiedono un'acquisizione: avviala, ricollega il telefono, aspetta il problema e premi Salva log.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Per indagare un problema: avvia l'acquisizione, ricollega il telefono, aspetta il problema e premi Salva log.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva i log della mappa e i messaggi recenti dell'unità principale in un file da allegare a una segnalazione.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un telefono sull'hotspot Wi-Fi dell'auto, scansiona il codice o apri l'indirizzo per scaricare i log."
   }
@@ -1946,7 +1946,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "ヘッドアップディスプレイに地図を表示します。まだ試験的です。",
    "The map shows on both: the instrument cluster and the head-up display.": "メーターとヘッドアップディスプレイの両方に地図を表示します。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "どちらにも地図を表示しません。メーターとHUDはBMWの表示になります。",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "キャプチャを頼まれたら、開始してスマートフォンを再接続し、問題を待ってからログを保存を押します。",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "問題を調べるには、キャプチャを開始してスマートフォンを再接続し、問題を待ってからログを保存を押します。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "地図のログとヘッドユニットの最近のメッセージを、問題報告に添付するファイルに保存します。",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。"
   }
@@ -2076,7 +2076,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "헤드업 디스플레이에 지도가 표시됩니다. 아직 실험 기능입니다.",
    "The map shows on both: the instrument cluster and the head-up display.": "계기판과 헤드업 디스플레이 둘 다에 지도가 표시됩니다.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "어디에도 지도가 표시되지 않습니다. 계기판과 HUD는 BMW 화면을 보여 줍니다.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "캡처를 요청받으면 시작하고 휴대폰을 다시 연결한 뒤 문제가 생기면 로그 저장을 누르세요.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "문제를 살펴보려면 캡처를 시작하고 휴대폰을 다시 연결한 뒤 문제가 생기면 로그 저장을 누르세요.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "지도 로그와 헤드 유닛의 최근 메시지를 문제 신고에 첨부할 파일로 저장합니다.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요."
   }
@@ -2206,7 +2206,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartet vises på head-up-displayet. Fortsatt eksperimentelt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartet vises begge steder: i instrumentpanelet og på head-up-displayet.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartet vises ingen steder: instrumentpanel og HUD viser BMWs eget innhold.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du blir bedt om et opptak: start det, koble til telefonen på nytt, vent på problemet og trykk Lagre logger.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "For å undersøke et problem: start opptaket, koble til telefonen på nytt, vent på problemet og trykk Lagre logger.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lagrer kartets logger og hovedenhetens siste meldinger i en fil du kan legge ved en feilrapport.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skann koden eller åpne adressen for å laste ned loggene."
   }
@@ -2338,7 +2338,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "De kaart verschijnt op het head-up display. Nog experimenteel.",
    "The map shows on both: the instrument cluster and the head-up display.": "De kaart verschijnt op beide: het instrumentenpaneel en het head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "De kaart verschijnt nergens: paneel en HUD tonen BMW's eigen inhoud.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Als om een opname wordt gevraagd: start die, verbind de telefoon opnieuw, wacht op het probleem en kies Logs opslaan.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Om het te onderzoeken: start de opname, verbind de telefoon opnieuw, wacht op het probleem en kies Logs opslaan.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Slaat de logs van de kaart en de recente meldingen van de head unit op in een bestand voor een probleemmelding.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs."
   }
@@ -2468,7 +2468,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa pokazuje się na wyświetlaczu przeziernym. Wciąż eksperymentalnie.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa pokazuje się na obu: zegarach i wyświetlaczu przeziernym.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa nie pokazuje się nigdzie: zegary i HUD pokazują treści BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jeśli poproszą o rejestrację: rozpocznij ją, połącz ponownie telefon, poczekaj na problem i naciśnij Zapisz logi.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Aby zbadać problem: rozpocznij rejestrację, połącz ponownie telefon, poczekaj na problem i zapisz logi.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Zapisuje logi mapy i ostatnie komunikaty jednostki głównej w pliku do dołączenia do zgłoszenia.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem w hotspocie Wi-Fi auta zeskanuj kod lub otwórz adres, by pobrać zapisane logi."
   }
@@ -2598,7 +2598,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no painel de instrumentos e no head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o painel e o HUD mostram o conteúdo da própria BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se pedirem uma captura: inicie-a, reconecte o celular, espere o problema e toque em Salvar registros.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Para investigar um problema: inicie a captura, reconecte o celular, espere o problema e toque em Salvar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva os registros do mapa e as mensagens recentes da unidade principal num arquivo, para anexar a um relato.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros."
   }
@@ -2728,7 +2728,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no quadrante e no head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o quadrante e o HUD mostram o conteúdo da própria BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se lhe pedirem uma captura: inicie-a, volte a ligar o telemóvel, espere pelo problema e prima Guardar registos.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Para investigar um problema: inicie a captura, volte a ligar o telemóvel, espere pelo problema e prima Guardar registos.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda os registos do mapa e as mensagens recentes da unidade principal num ficheiro, para anexar a um relato.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um telemóvel no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para transferir os registos."
   }
@@ -2858,7 +2858,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Harta apare pe afișajul head-up. Încă experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "Harta apare pe ambele: bordul și afișajul head-up.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harta nu apare nicăieri: bordul și HUD-ul arată conținutul BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Dacă vi se cere o captură: porniți-o, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Pentru a investiga o problemă: porniți captura, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salvează jurnalele hărții și mesajele recente ale unității principale într-un fișier de atașat la o raportare.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele."
   }
@@ -2988,7 +2988,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Карта показывается на проекционном дисплее. Пока экспериментально.",
    "The map shows on both: the instrument cluster and the head-up display.": "Карта показывается на обоих: на приборах и на проекционном дисплее.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта нигде не показывается: приборы и HUD показывают содержимое BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Если просят запись: начните, переподключите телефон, дождитесь проблемы и сохраните журналы.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Для разбора проблемы: начните запись, переподключите телефон, дождитесь её и сохраните журналы.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Сохраняет журналы карты и недавние сообщения головного устройства в файл для отчёта о проблеме.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "С телефона в точке доступа машины отсканируйте код или откройте адрес и скачайте журналы."
   }
@@ -3118,7 +3118,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa sa zobrazí na priehľadovom displeji. Zatiaľ experimentálne.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa sa zobrazí na oboch: prístrojovke aj priehľadovom displeji.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa sa nezobrazí nikde: prístrojovka a HUD ukazujú obsah BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ak vás požiadajú o záznam: spustite ho, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Ak chcete problém preskúmať: spustite záznam, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží záznamy mapy a nedávne správy hlavnej jednotky do súboru, ktorý priložíte k hláseniu problému.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy."
   }
@@ -3248,7 +3248,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Zemljevid se prikaže na zaslonu HUD. Še poskusno.",
    "The map shows on both: the instrument cluster and the head-up display.": "Zemljevid se prikaže na obeh: na armaturi in zaslonu HUD.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Zemljevid se ne prikaže nikjer: armatura in HUD kažeta vsebino BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Če vas prosijo za zajem: začnite ga, znova povežite telefon, počakajte na težavo in pritisnite Shrani dnevnike.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Za raziskavo težave: začnite zajem, znova povežite telefon, počakajte na težavo in pritisnite Shrani dnevnike.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Shrani dnevnike zemljevida in nedavna sporočila glavne enote v datoteko, ki jo priložite prijavi težave.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike."
   }
@@ -3378,7 +3378,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartan visas på head-up-displayen. Fortfarande experimentellt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartan visas på båda: kombiinstrumentet och head-up-displayen.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartan visas på ingen: kombiinstrument och HUD visar BMW:s eget innehåll.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Om du ombeds göra en inspelning: starta den, anslut telefonen igen, vänta på problemet och tryck Spara loggar.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "För att undersöka ett problem: starta inspelningen, anslut telefonen igen, vänta på problemet och tryck Spara loggar.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Sparar kartans loggar och huvudenhetens senaste meddelanden i en fil att bifoga en felrapport.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skanna koden eller öppna adressen för att hämta loggarna."
   }
@@ -3508,7 +3508,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "แผนที่แสดงบนจอ HUD ยังเป็นรุ่นทดลอง",
    "The map shows on both: the instrument cluster and the head-up display.": "แผนที่แสดงทั้งสองที่: หน้าปัดและจอ HUD",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "แผนที่ไม่แสดงที่ใด: หน้าปัดและ HUD แสดงเนื้อหาของ BMW",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "หากถูกขอให้เก็บข้อมูล: เริ่มเก็บ เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "หากต้องการตรวจสอบปัญหา: เริ่มเก็บข้อมูล เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "บันทึกล็อกของแผนที่และข้อความล่าสุดของชุดควบคุมหลักเป็นไฟล์ เพื่อแนบในการรายงานปัญหา",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก"
   }
@@ -3638,7 +3638,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Harita head-up ekranda görünür. Hâlâ deneysel.",
    "The map shows on both: the instrument cluster and the head-up display.": "Harita ikisinde de görünür: göstergede ve head-up ekranda.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harita hiçbirinde görünmez: gösterge ve HUD, BMW'nin kendi içeriğini gösterir.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Sizden kayıt istenirse: başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Bir sorunu incelemek için: kaydı başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Haritanın günlüklerini ve ana ünitenin son iletilerini bir sorun bildirimine eklemek için dosyaya kaydeder.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin."
   }
@@ -3768,7 +3768,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Карта показується на проєкційному дисплеї. Поки експериментально.",
    "The map shows on both: the instrument cluster and the head-up display.": "Карта показується на обох: на приладах і на проєкційному дисплеї.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта ніде не показується: прилади і HUD показують вміст BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Якщо просять запис: почніть, перепідключіть телефон, дочекайтеся проблеми й збережіть журнали.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Для розбору проблеми: почніть запис, перепідключіть телефон, дочекайтеся її й збережіть журнали.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Зберігає журнали карти та нещодавні повідомлення головного блока у файл для звіту про проблему.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали."
   }
@@ -3898,7 +3898,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Bản đồ hiển thị trên màn hình HUD. Vẫn đang thử nghiệm.",
    "The map shows on both: the instrument cluster and the head-up display.": "Bản đồ hiển thị trên cả hai: bảng đồng hồ và màn hình HUD.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Bản đồ không hiển thị ở đâu: bảng đồng hồ và HUD hiện nội dung của BMW.",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Nếu được yêu cầu ghi: bắt đầu ghi, kết nối lại điện thoại, chờ lỗi xảy ra rồi nhấn Lưu nhật ký.",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Để tìm hiểu lỗi: bắt đầu ghi, kết nối lại điện thoại, chờ lỗi xảy ra rồi nhấn Lưu nhật ký.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lưu nhật ký bản đồ và tin nhắn gần đây của bộ điều khiển vào một tệp để đính kèm khi báo lỗi.",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký."
   }
@@ -4030,7 +4030,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "地图显示在抬头显示器上。仍为实验功能。",
    "The map shows on both: the instrument cluster and the head-up display.": "地图同时显示在仪表盘和抬头显示器上。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地图都不显示：仪表盘和 HUD 显示 BMW 自己的内容。",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需采集：开始后重新连接手机，等问题出现，再按保存日志。",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "排查问题时：开始采集后重新连接手机，等问题出现，再按保存日志。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "将地图日志和主机的最近消息保存为文件，以附在问题报告中。",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。"
   }
@@ -4162,7 +4162,7 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "地圖顯示在抬頭顯示器上。仍為實驗功能。",
    "The map shows on both: the instrument cluster and the head-up display.": "地圖同時顯示在儀表板和抬頭顯示器上。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。",
-   "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需擷取：開始後重新連接手機，等問題出現，再按儲存記錄檔。",
+   "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "排查問題時：開始擷取後重新連接手機，等問題出現，再按儲存記錄檔。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "將地圖記錄檔和主機的最近訊息儲存為檔案，以附在問題回報中。",
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。"
   }

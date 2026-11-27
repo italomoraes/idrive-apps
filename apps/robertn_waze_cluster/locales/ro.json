@@ -122,7 +122,7 @@
     "The map shows on the head-up display. Still experimental.": "Harta apare pe afișajul head-up. Încă experimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "Harta apare pe ambele: bordul și afișajul head-up.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harta nu apare nicăieri: bordul și HUD-ul arată conținutul BMW.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Dacă vi se cere o captură: porniți-o, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Pentru a investiga o problemă: porniți captura, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salvează jurnalele hărții și mesajele recente ale unității principale într-un fișier de atașat la o raportare.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele."
   }

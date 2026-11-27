@@ -122,7 +122,7 @@
     "The map shows on the head-up display. Still experimental.": "La carte s'affiche sur l'affichage tête haute. Encore expérimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Pour examiner un problème : démarrez la capture, reconnectez le téléphone, attendez le problème, puis enregistrez.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger."
   }

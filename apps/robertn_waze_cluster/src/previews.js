@@ -49,7 +49,7 @@ const ROWS = {
  * the saved logs download from, drawn on the same background (src/qr.js),
  * or the logs picture while there is no address. */
 const LOGS_ROWS = {
-    wocCapture: { image: 'qr', text: () => t('If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.') },
+    wocCapture: { image: 'qr', text: () => t('To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.') },
     wocLogsSave: { image: 'qr', text: () => t('Saves the map\'s logs and the head unit\'s recent messages in a file, to attach to a problem report.') }
 };
 [1, 2, 3, 4, 5].forEach((i) => {

@@ -122,7 +122,7 @@
     "The map shows on the head-up display. Still experimental.": "Kortet vises på head-up-displayet. Stadig eksperimentelt.",
     "The map shows on both: the instrument cluster and the head-up display.": "Kortet vises begge steder: i instrumentpanelet og på head-up-displayet.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kortet vises ingen steder: instrumentpanel og HUD viser BMW's eget indhold.",
-    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du bliver bedt om en optagelse: start den, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
+    "To look into a problem: start the capture, reconnect the phone, wait for the problem, then press Save logs.": "Vil du undersøge et problem: start optagelsen, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Gemmer kortets logfiler og hovedenhedens seneste meddelelser i en fil, du kan vedhæfte en fejlrapport.",
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne."
   }
