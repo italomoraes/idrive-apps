@@ -14,7 +14,6 @@
     "Logs": "Log",
     "Restart head unit": "Mulai ulang head unit",
     "Hide BMW's turn box": "Sembunyikan petunjuk belok BMW",
-    "Turn card: {0}": "Kartu belokan: {0}",
     "Below the arrow": "Di bawah panah",
     "At the top": "Di atas",
     "Show an example": "Tampilkan contoh",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Peta tampil di head-up display. Masih eksperimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "Peta tampil di keduanya: panel instrumen dan head-up display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Peta tidak tampil di mana pun: panel dan HUD menampilkan konten BMW sendiri.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Tempat kartu belokan tampil di atas peta: mati, di bawah panah, atau di atas. Tiap tekanan menggantinya.",
     "Shows the turn card for a few seconds, where it is set to show.": "Menampilkan kartu belokan beberapa detik, di tempat yang diatur.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jika diminta rekaman: mulai, sambungkan ulang ponsel, tunggu masalahnya, lalu tekan Simpan log.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Menyimpan log peta dan pesan terbaru head unit ke dalam file untuk dilampirkan pada laporan masalah.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log.",
+    "Turn card": "Kartu belokan",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Tempat kartu kami dengan belokan berikutnya tampil di atas peta. Buka daftar untuk tiap pilihan.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Tanpa kartu kami di peta: kartu belok milik ponsel yang tampil, jika ada.",
+    "Our card with the next turn shows below the map's arrow.": "Kartu kami dengan belokan berikutnya tampil di bawah panah peta.",
+    "Our card with the next turn shows at the top of the map.": "Kartu kami dengan belokan berikutnya tampil di bagian atas peta."
   }
 }

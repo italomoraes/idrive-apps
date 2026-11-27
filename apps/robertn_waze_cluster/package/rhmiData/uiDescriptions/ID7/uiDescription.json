@@ -196,7 +196,7 @@
           ]
         },
         "40": {
-          "type": "button",
+          "type": "valueList",
           "name": "wocTurnCard",
           "properties": {
             "Visible": {
@@ -208,10 +208,44 @@
               "type": "UInt"
             }
           },
+          "cells": {
+            "HeaderText": {
+              "value": "Turn card",
+              "type": "Text"
+            },
+            "SelectedItem": {
+              "value": 0,
+              "type": "UInt"
+            }
+          },
           "rows": [
             {
-              "Text": {
-                "value": "Turn card: \u2014",
+              "ItemText": {
+                "value": "—",
+                "type": "Text"
+              },
+              "ItemSelectionText": {
+                "value": "—",
+                "type": "Text"
+              }
+            },
+            {
+              "ItemText": {
+                "value": "Below the arrow",
+                "type": "Text"
+              },
+              "ItemSelectionText": {
+                "value": "Below the arrow",
+                "type": "Text"
+              }
+            },
+            {
+              "ItemText": {
+                "value": "At the top",
+                "type": "Text"
+              },
+              "ItemSelectionText": {
+                "value": "At the top",
                 "type": "Text"
               }
             }

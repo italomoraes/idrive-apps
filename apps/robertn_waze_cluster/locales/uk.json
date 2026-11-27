@@ -14,7 +14,6 @@
     "Logs": "Журнали",
     "Restart head unit": "Перезапустити пристрій",
     "Hide BMW's turn box": "Приховати підказки поворотів BMW",
-    "Turn card: {0}": "Картка маневру: {0}",
     "Below the arrow": "Під стрілкою",
     "At the top": "Угорі",
     "Show an example": "Показати приклад",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Карта показується на проєкційному дисплеї. Поки експериментально.",
     "The map shows on both: the instrument cluster and the head-up display.": "Карта показується на обох: на приладах і на проєкційному дисплеї.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта ніде не показується: прилади і HUD показують вміст BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Де картка маневру видна на карті: вимк., під стрілкою або вгорі. Кожне натискання змінює.",
     "Shows the turn card for a few seconds, where it is set to show.": "Показує картку маневру на кілька секунд там, де її налаштовано.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Якщо просять запис: почніть, перепідключіть телефон, дочекайтеся проблеми й збережіть журнали.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Зберігає журнали карти та нещодавні повідомлення головного блока у файл для звіту про проблему.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали.",
+    "Turn card": "Картка маневру",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Де на карті видно нашу картку наступного маневру. Відкрийте список, щоб побачити варіанти.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашої картки на карті: видно картку повороту самого телефона, якщо вона є.",
+    "Our card with the next turn shows below the map's arrow.": "Наша картка наступного маневру видна під стрілкою карти.",
+    "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти."
   }
 }

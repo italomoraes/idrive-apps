@@ -340,6 +340,8 @@ async function main() {
     Object.entries(focusable()).filter(([, f]) => f === '3').forEach(([name]) =>
         assert(previews.preview(name, null), `${name}: a preview`));
     [0, 1, 2, 3].forEach((row) => assert(previews.preview('wocShowOn', row), `Show on's choice ${row}: a preview`));
+    [0, 1, 2].forEach((row) => assert(previews.preview('wocTurnCard', row), `the turn card's choice ${row}: a preview`));
+    assert.strictEqual(widgets.wocTurnCard, 'LT_ValueList_Regular', 'the turn card: a value list, as Show on');
     previews.images().forEach((image) => assert(fs.existsSync(path.join(PKG, 'previews', `${image}.png`)), `previews/${image}.png`));
     assert(JSON.parse(fs.readFileSync(path.join(PKG, 'package.json'), 'utf8')).files.includes('previews'), 'package.json ships previews/');
     assert.deepStrictEqual(['MinValue', 'MaxValue', 'NumberOfSteps'].map((k) => components['52'].rows[0][k].value), [0, HUD_SIZE_STEPS, HUD_SIZE_STEPS],
@@ -397,7 +399,7 @@ async function main() {
         const bound = logs.filter((l) => l.startsWith('info: BIND OK: ')).map((l) => l.split(' ')[3]).sort();
         assert.deepStrictEqual(bound, ['wocAaCard', 'wocAaDisable', 'wocAaEnable', 'wocAaZoomIn', 'wocAaZoomOut', 'wocCapture', 'wocDisable', 'wocEnable',
             'wocGuide', 'wocHudCentre', 'wocHudDown', 'wocHudKeep', 'wocHudLeft', 'wocHudRight', 'wocHudUp', 'wocLogs', 'wocLogsSave', 'wocProfile',
-            'wocRestart', 'wocTurnCard', 'wocTurnCardShow'],
+            'wocRestart', 'wocTurnCardShow'],
             'bound buttons and checkbox');
         assert.strictEqual(byName.wocRestart.visible, false, 'restart button hidden while the map shows');
         console.log('ok   a page opened while the map is up shows it');
@@ -452,22 +454,25 @@ async function main() {
             'not supported on this car: every button greyed');
 
         {
-            /* the turn card: off, below the arrow, at the top, in turn; the example only while it is on */
+            /* the turn card: a value list of Off, Below the arrow and At the top, each choice
+             * through the render; the example only while it is on */
             const card = byName.wocTurnCard, show = byName.wocTurnCardShow;
-            await until('the turn card off, its example greyed', () => card.text === 'Turn card: Off' && card.enabled === true && show.enabled === false);
-            card.press();
-            await until('below the arrow', () => render.turnCard === 'bottom' && card.text === 'Turn card: Below the arrow' && show.enabled === true);
+            await until('the turn card off, its example greyed', () => card.shown() === 'Turn card: Off' && card.enabled === true && show.enabled === false);
+            assert.deepStrictEqual([0, 1, 2].map((r) => card.cells[`${r}:ItemSelectionText`]), ['Off', 'Below the arrow', 'At the top'],
+                'each choice shows under the list\'s name, closed');
+            card.pick(1);
+            await until('below the arrow', () => render.turnCard === 'bottom' && card.shown() === 'Turn card: Below the arrow' && show.enabled === true);
             show.press();
             await until('the example sent', () => (render.maneuvers || []).length === 1);
             assert.deepStrictEqual(render.maneuvers[0], { cmd: 'maneuver', kind: 'left', distance: '200 m', road: 'Example street' }, 'the example manoeuvre');
             await sleep(450);   /* past the press debounce */
-            card.press();
-            await until('at the top', () => render.turnCard === 'top' && card.text === 'Turn card: At the top');
+            card.pick(2);
+            await until('at the top', () => render.turnCard === 'top' && card.shown() === 'Turn card: At the top');
             await sleep(450);
-            card.press();
-            await until('off again', () => render.turnCard === 'off' && card.text === 'Turn card: Off' && show.enabled === false);
+            card.pick(0);
+            await until('off again', () => render.turnCard === 'off' && card.shown() === 'Turn card: Off' && show.enabled === false);
             render.received = render.received.filter((m) => m.cmd !== 'turn_card' && m.cmd !== 'maneuver');
-            console.log('ok   the turn card: Off, Below the arrow, At the top in turn as the render says; Show an example sends one, greyed while off');
+            console.log('ok   the turn card: a list of Off, Below the arrow and At the top, each pick as the render says; Show an example sends one, greyed while off');
         }
         const guide = byName.wocGuide;
         await until('the switch enabled, ticked', () => guide.enabled === true && guide.selected === true);
@@ -767,6 +772,10 @@ async function main() {
         }
         focusOn('wocShowOn', { [2]: 4294967295 });
         await until('Show on, closed', () => shows('wocShowOn', null));
+        for (const row of [0, 1, 2]) {
+            focusOn('wocTurnCard', { [2]: row });
+            await until(`the turn card's choice ${row}`, () => shows('wocTurnCard', row));
+        }
         focusOn('wocHudCentre', { 0: true });
         await until('Centre\'s preview', () => shows('wocHudCentre', null));
         assert.deepStrictEqual([0, 1, 2, 3].map((r) => byName.wocShowOn.cells[`${r}:ItemSelectionText`]),

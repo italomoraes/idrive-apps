@@ -14,7 +14,6 @@
     "Logs": "Jurnale",
     "Restart head unit": "Repornire unitate",
     "Hide BMW's turn box": "Ascundere indicații BMW",
-    "Turn card: {0}": "Card de viraj: {0}",
     "Below the arrow": "Sub săgeată",
     "At the top": "Sus",
     "Show an example": "Arată un exemplu",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Harta apare pe afișajul head-up. Încă experimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "Harta apare pe ambele: bordul și afișajul head-up.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harta nu apare nicăieri: bordul și HUD-ul arată conținutul BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Unde apare cardul de viraj pe hartă: oprit, sub săgeată sau sus. Fiecare apăsare îl schimbă.",
     "Shows the turn card for a few seconds, where it is set to show.": "Arată cardul de viraj câteva secunde, acolo unde este setat.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Dacă vi se cere o captură: porniți-o, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salvează jurnalele hărții și mesajele recente ale unității principale într-un fișier de atașat la o raportare.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele.",
+    "Turn card": "Card de viraj",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Unde apare pe hartă cardul nostru cu virajul următor. Deschideți lista pentru fiecare opțiune.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Fără cardul nostru pe hartă: apare cardul de viraj al telefonului, dacă are unul.",
+    "Our card with the next turn shows below the map's arrow.": "Cardul nostru cu virajul următor apare sub săgeata hărții.",
+    "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții."
   }
 }

@@ -18,7 +18,6 @@ module.exports = [
    "Logs": "السجلات",
    "Restart head unit": "إعادة تشغيل الوحدة الرئيسية",
    "Hide BMW's turn box": "إخفاء مربع الانعطاف من BMW",
-   "Turn card: {0}": "بطاقة المنعطف: {0}",
    "Below the arrow": "أسفل السهم",
    "At the top": "في الأعلى",
    "Show an example": "عرض مثال",
@@ -123,11 +122,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "تظهر الخريطة على شاشة العرض الأمامية. ما زالت تجريبية.",
    "The map shows on both: the instrument cluster and the head-up display.": "تظهر الخريطة على الاثنين: لوحة العدادات وشاشة العرض الأمامية.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "لا تظهر الخريطة في أي منهما: لوحة العدادات وHUD تعرضان محتوى BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "مكان ظهور بطاقة المنعطف فوق الخريطة: إيقاف، أو أسفل السهم، أو في الأعلى. كل ضغطة تغيّره.",
    "Shows the turn card for a few seconds, where it is set to show.": "يعرض بطاقة المنعطف بضع ثوانٍ في المكان المحدد لها.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "إذا طُلب منك التقاط: ابدأه، وأعد توصيل الهاتف، وانتظر المشكلة، ثم اضغط حفظ السجلات.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "يحفظ سجلات الخريطة والرسائل الأخيرة للوحدة الرئيسية في ملف لإرفاقه بتقرير المشكلة.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات.",
+   "Turn card": "بطاقة المنعطف",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "مكان ظهور بطاقتنا للانعطاف التالي فوق الخريطة. افتح القائمة لترى كل خيار.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "لا بطاقة منا فوق الخريطة: تظهر بطاقة الانعطاف الخاصة بالهاتف، إن وُجدت.",
+   "Our card with the next turn shows below the map's arrow.": "تظهر بطاقتنا للانعطاف التالي أسفل سهم الخريطة.",
+   "Our card with the next turn shows at the top of the map.": "تظهر بطاقتنا للانعطاف التالي أعلى الخريطة."
   }
  },
  {
@@ -147,7 +150,6 @@ module.exports = [
    "Logs": "Protokoly",
    "Restart head unit": "Restartovat hlavní jednotku",
    "Hide BMW's turn box": "Skrýt okno odbočení BMW",
-   "Turn card: {0}": "Karta odbočení: {0}",
    "Below the arrow": "Pod šipkou",
    "At the top": "Nahoře",
    "Show an example": "Zobrazit příklad",
@@ -252,11 +254,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa se zobrazí na průhledovém displeji. Zatím experimentální.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa se zobrazí na obou: štítu přístrojů i průhledovém displeji.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa se nezobrazí nikde: štít a HUD ukazují obsah BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kde se karta odbočení zobrazuje na mapě: vypnuto, pod šipkou nebo nahoře. Každé stisknutí přepne.",
    "Shows the turn card for a few seconds, where it is set to show.": "Na několik sekund ukáže kartu odbočení tam, kde je nastavena.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pokud vás požádají o záznam: spusťte ho, znovu připojte telefon, počkejte na problém a stiskněte Uložit protokoly.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží protokoly mapy a nedávné zprávy hlavní jednotky do souboru, který přiložíte k hlášení problému.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem připojeným k hotspotu Wi-Fi auta naskenujte kód nebo otevřete adresu a stáhněte protokoly."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem připojeným k hotspotu Wi-Fi auta naskenujte kód nebo otevřete adresu a stáhněte protokoly.",
+   "Turn card": "Karta odbočení",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde se na mapě zobrazuje naše karta s dalším odbočením. Otevřete seznam a uvidíte volby.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez naší karty na mapě: zobrazí se karta odbočení telefonu, pokud ji má.",
+   "Our card with the next turn shows below the map's arrow.": "Naše karta s dalším odbočením se zobrazí pod šipkou mapy.",
+   "Our card with the next turn shows at the top of the map.": "Naše karta s dalším odbočením se zobrazí nahoře na mapě."
   }
  },
  {
@@ -276,7 +282,6 @@ module.exports = [
    "Logs": "Logfiler",
    "Restart head unit": "Genstart hovedenhed",
    "Hide BMW's turn box": "Skjul BMW's svinganvisning",
-   "Turn card: {0}": "Svingkort: {0}",
    "Below the arrow": "Under pilen",
    "At the top": "Øverst",
    "Show an example": "Vis et eksempel",
@@ -381,11 +386,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kortet vises på head-up-displayet. Stadig eksperimentelt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kortet vises begge steder: i instrumentpanelet og på head-up-displayet.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kortet vises ingen steder: instrumentpanel og HUD viser BMW's eget indhold.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hvor svingkortet vises over kortet: fra, under pilen eller øverst. Hvert tryk skifter.",
    "Shows the turn card for a few seconds, where it is set to show.": "Viser svingkortet i nogle sekunder, dér hvor det er indstillet.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du bliver bedt om en optagelse: start den, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Gemmer kortets logfiler og hovedenhedens seneste meddelelser i en fil, du kan vedhæfte en fejlrapport.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne.",
+   "Turn card": "Svingkort",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vores kort med næste sving vises over kortet. Åbn listen for at se hvert valg.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Intet kort fra os over kortet: telefonens eget svingkort vises, hvis den har et.",
+   "Our card with the next turn shows below the map's arrow.": "Vores kort med næste sving vises under kortets pil.",
+   "Our card with the next turn shows at the top of the map.": "Vores kort med næste sving vises øverst på kortet."
   }
  },
  {
@@ -405,7 +414,6 @@ module.exports = [
    "Logs": "Protokolle",
    "Restart head unit": "Headunit neu starten",
    "Hide BMW's turn box": "BMW-Abbiegehinweis ausblenden",
-   "Turn card: {0}": "Abbiegekarte: {0}",
    "Below the arrow": "Unter dem Pfeil",
    "At the top": "Oben",
    "Show an example": "Beispiel anzeigen",
@@ -510,11 +518,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Die Karte erscheint im Head-up-Display. Noch experimentell.",
    "The map shows on both: the instrument cluster and the head-up display.": "Die Karte erscheint in beiden: im Kombi und im Head-up-Display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Die Karte erscheint in keinem: Kombi und HUD zeigen BMWs eigene Inhalte.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Wo die Abbiegekarte über der Karte erscheint: aus, unter dem Pfeil oder oben. Jeder Druck wechselt.",
    "Shows the turn card for a few seconds, where it is set to show.": "Zeigt die Abbiegekarte für einige Sekunden dort, wo sie eingestellt ist.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Für eine erbetene Aufzeichnung: starten, Telefon neu verbinden, Problem abwarten, Protokolle speichern.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Speichert die Protokolle der Karte und die letzten Meldungen der Head Unit in einer Datei für einen Fehlerbericht.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden.",
+   "Turn card": "Abbiegekarte",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Wo unsere Karte mit dem nächsten Abbiegen über der Karte erscheint. Die Liste zeigt jede Wahl.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Keine Karte von uns über der Karte: die eigene Abbiegekarte des Telefons erscheint, falls es eine hat.",
+   "Our card with the next turn shows below the map's arrow.": "Unsere Karte mit dem nächsten Abbiegen erscheint unter dem Pfeil der Karte.",
+   "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte."
   }
  },
  {
@@ -534,7 +546,6 @@ module.exports = [
    "Logs": "Αρχεία καταγραφής",
    "Restart head unit": "Επανεκκίνηση μονάδας",
    "Hide BMW's turn box": "Απόκρυψη οδηγιών στροφής BMW",
-   "Turn card: {0}": "Κάρτα στροφής: {0}",
    "Below the arrow": "Κάτω από το βέλος",
    "At the top": "Στο πάνω μέρος",
    "Show an example": "Εμφάνιση παραδείγματος",
@@ -639,11 +650,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Ο χάρτης εμφανίζεται στην προβολή head-up. Ακόμα πειραματικό.",
    "The map shows on both: the instrument cluster and the head-up display.": "Ο χάρτης εμφανίζεται και στα δύο: στα όργανα και στην προβολή head-up.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Ο χάρτης δεν εμφανίζεται πουθενά: όργανα και HUD δείχνουν το περιεχόμενο της BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Πού εμφανίζεται η κάρτα στροφής στον χάρτη: ανενεργή, κάτω από το βέλος ή στο πάνω μέρος. Κάθε πάτημα την αλλάζει.",
    "Shows the turn card for a few seconds, where it is set to show.": "Δείχνει την κάρτα στροφής για λίγα δευτερόλεπτα, εκεί που έχει ρυθμιστεί.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Αν σας ζητηθεί καταγραφή: ξεκινήστε την, συνδέστε ξανά το τηλέφωνο, περιμένετε το πρόβλημα και πατήστε Αποθήκευση αρχείων.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Αποθηκεύει τα αρχεία του χάρτη και τα πρόσφατα μηνύματα της κεντρικής μονάδας σε ένα αρχείο για αναφορά.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Με τηλέφωνο στο σημείο πρόσβασης Wi-Fi του αυτοκινήτου, σαρώστε τον κωδικό ή ανοίξτε τη διεύθυνση."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Με τηλέφωνο στο σημείο πρόσβασης Wi-Fi του αυτοκινήτου, σαρώστε τον κωδικό ή ανοίξτε τη διεύθυνση.",
+   "Turn card": "Κάρτα στροφής",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Πού εμφανίζεται στον χάρτη η κάρτα μας με την επόμενη στροφή. Ανοίξτε τη λίστα για τις επιλογές.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Χωρίς δική μας κάρτα στον χάρτη: εμφανίζεται η κάρτα στροφής του τηλεφώνου, αν έχει.",
+   "Our card with the next turn shows below the map's arrow.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται κάτω από το βέλος του χάρτη.",
+   "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη."
   }
  },
  {
@@ -663,7 +678,6 @@ module.exports = [
    "Logs": "Registros",
    "Restart head unit": "Reiniciar unidad principal",
    "Hide BMW's turn box": "Ocultar indicación de giro de BMW",
-   "Turn card: {0}": "Tarjeta de maniobra: {0}",
    "Below the arrow": "Debajo de la flecha",
    "At the top": "Arriba",
    "Show an example": "Mostrar un ejemplo",
@@ -768,11 +782,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "El mapa se muestra en el head-up display. Aún es experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "El mapa se muestra en ambos: el tablero de instrumentos y el head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "El mapa no se muestra en ninguno: el tablero y el HUD muestran el contenido propio de BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Dónde aparece la tarjeta de maniobra sobre el mapa: desactivada, debajo de la flecha o arriba. Cada toque la cambia.",
    "Shows the turn card for a few seconds, where it is set to show.": "Muestra la tarjeta de maniobra unos segundos, donde está configurada.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Si te piden una captura: iníciala, vuelve a conectar el teléfono, espera el problema y toca Guardar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda los registros del mapa y de la unidad principal en un archivo para adjuntar a un reporte.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el hotspot Wi-Fi del auto, escanea el código o abre la dirección para descargar los registros."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el hotspot Wi-Fi del auto, escanea el código o abre la dirección para descargar los registros.",
+   "Turn card": "Tarjeta de maniobra",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de giro propia del teléfono, si tiene una.",
+   "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
+   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
   }
  },
  {
@@ -792,7 +810,6 @@ module.exports = [
    "Logs": "Registros",
    "Restart head unit": "Reiniciar unidad principal",
    "Hide BMW's turn box": "Ocultar indicación de giro de BMW",
-   "Turn card: {0}": "Tarjeta de maniobra: {0}",
    "Below the arrow": "Debajo de la flecha",
    "At the top": "Arriba",
    "Show an example": "Mostrar un ejemplo",
@@ -897,11 +914,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "El mapa se muestra en el head-up display. Aún es experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "El mapa se muestra en ambos: el cuadro de instrumentos y el head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "El mapa no se muestra en ninguno: el cuadro y el HUD muestran el contenido propio de BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Dónde aparece la tarjeta de maniobra sobre el mapa: desactivada, debajo de la flecha o arriba. Cada pulsación la cambia.",
    "Shows the turn card for a few seconds, where it is set to show.": "Muestra la tarjeta de maniobra unos segundos, donde está configurada.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Si te piden una captura: iníciala, vuelve a conectar el teléfono, espera el problema y pulsa Guardar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda los registros del mapa y de la unidad principal en un archivo para adjuntar a un informe.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el punto de acceso Wi-Fi del coche, escanea el código o abre la dirección para descargar los registros."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el punto de acceso Wi-Fi del coche, escanea el código o abre la dirección para descargar los registros.",
+   "Turn card": "Tarjeta de maniobra",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de giro propia del teléfono, si tiene una.",
+   "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
+   "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
   }
  },
  {
@@ -921,7 +942,6 @@ module.exports = [
    "Logs": "Lokit",
    "Restart head unit": "Käynnistä pääyksikkö uudelleen",
    "Hide BMW's turn box": "Piilota BMW:n kääntymisohje",
-   "Turn card: {0}": "Käännöskortti: {0}",
    "Below the arrow": "Nuolen alla",
    "At the top": "Ylhäällä",
    "Show an example": "Näytä esimerkki",
@@ -1026,11 +1046,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartta näkyy tuulilasinäytössä. Yhä kokeellinen.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartta näkyy molemmissa: mittaristossa ja tuulilasinäytössä.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartta ei näy kummassakaan: mittaristo ja HUD näyttävät BMW:n omaa sisältöä.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Missä käännöskortti näkyy kartan päällä: pois, nuolen alla tai ylhäällä. Jokainen painallus vaihtaa.",
    "Shows the turn card for a few seconds, where it is set to show.": "Näyttää käännöskortin muutaman sekunnin asetetussa paikassa.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jos sinulta pyydetään kaappausta: aloita se, yhdistä puhelin uudelleen, odota ongelmaa ja paina Tallenna lokit.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Tallentaa kartan lokit ja pääyksikön viimeisimmät viestit tiedostoon, jonka voi liittää ongelmailmoitukseen.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Kun puhelin on auton Wi-Fi-yhteyspisteessä, skannaa koodi tai avaa osoite ladataksesi lokit."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Kun puhelin on auton Wi-Fi-yhteyspisteessä, skannaa koodi tai avaa osoite ladataksesi lokit.",
+   "Turn card": "Käännöskortti",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Missä korttimme seuraavasta käännöksestä näkyy kartan päällä. Avaa luettelo nähdäksesi valinnat.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Ei korttiamme kartan päällä: puhelimen oma käännöskortti näkyy, jos sillä on sellainen.",
+   "Our card with the next turn shows below the map's arrow.": "Korttimme seuraavasta käännöksestä näkyy kartan nuolen alla.",
+   "Our card with the next turn shows at the top of the map.": "Korttimme seuraavasta käännöksestä näkyy kartan yläreunassa."
   }
  },
  {
@@ -1050,7 +1074,6 @@ module.exports = [
    "Logs": "Journaux",
    "Restart head unit": "Redémarrer le système",
    "Hide BMW's turn box": "Masquer le guidage BMW",
-   "Turn card: {0}": "Carte de manœuvre : {0}",
    "Below the arrow": "Sous la flèche",
    "At the top": "En haut",
    "Show an example": "Afficher un exemple",
@@ -1155,11 +1178,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La carte s'affiche sur l'affichage tête haute. Encore expérimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Où la carte de manœuvre s'affiche sur la carte : désactivée, sous la flèche ou en haut. Chaque appui la change.",
    "Shows the turn card for a few seconds, where it is set to show.": "Affiche la carte de manœuvre quelques secondes, là où elle est réglée.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger.",
+   "Turn card": "Carte de manœuvre",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Pas de carte à nous sur la carte : celle du téléphone s'affiche, s'il en a une.",
+   "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
+   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
   }
  },
  {
@@ -1179,7 +1206,6 @@ module.exports = [
    "Logs": "Journaux",
    "Restart head unit": "Redémarrer le système",
    "Hide BMW's turn box": "Masquer le guidage BMW",
-   "Turn card: {0}": "Carte de manœuvre : {0}",
    "Below the arrow": "Sous la flèche",
    "At the top": "En haut",
    "Show an example": "Afficher un exemple",
@@ -1284,11 +1310,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La carte s'affiche sur l'affichage tête haute. Encore expérimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "La carte s'affiche sur les deux : le combiné et l'affichage tête haute.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La carte ne s'affiche nulle part : le combiné et le HUD montrent le contenu de BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Où la carte de manœuvre s'affiche sur la carte : désactivée, sous la flèche ou en haut. Chaque appui la change.",
    "Shows the turn card for a few seconds, where it is set to show.": "Affiche la carte de manœuvre quelques secondes, là où elle est réglée.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Pour une capture demandée : démarrez-la, reconnectez le téléphone, attendez le problème, puis enregistrez.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Enregistre les journaux de la carte et de l'unité principale dans un fichier à joindre à un signalement.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, scannez le code ou ouvrez l'adresse pour les télécharger."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, scannez le code ou ouvrez l'adresse pour les télécharger.",
+   "Turn card": "Carte de manœuvre",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Pas de carte à nous sur la carte : celle du téléphone s'affiche, s'il en a une.",
+   "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
+   "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
   }
  },
  {
@@ -1308,7 +1338,6 @@ module.exports = [
    "Logs": "יומנים",
    "Restart head unit": "הפעלה מחדש של המערכת",
    "Hide BMW's turn box": "הסתרת תיבת הפניות של BMW",
-   "Turn card: {0}": "כרטיס פנייה: {0}",
    "Below the arrow": "מתחת לחץ",
    "At the top": "למעלה",
    "Show an example": "הצג דוגמה",
@@ -1413,11 +1442,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "המפה מוצגת בתצוגה העילית. עדיין ניסיוני.",
    "The map shows on both: the instrument cluster and the head-up display.": "המפה מוצגת בשניהם: בלוח המחוונים ובתצוגה העילית.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "המפה לא מוצגת באף אחד: לוח המחוונים וה-HUD מציגים את התוכן של BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "היכן כרטיס הפנייה מוצג על המפה: כבוי, מתחת לחץ או למעלה. כל לחיצה מחליפה.",
    "Shows the turn card for a few seconds, where it is set to show.": "מציג את כרטיס הפנייה לכמה שניות, במקום שהוגדר לו.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "אם ביקשו מכם הקלטה: התחילו אותה, חברו מחדש את הטלפון, חכו לבעיה ולחצו שמירת יומנים.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "שומר את יומני המפה ואת ההודעות האחרונות של היחידה הראשית בקובץ לצירוף לדיווח על בעיה.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים.",
+   "Turn card": "כרטיס פנייה",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "היכן מוצג על המפה הכרטיס שלנו עם הפנייה הבאה. פתחו את הרשימה לכל אפשרות.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "בלי כרטיס שלנו על המפה: מוצג כרטיס הפניות של הטלפון, אם יש לו.",
+   "Our card with the next turn shows below the map's arrow.": "הכרטיס שלנו עם הפנייה הבאה מוצג מתחת לחץ של המפה.",
+   "Our card with the next turn shows at the top of the map.": "הכרטיס שלנו עם הפנייה הבאה מוצג בראש המפה."
   }
  },
  {
@@ -1437,7 +1470,6 @@ module.exports = [
    "Logs": "Naplók",
    "Restart head unit": "Fejegység újraindítása",
    "Hide BMW's turn box": "BMW navigációs ablak elrejtése",
-   "Turn card: {0}": "Kanyarodási kártya: {0}",
    "Below the arrow": "A nyíl alatt",
    "At the top": "Felül",
    "Show an example": "Példa megjelenítése",
@@ -1542,11 +1574,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "A térkép a szélvédőkijelzőn jelenik meg. Még kísérleti.",
    "The map shows on both: the instrument cluster and the head-up display.": "A térkép mindkettőn megjelenik: a műszerfalon és a szélvédőkijelzőn.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "A térkép sehol sem jelenik meg: a műszerfal és a HUD a BMW saját tartalmát mutatja.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hol jelenik meg a kanyarodási kártya a térképen: ki, a nyíl alatt vagy felül. Minden nyomás vált.",
    "Shows the turn card for a few seconds, where it is set to show.": "Néhány másodpercre megmutatja a kanyarodási kártyát a beállított helyen.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ha rögzítést kérnek: indítsa el, csatlakoztassa újra a telefont, várja meg a hibát, majd Naplók mentése.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Fájlba menti a térkép naplóit és a fejegység legutóbbi üzeneteit, hogy hibabejelentéshez csatolja.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért.",
+   "Turn card": "Kanyarodási kártya",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hol jelenik meg a térképen a következő kanyar kártyánk. Nyissa meg a listát a lehetőségekért.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Nincs kártyánk a térképen: a telefon saját kanyarkártyája látszik, ha van neki.",
+   "Our card with the next turn shows below the map's arrow.": "A következő kanyar kártyánk a térkép nyila alatt jelenik meg.",
+   "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg."
   }
  },
  {
@@ -1566,7 +1602,6 @@ module.exports = [
    "Logs": "Log",
    "Restart head unit": "Mulai ulang head unit",
    "Hide BMW's turn box": "Sembunyikan petunjuk belok BMW",
-   "Turn card: {0}": "Kartu belokan: {0}",
    "Below the arrow": "Di bawah panah",
    "At the top": "Di atas",
    "Show an example": "Tampilkan contoh",
@@ -1671,11 +1706,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Peta tampil di head-up display. Masih eksperimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "Peta tampil di keduanya: panel instrumen dan head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Peta tidak tampil di mana pun: panel dan HUD menampilkan konten BMW sendiri.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Tempat kartu belokan tampil di atas peta: mati, di bawah panah, atau di atas. Tiap tekanan menggantinya.",
    "Shows the turn card for a few seconds, where it is set to show.": "Menampilkan kartu belokan beberapa detik, di tempat yang diatur.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jika diminta rekaman: mulai, sambungkan ulang ponsel, tunggu masalahnya, lalu tekan Simpan log.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Menyimpan log peta dan pesan terbaru head unit ke dalam file untuk dilampirkan pada laporan masalah.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log.",
+   "Turn card": "Kartu belokan",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Tempat kartu kami dengan belokan berikutnya tampil di atas peta. Buka daftar untuk tiap pilihan.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Tanpa kartu kami di peta: kartu belok milik ponsel yang tampil, jika ada.",
+   "Our card with the next turn shows below the map's arrow.": "Kartu kami dengan belokan berikutnya tampil di bawah panah peta.",
+   "Our card with the next turn shows at the top of the map.": "Kartu kami dengan belokan berikutnya tampil di bagian atas peta."
   }
  },
  {
@@ -1695,7 +1734,6 @@ module.exports = [
    "Logs": "Log",
    "Restart head unit": "Riavvia sistema",
    "Hide BMW's turn box": "Nascondi indicazioni BMW",
-   "Turn card: {0}": "Scheda di svolta: {0}",
    "Below the arrow": "Sotto la freccia",
    "At the top": "In alto",
    "Show an example": "Mostra un esempio",
@@ -1800,11 +1838,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "La mappa appare sull'head-up display. Ancora sperimentale.",
    "The map shows on both: the instrument cluster and the head-up display.": "La mappa appare su entrambi: il quadro strumenti e l'head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La mappa non appare da nessuna parte: il quadro e l'HUD mostrano i contenuti BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Dove appare la scheda di svolta sulla mappa: disattivata, sotto la freccia o in alto. Ogni pressione la cambia.",
    "Shows the turn card for a few seconds, where it is set to show.": "Mostra la scheda di svolta per qualche secondo, dove è impostata.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se ti chiedono un'acquisizione: avviala, ricollega il telefono, aspetta il problema e premi Salva log.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva i log della mappa e i messaggi recenti dell'unità principale in un file da allegare a una segnalazione.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un telefono sull'hotspot Wi-Fi dell'auto, scansiona il codice o apri l'indirizzo per scaricare i log."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un telefono sull'hotspot Wi-Fi dell'auto, scansiona il codice o apri l'indirizzo per scaricare i log.",
+   "Turn card": "Scheda di svolta",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dove appare sulla mappa la nostra scheda con la prossima svolta. Apri l'elenco per vedere ogni scelta.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Nessuna nostra scheda sulla mappa: appare quella di svolta del telefono, se ne ha una.",
+   "Our card with the next turn shows below the map's arrow.": "La nostra scheda con la prossima svolta appare sotto la freccia della mappa.",
+   "Our card with the next turn shows at the top of the map.": "La nostra scheda con la prossima svolta appare in cima alla mappa."
   }
  },
  {
@@ -1824,7 +1866,6 @@ module.exports = [
    "Logs": "ログ",
    "Restart head unit": "ヘッドユニットを再起動",
    "Hide BMW's turn box": "BMWの進路案内を非表示",
-   "Turn card: {0}": "案内カード: {0}",
    "Below the arrow": "矢印の下",
    "At the top": "上部",
    "Show an example": "例を表示",
@@ -1929,11 +1970,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "ヘッドアップディスプレイに地図を表示します。まだ試験的です。",
    "The map shows on both: the instrument cluster and the head-up display.": "メーターとヘッドアップディスプレイの両方に地図を表示します。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "どちらにも地図を表示しません。メーターとHUDはBMWの表示になります。",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "地図上の案内カードの位置：オフ、矢印の下、上部。押すたびに切り替わります。",
    "Shows the turn card for a few seconds, where it is set to show.": "案内カードを設定した位置に数秒間表示します。",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "キャプチャを頼まれたら、開始してスマートフォンを再接続し、問題を待ってからログを保存を押します。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "地図のログとヘッドユニットの最近のメッセージを、問題報告に添付するファイルに保存します。",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。"
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。",
+   "Turn card": "案内カード",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "次の進路を示す当アプリのカードを地図上のどこに出すか。リストを開くと各選択肢が見られます。",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "当アプリのカードは出しません。スマートフォンに独自の進路カードがあればそれが出ます。",
+   "Our card with the next turn shows below the map's arrow.": "次の進路のカードを地図の矢印の下に出します。",
+   "Our card with the next turn shows at the top of the map.": "次の進路のカードを地図の上部に出します。"
   }
  },
  {
@@ -1953,7 +1998,6 @@ module.exports = [
    "Logs": "로그",
    "Restart head unit": "헤드 유닛 재시작",
    "Hide BMW's turn box": "BMW 방향 안내 숨기기",
-   "Turn card: {0}": "회전 카드: {0}",
    "Below the arrow": "화살표 아래",
    "At the top": "상단",
    "Show an example": "예시 표시",
@@ -2058,11 +2102,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "헤드업 디스플레이에 지도가 표시됩니다. 아직 실험 기능입니다.",
    "The map shows on both: the instrument cluster and the head-up display.": "계기판과 헤드업 디스플레이 둘 다에 지도가 표시됩니다.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "어디에도 지도가 표시되지 않습니다. 계기판과 HUD는 BMW 화면을 보여 줍니다.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "지도 위 회전 카드의 위치: 끔, 화살표 아래, 상단. 누를 때마다 바뀝니다.",
    "Shows the turn card for a few seconds, where it is set to show.": "회전 카드를 설정한 위치에 몇 초간 표시합니다.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "캡처를 요청받으면 시작하고 휴대폰을 다시 연결한 뒤 문제가 생기면 로그 저장을 누르세요.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "지도 로그와 헤드 유닛의 최근 메시지를 문제 신고에 첨부할 파일로 저장합니다.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요.",
+   "Turn card": "회전 카드",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "다음 회전을 알리는 저희 카드가 지도 위 어디에 표시되는지입니다. 목록을 열어 각 선택을 보세요.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "지도 위에 저희 카드가 없습니다. 휴대폰 자체 회전 카드가 있으면 그것이 표시됩니다.",
+   "Our card with the next turn shows below the map's arrow.": "다음 회전 카드가 지도 화살표 아래에 표시됩니다.",
+   "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다."
   }
  },
  {
@@ -2082,7 +2130,6 @@ module.exports = [
    "Logs": "Logger",
    "Restart head unit": "Start hovedenheten på nytt",
    "Hide BMW's turn box": "Skjul BMWs svinganvisning",
-   "Turn card: {0}": "Svingkort: {0}",
    "Below the arrow": "Under pilen",
    "At the top": "Øverst",
    "Show an example": "Vis et eksempel",
@@ -2187,11 +2234,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartet vises på head-up-displayet. Fortsatt eksperimentelt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartet vises begge steder: i instrumentpanelet og på head-up-displayet.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartet vises ingen steder: instrumentpanel og HUD viser BMWs eget innhold.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hvor svingkortet vises over kartet: av, under pilen eller øverst. Hvert trykk bytter.",
    "Shows the turn card for a few seconds, where it is set to show.": "Viser svingkortet i noen sekunder, der det er stilt inn.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du blir bedt om et opptak: start det, koble til telefonen på nytt, vent på problemet og trykk Lagre logger.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lagrer kartets logger og hovedenhetens siste meldinger i en fil du kan legge ved en feilrapport.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skann koden eller åpne adressen for å laste ned loggene."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skann koden eller åpne adressen for å laste ned loggene.",
+   "Turn card": "Svingkort",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vårt kort med neste sving vises over kartet. Åpne listen for å se hvert valg.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Ikke noe kort fra oss over kartet: telefonens eget svingkort vises, hvis den har et.",
+   "Our card with the next turn shows below the map's arrow.": "Vårt kort med neste sving vises under kartets pil.",
+   "Our card with the next turn shows at the top of the map.": "Vårt kort med neste sving vises øverst på kartet."
   }
  },
  {
@@ -2213,7 +2264,6 @@ module.exports = [
    "Logs": "Logs",
    "Restart head unit": "Headunit herstarten",
    "Hide BMW's turn box": "BMW-afslaginfo verbergen",
-   "Turn card: {0}": "Afslagkaart: {0}",
    "Below the arrow": "Onder de pijl",
    "At the top": "Bovenaan",
    "Show an example": "Voorbeeld tonen",
@@ -2318,11 +2368,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "De kaart verschijnt op het head-up display. Nog experimenteel.",
    "The map shows on both: the instrument cluster and the head-up display.": "De kaart verschijnt op beide: het instrumentenpaneel en het head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "De kaart verschijnt nergens: paneel en HUD tonen BMW's eigen inhoud.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Waar de afslagkaart over de kaart verschijnt: uit, onder de pijl of bovenaan. Elke druk wisselt.",
    "Shows the turn card for a few seconds, where it is set to show.": "Toont de afslagkaart een paar seconden, waar die is ingesteld.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Als om een opname wordt gevraagd: start die, verbind de telefoon opnieuw, wacht op het probleem en kies Logs opslaan.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Slaat de logs van de kaart en de recente meldingen van de head unit op in een bestand voor een probleemmelding.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs.",
+   "Turn card": "Afslagkaart",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Waar onze kaart met de volgende afslag over de kaart verschijnt. Open de lijst voor elke keuze.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Geen kaart van ons over de kaart: de eigen afslagkaart van de telefoon verschijnt, als die er een heeft.",
+   "Our card with the next turn shows below the map's arrow.": "Onze kaart met de volgende afslag verschijnt onder de pijl van de kaart.",
+   "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart."
   }
  },
  {
@@ -2342,7 +2396,6 @@ module.exports = [
    "Logs": "Logi",
    "Restart head unit": "Uruchom ponownie jednostkę główną",
    "Hide BMW's turn box": "Ukryj okno manewrów BMW",
-   "Turn card: {0}": "Karta manewru: {0}",
    "Below the arrow": "Pod strzałką",
    "At the top": "Na górze",
    "Show an example": "Pokaż przykład",
@@ -2447,11 +2500,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa pokazuje się na wyświetlaczu przeziernym. Wciąż eksperymentalnie.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa pokazuje się na obu: zegarach i wyświetlaczu przeziernym.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa nie pokazuje się nigdzie: zegary i HUD pokazują treści BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Gdzie karta manewru pokazuje się na mapie: wyłączona, pod strzałką lub na górze. Każde naciśnięcie zmienia.",
    "Shows the turn card for a few seconds, where it is set to show.": "Pokazuje kartę manewru przez kilka sekund, tam gdzie jest ustawiona.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jeśli poproszą o rejestrację: rozpocznij ją, połącz ponownie telefon, poczekaj na problem i naciśnij Zapisz logi.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Zapisuje logi mapy i ostatnie komunikaty jednostki głównej w pliku do dołączenia do zgłoszenia.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem w hotspocie Wi-Fi auta zeskanuj kod lub otwórz adres, by pobrać zapisane logi."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem w hotspocie Wi-Fi auta zeskanuj kod lub otwórz adres, by pobrać zapisane logi.",
+   "Turn card": "Karta manewru",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Gdzie nasza karta z następnym manewrem pokazuje się na mapie. Otwórz listę, by zobaczyć wybory.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez naszej karty na mapie: pokazuje się karta manewru telefonu, jeśli ją ma.",
+   "Our card with the next turn shows below the map's arrow.": "Nasza karta z następnym manewrem pokazuje się pod strzałką mapy.",
+   "Our card with the next turn shows at the top of the map.": "Nasza karta z następnym manewrem pokazuje się na górze mapy."
   }
  },
  {
@@ -2471,7 +2528,6 @@ module.exports = [
    "Logs": "Registros",
    "Restart head unit": "Reiniciar unidade principal",
    "Hide BMW's turn box": "Ocultar indicação de conversão da BMW",
-   "Turn card: {0}": "Card de manobra: {0}",
    "Below the arrow": "Abaixo da seta",
    "At the top": "No topo",
    "Show an example": "Mostrar um exemplo",
@@ -2576,11 +2632,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no painel de instrumentos e no head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o painel e o HUD mostram o conteúdo da própria BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Onde o card de manobra aparece sobre o mapa: desativado, abaixo da seta ou no topo. Cada toque muda.",
    "Shows the turn card for a few seconds, where it is set to show.": "Mostra o card de manobra por alguns segundos, onde ele está configurado para aparecer.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se pedirem uma captura: inicie-a, reconecte o celular, espere o problema e toque em Salvar registros.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva os registros do mapa e as mensagens recentes da unidade principal num arquivo, para anexar a um relato.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros.",
+   "Turn card": "Card de manobra",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso card com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sem o nosso card sobre o mapa: aparece o card de manobra do próprio celular, se ele tiver um.",
+   "Our card with the next turn shows below the map's arrow.": "O nosso card com a próxima manobra aparece abaixo da seta do mapa.",
+   "Our card with the next turn shows at the top of the map.": "O nosso card com a próxima manobra aparece no topo do mapa."
   }
  },
  {
@@ -2600,7 +2660,6 @@ module.exports = [
    "Logs": "Registos",
    "Restart head unit": "Reiniciar unidade principal",
    "Hide BMW's turn box": "Ocultar indicação de viragem BMW",
-   "Turn card: {0}": "Cartão de manobra: {0}",
    "Below the arrow": "Abaixo da seta",
    "At the top": "No topo",
    "Show an example": "Mostrar um exemplo",
@@ -2705,11 +2764,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no quadrante e no head-up display.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o quadrante e o HUD mostram o conteúdo da própria BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Onde o cartão de manobra aparece sobre o mapa: desligado, abaixo da seta ou no topo. Cada toque muda.",
    "Shows the turn card for a few seconds, where it is set to show.": "Mostra o cartão de manobra durante alguns segundos, onde está definido para aparecer.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se lhe pedirem uma captura: inicie-a, volte a ligar o telemóvel, espere pelo problema e prima Guardar registos.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Guarda os registos do mapa e as mensagens recentes da unidade principal num ficheiro, para anexar a um relato.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um telemóvel no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para transferir os registos."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um telemóvel no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para transferir os registos.",
+   "Turn card": "Cartão de manobra",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso cartão com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sem o nosso cartão sobre o mapa: aparece o cartão de manobra do próprio telemóvel, se tiver um.",
+   "Our card with the next turn shows below the map's arrow.": "O nosso cartão com a próxima manobra aparece abaixo da seta do mapa.",
+   "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa."
   }
  },
  {
@@ -2729,7 +2792,6 @@ module.exports = [
    "Logs": "Jurnale",
    "Restart head unit": "Repornire unitate",
    "Hide BMW's turn box": "Ascundere indicații BMW",
-   "Turn card: {0}": "Card de viraj: {0}",
    "Below the arrow": "Sub săgeată",
    "At the top": "Sus",
    "Show an example": "Arată un exemplu",
@@ -2834,11 +2896,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Harta apare pe afișajul head-up. Încă experimental.",
    "The map shows on both: the instrument cluster and the head-up display.": "Harta apare pe ambele: bordul și afișajul head-up.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harta nu apare nicăieri: bordul și HUD-ul arată conținutul BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Unde apare cardul de viraj pe hartă: oprit, sub săgeată sau sus. Fiecare apăsare îl schimbă.",
    "Shows the turn card for a few seconds, where it is set to show.": "Arată cardul de viraj câteva secunde, acolo unde este setat.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Dacă vi se cere o captură: porniți-o, reconectați telefonul, așteptați problema, apoi apăsați Salvare jurnale.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salvează jurnalele hărții și mesajele recente ale unității principale într-un fișier de atașat la o raportare.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele.",
+   "Turn card": "Card de viraj",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Unde apare pe hartă cardul nostru cu virajul următor. Deschideți lista pentru fiecare opțiune.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Fără cardul nostru pe hartă: apare cardul de viraj al telefonului, dacă are unul.",
+   "Our card with the next turn shows below the map's arrow.": "Cardul nostru cu virajul următor apare sub săgeata hărții.",
+   "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții."
   }
  },
  {
@@ -2858,7 +2924,6 @@ module.exports = [
    "Logs": "Журналы",
    "Restart head unit": "Перезапустить устройство",
    "Hide BMW's turn box": "Скрыть подсказки поворотов BMW",
-   "Turn card: {0}": "Карточка манёвра: {0}",
    "Below the arrow": "Под стрелкой",
    "At the top": "Вверху",
    "Show an example": "Показать пример",
@@ -2963,11 +3028,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Карта показывается на проекционном дисплее. Пока экспериментально.",
    "The map shows on both: the instrument cluster and the head-up display.": "Карта показывается на обоих: на приборах и на проекционном дисплее.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта нигде не показывается: приборы и HUD показывают содержимое BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Где карточка манёвра видна на карте: выкл., под стрелкой или вверху. Каждое нажатие меняет.",
    "Shows the turn card for a few seconds, where it is set to show.": "Показывает карточку манёвра на несколько секунд там, где она настроена.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Если просят запись: начните, переподключите телефон, дождитесь проблемы и сохраните журналы.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Сохраняет журналы карты и недавние сообщения головного устройства в файл для отчёта о проблеме.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "С телефона в точке доступа машины отсканируйте код или откройте адрес и скачайте журналы."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "С телефона в точке доступа машины отсканируйте код или откройте адрес и скачайте журналы.",
+   "Turn card": "Карточка манёвра",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Где на карте видна наша карточка следующего манёвра. Откройте список, чтобы увидеть варианты.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашей карточки на карте: видна карточка поворота самого телефона, если она есть.",
+   "Our card with the next turn shows below the map's arrow.": "Наша карточка следующего манёвра видна под стрелкой карты.",
+   "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты."
   }
  },
  {
@@ -2987,7 +3056,6 @@ module.exports = [
    "Logs": "Záznamy",
    "Restart head unit": "Reštartovať jednotku",
    "Hide BMW's turn box": "Skryť navigačné pokyny BMW",
-   "Turn card: {0}": "Karta odbočenia: {0}",
    "Below the arrow": "Pod šípkou",
    "At the top": "Hore",
    "Show an example": "Zobraziť príklad",
@@ -3092,11 +3160,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Mapa sa zobrazí na priehľadovom displeji. Zatiaľ experimentálne.",
    "The map shows on both: the instrument cluster and the head-up display.": "Mapa sa zobrazí na oboch: prístrojovke aj priehľadovom displeji.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa sa nezobrazí nikde: prístrojovka a HUD ukazujú obsah BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kde sa karta odbočenia zobrazuje na mape: vyp., pod šípkou alebo hore. Každé stlačenie prepne.",
    "Shows the turn card for a few seconds, where it is set to show.": "Na niekoľko sekúnd ukáže kartu odbočenia tam, kde je nastavená.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ak vás požiadajú o záznam: spustite ho, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží záznamy mapy a nedávne správy hlavnej jednotky do súboru, ktorý priložíte k hláseniu problému.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy.",
+   "Turn card": "Karta odbočenia",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde sa na mape zobrazuje naša karta s ďalším odbočením. Otvorte zoznam a uvidíte voľby.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez našej karty na mape: zobrazí sa karta odbočenia telefónu, ak ju má.",
+   "Our card with the next turn shows below the map's arrow.": "Naša karta s ďalším odbočením sa zobrazí pod šípkou mapy.",
+   "Our card with the next turn shows at the top of the map.": "Naša karta s ďalším odbočením sa zobrazí hore na mape."
   }
  },
  {
@@ -3116,7 +3188,6 @@ module.exports = [
    "Logs": "Dnevniki",
    "Restart head unit": "Znova zaženi enoto",
    "Hide BMW's turn box": "Skrij navodila BMW",
-   "Turn card: {0}": "Kartica zavoja: {0}",
    "Below the arrow": "Pod puščico",
    "At the top": "Zgoraj",
    "Show an example": "Prikaži primer",
@@ -3221,11 +3292,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Zemljevid se prikaže na zaslonu HUD. Še poskusno.",
    "The map shows on both: the instrument cluster and the head-up display.": "Zemljevid se prikaže na obeh: na armaturi in zaslonu HUD.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Zemljevid se ne prikaže nikjer: armatura in HUD kažeta vsebino BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kje se kartica zavoja prikaže na zemljevidu: izkl., pod puščico ali zgoraj. Vsak pritisk preklopi.",
    "Shows the turn card for a few seconds, where it is set to show.": "Za nekaj sekund pokaže kartico zavoja tam, kjer je nastavljena.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Če vas prosijo za zajem: začnite ga, znova povežite telefon, počakajte na težavo in pritisnite Shrani dnevnike.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Shrani dnevnike zemljevida in nedavna sporočila glavne enote v datoteko, ki jo priložite prijavi težave.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike.",
+   "Turn card": "Kartica zavoja",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kje se na zemljevidu prikaže naša kartica z naslednjim zavojem. Odprite seznam za izbire.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Brez naše kartice na zemljevidu: prikaže se kartica zavoja telefona, če jo ima.",
+   "Our card with the next turn shows below the map's arrow.": "Naša kartica z naslednjim zavojem se prikaže pod puščico zemljevida.",
+   "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida."
   }
  },
  {
@@ -3245,7 +3320,6 @@ module.exports = [
    "Logs": "Loggar",
    "Restart head unit": "Starta om huvudenheten",
    "Hide BMW's turn box": "Dölj BMW:s svängruta",
-   "Turn card: {0}": "Svängkort: {0}",
    "Below the arrow": "Under pilen",
    "At the top": "Överst",
    "Show an example": "Visa ett exempel",
@@ -3350,11 +3424,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Kartan visas på head-up-displayen. Fortfarande experimentellt.",
    "The map shows on both: the instrument cluster and the head-up display.": "Kartan visas på båda: kombiinstrumentet och head-up-displayen.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartan visas på ingen: kombiinstrument och HUD visar BMW:s eget innehåll.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Var svängkortet visas över kartan: av, under pilen eller överst. Varje tryck byter.",
    "Shows the turn card for a few seconds, where it is set to show.": "Visar svängkortet i några sekunder, där det är inställt.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Om du ombeds göra en inspelning: starta den, anslut telefonen igen, vänta på problemet och tryck Spara loggar.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Sparar kartans loggar och huvudenhetens senaste meddelanden i en fil att bifoga en felrapport.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skanna koden eller öppna adressen för att hämta loggarna."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skanna koden eller öppna adressen för att hämta loggarna.",
+   "Turn card": "Svängkort",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Var vårt kort med nästa sväng visas över kartan. Öppna listan för att se varje val.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Inget kort från oss över kartan: telefonens eget svängkort visas, om den har ett.",
+   "Our card with the next turn shows below the map's arrow.": "Vårt kort med nästa sväng visas under kartans pil.",
+   "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan."
   }
  },
  {
@@ -3374,7 +3452,6 @@ module.exports = [
    "Logs": "ล็อก",
    "Restart head unit": "รีสตาร์ทเฮดยูนิต",
    "Hide BMW's turn box": "ซ่อนกล่องบอกทางเลี้ยวของ BMW",
-   "Turn card: {0}": "การ์ดเลี้ยว: {0}",
    "Below the arrow": "ใต้ลูกศร",
    "At the top": "ด้านบน",
    "Show an example": "แสดงตัวอย่าง",
@@ -3479,11 +3556,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "แผนที่แสดงบนจอ HUD ยังเป็นรุ่นทดลอง",
    "The map shows on both: the instrument cluster and the head-up display.": "แผนที่แสดงทั้งสองที่: หน้าปัดและจอ HUD",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "แผนที่ไม่แสดงที่ใด: หน้าปัดและ HUD แสดงเนื้อหาของ BMW",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "ตำแหน่งที่การ์ดเลี้ยวแสดงบนแผนที่: ปิด ใต้ลูกศร หรือด้านบน กดแต่ละครั้งจะเปลี่ยน",
    "Shows the turn card for a few seconds, where it is set to show.": "แสดงการ์ดเลี้ยวสองสามวินาที ในตำแหน่งที่ตั้งไว้",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "หากถูกขอให้เก็บข้อมูล: เริ่มเก็บ เชื่อมต่อโทรศัพท์ใหม่ รอให้เกิดปัญหา แล้วกด บันทึกล็อก",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "บันทึกล็อกของแผนที่และข้อความล่าสุดของชุดควบคุมหลักเป็นไฟล์ เพื่อแนบในการรายงานปัญหา",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก"
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก",
+   "Turn card": "การ์ดเลี้ยว",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "ตำแหน่งการ์ดเลี้ยวถัดไปของเราบนแผนที่ เปิดรายการเพื่อดูแต่ละตัวเลือก",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "ไม่มีการ์ดของเราบนแผนที่: การ์ดเลี้ยวของโทรศัพท์จะแสดงแทน หากมี",
+   "Our card with the next turn shows below the map's arrow.": "การ์ดเลี้ยวถัดไปของเราแสดงใต้ลูกศรของแผนที่",
+   "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่"
   }
  },
  {
@@ -3503,7 +3584,6 @@ module.exports = [
    "Logs": "Günlükler",
    "Restart head unit": "Ana üniteyi yeniden başlat",
    "Hide BMW's turn box": "BMW'nin dönüş talimatlarını gizle",
-   "Turn card: {0}": "Dönüş kartı: {0}",
    "Below the arrow": "Okun altında",
    "At the top": "Üstte",
    "Show an example": "Örnek göster",
@@ -3608,11 +3688,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Harita head-up ekranda görünür. Hâlâ deneysel.",
    "The map shows on both: the instrument cluster and the head-up display.": "Harita ikisinde de görünür: göstergede ve head-up ekranda.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harita hiçbirinde görünmez: gösterge ve HUD, BMW'nin kendi içeriğini gösterir.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Dönüş kartının haritada göründüğü yer: kapalı, okun altında veya üstte. Her basış değiştirir.",
    "Shows the turn card for a few seconds, where it is set to show.": "Dönüş kartını birkaç saniye, ayarlandığı yerde gösterir.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Sizden kayıt istenirse: başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Haritanın günlüklerini ve ana ünitenin son iletilerini bir sorun bildirimine eklemek için dosyaya kaydeder.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin.",
+   "Turn card": "Dönüş kartı",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Bir sonraki dönüşü gösteren kartımızın haritada göründüğü yer. Seçenekler için listeyi açın.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Haritada kartımız yok: telefonun kendi dönüş kartı, varsa, görünür.",
+   "Our card with the next turn shows below the map's arrow.": "Bir sonraki dönüşü gösteren kartımız haritanın okunun altında görünür.",
+   "Our card with the next turn shows at the top of the map.": "Bir sonraki dönüşü gösteren kartımız haritanın üstünde görünür."
   }
  },
  {
@@ -3632,7 +3716,6 @@ module.exports = [
    "Logs": "Журнали",
    "Restart head unit": "Перезапустити пристрій",
    "Hide BMW's turn box": "Приховати підказки поворотів BMW",
-   "Turn card: {0}": "Картка маневру: {0}",
    "Below the arrow": "Під стрілкою",
    "At the top": "Угорі",
    "Show an example": "Показати приклад",
@@ -3737,11 +3820,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Карта показується на проєкційному дисплеї. Поки експериментально.",
    "The map shows on both: the instrument cluster and the head-up display.": "Карта показується на обох: на приладах і на проєкційному дисплеї.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта ніде не показується: прилади і HUD показують вміст BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Де картка маневру видна на карті: вимк., під стрілкою або вгорі. Кожне натискання змінює.",
    "Shows the turn card for a few seconds, where it is set to show.": "Показує картку маневру на кілька секунд там, де її налаштовано.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Якщо просять запис: почніть, перепідключіть телефон, дочекайтеся проблеми й збережіть журнали.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Зберігає журнали карти та нещодавні повідомлення головного блока у файл для звіту про проблему.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали.",
+   "Turn card": "Картка маневру",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Де на карті видно нашу картку наступного маневру. Відкрийте список, щоб побачити варіанти.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашої картки на карті: видно картку повороту самого телефона, якщо вона є.",
+   "Our card with the next turn shows below the map's arrow.": "Наша картка наступного маневру видна під стрілкою карти.",
+   "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти."
   }
  },
  {
@@ -3761,7 +3848,6 @@ module.exports = [
    "Logs": "Nhật ký",
    "Restart head unit": "Khởi động lại hệ thống",
    "Hide BMW's turn box": "Ẩn ô chỉ hướng của BMW",
-   "Turn card: {0}": "Thẻ rẽ: {0}",
    "Below the arrow": "Dưới mũi tên",
    "At the top": "Ở trên cùng",
    "Show an example": "Hiện ví dụ",
@@ -3866,11 +3952,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "Bản đồ hiển thị trên màn hình HUD. Vẫn đang thử nghiệm.",
    "The map shows on both: the instrument cluster and the head-up display.": "Bản đồ hiển thị trên cả hai: bảng đồng hồ và màn hình HUD.",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Bản đồ không hiển thị ở đâu: bảng đồng hồ và HUD hiện nội dung của BMW.",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Nơi thẻ rẽ hiện trên bản đồ: tắt, dưới mũi tên hoặc ở trên cùng. Mỗi lần nhấn sẽ đổi.",
    "Shows the turn card for a few seconds, where it is set to show.": "Hiện thẻ rẽ vài giây, ở vị trí đã chọn.",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Nếu được yêu cầu ghi: bắt đầu ghi, kết nối lại điện thoại, chờ lỗi xảy ra rồi nhấn Lưu nhật ký.",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lưu nhật ký bản đồ và tin nhắn gần đây của bộ điều khiển vào một tệp để đính kèm khi báo lỗi.",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký."
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký.",
+   "Turn card": "Thẻ rẽ",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "Nơi thẻ rẽ tiếp theo của chúng tôi hiện trên bản đồ. Mở danh sách để xem từng lựa chọn.",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Không có thẻ của chúng tôi trên bản đồ: thẻ rẽ của điện thoại sẽ hiện, nếu có.",
+   "Our card with the next turn shows below the map's arrow.": "Thẻ rẽ tiếp theo của chúng tôi hiện dưới mũi tên của bản đồ.",
+   "Our card with the next turn shows at the top of the map.": "Thẻ rẽ tiếp theo của chúng tôi hiện ở trên cùng bản đồ."
   }
  },
  {
@@ -3892,7 +3982,6 @@ module.exports = [
    "Logs": "日志",
    "Restart head unit": "重启主机",
    "Hide BMW's turn box": "隐藏 BMW 转向提示",
-   "Turn card: {0}": "转向卡片：{0}",
    "Below the arrow": "箭头下方",
    "At the top": "顶部",
    "Show an example": "显示示例",
@@ -3997,11 +4086,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "地图显示在抬头显示器上。仍为实验功能。",
    "The map shows on both: the instrument cluster and the head-up display.": "地图同时显示在仪表盘和抬头显示器上。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地图都不显示：仪表盘和 HUD 显示 BMW 自己的内容。",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "转向卡片在地图上的位置：关闭、箭头下方或顶部。每按一次切换。",
    "Shows the turn card for a few seconds, where it is set to show.": "在设定的位置显示转向卡片几秒钟。",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需采集：开始后重新连接手机，等问题出现，再按保存日志。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "将地图日志和主机的最近消息保存为文件，以附在问题报告中。",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。"
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。",
+   "Turn card": "转向卡片",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "我们显示下一个转向的卡片在地图上的位置。打开列表查看每个选项。",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "地图上不显示我们的卡片：如手机自带转向卡片，则显示它。",
+   "Our card with the next turn shows below the map's arrow.": "我们的下一个转向卡片显示在地图箭头下方。",
+   "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。"
   }
  },
  {
@@ -4023,7 +4116,6 @@ module.exports = [
    "Logs": "記錄檔",
    "Restart head unit": "重新啟動主機",
    "Hide BMW's turn box": "隱藏 BMW 轉向提示",
-   "Turn card: {0}": "轉彎卡片：{0}",
    "Below the arrow": "箭頭下方",
    "At the top": "頂部",
    "Show an example": "顯示範例",
@@ -4128,11 +4220,15 @@ module.exports = [
    "The map shows on the head-up display. Still experimental.": "地圖顯示在抬頭顯示器上。仍為實驗功能。",
    "The map shows on both: the instrument cluster and the head-up display.": "地圖同時顯示在儀表板和抬頭顯示器上。",
    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。",
-   "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "轉彎卡片在地圖上的位置：關閉、箭頭下方或頂部。每按一次切換。",
    "Shows the turn card for a few seconds, where it is set to show.": "在設定的位置顯示轉彎卡片幾秒鐘。",
    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需擷取：開始後重新連接手機，等問題出現，再按儲存記錄檔。",
    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "將地圖記錄檔和主機的最近訊息儲存為檔案，以附在問題回報中。",
-   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。"
+   "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。",
+   "Turn card": "轉彎卡片",
+   "Where our card with the next turn shows over the map. Open the list to see each choice.": "我們顯示下一個轉彎的卡片在地圖上的位置。開啟清單查看每個選項。",
+   "No card of ours over the map: the phone's own turn card shows, if it has one.": "地圖上不顯示我們的卡片：如手機有自己的轉彎卡片，則顯示它。",
+   "Our card with the next turn shows below the map's arrow.": "我們的下一個轉彎卡片顯示在地圖箭頭下方。",
+   "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。"
   }
  }
 ];

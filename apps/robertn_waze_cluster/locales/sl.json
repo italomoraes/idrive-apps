@@ -14,7 +14,6 @@
     "Logs": "Dnevniki",
     "Restart head unit": "Znova zaženi enoto",
     "Hide BMW's turn box": "Skrij navodila BMW",
-    "Turn card: {0}": "Kartica zavoja: {0}",
     "Below the arrow": "Pod puščico",
     "At the top": "Zgoraj",
     "Show an example": "Prikaži primer",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Zemljevid se prikaže na zaslonu HUD. Še poskusno.",
     "The map shows on both: the instrument cluster and the head-up display.": "Zemljevid se prikaže na obeh: na armaturi in zaslonu HUD.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Zemljevid se ne prikaže nikjer: armatura in HUD kažeta vsebino BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kje se kartica zavoja prikaže na zemljevidu: izkl., pod puščico ali zgoraj. Vsak pritisk preklopi.",
     "Shows the turn card for a few seconds, where it is set to show.": "Za nekaj sekund pokaže kartico zavoja tam, kjer je nastavljena.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Če vas prosijo za zajem: začnite ga, znova povežite telefon, počakajte na težavo in pritisnite Shrani dnevnike.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Shrani dnevnike zemljevida in nedavna sporočila glavne enote v datoteko, ki jo priložite prijavi težave.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike.",
+    "Turn card": "Kartica zavoja",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kje se na zemljevidu prikaže naša kartica z naslednjim zavojem. Odprite seznam za izbire.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Brez naše kartice na zemljevidu: prikaže se kartica zavoja telefona, če jo ima.",
+    "Our card with the next turn shows below the map's arrow.": "Naša kartica z naslednjim zavojem se prikaže pod puščico zemljevida.",
+    "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida."
   }
 }

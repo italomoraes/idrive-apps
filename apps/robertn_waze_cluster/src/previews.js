@@ -27,8 +27,8 @@ const ROWS = {
     wocShowOn: { image: 'cluster', text: () => t('Where the phone\'s map shows. Open the list to see what each choice does.') },
     wocProfile: { image: 'profile', text: () => t('Ticked, this driver profile keeps its own Show on, HUD size and HUD position.') },
     wocGuide: { image: 'turn-box', text: () => t('Ticked, BMW\'s turn-by-turn box on the cluster is hidden while the map shows.') },
-    wocTurnCard: { image: 'turn-card', text: () => t('Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.') },
-    wocTurnCardShow: { image: 'turn-card', text: () => t('Shows the turn card for a few seconds, where it is set to show.') },
+    wocTurnCard: { image: 'turn-card-top', text: () => t('Where our card with the next turn shows over the map. Open the list to see each choice.') },
+    wocTurnCardShow: { image: 'turn-card-top', text: () => t('Shows the turn card for a few seconds, where it is set to show.') },
     wocLogs: { image: 'logs', text: () => t('Opens the Logs page: save the logs to report a problem, and download them on your phone.') },
     wocHudKeep: { image: 'hud-keep', text: () => t('Ticked, the map stays on the HUD while BMW\'s media and list pop-ups show.') },
     wocHudSize: { image: 'hud-size', text: () => t('How wide the map is on the HUD.') },
@@ -67,18 +67,28 @@ const SHOW_ON_CHOICES = [
     { image: 'off', text: () => t('The map shows on neither: the cluster and the HUD show BMW\'s own content.') }
 ];
 
+/* The turn card's choices, in the list's order (TURN_CARD_MODES of waze_cluster_control.js). */
+const TURN_CARD_CHOICES = [
+    { image: 'turn-card-off', text: () => t('No card of ours over the map: the phone\'s own turn card shows, if it has one.') },
+    { image: 'turn-card-below', text: () => t('Our card with the next turn shows below the map\'s arrow.') },
+    { image: 'turn-card-top', text: () => t('Our card with the next turn shows at the top of the map.') }
+];
+
+/* The value lists' choices, by component name. */
+const CHOICES = { wocShowOn: SHOW_ON_CHOICES, wocTurnCard: TURN_CARD_CHOICES };
+
 /* What the preview shows for a row (and, for Show on, a choice: row 0 to 3
  * while the list is open, anything else its name): { image, text }, or null
  * for a row without one. */
 function preview(name, row) {
-    const choice = name === 'wocShowOn' && Number.isInteger(row) && row >= 0 ? SHOW_ON_CHOICES[row] : null;
+    const choice = CHOICES[name] && Number.isInteger(row) && row >= 0 ? CHOICES[name][row] : null;
     const entry = choice || ROWS[name] || LOGS_ROWS[name];
     return entry ? { image: entry.image, text: entry.text() } : null;
 }
 
 /* Every picture the previews use, for the app to register at start. */
 function images() {
-    return [...new Set(Object.values(ROWS).concat(SHOW_ON_CHOICES).map((e) => e.image).concat('logs'))].sort();
+    return [...new Set(Object.values(ROWS).concat(SHOW_ON_CHOICES, TURN_CARD_CHOICES).map((e) => e.image).concat('logs'))].sort();
 }
 
-module.exports = { ROWS, LOGS_ROWS, SHOW_ON_CHOICES, preview, images };
+module.exports = { ROWS, LOGS_ROWS, SHOW_ON_CHOICES, TURN_CARD_CHOICES, CHOICES, preview, images };

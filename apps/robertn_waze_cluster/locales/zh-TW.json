@@ -16,7 +16,6 @@
     "Logs": "記錄檔",
     "Restart head unit": "重新啟動主機",
     "Hide BMW's turn box": "隱藏 BMW 轉向提示",
-    "Turn card: {0}": "轉彎卡片：{0}",
     "Below the arrow": "箭頭下方",
     "At the top": "頂部",
     "Show an example": "顯示範例",
@@ -121,10 +120,14 @@
     "The map shows on the head-up display. Still experimental.": "地圖顯示在抬頭顯示器上。仍為實驗功能。",
     "The map shows on both: the instrument cluster and the head-up display.": "地圖同時顯示在儀表板和抬頭顯示器上。",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "轉彎卡片在地圖上的位置：關閉、箭頭下方或頂部。每按一次切換。",
     "Shows the turn card for a few seconds, where it is set to show.": "在設定的位置顯示轉彎卡片幾秒鐘。",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需擷取：開始後重新連接手機，等問題出現，再按儲存記錄檔。",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "將地圖記錄檔和主機的最近訊息儲存為檔案，以附在問題回報中。",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。"
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。",
+    "Turn card": "轉彎卡片",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "我們顯示下一個轉彎的卡片在地圖上的位置。開啟清單查看每個選項。",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "地圖上不顯示我們的卡片：如手機有自己的轉彎卡片，則顯示它。",
+    "Our card with the next turn shows below the map's arrow.": "我們的下一個轉彎卡片顯示在地圖箭頭下方。",
+    "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。"
   }
 }

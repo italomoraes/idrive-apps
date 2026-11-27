@@ -14,7 +14,6 @@
     "Logs": "Günlükler",
     "Restart head unit": "Ana üniteyi yeniden başlat",
     "Hide BMW's turn box": "BMW'nin dönüş talimatlarını gizle",
-    "Turn card: {0}": "Dönüş kartı: {0}",
     "Below the arrow": "Okun altında",
     "At the top": "Üstte",
     "Show an example": "Örnek göster",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Harita head-up ekranda görünür. Hâlâ deneysel.",
     "The map shows on both: the instrument cluster and the head-up display.": "Harita ikisinde de görünür: göstergede ve head-up ekranda.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Harita hiçbirinde görünmez: gösterge ve HUD, BMW'nin kendi içeriğini gösterir.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Dönüş kartının haritada göründüğü yer: kapalı, okun altında veya üstte. Her basış değiştirir.",
     "Shows the turn card for a few seconds, where it is set to show.": "Dönüş kartını birkaç saniye, ayarlandığı yerde gösterir.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Sizden kayıt istenirse: başlatın, telefonu yeniden bağlayın, sorunu bekleyin ve Günlükleri kaydet'e basın.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Haritanın günlüklerini ve ana ünitenin son iletilerini bir sorun bildirimine eklemek için dosyaya kaydeder.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin.",
+    "Turn card": "Dönüş kartı",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Bir sonraki dönüşü gösteren kartımızın haritada göründüğü yer. Seçenekler için listeyi açın.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Haritada kartımız yok: telefonun kendi dönüş kartı, varsa, görünür.",
+    "Our card with the next turn shows below the map's arrow.": "Bir sonraki dönüşü gösteren kartımız haritanın okunun altında görünür.",
+    "Our card with the next turn shows at the top of the map.": "Bir sonraki dönüşü gösteren kartımız haritanın üstünde görünür."
   }
 }

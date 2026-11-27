@@ -14,7 +14,6 @@
     "Logs": "Logfiler",
     "Restart head unit": "Genstart hovedenhed",
     "Hide BMW's turn box": "Skjul BMW's svinganvisning",
-    "Turn card: {0}": "Svingkort: {0}",
     "Below the arrow": "Under pilen",
     "At the top": "Øverst",
     "Show an example": "Vis et eksempel",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Kortet vises på head-up-displayet. Stadig eksperimentelt.",
     "The map shows on both: the instrument cluster and the head-up display.": "Kortet vises begge steder: i instrumentpanelet og på head-up-displayet.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kortet vises ingen steder: instrumentpanel og HUD viser BMW's eget indhold.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hvor svingkortet vises over kortet: fra, under pilen eller øverst. Hvert tryk skifter.",
     "Shows the turn card for a few seconds, where it is set to show.": "Viser svingkortet i nogle sekunder, dér hvor det er indstillet.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du bliver bedt om en optagelse: start den, forbind telefonen igen, vent på problemet, og tryk Gem logfiler.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Gemmer kortets logfiler og hovedenhedens seneste meddelelser i en fil, du kan vedhæfte en fejlrapport.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne.",
+    "Turn card": "Svingkort",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vores kort med næste sving vises over kortet. Åbn listen for at se hvert valg.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Intet kort fra os over kortet: telefonens eget svingkort vises, hvis den har et.",
+    "Our card with the next turn shows below the map's arrow.": "Vores kort med næste sving vises under kortets pil.",
+    "Our card with the next turn shows at the top of the map.": "Vores kort med næste sving vises øverst på kortet."
   }
 }

@@ -116,11 +116,24 @@ let drawings: [(String, (CGContext) -> Void)] = [
         stroke(c, white, 8, lines([[130, 60, 130, 120, 175, 120], [160, 135, 178, 120, 160, 105]]))
         slash(c)
     }),
-    ("turn-card", { c in
+    /* the turn card's choices: our card at the top, below the arrow, or none */
+    ("turn-card-top", { c in
         stroke(c, white, 7, rounded(70, 25, 160, 170, 16))
         stroke(c, red, 6, rounded(85, 140, 130, 40, 8))
         stroke(c, white, 4, lines([[100, 160, 160, 160]]))
         stroke(c, red, 7, arrow(150, 50, 30, 60))
+    }),
+    ("turn-card-below", { c in
+        stroke(c, white, 7, rounded(70, 25, 160, 170, 16))
+        stroke(c, red, 7, arrow(150, 120, 30, 55))
+        stroke(c, red, 6, rounded(85, 45, 130, 40, 8))
+        stroke(c, white, 4, lines([[100, 65, 160, 65]]))
+    }),
+    ("turn-card-off", { c in
+        stroke(c, white, 7, rounded(70, 25, 160, 170, 16))
+        stroke(c, red, 7, arrow(150, 70, 30, 70))
+        stroke(c, white, 5, rounded(85, 150, 130, 30, 8))
+        stroke(c, red, 9, lines([[80, 135, 220, 195]]))
     }),
     ("logs", { c in
         stroke(c, red, 8, rounded(85, 20, 130, 180, 12))

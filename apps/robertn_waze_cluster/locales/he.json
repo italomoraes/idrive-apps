@@ -14,7 +14,6 @@
     "Logs": "יומנים",
     "Restart head unit": "הפעלה מחדש של המערכת",
     "Hide BMW's turn box": "הסתרת תיבת הפניות של BMW",
-    "Turn card: {0}": "כרטיס פנייה: {0}",
     "Below the arrow": "מתחת לחץ",
     "At the top": "למעלה",
     "Show an example": "הצג דוגמה",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "המפה מוצגת בתצוגה העילית. עדיין ניסיוני.",
     "The map shows on both: the instrument cluster and the head-up display.": "המפה מוצגת בשניהם: בלוח המחוונים ובתצוגה העילית.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "המפה לא מוצגת באף אחד: לוח המחוונים וה-HUD מציגים את התוכן של BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "היכן כרטיס הפנייה מוצג על המפה: כבוי, מתחת לחץ או למעלה. כל לחיצה מחליפה.",
     "Shows the turn card for a few seconds, where it is set to show.": "מציג את כרטיס הפנייה לכמה שניות, במקום שהוגדר לו.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "אם ביקשו מכם הקלטה: התחילו אותה, חברו מחדש את הטלפון, חכו לבעיה ולחצו שמירת יומנים.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "שומר את יומני המפה ואת ההודעות האחרונות של היחידה הראשית בקובץ לצירוף לדיווח על בעיה.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים.",
+    "Turn card": "כרטיס פנייה",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "היכן מוצג על המפה הכרטיס שלנו עם הפנייה הבאה. פתחו את הרשימה לכל אפשרות.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "בלי כרטיס שלנו על המפה: מוצג כרטיס הפניות של הטלפון, אם יש לו.",
+    "Our card with the next turn shows below the map's arrow.": "הכרטיס שלנו עם הפנייה הבאה מוצג מתחת לחץ של המפה.",
+    "Our card with the next turn shows at the top of the map.": "הכרטיס שלנו עם הפנייה הבאה מוצג בראש המפה."
   }
 }

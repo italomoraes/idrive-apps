@@ -14,7 +14,6 @@
     "Logs": "Záznamy",
     "Restart head unit": "Reštartovať jednotku",
     "Hide BMW's turn box": "Skryť navigačné pokyny BMW",
-    "Turn card: {0}": "Karta odbočenia: {0}",
     "Below the arrow": "Pod šípkou",
     "At the top": "Hore",
     "Show an example": "Zobraziť príklad",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Mapa sa zobrazí na priehľadovom displeji. Zatiaľ experimentálne.",
     "The map shows on both: the instrument cluster and the head-up display.": "Mapa sa zobrazí na oboch: prístrojovke aj priehľadovom displeji.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Mapa sa nezobrazí nikde: prístrojovka a HUD ukazujú obsah BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Kde sa karta odbočenia zobrazuje na mape: vyp., pod šípkou alebo hore. Každé stlačenie prepne.",
     "Shows the turn card for a few seconds, where it is set to show.": "Na niekoľko sekúnd ukáže kartu odbočenia tam, kde je nastavená.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ak vás požiadajú o záznam: spustite ho, znova pripojte telefón, počkajte na problém a stlačte Uložiť záznamy.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Uloží záznamy mapy a nedávne správy hlavnej jednotky do súboru, ktorý priložíte k hláseniu problému.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy.",
+    "Turn card": "Karta odbočenia",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde sa na mape zobrazuje naša karta s ďalším odbočením. Otvorte zoznam a uvidíte voľby.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez našej karty na mape: zobrazí sa karta odbočenia telefónu, ak ju má.",
+    "Our card with the next turn shows below the map's arrow.": "Naša karta s ďalším odbočením sa zobrazí pod šípkou mapy.",
+    "Our card with the next turn shows at the top of the map.": "Naša karta s ďalším odbočením sa zobrazí hore na mape."
   }
 }

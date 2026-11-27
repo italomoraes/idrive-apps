@@ -14,7 +14,6 @@
     "Logs": "로그",
     "Restart head unit": "헤드 유닛 재시작",
     "Hide BMW's turn box": "BMW 방향 안내 숨기기",
-    "Turn card: {0}": "회전 카드: {0}",
     "Below the arrow": "화살표 아래",
     "At the top": "상단",
     "Show an example": "예시 표시",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "헤드업 디스플레이에 지도가 표시됩니다. 아직 실험 기능입니다.",
     "The map shows on both: the instrument cluster and the head-up display.": "계기판과 헤드업 디스플레이 둘 다에 지도가 표시됩니다.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "어디에도 지도가 표시되지 않습니다. 계기판과 HUD는 BMW 화면을 보여 줍니다.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "지도 위 회전 카드의 위치: 끔, 화살표 아래, 상단. 누를 때마다 바뀝니다.",
     "Shows the turn card for a few seconds, where it is set to show.": "회전 카드를 설정한 위치에 몇 초간 표시합니다.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "캡처를 요청받으면 시작하고 휴대폰을 다시 연결한 뒤 문제가 생기면 로그 저장을 누르세요.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "지도 로그와 헤드 유닛의 최근 메시지를 문제 신고에 첨부할 파일로 저장합니다.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요.",
+    "Turn card": "회전 카드",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "다음 회전을 알리는 저희 카드가 지도 위 어디에 표시되는지입니다. 목록을 열어 각 선택을 보세요.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "지도 위에 저희 카드가 없습니다. 휴대폰 자체 회전 카드가 있으면 그것이 표시됩니다.",
+    "Our card with the next turn shows below the map's arrow.": "다음 회전 카드가 지도 화살표 아래에 표시됩니다.",
+    "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다."
   }
 }

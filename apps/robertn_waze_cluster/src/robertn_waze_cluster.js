@@ -63,7 +63,7 @@ const OnlineApp = require('oap-sdk/src/core/OnlineApp.js');
 const logging = require('oap-sdk/src/logging/logging');
 const someipBuilders = require('oap-sdk/src/someip/someipBuilders');
 const i18n = require('./i18n.js');
-const { WazeClusterControl, ZOOM_STEP, SHOWN_ON } = require('./waze_cluster_control.js');
+const { WazeClusterControl, ZOOM_STEP, SHOWN_ON, TURN_CARD_MODES } = require('./waze_cluster_control.js');
 const { LogsControl, ROWS: LOGS_ROWS } = require('./logs_control.js');
 const { qrPreviewPng } = require('./qr.js');
 const { ProfileSync, sessionReader } = require('./profile_sync.js');
@@ -261,7 +261,13 @@ class WazeClusterApp extends OnlineApp {
             this._control.toggleGuidance();
         });
         /* the turn card over the map: off, below the arrow, at the top, in turn */
-        this._bind(TURN_CARD_NAME, () => this._control.nextTurnCard());
+        /* where the turn card shows: a value list, as Show on; the HMI moves its
+         * choice itself, the render's answer decides what it shows */
+        this._components[TURN_CARD_NAME].on('action', (ev) => this._press(TURN_CARD_NAME, () => {
+            delete this._written[`cell:${TURN_CARD_NAME}:SelectedItem`];
+            this._control.setTurnCard(TURN_CARD_MODES[ev && ev.row]);
+            this._render();
+        }));
         this._bind(TURN_CARD_SHOW_NAME, () => this._control.showTurnCardExample());
         this._bind(HUD_KEEP_NAME, () => {
             /* as for the turn box: the render's answer decides the tick */
@@ -716,7 +722,14 @@ class WazeClusterApp extends OnlineApp {
         this._setEnabled(GUIDE_NAME, hide !== null && !unavailable && c.clusterOn() !== false);
         this._write(GUIDE_NAME, t("Hide BMW's turn box"));
         this._setSelected(GUIDE_NAME, !!hide && !unavailable);
-        this._write(TURN_CARD_NAME, c.turnCardText());
+        const card = TURN_CARD_MODES.indexOf(c.turnCard());
+        this._writeCell(TURN_CARD_NAME, 'HeaderText', t('Turn card'), 'Text');
+        [t('Off'), t('Below the arrow'), t('At the top')].forEach((text, row) => {
+            const shown = row === 0 && card < 0 ? '\u2014' : text;
+            this._writeCell(TURN_CARD_NAME, 'ItemText', shown, 'Text', row);
+            this._writeCell(TURN_CARD_NAME, 'ItemSelectionText', shown, 'Text', row);
+        });
+        this._writeCell(TURN_CARD_NAME, 'SelectedItem', Math.max(card, 0), 'UInt');
         this._setEnabled(TURN_CARD_NAME, c.canSetTurnCard());
         this._write(TURN_CARD_SHOW_NAME, t('Show an example'));
         this._setEnabled(TURN_CARD_SHOW_NAME, c.canShowTurnCardExample());

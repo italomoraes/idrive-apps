@@ -14,7 +14,6 @@
     "Logs": "Naplók",
     "Restart head unit": "Fejegység újraindítása",
     "Hide BMW's turn box": "BMW navigációs ablak elrejtése",
-    "Turn card: {0}": "Kanyarodási kártya: {0}",
     "Below the arrow": "A nyíl alatt",
     "At the top": "Felül",
     "Show an example": "Példa megjelenítése",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "A térkép a szélvédőkijelzőn jelenik meg. Még kísérleti.",
     "The map shows on both: the instrument cluster and the head-up display.": "A térkép mindkettőn megjelenik: a műszerfalon és a szélvédőkijelzőn.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "A térkép sehol sem jelenik meg: a műszerfal és a HUD a BMW saját tartalmát mutatja.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hol jelenik meg a kanyarodási kártya a térképen: ki, a nyíl alatt vagy felül. Minden nyomás vált.",
     "Shows the turn card for a few seconds, where it is set to show.": "Néhány másodpercre megmutatja a kanyarodási kártyát a beállított helyen.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Ha rögzítést kérnek: indítsa el, csatlakoztassa újra a telefont, várja meg a hibát, majd Naplók mentése.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Fájlba menti a térkép naplóit és a fejegység legutóbbi üzeneteit, hogy hibabejelentéshez csatolja.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért.",
+    "Turn card": "Kanyarodási kártya",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hol jelenik meg a térképen a következő kanyar kártyánk. Nyissa meg a listát a lehetőségekért.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Nincs kártyánk a térképen: a telefon saját kanyarkártyája látszik, ha van neki.",
+    "Our card with the next turn shows below the map's arrow.": "A következő kanyar kártyánk a térkép nyila alatt jelenik meg.",
+    "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg."
   }
 }

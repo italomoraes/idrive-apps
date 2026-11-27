@@ -14,7 +14,6 @@
     "Logs": "Nhật ký",
     "Restart head unit": "Khởi động lại hệ thống",
     "Hide BMW's turn box": "Ẩn ô chỉ hướng của BMW",
-    "Turn card: {0}": "Thẻ rẽ: {0}",
     "Below the arrow": "Dưới mũi tên",
     "At the top": "Ở trên cùng",
     "Show an example": "Hiện ví dụ",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Bản đồ hiển thị trên màn hình HUD. Vẫn đang thử nghiệm.",
     "The map shows on both: the instrument cluster and the head-up display.": "Bản đồ hiển thị trên cả hai: bảng đồng hồ và màn hình HUD.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Bản đồ không hiển thị ở đâu: bảng đồng hồ và HUD hiện nội dung của BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Nơi thẻ rẽ hiện trên bản đồ: tắt, dưới mũi tên hoặc ở trên cùng. Mỗi lần nhấn sẽ đổi.",
     "Shows the turn card for a few seconds, where it is set to show.": "Hiện thẻ rẽ vài giây, ở vị trí đã chọn.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Nếu được yêu cầu ghi: bắt đầu ghi, kết nối lại điện thoại, chờ lỗi xảy ra rồi nhấn Lưu nhật ký.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lưu nhật ký bản đồ và tin nhắn gần đây của bộ điều khiển vào một tệp để đính kèm khi báo lỗi.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký.",
+    "Turn card": "Thẻ rẽ",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Nơi thẻ rẽ tiếp theo của chúng tôi hiện trên bản đồ. Mở danh sách để xem từng lựa chọn.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Không có thẻ của chúng tôi trên bản đồ: thẻ rẽ của điện thoại sẽ hiện, nếu có.",
+    "Our card with the next turn shows below the map's arrow.": "Thẻ rẽ tiếp theo của chúng tôi hiện dưới mũi tên của bản đồ.",
+    "Our card with the next turn shows at the top of the map.": "Thẻ rẽ tiếp theo của chúng tôi hiện ở trên cùng bản đồ."
   }
 }

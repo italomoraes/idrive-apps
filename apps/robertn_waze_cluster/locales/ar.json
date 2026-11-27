@@ -14,7 +14,6 @@
     "Logs": "السجلات",
     "Restart head unit": "إعادة تشغيل الوحدة الرئيسية",
     "Hide BMW's turn box": "إخفاء مربع الانعطاف من BMW",
-    "Turn card: {0}": "بطاقة المنعطف: {0}",
     "Below the arrow": "أسفل السهم",
     "At the top": "في الأعلى",
     "Show an example": "عرض مثال",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "تظهر الخريطة على شاشة العرض الأمامية. ما زالت تجريبية.",
     "The map shows on both: the instrument cluster and the head-up display.": "تظهر الخريطة على الاثنين: لوحة العدادات وشاشة العرض الأمامية.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "لا تظهر الخريطة في أي منهما: لوحة العدادات وHUD تعرضان محتوى BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "مكان ظهور بطاقة المنعطف فوق الخريطة: إيقاف، أو أسفل السهم، أو في الأعلى. كل ضغطة تغيّره.",
     "Shows the turn card for a few seconds, where it is set to show.": "يعرض بطاقة المنعطف بضع ثوانٍ في المكان المحدد لها.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "إذا طُلب منك التقاط: ابدأه، وأعد توصيل الهاتف، وانتظر المشكلة، ثم اضغط حفظ السجلات.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "يحفظ سجلات الخريطة والرسائل الأخيرة للوحدة الرئيسية في ملف لإرفاقه بتقرير المشكلة.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات.",
+    "Turn card": "بطاقة المنعطف",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "مكان ظهور بطاقتنا للانعطاف التالي فوق الخريطة. افتح القائمة لترى كل خيار.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "لا بطاقة منا فوق الخريطة: تظهر بطاقة الانعطاف الخاصة بالهاتف، إن وُجدت.",
+    "Our card with the next turn shows below the map's arrow.": "تظهر بطاقتنا للانعطاف التالي أسفل سهم الخريطة.",
+    "Our card with the next turn shows at the top of the map.": "تظهر بطاقتنا للانعطاف التالي أعلى الخريطة."
   }
 }

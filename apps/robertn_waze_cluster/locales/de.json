@@ -14,7 +14,6 @@
     "Logs": "Protokolle",
     "Restart head unit": "Headunit neu starten",
     "Hide BMW's turn box": "BMW-Abbiegehinweis ausblenden",
-    "Turn card: {0}": "Abbiegekarte: {0}",
     "Below the arrow": "Unter dem Pfeil",
     "At the top": "Oben",
     "Show an example": "Beispiel anzeigen",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "Die Karte erscheint im Head-up-Display. Noch experimentell.",
     "The map shows on both: the instrument cluster and the head-up display.": "Die Karte erscheint in beiden: im Kombi und im Head-up-Display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "Die Karte erscheint in keinem: Kombi und HUD zeigen BMWs eigene Inhalte.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Wo die Abbiegekarte über der Karte erscheint: aus, unter dem Pfeil oder oben. Jeder Druck wechselt.",
     "Shows the turn card for a few seconds, where it is set to show.": "Zeigt die Abbiegekarte für einige Sekunden dort, wo sie eingestellt ist.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Für eine erbetene Aufzeichnung: starten, Telefon neu verbinden, Problem abwarten, Protokolle speichern.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Speichert die Protokolle der Karte und die letzten Meldungen der Head Unit in einer Datei für einen Fehlerbericht.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden.",
+    "Turn card": "Abbiegekarte",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Wo unsere Karte mit dem nächsten Abbiegen über der Karte erscheint. Die Liste zeigt jede Wahl.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Keine Karte von uns über der Karte: die eigene Abbiegekarte des Telefons erscheint, falls es eine hat.",
+    "Our card with the next turn shows below the map's arrow.": "Unsere Karte mit dem nächsten Abbiegen erscheint unter dem Pfeil der Karte.",
+    "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte."
   }
 }

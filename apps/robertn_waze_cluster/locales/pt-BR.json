@@ -14,7 +14,6 @@
     "Logs": "Registros",
     "Restart head unit": "Reiniciar unidade principal",
     "Hide BMW's turn box": "Ocultar indicação de conversão da BMW",
-    "Turn card: {0}": "Card de manobra: {0}",
     "Below the arrow": "Abaixo da seta",
     "At the top": "No topo",
     "Show an example": "Mostrar um exemplo",
@@ -119,10 +118,14 @@
     "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no painel de instrumentos e no head-up display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o painel e o HUD mostram o conteúdo da própria BMW.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Onde o card de manobra aparece sobre o mapa: desativado, abaixo da seta ou no topo. Cada toque muda.",
     "Shows the turn card for a few seconds, where it is set to show.": "Mostra o card de manobra por alguns segundos, onde ele está configurado para aparecer.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se pedirem uma captura: inicie-a, reconecte o celular, espere o problema e toque em Salvar registros.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva os registros do mapa e as mensagens recentes da unidade principal num arquivo, para anexar a um relato.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros.",
+    "Turn card": "Card de manobra",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso card com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sem o nosso card sobre o mapa: aparece o card de manobra do próprio celular, se ele tiver um.",
+    "Our card with the next turn shows below the map's arrow.": "O nosso card com a próxima manobra aparece abaixo da seta do mapa.",
+    "Our card with the next turn shows at the top of the map.": "O nosso card com a próxima manobra aparece no topo do mapa."
   }
 }

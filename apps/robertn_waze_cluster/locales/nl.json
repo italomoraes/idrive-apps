@@ -16,7 +16,6 @@
     "Logs": "Logs",
     "Restart head unit": "Headunit herstarten",
     "Hide BMW's turn box": "BMW-afslaginfo verbergen",
-    "Turn card: {0}": "Afslagkaart: {0}",
     "Below the arrow": "Onder de pijl",
     "At the top": "Bovenaan",
     "Show an example": "Voorbeeld tonen",
@@ -121,10 +120,14 @@
     "The map shows on the head-up display. Still experimental.": "De kaart verschijnt op het head-up display. Nog experimenteel.",
     "The map shows on both: the instrument cluster and the head-up display.": "De kaart verschijnt op beide: het instrumentenpaneel en het head-up display.",
     "The map shows on neither: the cluster and the HUD show BMW's own content.": "De kaart verschijnt nergens: paneel en HUD tonen BMW's eigen inhoud.",
-    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Waar de afslagkaart over de kaart verschijnt: uit, onder de pijl of bovenaan. Elke druk wisselt.",
     "Shows the turn card for a few seconds, where it is set to show.": "Toont de afslagkaart een paar seconden, waar die is ingesteld.",
     "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Als om een opname wordt gevraagd: start die, verbind de telefoon opnieuw, wacht op het probleem en kies Logs opslaan.",
     "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Slaat de logs van de kaart en de recente meldingen van de head unit op in een bestand voor een probleemmelding.",
-    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs."
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs.",
+    "Turn card": "Afslagkaart",
+    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Waar onze kaart met de volgende afslag over de kaart verschijnt. Open de lijst voor elke keuze.",
+    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Geen kaart van ons over de kaart: de eigen afslagkaart van de telefoon verschijnt, als die er een heeft.",
+    "Our card with the next turn shows below the map's arrow.": "Onze kaart met de volgende afslag verschijnt onder de pijl van de kaart.",
+    "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart."
   }
 }

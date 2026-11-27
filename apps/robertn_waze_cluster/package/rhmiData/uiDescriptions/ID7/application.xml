@@ -34,7 +34,7 @@
                 <property id="2" value="1"/>
                 <property id="3" value="3"/>
             </component>
-            <component id="40" type="button" widget="LT_Button_2Row_1TextDyn">
+            <component id="40" type="valueList" widget="LT_ValueList_Regular">
                 <property id="2" value="1"/>
                 <property id="3" value="3"/>
             </component>

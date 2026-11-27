@@ -719,11 +719,6 @@ class WazeClusterControl extends EventEmitter {
         return TURN_CARD_MODES.indexOf(v) >= 0 ? v : null;
     }
 
-    turnCardText() {
-        const names = { off: t('Off'), bottom: t('Below the arrow'), top: t('At the top') };
-        const mode = this.turnCard();
-        return t('Turn card: {0}', mode === null ? '\u2014' : names[mode]);
-    }
 
     /* The card follows the map on the cluster. */
     canSetTurnCard() {
@@ -732,12 +727,16 @@ class WazeClusterControl extends EventEmitter {
 
     /* The next of off, below the arrow, at the top; the render's next
      * status shows it. */
-    nextTurnCard() {
-        if (this.canSetTurnCard()) {
-            const next = TURN_CARD_MODES[(TURN_CARD_MODES.indexOf(this.turnCard()) + 1) % TURN_CARD_MODES.length];
-            this._turnCardAsked = next;
-            this.render.send({ cmd: 'turn_card', mode: next });
+    /* The turn card where mode says (TURN_CARD_MODES), from the page's list. */
+    setTurnCard(mode) {
+        if (this.canSetTurnCard() && TURN_CARD_MODES.indexOf(mode) >= 0 && mode !== this.turnCard()) {
+            this._turnCardAsked = mode;
+            this.render.send({ cmd: 'turn_card', mode });
         }
+    }
+    /* The next of TURN_CARD_MODES after the one shown. */
+    nextTurnCard() {
+        this.setTurnCard(TURN_CARD_MODES[(TURN_CARD_MODES.indexOf(this.turnCard()) + 1) % TURN_CARD_MODES.length]);
     }
 
     /* CarPlay's patch follows the turn card: patchd plans its ShowUI URL
@@ -1166,5 +1165,5 @@ class WazeClusterControl extends EventEmitter {
 module.exports = {
     WazeClusterControl, LineSocket,
     RENDER_PATH, PATCH_PATH, PENDING_PATH, AA_PENDING_PATH, BOOT_ID_PATH,
-    SIZE, SAFE, ZOOM_STEP, RESTART_FAILED, SHOWN_ON, HUD_SIZE_STEPS
+    SIZE, SAFE, ZOOM_STEP, RESTART_FAILED, SHOWN_ON, HUD_SIZE_STEPS, TURN_CARD_MODES
 };
