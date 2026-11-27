@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.19
+
 A row's name too long for the list takes a second line instead of being
 cut off, a line sets each section apart, and the HUD's section is called
 Head-up display. The Logs page is laid out like the main page, the QR code
