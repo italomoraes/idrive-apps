@@ -194,6 +194,17 @@ async function card(mode) {
     return status();
 }
 
+/* The status once patchd has settled what a change started: r again until
+ * it is patched with nothing pending, for up to 5 s. card()'s status can come
+ * while a restart it set off is still under way on a slow machine. */
+async function settled(r) {
+    for (var i = 0; i < 50 && !(r.state === 'patched' && !r.pending); i++) {
+        await sleep(100);
+        r = await status();
+    }
+    return r;
+}
+
 async function main() {
     for (var i = 0; i < 200 && !fs.existsSync(SOCK); i++) await sleep(25);
     var r, rc, before, dummy;
@@ -262,6 +273,7 @@ async function main() {
         rc.proven === true && rc.trial === false, JSON.stringify(rc));
     ok('card off again, restart allowed: carplay killed and started, running the new plan', await diedWithin(dummy) === 'SIGKILL' &&
         restarted.some(function (l) { return /^start carplay\.service/.test(l); }) && memAgainst(planText()) === 'patched', JSON.stringify(restarted));
+    r = await settled(r);
     ok('card off again: patched, mapurl eta, nothing pending', r.state === 'patched' && r.mapurl === 'eta' && !r.pending && !fs.existsSync(PENDING),
         JSON.stringify(r));
 
