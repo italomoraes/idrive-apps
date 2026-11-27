@@ -78,7 +78,7 @@
     "Cluster": "Quadro",
     "HUD (experimental)": "HUD (sperimentale)",
     "Cluster and HUD (experimental)": "Quadro e HUD (sperimentale)",
-    "HUD": "HUD",
+    "Head-up display": "Head-Up Display",
     "HUD map: {0}": "Mappa sull'HUD: {0}",
     "Showing": "Visualizzata",
     "Disabled after errors": "Disattivata dopo errori",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "La mappa appare nel quadro strumenti, al posto di quella BMW, mentre il telefono naviga.",
     "The map shows on the head-up display. Still experimental.": "La mappa appare sull'head-up display. Ancora sperimentale.",
     "The map shows on both: the instrument cluster and the head-up display.": "La mappa appare su entrambi: il quadro strumenti e l'head-up display.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La mappa non appare da nessuna parte: il quadro e l'HUD mostrano i contenuti BMW."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "La mappa non appare da nessuna parte: il quadro e l'HUD mostrano i contenuti BMW.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Se ti chiedono un'acquisizione: avviala, ricollega il telefono, aspetta il problema e premi Salva log.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Salva i log della mappa e i messaggi recenti dell'unità principale in un file da allegare a una segnalazione.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un telefono sull'hotspot Wi-Fi dell'auto, scansiona il codice o apri l'indirizzo per scaricare i log."
   }
 }

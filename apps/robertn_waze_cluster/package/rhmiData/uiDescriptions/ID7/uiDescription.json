@@ -239,6 +239,19 @@
             }
           ]
         },
+        "95": {
+          "type": "separator",
+          "name": "wocSepHud",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {}
+          ]
+        },
         "93": {
           "type": "label",
           "name": "wocHeadHud",
@@ -255,7 +268,7 @@
           "rows": [
             {
               "Text": {
-                "value": "HUD",
+                "value": "Head-up display",
                 "type": "Text"
               }
             }
@@ -483,6 +496,19 @@
             }
           ]
         },
+        "96": {
+          "type": "separator",
+          "name": "wocSepCarPlay",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {}
+          ]
+        },
         "90": {
           "type": "label",
           "name": "wocHeadCarPlay",
@@ -613,6 +639,19 @@
                 "type": "Text"
               }
             }
+          ]
+        },
+        "97": {
+          "type": "separator",
+          "name": "wocSepAa",
+          "properties": {
+            "Visible": {
+              "value": 1,
+              "type": "UInt"
+            }
+          },
+          "rows": [
+            {}
           ]
         },
         "91": {
@@ -848,6 +887,10 @@
         "ParentState": {
           "value": 1,
           "type": "UInt"
+        },
+        "Preview": {
+          "value": 83,
+          "type": "UInt"
         }
       },
       "components": {
@@ -868,6 +911,10 @@
               }
             }
           ]
+        },
+        "83": {
+          "type": "preview",
+          "name": "wocLogsQr"
         },
         "37": {
           "type": "button",
@@ -955,23 +1002,6 @@
                 "type": "Text"
               }
             }
-          ]
-        },
-        "83": {
-          "type": "label",
-          "name": "wocLogsQr",
-          "properties": {
-            "Visible": {
-              "value": 1,
-              "type": "UInt"
-            },
-            "Focusable": {
-              "value": 0,
-              "type": "UInt"
-            }
-          },
-          "rows": [
-            {}
           ]
         },
         "84": {

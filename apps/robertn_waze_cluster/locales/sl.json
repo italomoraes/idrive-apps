@@ -78,7 +78,7 @@
     "Cluster": "Armatura",
     "HUD (experimental)": "HUD (eksperimentalno)",
     "Cluster and HUD (experimental)": "Armatura in HUD (eksperimentalno)",
-    "HUD": "HUD",
+    "Head-up display": "Zaslon HUD",
     "HUD map: {0}": "Zemljevid na HUD: {0}",
     "Showing": "Prikazano",
     "Disabled after errors": "Onemogočeno zaradi napak",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Zemljevid se prikaže na armaturi namesto zemljevida BMW, dokler telefon vodi.",
     "The map shows on the head-up display. Still experimental.": "Zemljevid se prikaže na zaslonu HUD. Še poskusno.",
     "The map shows on both: the instrument cluster and the head-up display.": "Zemljevid se prikaže na obeh: na armaturi in zaslonu HUD.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Zemljevid se ne prikaže nikjer: armatura in HUD kažeta vsebino BMW."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Zemljevid se ne prikaže nikjer: armatura in HUD kažeta vsebino BMW.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Če vas prosijo za zajem: začnite ga, znova povežite telefon, počakajte na težavo in pritisnite Shrani dnevnike.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Shrani dnevnike zemljevida in nedavna sporočila glavne enote v datoteko, ki jo priložite prijavi težave.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike."
   }
 }

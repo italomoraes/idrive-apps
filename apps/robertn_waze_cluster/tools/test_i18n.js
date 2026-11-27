@@ -140,7 +140,7 @@ de.words = deWords;
 const fit = require('./preview_fit.js');
 const previews = require(path.join(SRC, 'previews.js'));
 const measure = fit.measure();
-const previewWords = [...new Set(Object.values(previews.ROWS).concat(previews.SHOW_ON_CHOICES)
+const previewWords = [...new Set(Object.values(previews.ROWS).concat(previews.SHOW_ON_CHOICES, Object.values(previews.LOGS_ROWS))
     .map((e) => e.text.toString().match(/t\('((?:\\.|[^'])*)'\)/)[1].replace(/\\'/g, '\'')))];
 ok(previewWords.length > 15 && previewWords.every((w) => used.has(w)), 'the preview\'s texts are words of the app');
 [{ code: 'en', words: Object.fromEntries(previewWords.map((w) => [w, w])) }].concat(all).forEach((l) => previewWords

@@ -5,7 +5,11 @@
 The page looks like the car's own settings pages: a narrow list with, on
 its right, a picture and a few lines saying what the row the controller
 stops on does. Show on opens its choices in place, each with its own
-explanation, and shows the one in use under its name.
+explanation, and shows the one in use under its name. A row's name too long
+for the list takes a second line instead of being cut off, a line sets each
+section apart, and the HUD's section is called Head-up display. The Logs
+page is laid out the same way, the QR code of the download address on its
+right.
 
 ## 0.6.18
 

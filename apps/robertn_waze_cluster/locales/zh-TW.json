@@ -80,7 +80,7 @@
     "Cluster": "儀表板",
     "HUD (experimental)": "HUD（實驗性）",
     "Cluster and HUD (experimental)": "儀表板和 HUD（實驗性）",
-    "HUD": "HUD",
+    "Head-up display": "抬頭顯示器",
     "HUD map: {0}": "HUD 地圖：{0}",
     "Showing": "正在顯示",
     "Disabled after errors": "因錯誤已停用",
@@ -123,6 +123,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "手機導航時，地圖顯示在儀表板上，取代 BMW 的地圖。",
     "The map shows on the head-up display. Still experimental.": "地圖顯示在抬頭顯示器上。仍為實驗功能。",
     "The map shows on both: the instrument cluster and the head-up display.": "地圖同時顯示在儀表板和抬頭顯示器上。",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。"
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "地圖都不顯示：儀表板和 HUD 顯示 BMW 自己的內容。",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "如需擷取：開始後重新連接手機，等問題出現，再按儲存記錄檔。",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "將地圖記錄檔和主機的最近訊息儲存為檔案，以附在問題回報中。",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。"
   }
 }

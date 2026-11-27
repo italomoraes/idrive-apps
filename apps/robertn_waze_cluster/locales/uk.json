@@ -78,7 +78,7 @@
     "Cluster": "Прилади",
     "HUD (experimental)": "HUD (експериментально)",
     "Cluster and HUD (experimental)": "Прилади та HUD (експериментально)",
-    "HUD": "HUD",
+    "Head-up display": "Проєкційний дисплей",
     "HUD map: {0}": "Карта на HUD: {0}",
     "Showing": "Показується",
     "Disabled after errors": "Вимкнена після помилок",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Карта показується на приладах замість карти BMW, поки телефон веде маршрутом.",
     "The map shows on the head-up display. Still experimental.": "Карта показується на проєкційному дисплеї. Поки експериментально.",
     "The map shows on both: the instrument cluster and the head-up display.": "Карта показується на обох: на приладах і на проєкційному дисплеї.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта ніде не показується: прилади і HUD показують вміст BMW."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Карта ніде не показується: прилади і HUD показують вміст BMW.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Якщо просять запис: почніть, перепідключіть телефон, дочекайтеся проблеми й збережіть журнали.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Зберігає журнали карти та нещодавні повідомлення головного блока у файл для звіту про проблему.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали."
   }
 }

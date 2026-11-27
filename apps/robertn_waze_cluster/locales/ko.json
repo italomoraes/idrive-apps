@@ -78,7 +78,7 @@
     "Cluster": "계기판",
     "HUD (experimental)": "HUD (실험적)",
     "Cluster and HUD (experimental)": "계기판 및 HUD (실험적)",
-    "HUD": "HUD",
+    "Head-up display": "헤드업 디스플레이",
     "HUD map: {0}": "HUD 지도: {0}",
     "Showing": "표시 중",
     "Disabled after errors": "오류로 비활성화됨",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "휴대폰이 길 안내 중일 때 BMW 지도 대신 계기판에 지도가 표시됩니다.",
     "The map shows on the head-up display. Still experimental.": "헤드업 디스플레이에 지도가 표시됩니다. 아직 실험 기능입니다.",
     "The map shows on both: the instrument cluster and the head-up display.": "계기판과 헤드업 디스플레이 둘 다에 지도가 표시됩니다.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "어디에도 지도가 표시되지 않습니다. 계기판과 HUD는 BMW 화면을 보여 줍니다."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "어디에도 지도가 표시되지 않습니다. 계기판과 HUD는 BMW 화면을 보여 줍니다.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "캡처를 요청받으면 시작하고 휴대폰을 다시 연결한 뒤 문제가 생기면 로그 저장을 누르세요.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "지도 로그와 헤드 유닛의 최근 메시지를 문제 신고에 첨부할 파일로 저장합니다.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요."
   }
 }

@@ -184,7 +184,9 @@ the same `{n}`, and every HMI language its text file.
 ### The page's previews
 
 Each row the controller stops on, and each of Show on's choices, has a
-preview on the page's right: a picture and up to three lines of text
+preview on the page's right (the Logs page's rows too: their picture is the
+QR code of the download address, drawn by `src/qr.js` on the same
+background): a picture and up to three lines of text
 (`src/previews.js`). A new row needs one there, or `tools/test_page.js`
 fails.
 

@@ -78,7 +78,7 @@
     "Cluster": "Panel",
     "HUD (experimental)": "HUD (eksperimental)",
     "Cluster and HUD (experimental)": "Panel dan HUD (eksperimental)",
-    "HUD": "HUD",
+    "Head-up display": "Head-up display",
     "HUD map: {0}": "Peta di HUD: {0}",
     "Showing": "Ditampilkan",
     "Disabled after errors": "Dinonaktifkan karena error",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Peta tampil di panel instrumen, menggantikan milik BMW, selama ponsel menavigasi.",
     "The map shows on the head-up display. Still experimental.": "Peta tampil di head-up display. Masih eksperimental.",
     "The map shows on both: the instrument cluster and the head-up display.": "Peta tampil di keduanya: panel instrumen dan head-up display.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Peta tidak tampil di mana pun: panel dan HUD menampilkan konten BMW sendiri."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Peta tidak tampil di mana pun: panel dan HUD menampilkan konten BMW sendiri.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Jika diminta rekaman: mulai, sambungkan ulang ponsel, tunggu masalahnya, lalu tekan Simpan log.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Menyimpan log peta dan pesan terbaru head unit ke dalam file untuk dilampirkan pada laporan masalah.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log."
   }
 }

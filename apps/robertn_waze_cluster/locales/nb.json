@@ -78,7 +78,7 @@
     "Cluster": "Instrumentpanel",
     "HUD (experimental)": "HUD (eksperimentell)",
     "Cluster and HUD (experimental)": "Instrumentpanel og HUD (eksperimentell)",
-    "HUD": "HUD",
+    "Head-up display": "Head-up-display",
     "HUD map: {0}": "Kart i HUD: {0}",
     "Showing": "Vises",
     "Disabled after errors": "Deaktivert etter feil",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Kartet vises i instrumentpanelet i stedet for BMWs, mens telefonen navigerer.",
     "The map shows on the head-up display. Still experimental.": "Kartet vises på head-up-displayet. Fortsatt eksperimentelt.",
     "The map shows on both: the instrument cluster and the head-up display.": "Kartet vises begge steder: i instrumentpanelet og på head-up-displayet.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartet vises ingen steder: instrumentpanel og HUD viser BMWs eget innhold."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartet vises ingen steder: instrumentpanel og HUD viser BMWs eget innhold.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Hvis du blir bedt om et opptak: start det, koble til telefonen på nytt, vent på problemet og trykk Lagre logger.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lagrer kartets logger og hovedenhetens siste meldinger i en fil du kan legge ved en feilrapport.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skann koden eller åpne adressen for å laste ned loggene."
   }
 }

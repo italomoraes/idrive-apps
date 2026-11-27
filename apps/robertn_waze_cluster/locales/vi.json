@@ -78,7 +78,7 @@
     "Cluster": "Bảng đồng hồ",
     "HUD (experimental)": "HUD (thử nghiệm)",
     "Cluster and HUD (experimental)": "Bảng đồng hồ và HUD (thử nghiệm)",
-    "HUD": "HUD",
+    "Head-up display": "Màn hình HUD",
     "HUD map: {0}": "Bản đồ trên HUD: {0}",
     "Showing": "Đang hiển thị",
     "Disabled after errors": "Đã tắt do lỗi",
@@ -121,6 +121,9 @@
     "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Bản đồ hiển thị trên bảng đồng hồ, thay cho bản đồ BMW, khi điện thoại dẫn đường.",
     "The map shows on the head-up display. Still experimental.": "Bản đồ hiển thị trên màn hình HUD. Vẫn đang thử nghiệm.",
     "The map shows on both: the instrument cluster and the head-up display.": "Bản đồ hiển thị trên cả hai: bảng đồng hồ và màn hình HUD.",
-    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Bản đồ không hiển thị ở đâu: bảng đồng hồ và HUD hiện nội dung của BMW."
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Bản đồ không hiển thị ở đâu: bảng đồng hồ và HUD hiện nội dung của BMW.",
+    "If you are asked for a capture: start it, reconnect the phone, wait for the problem, then press Save logs.": "Nếu được yêu cầu ghi: bắt đầu ghi, kết nối lại điện thoại, chờ lỗi xảy ra rồi nhấn Lưu nhật ký.",
+    "Saves the map's logs and the head unit's recent messages in a file, to attach to a problem report.": "Lưu nhật ký bản đồ và tin nhắn gần đây của bộ điều khiển vào một tệp để đính kèm khi báo lỗi.",
+    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký."
   }
 }
