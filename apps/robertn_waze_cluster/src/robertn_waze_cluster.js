@@ -5,9 +5,12 @@
  * waze-on-cluster tool, which puts the CarPlay cluster map on the instrument
  * cluster. It drives the tool entirely from the HMI, so no shell is needed.
  *
- * The main page, one LT_State_Wide list in four sections, each under a
- * header row: General, HUD, CarPlay, Android Auto, then the restart's two
- * rows. General: Show on (a drop-down of Cluster, HUD, both and Off), the Own
+ * The main page, a narrow list (LT_State_Regular_ContentHidden) in four
+ * sections, each under a header row: General, HUD, CarPlay, Android Auto,
+ * then the restart's two rows; on its right, the preview says what the row
+ * the controller stops on does, with a picture (src/previews.js). General:
+ * Show on (a value list of Cluster, HUD, both and Off, which opens in place,
+ * its choice under its name, each choice with its own preview), the Own
  * settings for this driver checkbox (profile_sync.js; greyed while no driver
  * profile is detected), Cluster map (the shared render's map), the Hide
  * BMW's turn box checkbox (the render's setting; a press asks the render to
@@ -63,6 +66,7 @@ const { WazeClusterControl, ZOOM_STEP, SHOWN_ON } = require('./waze_cluster_cont
 const { LogsControl, ROWS: LOGS_ROWS } = require('./logs_control.js');
 const { qrPng } = require('./qr.js');
 const { ProfileSync, sessionReader } = require('./profile_sync.js');
+const previews = require('./previews.js');
 
 const logger = logging.getSDKLogger();
 
@@ -104,6 +108,10 @@ const LOGS_STATUS = 'wocLogsStatus';
 const LOGS_QR = 'wocLogsQr';
 const LOGS_URL = 'wocLogsUrl';
 const LOGS_ROW_NAMES = Array.from({ length: LOGS_ROWS }, (_, i) => `wocLogsRow${i + 1}`);
+const PREVIEW_NAME = 'wocPreview';
+/* the value list's row in a focus event; this value is its name, the list closed */
+const LIST_ROW = 2;
+const NO_ROW = 4294967295;
 const ROW_CHARS = 90;
 const PRESS_DEDUPE_MS = 400;
 const HIDE_SETTLE_MS = 800;
@@ -111,6 +119,10 @@ const HMI_CONTEXT = ['de.bmw.infotainment.hmi.hmicontext.HMIContext', 'HMI_CID']
 const { t } = i18n;
 const QR_DIR = path.join(fs.existsSync('/dev/shm') ? '/dev/shm' : os.tmpdir(),
     `robertn_waze_cluster_qr_${typeof process.getuid === 'function' ? process.getuid() : 'x'}`);
+/* the preview's pictures as shipped, and where the HMI reads them (as the QR code) */
+const PREVIEWS_SRC = path.join(__dirname, '..', 'previews');
+const PREVIEWS_DIR = path.join(fs.existsSync('/dev/shm') ? '/dev/shm' : os.tmpdir(),
+    `robertn_waze_cluster_previews_${typeof process.getuid === 'function' ? process.getuid() : 'x'}`);
 
 /* A line as one row: no line breaks, at most ROW_CHARS characters. */
 function oneRow(line) {
@@ -136,6 +148,9 @@ class WazeClusterApp extends OnlineApp {
         this._shownPage = 'main';   /* the page last shown, which shows again when the app does */
         this._hideTimer = null;
         this._qr = { url: undefined, file: null, chain: Promise.resolve() };
+        /* the preview: the pictures' files once registered, the row it shows */
+        this._preview = { files: null, name: 'wocShowOn', row: null, shown: null };
+        this._nameById = {};
         this._sawForeground = false;
         this._shutdownPromise = null;
         this._control = new WazeClusterControl({ log: logger });
@@ -208,10 +223,18 @@ class WazeClusterApp extends OnlineApp {
         }
         const names = [STATUS_NAME, MAP_NAME, RESTART_STATUS_NAME, ENABLE_NAME, DISABLE_NAME, WIFI_NAME, WIFI_HINT_NAME, AA_STATUS_NAME,
             AA_ENABLE_NAME, AA_DISABLE_NAME, AA_ZOOM_NAME, AA_ZOOM_OUT_NAME, AA_ZOOM_IN_NAME, AA_CARD_NAME, RESTART_NAME, GUIDE_NAME, TURN_CARD_NAME, TURN_CARD_SHOW_NAME,
-            HEAD_GENERAL_NAME, HEAD_HUD_NAME, SHOW_ON_NAME, PROFILE_NAME, HUD_NAME, HUD_KEEP_NAME, HUD_SIZE_NAME, HUD_POS_NAME]
+            HEAD_GENERAL_NAME, HEAD_HUD_NAME, SHOW_ON_NAME, PROFILE_NAME, HUD_NAME, HUD_KEEP_NAME, HUD_SIZE_NAME, HUD_POS_NAME,
+            PREVIEW_NAME]
             .concat(Object.values(HUD_MOVE_NAMES), [HUD_CENTRE_NAME, CAPTURE_NAME, CAPTURE_STATUS,
                 LOGS_NAME, LOGS_SAVE, LOGS_STATUS, LOGS_QR, LOGS_URL], LOGS_ROW_NAMES);
         names.forEach((name) => { this._components[name] = rhmi.getByName(name); });
+        names.filter((name) => this._components[name]).forEach((name) => {
+            try {
+                this._nameById[Number(this._components[name].getId())] = name;
+            } catch (e) {
+                /* no id: no preview for it */
+            }
+        });
         const missing = names.filter((name) => !this._components[name]);
         if (missing.length) {
             return Promise.reject(new Error(`uiDescription lacks ${missing.join(', ')}`));
@@ -280,6 +303,9 @@ class WazeClusterApp extends OnlineApp {
             if (entry) {
                 this._press(entry.name, entry.handler);
             }
+            if (ev && ev.eventType === 'FOCUS') {
+                this._focus(this._nameById[Number(ev.sourceId)], ev.parameterMap || {});
+            }
         });
         rhmi.on('applicationStackChanged', (stack) => {
             // The app holds the foreground while the stack has a ROOT_APP slot;
@@ -299,8 +325,11 @@ class WazeClusterApp extends OnlineApp {
             logger.info('RESTORE_HMI: re-pushing page content');
             this._written = {};
             this._qr.url = undefined;
+            this._preview.files = null;
+            this._preview.shown = null;
             this._render();
             this._renderLogs();
+            this._setupPreviews();
         });
         this._state.on('visible', (event) => this._pageVisible('main', isTrue(event && event.visible)));
         this._logsState.on('visible', (event) => this._pageVisible('logs', isTrue(event && event.visible)));
@@ -309,7 +338,80 @@ class WazeClusterApp extends OnlineApp {
             logger.info(`page ready: ${names.length} components found`);
             this._render();
             this._renderLogs();
+            this._setupPreviews();
         });
+    }
+
+    /* ---- the preview ---- */
+    /* Copies the preview's pictures where the HMI reads them (world-readable,
+     * as the QR code) and registers them; then shows the row in focus. */
+    _setupPreviews() {
+        const rhmi = this.rhmiApplication;
+        const files = {};
+        return Promise.resolve().then(() => {
+            try {
+                fs.mkdirSync(PREVIEWS_DIR);
+            } catch (e) {
+                if (e.code !== 'EEXIST') {
+                    throw e;
+                }
+            }
+            fs.chmodSync(PREVIEWS_DIR, 0o755);
+            previews.images().forEach((image) => {
+                const file = path.join(PREVIEWS_DIR, `${image}.png`);
+                fs.copyFileSync(path.join(PREVIEWS_SRC, `${image}.png`), file);
+                fs.chmodSync(file, 0o644);
+                files[image] = file;
+            });
+            return rhmi.getResourceBundle().createResourceHandles(Object.values(files));
+        }).then(() => {
+            this._preview.files = files;
+            this._showPreview();
+        }).catch((err) => logger.warn(`previews failed: ${err && err.message}`));
+    }
+
+    /* A row took the focus: the preview shows it. The value list says which of
+     * its choices has it (LIST_ROW; NO_ROW: its name, the list closed); the
+     * other rows, that they have it (row 0's value). */
+    _focus(name, params) {
+        if (!name) {
+            return;
+        }
+        let row = null;
+        if (Object.prototype.hasOwnProperty.call(params, LIST_ROW)) {
+            const r = Number(params[LIST_ROW]);
+            row = r >= 0 && r !== NO_ROW ? r : null;
+        } else if (!isTrue(params[0])) {
+            return;
+        }
+        if (previews.preview(name, row)) {
+            this._preview.name = name;
+            this._preview.row = row;
+            this._showPreview();
+        }
+    }
+
+    /* Writes the preview of the row in focus, in the display language, unless
+     * it shows it already. */
+    _showPreview() {
+        const p = previews.preview(this._preview.name, this._preview.row);
+        const files = this._preview.files;
+        if (!p || !files || this._shutdownPromise) {
+            return Promise.resolve();
+        }
+        const key = `${p.image}\n${p.text}`;
+        if (this._preview.shown === key) {
+            return Promise.resolve();
+        }
+        this._preview.shown = key;
+        const comp = this._components[PREVIEW_NAME];
+        return Promise.all([comp.setValue(0, 'Description', p.text, 'Text'),
+            comp.setValue(0, 'Illustration', files[p.image], 'ResourceId')])
+            .then(() => this.rhmiApplication.flush())
+            .catch((err) => {
+                this._preview.shown = null;
+                logger.warn(`preview ${this._preview.name} failed: ${err && err.message}`);
+            });
     }
 
     /* The words follow the HMI's display language: read at start and on
@@ -334,6 +436,7 @@ class WazeClusterApp extends OnlineApp {
             logger.info(`display language ${value}: ${i18n.language()}`);
             this._render();
             this._renderLogs();
+            this._showPreview();
         }
     }
 
@@ -562,8 +665,12 @@ class WazeClusterApp extends OnlineApp {
         /* where the map shows: the choice, '—' in its place until the render has said */
         const shownOn = SHOWN_ON.indexOf(c.shownOn());
         this._writeCell(SHOW_ON_NAME, 'HeaderText', t('Show on'), 'Text');
-        [t('Cluster'), t('HUD (experimental)'), t('Cluster and HUD (experimental)'), t('Off')].forEach((text, row) =>
-            this._writeCell(SHOW_ON_NAME, 'ItemText', row === 0 && shownOn < 0 ? '—' : text, 'Text', row));
+        /* ItemSelectionText: what the list shows under its name for the choice */
+        [t('Cluster'), t('HUD (experimental)'), t('Cluster and HUD (experimental)'), t('Off')].forEach((text, row) => {
+            const shown = row === 0 && shownOn < 0 ? '—' : text;
+            this._writeCell(SHOW_ON_NAME, 'ItemText', shown, 'Text', row);
+            this._writeCell(SHOW_ON_NAME, 'ItemSelectionText', shown, 'Text', row);
+        });
         this._writeCell(SHOW_ON_NAME, 'SelectedItem', Math.max(shownOn, 0), 'UInt');
         this._setEnabled(SHOW_ON_NAME, c.canChooseShownOn());
         const profiles = this._profiles;
@@ -684,6 +791,13 @@ class WazeClusterApp extends OnlineApp {
                 /* gone already */
             }
         }
+        Object.values(this._preview.files || {}).forEach((file) => {
+            try {
+                fs.unlinkSync(file);
+            } catch (e) {
+                /* gone already */
+            }
+        });
         this._shutdownPromise = Promise.resolve()
             .then(() => this.destroyBundles().catch((err) =>
                 logger.info(`destroyBundles: ${err && err.message}`)))

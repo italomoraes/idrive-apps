@@ -19,6 +19,7 @@
   "files": [
     "config",
     "rhmiData",
+    "previews",
     "package.json",
     "npm-shrinkwrap.json",
     "permissions.json",

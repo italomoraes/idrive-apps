@@ -99,6 +99,27 @@
     "2.4 GHz": "2,4 GHz",
     "Audio may cut out. On your iPhone, turn Wi-Fi off and on.": "O áudio pode falhar. No iPhone, desative e volte a ativar o Wi-Fi.",
     "Own settings for this driver": "Definições próprias para este condutor",
-    "Keep HUD map over BMW's pop-ups": "Manter mapa no HUD sobre pop-ups BMW"
+    "Keep HUD map over BMW's pop-ups": "Manter mapa no HUD sobre pop-ups BMW",
+    "Where the phone's map shows. Open the list to see what each choice does.": "Onde aparece o mapa do telemóvel. Abra a lista para ver o que faz cada opção.",
+    "Ticked, this driver profile keeps its own Show on, HUD size and HUD position.": "Marcado, este perfil de condutor guarda o seu próprio Mostrar em, tamanho e posição do HUD.",
+    "Ticked, BMW's turn-by-turn box on the cluster is hidden while the map shows.": "Marcado, a indicação de viragem BMW no quadrante fica oculta enquanto o mapa aparece.",
+    "Opens the Logs page: save the logs to report a problem, and download them on your phone.": "Abre a página Registos: guarde os registos para comunicar um problema e transfira-os no telemóvel.",
+    "Ticked, the map stays on the HUD while BMW's media and list pop-ups show.": "Marcado, o mapa fica no HUD enquanto aparecem as janelas de multimédia e de listas da BMW.",
+    "How wide the map is on the HUD.": "A largura do mapa no HUD.",
+    "Moves the map on the HUD, a step at a time.": "Move o mapa no HUD, um passo de cada vez.",
+    "Puts the map back in the middle of the HUD.": "Volta a pôr o mapa no meio do HUD.",
+    "Turns the map on for CarPlay. Only needed when its Status isn't Patched.": "Liga o mapa para o CarPlay. Só é preciso quando o Estado não é Correção aplicada.",
+    "Turns the map off for CarPlay. It stays off, also after updates, until you press Patch.": "Desliga o mapa para o CarPlay. Fica desligado, mesmo após atualizações, até premir Aplicar correção.",
+    "Turns the map on for Android Auto. Only needed when its Status isn't Patched.": "Liga o mapa para o Android Auto. Só é preciso quando o Estado não é Correção aplicada.",
+    "Turns the map off for Android Auto. It stays off, also after updates, until you press Patch.": "Desliga o mapa para o Android Auto. Fica desligado, mesmo após atualizações, até premir Aplicar correção.",
+    "Zoom out shows more of the map, Zoom in bigger text. Applied at the next restart.": "Afastar mostra mais mapa; Aproximar, texto maior. Aplica-se no próximo reinício.",
+    "Ticked, Google Maps' own turn card at the top of the map is hidden.": "Marcado, o cartão de viragem do próprio Google Maps, no topo do mapa, fica oculto.",
+    "Restarts the head unit, to apply the changes that wait for it.": "Reinicia a unidade principal, para aplicar as alterações que esperam por isso.",
+    "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "O mapa aparece no quadrante, no lugar do da BMW, enquanto o telemóvel navega.",
+    "The map shows on the head-up display. Still experimental.": "O mapa aparece no head-up display. Ainda é experimental.",
+    "The map shows on both: the instrument cluster and the head-up display.": "O mapa aparece nos dois: no quadrante e no head-up display.",
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "O mapa não aparece em nenhum: o quadrante e o HUD mostram o conteúdo da própria BMW.",
+    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Onde o cartão de manobra aparece sobre o mapa: desligado, abaixo da seta ou no topo. Cada toque muda.",
+    "Shows the turn card for a few seconds, where it is set to show.": "Mostra o cartão de manobra durante alguns segundos, onde está definido para aparecer."
   }
 }

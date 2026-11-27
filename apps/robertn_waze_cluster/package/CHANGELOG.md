@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+The page looks like the car's own settings pages: a narrow list with, on
+its right, a picture and a few lines saying what the row the controller
+stops on does. Show on opens its choices in place, each with its own
+explanation, and shows the one in use under its name.
+
 ## 0.6.17
 
 While **Turn card** is on, the iPhone draws no turn card of its own on the

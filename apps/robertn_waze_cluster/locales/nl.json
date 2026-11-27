@@ -101,6 +101,27 @@
     "2.4 GHz": "2,4 GHz",
     "Audio may cut out. On your iPhone, turn Wi-Fi off and on.": "Het geluid kan wegvallen. Zet Wi-Fi op je iPhone uit en weer aan.",
     "Own settings for this driver": "Eigen instellingen voor deze bestuurder",
-    "Keep HUD map over BMW's pop-ups": "Kaart in HUD boven BMW-pop-ups houden"
+    "Keep HUD map over BMW's pop-ups": "Kaart in HUD boven BMW-pop-ups houden",
+    "Where the phone's map shows. Open the list to see what each choice does.": "Waar de kaart van de telefoon verschijnt. Open de lijst om te zien wat elke keuze doet.",
+    "Ticked, this driver profile keeps its own Show on, HUD size and HUD position.": "Aangevinkt houdt dit bestuurdersprofiel eigen Tonen in, HUD-grootte en HUD-positie.",
+    "Ticked, BMW's turn-by-turn box on the cluster is hidden while the map shows.": "Aangevinkt is de BMW-afslaginfo in het paneel verborgen zolang de kaart verschijnt.",
+    "Opens the Logs page: save the logs to report a problem, and download them on your phone.": "Opent de pagina Logs: sla de logs op om een probleem te melden en download ze op je telefoon.",
+    "Ticked, the map stays on the HUD while BMW's media and list pop-ups show.": "Aangevinkt blijft de kaart op de HUD terwijl BMW's media- en lijstpop-ups verschijnen.",
+    "How wide the map is on the HUD.": "Hoe breed de kaart op de HUD is.",
+    "Moves the map on the HUD, a step at a time.": "Verschuift de kaart op de HUD, stap voor stap.",
+    "Puts the map back in the middle of the HUD.": "Zet de kaart terug in het midden van de HUD.",
+    "Turns the map on for CarPlay. Only needed when its Status isn't Patched.": "Zet de kaart aan voor CarPlay. Alleen nodig als de Status niet Gepatcht is.",
+    "Turns the map off for CarPlay. It stays off, also after updates, until you press Patch.": "Zet de kaart uit voor CarPlay. Ze blijft uit, ook na updates, tot je op Patchen drukt.",
+    "Turns the map on for Android Auto. Only needed when its Status isn't Patched.": "Zet de kaart aan voor Android Auto. Alleen nodig als de Status niet Gepatcht is.",
+    "Turns the map off for Android Auto. It stays off, also after updates, until you press Patch.": "Zet de kaart uit voor Android Auto. Ze blijft uit, ook na updates, tot je op Patchen drukt.",
+    "Zoom out shows more of the map, Zoom in bigger text. Applied at the next restart.": "Uitzoomen toont meer kaart, Inzoomen grotere tekst. Geldt vanaf de volgende herstart.",
+    "Ticked, Google Maps' own turn card at the top of the map is hidden.": "Aangevinkt is de eigen afslagkaart van Google Maps boven op de kaart verborgen.",
+    "Restarts the head unit, to apply the changes that wait for it.": "Herstart de head unit om de wachtende wijzigingen toe te passen.",
+    "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "De kaart verschijnt op het instrumentenpaneel, in plaats van die van BMW, terwijl de telefoon navigeert.",
+    "The map shows on the head-up display. Still experimental.": "De kaart verschijnt op het head-up display. Nog experimenteel.",
+    "The map shows on both: the instrument cluster and the head-up display.": "De kaart verschijnt op beide: het instrumentenpaneel en het head-up display.",
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "De kaart verschijnt nergens: paneel en HUD tonen BMW's eigen inhoud.",
+    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Waar de afslagkaart over de kaart verschijnt: uit, onder de pijl of bovenaan. Elke druk wisselt.",
+    "Shows the turn card for a few seconds, where it is set to show.": "Toont de afslagkaart een paar seconden, waar die is ingesteld."
   }
 }

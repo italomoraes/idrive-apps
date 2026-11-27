@@ -99,6 +99,27 @@
     "2.4 GHz": "2,4 GHz",
     "Audio may cut out. On your iPhone, turn Wi-Fi off and on.": "Lyden kan falle ut. Slå Wi-Fi av og på igjen på iPhone.",
     "Own settings for this driver": "Egne innstillinger for denne føreren",
-    "Keep HUD map over BMW's pop-ups": "Behold kart i HUD over BMWs popup-vinduer"
+    "Keep HUD map over BMW's pop-ups": "Behold kart i HUD over BMWs popup-vinduer",
+    "Where the phone's map shows. Open the list to see what each choice does.": "Hvor telefonens kart vises. Åpne listen for å se hva hvert valg gjør.",
+    "Ticked, this driver profile keeps its own Show on, HUD size and HUD position.": "Avkrysset beholder denne førerprofilen egen Vis i, HUD-størrelse og HUD-plassering.",
+    "Ticked, BMW's turn-by-turn box on the cluster is hidden while the map shows.": "Avkrysset skjules BMWs svinganvisning i instrumentpanelet mens kartet vises.",
+    "Opens the Logs page: save the logs to report a problem, and download them on your phone.": "Åpner siden Logger: lagre loggene for å melde fra om et problem, og last dem ned på telefonen.",
+    "Ticked, the map stays on the HUD while BMW's media and list pop-ups show.": "Avkrysset blir kartet på HUD-en mens BMWs medie- og listevinduer vises.",
+    "How wide the map is on the HUD.": "Hvor bredt kartet er på HUD-en.",
+    "Moves the map on the HUD, a step at a time.": "Flytter kartet på HUD-en, ett trinn om gangen.",
+    "Puts the map back in the middle of the HUD.": "Setter kartet tilbake midt på HUD-en.",
+    "Turns the map on for CarPlay. Only needed when its Status isn't Patched.": "Slår på kartet for CarPlay. Bare nødvendig når Status ikke er Patchet.",
+    "Turns the map off for CarPlay. It stays off, also after updates, until you press Patch.": "Slår av kartet for CarPlay. Det forblir av, også etter oppdateringer, til du trykker Bruk patch.",
+    "Turns the map on for Android Auto. Only needed when its Status isn't Patched.": "Slår på kartet for Android Auto. Bare nødvendig når Status ikke er Patchet.",
+    "Turns the map off for Android Auto. It stays off, also after updates, until you press Patch.": "Slår av kartet for Android Auto. Det forblir av, også etter oppdateringer, til du trykker Bruk patch.",
+    "Zoom out shows more of the map, Zoom in bigger text. Applied at the next restart.": "Zoom ut viser mer kart, Zoom inn større tekst. Gjelder fra neste omstart.",
+    "Ticked, Google Maps' own turn card at the top of the map is hidden.": "Avkrysset skjules Google Maps' eget svingkort øverst på kartet.",
+    "Restarts the head unit, to apply the changes that wait for it.": "Starter hovedenheten på nytt for å bruke endringene som venter på det.",
+    "The map shows on the instrument cluster, in place of BMW's, while the phone navigates.": "Kartet vises i instrumentpanelet i stedet for BMWs, mens telefonen navigerer.",
+    "The map shows on the head-up display. Still experimental.": "Kartet vises på head-up-displayet. Fortsatt eksperimentelt.",
+    "The map shows on both: the instrument cluster and the head-up display.": "Kartet vises begge steder: i instrumentpanelet og på head-up-displayet.",
+    "The map shows on neither: the cluster and the HUD show BMW's own content.": "Kartet vises ingen steder: instrumentpanel og HUD viser BMWs eget innhold.",
+    "Where our turn card shows over the map: off, below the arrow or at the top. Each press moves it on.": "Hvor svingkortet vises over kartet: av, under pilen eller øverst. Hvert trykk bytter.",
+    "Shows the turn card for a few seconds, where it is set to show.": "Viser svingkortet i noen sekunder, der det er stilt inn."
   }
 }
