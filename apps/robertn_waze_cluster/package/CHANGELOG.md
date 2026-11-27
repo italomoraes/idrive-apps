@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.18
+
 The page looks like the car's own settings pages: a narrow list with, on
 its right, a picture and a few lines saying what the row the controller
 stops on does. Show on opens its choices in place, each with its own
