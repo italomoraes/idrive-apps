@@ -124,7 +124,7 @@
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Kun puhelin on auton Wi-Fi-yhteyspisteessä, skannaa koodi tai avaa osoite ladataksesi lokit.",
     "Turn card": "Käännöskortti",
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Missä korttimme seuraavasta käännöksestä näkyy kartan päällä. Avaa luettelo nähdäksesi valinnat.",
-    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Ei korttiamme kartan päällä: puhelimen oma käännöskortti näkyy, jos sillä on sellainen.",
+    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Ei korttiamme kartan päällä: sovelluksen oma kortti näkyy, jos sillä on sellainen, kuten Apple Kartoilla.",
     "Our card with the next turn shows below the map's arrow.": "Korttimme seuraavasta käännöksestä näkyy kartan nuolen alla.",
     "Our card with the next turn shows at the top of the map.": "Korttimme seuraavasta käännöksestä näkyy kartan yläreunassa."
   }

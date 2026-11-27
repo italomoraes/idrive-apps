@@ -124,7 +124,7 @@
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。",
     "Turn card": "案内カード",
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "次の進路を示す当アプリのカードを地図上のどこに出すか。リストを開くと各選択肢が見られます。",
-    "No card of ours over the map: the phone's own turn card shows, if it has one.": "当アプリのカードは出しません。スマートフォンに独自の進路カードがあればそれが出ます。",
+    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "当アプリのカードは出しません。ナビアプリに独自のカードがあればそれが出ます（Appleマップなど）。",
     "Our card with the next turn shows below the map's arrow.": "次の進路のカードを地図の矢印の下に出します。",
     "Our card with the next turn shows at the top of the map.": "次の進路のカードを地図の上部に出します。"
   }

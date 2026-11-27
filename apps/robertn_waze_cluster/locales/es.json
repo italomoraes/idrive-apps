@@ -124,7 +124,7 @@
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el punto de acceso Wi-Fi del coche, escanea el código o abre la dirección para descargar los registros.",
     "Turn card": "Tarjeta de maniobra",
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
-    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de giro propia del teléfono, si tiene una.",
+    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de la propia app, si tiene una, como la de Apple Maps.",
     "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
     "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
   }

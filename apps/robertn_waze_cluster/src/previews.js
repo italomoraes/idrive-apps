@@ -69,7 +69,7 @@ const SHOW_ON_CHOICES = [
 
 /* The turn card's choices, in the list's order (TURN_CARD_MODES of waze_cluster_control.js). */
 const TURN_CARD_CHOICES = [
-    { image: 'turn-card-off', text: () => t('No card of ours over the map: the phone\'s own turn card shows, if it has one.') },
+    { image: 'turn-card-off', text: () => t('No card of ours over the map: the app\'s own card shows, if it has one, as Apple Maps does.') },
     { image: 'turn-card-below', text: () => t('Our card with the next turn shows below the map\'s arrow.') },
     { image: 'turn-card-top', text: () => t('Our card with the next turn shows at the top of the map.') }
 ];

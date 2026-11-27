@@ -128,7 +128,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "بهاتف متصل بنقطة اتصال Wi-Fi في السيارة، امسح الرمز أو افتح العنوان لتنزيل السجلات.",
    "Turn card": "بطاقة المنعطف",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "مكان ظهور بطاقتنا للانعطاف التالي فوق الخريطة. افتح القائمة لترى كل خيار.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "لا بطاقة منا فوق الخريطة: تظهر بطاقة الانعطاف الخاصة بالهاتف، إن وُجدت.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "لا بطاقة منا فوق الخريطة: تظهر بطاقة التطبيق نفسه، إن وُجدت، كما في خرائط Apple.",
    "Our card with the next turn shows below the map's arrow.": "تظهر بطاقتنا للانعطاف التالي أسفل سهم الخريطة.",
    "Our card with the next turn shows at the top of the map.": "تظهر بطاقتنا للانعطاف التالي أعلى الخريطة."
   }
@@ -260,7 +260,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem připojeným k hotspotu Wi-Fi auta naskenujte kód nebo otevřete adresu a stáhněte protokoly.",
    "Turn card": "Karta odbočení",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde se na mapě zobrazuje naše karta s dalším odbočením. Otevřete seznam a uvidíte volby.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez naší karty na mapě: zobrazí se karta odbočení telefonu, pokud ji má.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez naší karty na mapě: zobrazí se karta samotné aplikace, pokud ji má, jako u Map Apple.",
    "Our card with the next turn shows below the map's arrow.": "Naše karta s dalším odbočením se zobrazí pod šipkou mapy.",
    "Our card with the next turn shows at the top of the map.": "Naše karta s dalším odbočením se zobrazí nahoře na mapě."
   }
@@ -392,7 +392,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: scan koden eller åbn adressen for at hente logfilerne.",
    "Turn card": "Svingkort",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vores kort med næste sving vises over kortet. Åbn listen for at se hvert valg.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Intet kort fra os over kortet: telefonens eget svingkort vises, hvis den har et.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Intet kort fra os over kortet: appens eget kort vises, hvis den har et, som i Apple Kort.",
    "Our card with the next turn shows below the map's arrow.": "Vores kort med næste sving vises under kortets pil.",
    "Our card with the next turn shows at the top of the map.": "Vores kort med næste sving vises øverst på kortet."
   }
@@ -524,7 +524,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Mit dem Telefon im Wi-Fi-Hotspot des Autos den Code scannen oder die Adresse öffnen und laden.",
    "Turn card": "Abbiegekarte",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Wo unsere Karte mit dem nächsten Abbiegen über der Karte erscheint. Die Liste zeigt jede Wahl.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Keine Karte von uns über der Karte: die eigene Abbiegekarte des Telefons erscheint, falls es eine hat.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Keine Karte von uns über der Karte: die eigene Karte der App erscheint, falls sie eine hat, wie bei Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Unsere Karte mit dem nächsten Abbiegen erscheint unter dem Pfeil der Karte.",
    "Our card with the next turn shows at the top of the map.": "Unsere Karte mit dem nächsten Abbiegen erscheint oben auf der Karte."
   }
@@ -656,7 +656,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Με τηλέφωνο στο σημείο πρόσβασης Wi-Fi του αυτοκινήτου, σαρώστε τον κωδικό ή ανοίξτε τη διεύθυνση.",
    "Turn card": "Κάρτα στροφής",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Πού εμφανίζεται στον χάρτη η κάρτα μας με την επόμενη στροφή. Ανοίξτε τη λίστα για τις επιλογές.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Χωρίς δική μας κάρτα στον χάρτη: εμφανίζεται η κάρτα στροφής του τηλεφώνου, αν έχει.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Χωρίς δική μας κάρτα στον χάρτη: εμφανίζεται η κάρτα της εφαρμογής, αν έχει, όπως στους Χάρτες Apple.",
    "Our card with the next turn shows below the map's arrow.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται κάτω από το βέλος του χάρτη.",
    "Our card with the next turn shows at the top of the map.": "Η κάρτα μας με την επόμενη στροφή εμφανίζεται στο πάνω μέρος του χάρτη."
   }
@@ -788,7 +788,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el hotspot Wi-Fi del auto, escanea el código o abre la dirección para descargar los registros.",
    "Turn card": "Tarjeta de maniobra",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de giro propia del teléfono, si tiene una.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de la propia app, si tiene una, como la de Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
    "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
   }
@@ -920,7 +920,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un teléfono en el punto de acceso Wi-Fi del coche, escanea el código o abre la dirección para descargar los registros.",
    "Turn card": "Tarjeta de maniobra",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dónde aparece sobre el mapa nuestra tarjeta con la próxima maniobra. Abre la lista para ver cada opción.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de giro propia del teléfono, si tiene una.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sin nuestra tarjeta sobre el mapa: aparece la tarjeta de la propia app, si tiene una, como la de Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Nuestra tarjeta con la próxima maniobra aparece debajo de la flecha del mapa.",
    "Our card with the next turn shows at the top of the map.": "Nuestra tarjeta con la próxima maniobra aparece arriba del mapa."
   }
@@ -1052,7 +1052,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Kun puhelin on auton Wi-Fi-yhteyspisteessä, skannaa koodi tai avaa osoite ladataksesi lokit.",
    "Turn card": "Käännöskortti",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Missä korttimme seuraavasta käännöksestä näkyy kartan päällä. Avaa luettelo nähdäksesi valinnat.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Ei korttiamme kartan päällä: puhelimen oma käännöskortti näkyy, jos sillä on sellainen.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Ei korttiamme kartan päällä: sovelluksen oma kortti näkyy, jos sillä on sellainen, kuten Apple Kartoilla.",
    "Our card with the next turn shows below the map's arrow.": "Korttimme seuraavasta käännöksestä näkyy kartan nuolen alla.",
    "Our card with the next turn shows at the top of the map.": "Korttimme seuraavasta käännöksestä näkyy kartan yläreunassa."
   }
@@ -1184,7 +1184,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, balayez le code ou ouvrez l'adresse pour les télécharger.",
    "Turn card": "Carte de manœuvre",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Pas de carte à nous sur la carte : celle du téléphone s'affiche, s'il en a une.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Pas de carte à nous sur la carte : celle de l'app s'affiche, si elle en a une, comme celle d'Apple Plans.",
    "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
    "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
   }
@@ -1316,7 +1316,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Avec un téléphone sur le Wi-Fi de la voiture, scannez le code ou ouvrez l'adresse pour les télécharger.",
    "Turn card": "Carte de manœuvre",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Où notre carte de la prochaine manœuvre s'affiche sur la carte. Ouvrez la liste pour voir chaque choix.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Pas de carte à nous sur la carte : celle du téléphone s'affiche, s'il en a une.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Pas de carte à nous sur la carte : celle de l'app s'affiche, si elle en a une, comme celle d'Apple Plans.",
    "Our card with the next turn shows below the map's arrow.": "Notre carte de la prochaine manœuvre s'affiche sous la flèche de la carte.",
    "Our card with the next turn shows at the top of the map.": "Notre carte de la prochaine manœuvre s'affiche en haut de la carte."
   }
@@ -1448,7 +1448,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "בטלפון המחובר לנקודת ה-Wi-Fi של הרכב, סרקו את הקוד או פתחו את הכתובת להורדת היומנים.",
    "Turn card": "כרטיס פנייה",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "היכן מוצג על המפה הכרטיס שלנו עם הפנייה הבאה. פתחו את הרשימה לכל אפשרות.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "בלי כרטיס שלנו על המפה: מוצג כרטיס הפניות של הטלפון, אם יש לו.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "בלי כרטיס שלנו על המפה: מוצג הכרטיס של האפליקציה עצמה, אם יש לה, כמו ב-Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "הכרטיס שלנו עם הפנייה הבאה מוצג מתחת לחץ של המפה.",
    "Our card with the next turn shows at the top of the map.": "הכרטיס שלנו עם הפנייה הבאה מוצג בראש המפה."
   }
@@ -1580,7 +1580,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Az autó Wi-Fi hotspotjára csatlakozó telefonnal olvassa be a kódot vagy nyissa meg a címet a naplókért.",
    "Turn card": "Kanyarodási kártya",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hol jelenik meg a térképen a következő kanyar kártyánk. Nyissa meg a listát a lehetőségekért.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Nincs kártyánk a térképen: a telefon saját kanyarkártyája látszik, ha van neki.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Nincs kártyánk a térképen: az alkalmazás saját kártyája látszik, ha van neki, mint az Apple Térképnél.",
    "Our card with the next turn shows below the map's arrow.": "A következő kanyar kártyánk a térkép nyila alatt jelenik meg.",
    "Our card with the next turn shows at the top of the map.": "A következő kanyar kártyánk a térkép tetején jelenik meg."
   }
@@ -1712,7 +1712,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Dengan ponsel di hotspot Wi-Fi mobil, pindai kode atau buka alamatnya untuk mengunduh log.",
    "Turn card": "Kartu belokan",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Tempat kartu kami dengan belokan berikutnya tampil di atas peta. Buka daftar untuk tiap pilihan.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Tanpa kartu kami di peta: kartu belok milik ponsel yang tampil, jika ada.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Tanpa kartu kami di peta: kartu milik aplikasi yang tampil, jika ada, seperti di Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Kartu kami dengan belokan berikutnya tampil di bawah panah peta.",
    "Our card with the next turn shows at the top of the map.": "Kartu kami dengan belokan berikutnya tampil di bagian atas peta."
   }
@@ -1844,7 +1844,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Con un telefono sull'hotspot Wi-Fi dell'auto, scansiona il codice o apri l'indirizzo per scaricare i log.",
    "Turn card": "Scheda di svolta",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Dove appare sulla mappa la nostra scheda con la prossima svolta. Apri l'elenco per vedere ogni scelta.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Nessuna nostra scheda sulla mappa: appare quella di svolta del telefono, se ne ha una.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Nessuna nostra scheda sulla mappa: appare quella dell'app, se ne ha una, come in Apple Mappe.",
    "Our card with the next turn shows below the map's arrow.": "La nostra scheda con la prossima svolta appare sotto la freccia della mappa.",
    "Our card with the next turn shows at the top of the map.": "La nostra scheda con la prossima svolta appare in cima alla mappa."
   }
@@ -1976,7 +1976,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "車のWi-Fiにつないだスマートフォンでコードを読み取るか、アドレスを開いてログを入手します。",
    "Turn card": "案内カード",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "次の進路を示す当アプリのカードを地図上のどこに出すか。リストを開くと各選択肢が見られます。",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "当アプリのカードは出しません。スマートフォンに独自の進路カードがあればそれが出ます。",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "当アプリのカードは出しません。ナビアプリに独自のカードがあればそれが出ます（Appleマップなど）。",
    "Our card with the next turn shows below the map's arrow.": "次の進路のカードを地図の矢印の下に出します。",
    "Our card with the next turn shows at the top of the map.": "次の進路のカードを地図の上部に出します。"
   }
@@ -2108,7 +2108,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요.",
    "Turn card": "회전 카드",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "다음 회전을 알리는 저희 카드가 지도 위 어디에 표시되는지입니다. 목록을 열어 각 선택을 보세요.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "지도 위에 저희 카드가 없습니다. 휴대폰 자체 회전 카드가 있으면 그것이 표시됩니다.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "지도 위에 저희 카드가 없습니다. 앱 자체 카드가 있으면 그것이 표시됩니다(Apple 지도처럼).",
    "Our card with the next turn shows below the map's arrow.": "다음 회전 카드가 지도 화살표 아래에 표시됩니다.",
    "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다."
   }
@@ -2240,7 +2240,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skann koden eller åpne adressen for å laste ned loggene.",
    "Turn card": "Svingkort",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Hvor vårt kort med neste sving vises over kartet. Åpne listen for å se hvert valg.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Ikke noe kort fra oss over kartet: telefonens eget svingkort vises, hvis den har et.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Ikke noe kort fra oss over kartet: appens eget kort vises, hvis den har et, som i Apple Kart.",
    "Our card with the next turn shows below the map's arrow.": "Vårt kort med neste sving vises under kartets pil.",
    "Our card with the next turn shows at the top of the map.": "Vårt kort med neste sving vises øverst på kartet."
   }
@@ -2374,7 +2374,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Scan de code met een telefoon op de hotspot van de auto, of open het adres, voor de logs.",
    "Turn card": "Afslagkaart",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Waar onze kaart met de volgende afslag over de kaart verschijnt. Open de lijst voor elke keuze.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Geen kaart van ons over de kaart: de eigen afslagkaart van de telefoon verschijnt, als die er een heeft.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Geen kaart van ons over de kaart: de eigen kaart van de app verschijnt, als die er een heeft, zoals bij Apple Kaarten.",
    "Our card with the next turn shows below the map's arrow.": "Onze kaart met de volgende afslag verschijnt onder de pijl van de kaart.",
    "Our card with the next turn shows at the top of the map.": "Onze kaart met de volgende afslag verschijnt bovenaan de kaart."
   }
@@ -2506,7 +2506,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefonem w hotspocie Wi-Fi auta zeskanuj kod lub otwórz adres, by pobrać zapisane logi.",
    "Turn card": "Karta manewru",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Gdzie nasza karta z następnym manewrem pokazuje się na mapie. Otwórz listę, by zobaczyć wybory.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez naszej karty na mapie: pokazuje się karta manewru telefonu, jeśli ją ma.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez naszej karty na mapie: pokazuje się karta samej aplikacji, jeśli ją ma, jak w Mapach Apple.",
    "Our card with the next turn shows below the map's arrow.": "Nasza karta z następnym manewrem pokazuje się pod strzałką mapy.",
    "Our card with the next turn shows at the top of the map.": "Nasza karta z następnym manewrem pokazuje się na górze mapy."
   }
@@ -2638,7 +2638,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um celular no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para baixar os registros.",
    "Turn card": "Card de manobra",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso card com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sem o nosso card sobre o mapa: aparece o card de manobra do próprio celular, se ele tiver um.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sem o nosso card sobre o mapa: aparece o card do próprio app, se ele tiver um, como o do Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "O nosso card com a próxima manobra aparece abaixo da seta do mapa.",
    "Our card with the next turn shows at the top of the map.": "O nosso card com a próxima manobra aparece no topo do mapa."
   }
@@ -2770,7 +2770,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Com um telemóvel no ponto de acesso Wi-Fi do carro, leia o código ou abra o endereço para transferir os registos.",
    "Turn card": "Cartão de manobra",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Onde o nosso cartão com a próxima manobra aparece sobre o mapa. Abra a lista para ver cada opção.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Sem o nosso cartão sobre o mapa: aparece o cartão de manobra do próprio telemóvel, se tiver um.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Sem o nosso cartão sobre o mapa: aparece o cartão da própria app, se tiver um, como o do Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "O nosso cartão com a próxima manobra aparece abaixo da seta do mapa.",
    "Our card with the next turn shows at the top of the map.": "O nosso cartão com a próxima manobra aparece no topo do mapa."
   }
@@ -2902,7 +2902,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Cu un telefon pe hotspotul Wi-Fi al mașinii, scanați codul sau deschideți adresa pentru a descărca jurnalele.",
    "Turn card": "Card de viraj",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Unde apare pe hartă cardul nostru cu virajul următor. Deschideți lista pentru fiecare opțiune.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Fără cardul nostru pe hartă: apare cardul de viraj al telefonului, dacă are unul.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Fără cardul nostru pe hartă: apare cardul aplicației, dacă are unul, ca la Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Cardul nostru cu virajul următor apare sub săgeata hărții.",
    "Our card with the next turn shows at the top of the map.": "Cardul nostru cu virajul următor apare în partea de sus a hărții."
   }
@@ -3034,7 +3034,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "С телефона в точке доступа машины отсканируйте код или откройте адрес и скачайте журналы.",
    "Turn card": "Карточка манёвра",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Где на карте видна наша карточка следующего манёвра. Откройте список, чтобы увидеть варианты.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашей карточки на карте: видна карточка поворота самого телефона, если она есть.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашей карточки на карте: видна карточка самого приложения, если она есть, как у Apple Карт.",
    "Our card with the next turn shows below the map's arrow.": "Наша карточка следующего манёвра видна под стрелкой карты.",
    "Our card with the next turn shows at the top of the map.": "Наша карточка следующего манёвра видна вверху карты."
   }
@@ -3166,7 +3166,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Telefónom pripojeným k hotspotu Wi-Fi auta naskenujte kód alebo otvorte adresu a stiahnite záznamy.",
    "Turn card": "Karta odbočenia",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kde sa na mape zobrazuje naša karta s ďalším odbočením. Otvorte zoznam a uvidíte voľby.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Bez našej karty na mape: zobrazí sa karta odbočenia telefónu, ak ju má.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Bez našej karty na mape: zobrazí sa karta samotnej aplikácie, ak ju má, ako pri Mapách Apple.",
    "Our card with the next turn shows below the map's arrow.": "Naša karta s ďalším odbočením sa zobrazí pod šípkou mapy.",
    "Our card with the next turn shows at the top of the map.": "Naša karta s ďalším odbočením sa zobrazí hore na mape."
   }
@@ -3298,7 +3298,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "S telefonom na dostopni točki Wi-Fi avtomobila skenirajte kodo ali odprite naslov in prenesite dnevnike.",
    "Turn card": "Kartica zavoja",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Kje se na zemljevidu prikaže naša kartica z naslednjim zavojem. Odprite seznam za izbire.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Brez naše kartice na zemljevidu: prikaže se kartica zavoja telefona, če jo ima.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Brez naše kartice na zemljevidu: prikaže se kartica aplikacije, če jo ima, kot pri Apple Zemljevidih.",
    "Our card with the next turn shows below the map's arrow.": "Naša kartica z naslednjim zavojem se prikaže pod puščico zemljevida.",
    "Our card with the next turn shows at the top of the map.": "Naša kartica z naslednjim zavojem se prikaže na vrhu zemljevida."
   }
@@ -3430,7 +3430,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Med en telefon på bilens Wi-Fi-hotspot: skanna koden eller öppna adressen för att hämta loggarna.",
    "Turn card": "Svängkort",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Var vårt kort med nästa sväng visas över kartan. Öppna listan för att se varje val.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Inget kort från oss över kartan: telefonens eget svängkort visas, om den har ett.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Inget kort från oss över kartan: appens eget kort visas, om den har ett, som i Apple Kartor.",
    "Our card with the next turn shows below the map's arrow.": "Vårt kort med nästa sväng visas under kartans pil.",
    "Our card with the next turn shows at the top of the map.": "Vårt kort med nästa sväng visas överst på kartan."
   }
@@ -3562,7 +3562,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "ใช้โทรศัพท์ที่ต่อฮอตสปอต Wi-Fi ของรถ สแกนโค้ดหรือเปิดที่อยู่เพื่อดาวน์โหลดล็อก",
    "Turn card": "การ์ดเลี้ยว",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "ตำแหน่งการ์ดเลี้ยวถัดไปของเราบนแผนที่ เปิดรายการเพื่อดูแต่ละตัวเลือก",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "ไม่มีการ์ดของเราบนแผนที่: การ์ดเลี้ยวของโทรศัพท์จะแสดงแทน หากมี",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "ไม่มีการ์ดของเราบนแผนที่: การ์ดของแอปจะแสดงแทน หากมี เช่นใน Apple Maps",
    "Our card with the next turn shows below the map's arrow.": "การ์ดเลี้ยวถัดไปของเราแสดงใต้ลูกศรของแผนที่",
    "Our card with the next turn shows at the top of the map.": "การ์ดเลี้ยวถัดไปของเราแสดงด้านบนของแผนที่"
   }
@@ -3694,7 +3694,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Aracın Wi-Fi erişim noktasındaki bir telefonla kodu tarayın veya adresi açarak günlükleri indirin.",
    "Turn card": "Dönüş kartı",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Bir sonraki dönüşü gösteren kartımızın haritada göründüğü yer. Seçenekler için listeyi açın.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Haritada kartımız yok: telefonun kendi dönüş kartı, varsa, görünür.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Haritada kartımız yok: uygulamanın kendi kartı, varsa, görünür; Apple Haritalar'daki gibi.",
    "Our card with the next turn shows below the map's arrow.": "Bir sonraki dönüşü gösteren kartımız haritanın okunun altında görünür.",
    "Our card with the next turn shows at the top of the map.": "Bir sonraki dönüşü gösteren kartımız haritanın üstünde görünür."
   }
@@ -3826,7 +3826,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали.",
    "Turn card": "Картка маневру",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Де на карті видно нашу картку наступного маневру. Відкрийте список, щоб побачити варіанти.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашої картки на карті: видно картку повороту самого телефона, якщо вона є.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашої картки на карті: видно картку самого застосунку, якщо вона є, як у Apple Карт.",
    "Our card with the next turn shows below the map's arrow.": "Наша картка наступного маневру видна під стрілкою карти.",
    "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти."
   }
@@ -3958,7 +3958,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "Với điện thoại trên điểm phát Wi-Fi của xe, quét mã hoặc mở địa chỉ để tải nhật ký.",
    "Turn card": "Thẻ rẽ",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "Nơi thẻ rẽ tiếp theo của chúng tôi hiện trên bản đồ. Mở danh sách để xem từng lựa chọn.",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "Không có thẻ của chúng tôi trên bản đồ: thẻ rẽ của điện thoại sẽ hiện, nếu có.",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Không có thẻ của chúng tôi trên bản đồ: thẻ của chính ứng dụng sẽ hiện, nếu có, như Apple Maps.",
    "Our card with the next turn shows below the map's arrow.": "Thẻ rẽ tiếp theo của chúng tôi hiện dưới mũi tên của bản đồ.",
    "Our card with the next turn shows at the top of the map.": "Thẻ rẽ tiếp theo của chúng tôi hiện ở trên cùng bản đồ."
   }
@@ -4092,7 +4092,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用连接车辆 Wi-Fi 热点的手机扫描二维码或打开地址，下载日志。",
    "Turn card": "转向卡片",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "我们显示下一个转向的卡片在地图上的位置。打开列表查看每个选项。",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "地图上不显示我们的卡片：如手机自带转向卡片，则显示它。",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地图上不显示我们的卡片：如导航应用有自己的卡片，则显示它，例如 Apple 地图。",
    "Our card with the next turn shows below the map's arrow.": "我们的下一个转向卡片显示在地图箭头下方。",
    "Our card with the next turn shows at the top of the map.": "我们的下一个转向卡片显示在地图顶部。"
   }
@@ -4226,7 +4226,7 @@ module.exports = [
    "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "用連接車輛 Wi-Fi 熱點的手機掃描條碼或開啟網址，下載記錄檔。",
    "Turn card": "轉彎卡片",
    "Where our card with the next turn shows over the map. Open the list to see each choice.": "我們顯示下一個轉彎的卡片在地圖上的位置。開啟清單查看每個選項。",
-   "No card of ours over the map: the phone's own turn card shows, if it has one.": "地圖上不顯示我們的卡片：如手機有自己的轉彎卡片，則顯示它。",
+   "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "地圖上不顯示我們的卡片：如導航 App 有自己的卡片，則顯示它，例如 Apple 地圖。",
    "Our card with the next turn shows below the map's arrow.": "我們的下一個轉彎卡片顯示在地圖箭頭下方。",
    "Our card with the next turn shows at the top of the map.": "我們的下一個轉彎卡片顯示在地圖頂部。"
   }

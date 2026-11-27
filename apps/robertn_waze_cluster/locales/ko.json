@@ -124,7 +124,7 @@
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "차량 Wi-Fi 핫스팟에 연결한 휴대폰으로 코드를 스캔하거나 주소를 열어 로그를 내려받으세요.",
     "Turn card": "회전 카드",
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "다음 회전을 알리는 저희 카드가 지도 위 어디에 표시되는지입니다. 목록을 열어 각 선택을 보세요.",
-    "No card of ours over the map: the phone's own turn card shows, if it has one.": "지도 위에 저희 카드가 없습니다. 휴대폰 자체 회전 카드가 있으면 그것이 표시됩니다.",
+    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "지도 위에 저희 카드가 없습니다. 앱 자체 카드가 있으면 그것이 표시됩니다(Apple 지도처럼).",
     "Our card with the next turn shows below the map's arrow.": "다음 회전 카드가 지도 화살표 아래에 표시됩니다.",
     "Our card with the next turn shows at the top of the map.": "다음 회전 카드가 지도 상단에 표시됩니다."
   }

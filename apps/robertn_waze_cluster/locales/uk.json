@@ -124,7 +124,7 @@
     "With a phone on the car's Wi-Fi hotspot, scan the code or open the address to download the saved logs.": "З телефона в точці доступу Wi-Fi авто відскануйте код або відкрийте адресу, щоб завантажити журнали.",
     "Turn card": "Картка маневру",
     "Where our card with the next turn shows over the map. Open the list to see each choice.": "Де на карті видно нашу картку наступного маневру. Відкрийте список, щоб побачити варіанти.",
-    "No card of ours over the map: the phone's own turn card shows, if it has one.": "Без нашої картки на карті: видно картку повороту самого телефона, якщо вона є.",
+    "No card of ours over the map: the app's own card shows, if it has one, as Apple Maps does.": "Без нашої картки на карті: видно картку самого застосунку, якщо вона є, як у Apple Карт.",
     "Our card with the next turn shows below the map's arrow.": "Наша картка наступного маневру видна під стрілкою карти.",
     "Our card with the next turn shows at the top of the map.": "Наша картка наступного маневру видна вгорі карти."
   }
