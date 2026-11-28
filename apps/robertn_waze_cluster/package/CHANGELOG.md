@@ -6,6 +6,11 @@
 over the cluster map; **Show an example** shows one for 10 seconds. While
 it is on, the iPhone draws no turn card of its own on the cluster map;
 changing it reconnects CarPlay. Requires the waze-on-cluster released with it.
+
+## 0.6.19
+
+The app uses less background CPU and memory, loads translations only for the active language, and generates the Logs QR code faster.
+
 ## 0.6.18
 
 The Status rows say Not supported only where the patch cannot be applied,

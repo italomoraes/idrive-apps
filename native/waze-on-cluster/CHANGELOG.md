@@ -11,6 +11,11 @@ While the turn card shows, CarPlay's patch asks the phone for the map
 alone, so Apple Maps does not draw its own turn card, nor its arrival-time
 card, below ours. A change of the app's Turn card reconnects CarPlay at once
 where the tool may restart it, else it takes effect at CarPlay's next start.
+
+## 0.14.21
+
+The cluster and HUD map update with lower latency and less CPU and flash wear, and installing or updating patches runs faster and handles clock jumps more reliably.
+
 ## 0.14.20
 
 Android Auto reads the copy of aapd.conf with the cluster geometry in
