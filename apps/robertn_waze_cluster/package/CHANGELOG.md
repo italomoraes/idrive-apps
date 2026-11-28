@@ -11,6 +11,10 @@ section apart, and the HUD's section is called Head-up display. The Logs
 page is laid out the same way, the QR code of the download address on its
 right.
 
+## 0.6.19
+
+The app uses less background CPU and memory, loads translations only for the active language, and generates the Logs QR code faster.
+
 ## 0.6.18
 
 The Status rows say Not supported only where the patch cannot be applied,
